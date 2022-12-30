@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{49fa7c50-9857-4e86-ae9f-7889bc1710e8}</ProjectGuid>
+    <RootNamespace>SapphireEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Engine\audio.cpp" />
+    <ClCompile Include="..\..\source\Engine\AvP_AudioStreaming.cpp" />
+    <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp" />
+    <ClCompile Include="..\..\source\Engine\AvP_RingBuffer.cpp" />
+    <ClCompile Include="..\..\source\Engine\Button.cpp" />
+    <ClCompile Include="..\..\source\Engine\graphics.cpp" />
+    <ClCompile Include="..\..\source\Engine\Scene.cpp" />
+    <ClCompile Include="..\..\source\Engine\sprite.cpp" />
+    <ClCompile Include="..\..\source\Engine\utils.cpp" />
+    <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\Nancy\CIFF.cpp" />
+    <ClCompile Include="..\..\source\Nancy\HIFF.cpp" />
+    <ClCompile Include="..\..\source\Nancy\Loader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\Engine\audio.h" />
+    <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h" />
+    <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h" />
+    <ClInclude Include="..\..\source\Engine\AvP_RingBuffer.h" />
+    <ClInclude Include="..\..\source\Engine\Button.h" />
+    <ClInclude Include="..\..\source\Engine\graphics.h" />
+    <ClInclude Include="..\..\source\Engine\Scene.h" />
+    <ClInclude Include="..\..\source\Engine\SDL_ptr.h" />
+    <ClInclude Include="..\..\source\Engine\SDL_TTF_ptr.h" />
+    <ClInclude Include="..\..\source\Engine\sprite.h" />
+    <ClInclude Include="..\..\source\Engine\utils.h" />
+    <ClInclude Include="..\..\source\globals.h" />
+    <ClInclude Include="..\..\source\Nancy\CIFF.h" />
+    <ClInclude Include="..\..\source\Nancy\HIFF.h" />
+    <ClInclude Include="..\..\source\Nancy\Loader.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
