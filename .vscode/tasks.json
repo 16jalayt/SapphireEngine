@@ -1,0 +1,18 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe build active file",
+			"command": "F:\\sdk\\devkitPro\\msys2\\msys2_shell.bat",
+			"args": [
+				"-where F:\\sdk\\devkitPro\\projects\\switch_SDLTest"
+			],
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compiler: F:\\sdk\\devkitPro\\msys2\\msys2.exe"
+		}
+	]
+}

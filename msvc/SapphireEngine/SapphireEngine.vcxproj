@@ -72,27 +72,29 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,7 +106,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
@@ -125,7 +127,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
@@ -142,7 +144,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
@@ -163,7 +165,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libbinkdec.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
@@ -180,8 +182,25 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Engine\Scene.cpp" />
     <ClCompile Include="..\..\source\Engine\sprite.cpp" />
     <ClCompile Include="..\..\source\Engine\utils.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\avfft.c" />
+    <ClCompile Include="..\..\source\libbinkdec\BinkAudio.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\BinkDecoder.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\BinkVideo.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\BitReader.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\dct.c" />
+    <ClCompile Include="..\..\source\libbinkdec\dct32.c" />
+    <ClCompile Include="..\..\source\libbinkdec\fft.c" />
+    <ClCompile Include="..\..\source\libbinkdec\FileStream.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\HuffmanVLC.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\LogError.cpp" />
+    <ClCompile Include="..\..\source\libbinkdec\mdct.c" />
+    <ClCompile Include="..\..\source\libbinkdec\rdft.c" />
+    <ClCompile Include="..\..\source\libbinkdec\Util.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Nancy\CIFF.cpp" />
+    <ClCompile Include="..\..\source\Nancy\GUI.cpp" />
+    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp" />
+    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp" />
     <ClCompile Include="..\..\source\Nancy\HIFF.cpp" />
     <ClCompile Include="..\..\source\Nancy\Loader.cpp" />
   </ItemGroup>
@@ -198,7 +217,26 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Engine\sprite.h" />
     <ClInclude Include="..\..\source\Engine\utils.h" />
     <ClInclude Include="..\..\source\globals.h" />
+    <ClInclude Include="..\..\source\libbinkdec\avfft.h" />
+    <ClInclude Include="..\..\source\libbinkdec\BinkAudio.h" />
+    <ClInclude Include="..\..\source\libbinkdec\binkdata.h" />
+    <ClInclude Include="..\..\source\libbinkdec\BinkDecoder.h" />
+    <ClInclude Include="..\..\source\libbinkdec\BinkVideo.h" />
+    <ClInclude Include="..\..\source\libbinkdec\BitReader.h" />
+    <ClInclude Include="..\..\source\libbinkdec\dct.h" />
+    <ClInclude Include="..\..\source\libbinkdec\dct32.h" />
+    <ClInclude Include="..\..\source\libbinkdec\FFmpeg_includes.h" />
+    <ClInclude Include="..\..\source\libbinkdec\fft-internal.h" />
+    <ClInclude Include="..\..\source\libbinkdec\fft.h" />
+    <ClInclude Include="..\..\source\libbinkdec\FileStream.h" />
+    <ClInclude Include="..\..\source\libbinkdec\HuffmanVLC.h" />
+    <ClInclude Include="..\..\source\libbinkdec\LogError.h" />
+    <ClInclude Include="..\..\source\libbinkdec\rdft.h" />
+    <ClInclude Include="..\..\source\libbinkdec\Util.h" />
     <ClInclude Include="..\..\source\Nancy\CIFF.h" />
+    <ClInclude Include="..\..\source\Nancy\GUI.h" />
+    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h" />
+    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF.h" />
     <ClInclude Include="..\..\source\Nancy\Loader.h" />
   </ItemGroup>

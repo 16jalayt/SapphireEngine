@@ -1,0 +1,195 @@
+
+16jal@DESKTOP-4LTADIG MSYS ~
+# pacman -Ss switch
+msys/getent 2.18.90-3 [installed]
+    Get entries from Name Service Switch libraries
+dkp-libs/deko3d 0.4.0-1 (switch-dev) [installed]
+    Homebrew low level graphics API for Nintendo Switch (Nvidia Tegra X1)
+dkp-libs/devkita64-cmake 1.1.1-1 (switch-dev) [installed]
+    CMake support files for devkitA64
+dkp-libs/libnx 4.2.1-1 (switch-dev) [installed]
+    Nintendo Switch AArch64-only userland library.
+dkp-libs/switch-box2d 2.4.1-1 (switch-portlibs)
+    Box2D is a 2D physics engine for games.
+dkp-libs/switch-bulletphysics 2.88-3 (switch-portlibs)
+    Bullet Physics SDK: real-time collision detection and multi-physics
+    simulation for VR, games, visual effects, robotics, machine learning etc.
+dkp-libs/switch-bzip2 1.0.6-3 (switch-portlibs) [installed]
+    A high-quality data compression program
+dkp-libs/switch-cmake 1.3.0-1 (switch-dev) [installed]
+    CMake support for Nintendo Switch
+dkp-libs/switch-curl 7.69.1-4 (switch-portlibs)
+    An URL retrieval utility and library
+dkp-libs/switch-enet 1.3.17-1 (switch-portlibs)
+    ENet reliable UDP networking library (adapted for Nintendo Switch homebrew
+    development)
+dkp-libs/switch-examples 20201219-1 (switch-dev) [installed]
+    Nintendo Switch example code.
+dkp-libs/switch-ffmpeg 4.3.1-1 (switch-portlibs) [installed]
+    ffmpeg port (for Nintendo Switch homebrew development)
+dkp-libs/switch-flac 1.3.2-4 (switch-portlibs) [installed]
+    FLAC stands for Free Lossless Audio Codec, an audio format similar to MP3,
+    but lossless...
+dkp-libs/switch-freetype 2.10.1-2 (switch-portlibs) [installed]
+    FreeType is a freely available software library to render fonts.
+dkp-libs/switch-giflib 5.1.4-2 (switch-portlibs) [installed]
+    A library for reading and writing gif images
+dkp-libs/switch-glad 0.1.27-1 (switch-portlibs) [installed]
+    OpenGL Loader (modified for Switch)
+dkp-libs/switch-glfw 3.3.4-2 (switch-portlibs) [installed]
+    Open Source, multi-platform library for OpenGL, OpenGL ES and Vulkan
+    development on the desktop
+dkp-libs/switch-glm 0.9.9.7-2 (switch-portlibs)
+    OpenGL Mathematics (GLM) header only C++ library
+dkp-libs/switch-harfbuzz 2.8.0-2 (switch-portlibs)
+    HarfBuzz is a text shaping library. Using the HarfBuzz library allows
+    programs to convert a sequence of Unicode input into properly formatted and
+    positioned glyph output—for any writing system and language.
+dkp-libs/switch-jansson 2.11-2 (switch-portlibs)
+    A C library for encoding, decoding and manipulating JSON data.
+dkp-libs/switch-libarchive 3.3.2-4 (switch-portlibs)
+    library that can create and read several streaming archive format (for
+    Nintendo Switch homebrew development)
+dkp-libs/switch-libass 0.14.0-1 (switch-portlibs) [installed]
+    A portable subtitle renderer (Nintendo Switch port)
+dkp-libs/switch-libconfig 1.7.2-3 (switch-portlibs) [installed]
+    C/C++ Configuration File Library (for Nintendo Switch homebrew development)
+dkp-libs/switch-libdrm_nouveau 1.0.1-2 (switch-portlibs) [installed]
+    Interface between mesa/nouveau and Nintendo Switch Nvidia GPU driver
+dkp-libs/switch-libexpat 2.2.5-2 (switch-portlibs)
+    Expat, a stream-oriented XML parser library written in C.
+dkp-libs/switch-libfribidi 1.0.4-1 (switch-portlibs) [installed]
+    Free Implementation of the Unicode Bidirectional Algorithm (Nintendo Switch
+    port)
+dkp-libs/switch-libgd 2.2.5-2 (switch-portlibs)
+    Library for the dynamic creation of images
+dkp-libs/switch-libjpeg-turbo 2.1.2-2 (switch-portlibs) [installed]
+    libjpeg derivative with accelerated baseline JPEG compression and
+    decompression
+dkp-libs/switch-libjson-c 0.13.1-2 (switch-portlibs) [installed]
+    A JSON implementation in C.
+dkp-libs/switch-liblzma 5.2.4-2 (switch-portlibs)
+    A compression library with an API similar to that of zlib
+dkp-libs/switch-liblzo2 2.10-2 (switch-portlibs)
+    A real-time data compression library
+dkp-libs/switch-libmad 0.15.1b-3 (switch-portlibs) [installed]
+    A high-quality MPEG audio decoder. (for Nintendo 3DS homebrew development)
+dkp-libs/switch-libmikmod 3.3.11.1-2 (switch-portlibs) [installed]
+    A portable sound library supporting many tracker formats (Nintendo Switch
+    port)
+dkp-libs/switch-libmodplug 0.8.9.0-2 (switch-portlibs) [installed]
+    Play various .mod formats
+dkp-libs/switch-libmpv 0.33.0-1 (switch-portlibs) [installed]
+    Command line video player (library only)
+dkp-libs/switch-libogg 1.3.4-2 (switch-portlibs) [installed]
+    The Ogg transport bitstream is designed to provide framing, error protection
+    and seeking structure for higher-level codec streams that consist of raw,
+    unencapsulated data packets, such as the Opus, Vorbis and FLAC audio codecs
+    or the Theora and Dirac video codecs.
+dkp-libs/switch-libopus 1.3-2 (switch-portlibs) [installed]
+    Reference implementation of the lossy audio codec
+dkp-libs/switch-libpcre2 10.33-1 (switch-portlibs)
+    libpcre2 port (for Nintendo Switch homebrew development)
+dkp-libs/switch-libpng 1.6.37-1 (switch-portlibs) [installed]
+    PNG format graphic files library (for Nintendo Switch homebrew development)
+dkp-libs/switch-libsamplerate 0.1.9-2 (switch-portlibs)
+    Secret Rabbit Code (aka libsamplerate) is a Sample Rate Converter for audio
+    (for Nintendo Switch homebrew development)
+dkp-libs/switch-libsodium 1.0.18-1 (switch-portlibs)
+    A modern and easy-to-use crypto library.
+dkp-libs/switch-libssh2 1.9.0-1 (switch-portlibs)
+    A library implementing the SSH2 protocol as defined by Internet Drafts
+dkp-libs/switch-libtheora 1.2.0alpha1-1 (switch-portlibs)
+    Free and open video compression codec from the Xiph.org Foundation
+dkp-libs/switch-libtimidity 0.2.6-2 (switch-portlibs)
+    A MIDI to WAVE converter library.
+dkp-libs/switch-libvorbis 1.3.7-1 (switch-portlibs)
+    Vorbis is a patent-clear, fully open, general purpose audio encoding format
+    standard that rivals or even surpasses the upcoming generation of
+    proprietary codecs (AAC and TwinVQ, also known as VQF).
+dkp-libs/switch-libvorbisidec 1.2.1-2 (switch-portlibs) [installed]
+    Fixed-point version of the Ogg Vorbis decoder (for Nintendo Switch homebrew
+    development)
+dkp-libs/switch-libvpx 1.8.0-2 (switch-portlibs)
+    A free software video codec library from Google and the Alliance for Open
+    Media (AOMedia). It serves as the reference software implementation for the
+    VP8 and VP9 video coding formats.
+dkp-libs/switch-libwebp 1.0.2-2 (switch-portlibs) [installed]
+    WebP is a modern image format that provides superior lossless and lossy
+    compression for images on the web. Using WebP, webmasters and web developers
+    can create smaller, richer images that make the web faster.
+dkp-libs/switch-libxml2 2.9.8-3 (switch-portlibs)
+    XML parsing library, version 2.
+dkp-libs/switch-libzstd 1.4.4-1 (switch-portlibs)
+    Zstd, short for Zstandard, is a fast lossless compression algorithm,
+    targeting real-time compression scenarios at zlib-level compression ratio
+    (for Nintendo Switch homebrew development)
+dkp-libs/switch-lz4 1.9.3-1 (switch-portlibs)
+    Very fast lossless compression algorithm
+dkp-libs/switch-mbedtls 2.16.6-3 (switch-portlibs)
+    An open source, portable, easy to use, readable and flexible SSL library
+dkp-libs/switch-mesa 20.1.0-4 (switch-portlibs) [installed]
+    The Mesa 3D Graphics Library
+dkp-libs/switch-miniupnpc 2.1.20190824-1 (switch-portlibs)
+    UPNP support library (for Nintendo Switch homebrew development)
+dkp-libs/switch-mpg123 1.25.10-4 (switch-portlibs) [installed]
+    A real time MPEG audio decoder for layer 1, 2 and 3
+dkp-libs/switch-ode 0.16.1-1 (switch-portlibs)
+    High performance library for simulating rigid body dynamics
+dkp-libs/switch-oniguruma 6.9.2-2 (switch-portlibs)
+    Oniguruma is a modern and flexible regular expressions library. It
+    encompasses features from different regular expression implementations that
+    traditionally exist in different languages.
+dkp-libs/switch-openal-soft 1.21.1-4 (switch-portlibs) [installed]
+    OpenAL Soft is a software implementation of the OpenAL 3D audio API.
+dkp-libs/switch-opusfile 0.10-3 (switch-portlibs) [installed]
+    Library for opening, seeking, and decoding .opus files
+dkp-libs/switch-physfs 3.0.2-2 (switch-portlibs)
+    A library to provide abstract access to various archives.
+dkp-libs/switch-pkg-config 0.28-4 (switch-dev) [installed]
+    pkg-config wrapper (for Nintendo Switch homebrew development)
+dkp-libs/switch-sdl2 2.0.14-1 (switch-portlibs switch-sdl2) [installed]
+    A library for portable low-level access to a video framebuffer, audio
+    output, mouse, and keyboard (Nintendo Switch port)
+dkp-libs/switch-sdl2_gfx 1.0.4-2 (switch-portlibs switch-sdl2) [installed]
+    SDL2 graphics drawing primitives (Nintendo Switch port).
+dkp-libs/switch-sdl2_image 2.0.4-1 (switch-portlibs switch-sdl2-libs) [installed]
+    SDL2 image loading library (Nintendo Switch port).
+dkp-libs/switch-sdl2_mixer 2.0.4-2 (switch-portlibs switch-sdl2) [installed]
+    A sample multi-channel audio mixer library.
+dkp-libs/switch-sdl2_net 2.0.1-3 (switch-portlibs switch-sdl2-libs)
+    A small sample cross-platform networking library.
+dkp-libs/switch-sdl2_ttf 2.0.15-1 (switch-portlibs switch-sdl2) [installed]
+    SDL2 TrueType font library (Nintendo Switch port).
+dkp-libs/switch-smpeg2 2.0.0-1 (switch-portlibs switch-sdl2) [installed]
+    SDL2 MPEG Player Library
+dkp-libs/switch-tinyxml2 6.0.0-2 (switch-portlibs)
+    A simple, small, efficient, C++ XML parser that can be easily integrated
+    into other programs (for Nintendo Switch homebrew development)
+dkp-libs/switch-wslay 1.1.0-1 (switch-portlibs)
+    Wslay is a WebSocket library written in C.
+dkp-libs/switch-zlib 1.2.11-3 (switch-portlibs) [installed]
+    Deflate compression method library (for Nintendo Switch homebrew
+    development)
+dkp-libs/switch-zziplib 0.13.69-3 (switch-portlibs)
+    The ZZIPlib provides read access on ZIP-archives and unpacked data. It
+    features an additional simplified API following the standard Posix API for
+    file access
+dkp-windows/devkitA64 r19-2 (switch-dev) [installed]
+    Toolchain for Nintendo Switch homebrew development
+dkp-windows/devkitA64-gdb 11.2-1 (switch-dev) [installed]
+    gnu debugger for devkitA64
+dkp-windows/devkitARM r58-2 (gp32-dev gp2x-dev gba-dev nds-dev 3ds-dev) [installed]
+    Toolchain for gp2x, gp32, Nintendo gba, nds, dsi, (3)ds & switch homebrew
+    development
+dkp-windows/general-tools 1.2.0-3 (gp32-dev gp2x-dev gba-dev nds-dev 3ds-dev switch-dev gamecube-dev wii-dev wiiu-dev) [installed]
+    Tools for homebrew development
+dkp-windows/hactool 1.4.0-3
+    A tool to view information about, decrypt, and extract common file formats
+    for the Nintendo Switch
+dkp-windows/switch-tools 1.12.0-1 (switch-dev) [installed]
+    Tools for Nintendo Switch homebrew development)
+dkp-windows/uam 1.1.0-2 (switch-dev) [installed]
+    deko3d shader compiler for Nintendo Switch
+
+16jal@DESKTOP-4LTADIG MSYS ~

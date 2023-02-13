@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{efb684c4-fa14-444a-8699-6994f70ac1b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{44ec94ec-ce97-48c9-a5bd-8dbc16e61dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nancy">
+      <UniqueIdentifier>{71307ac9-f43b-4962-93e5-a16a186a95ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nancy">
+      <UniqueIdentifier>{b408e32b-d38f-4834-8a23-c6f530c59460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libbinkdec">
+      <UniqueIdentifier>{4e654913-b181-4c39-acc6-53e6d806893e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nancy\HIFF Chunks">
+      <UniqueIdentifier>{10d3c1d6-3b6d-4b63-af4c-772af5eb4c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nancy\HIFF Chunks\ACT">
+      <UniqueIdentifier>{264ca047-1085-49ec-b732-c20452f7064e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nancy\HIFF Chunks">
+      <UniqueIdentifier>{15487682-b8e1-49a5-8fee-cb9033f8cceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nancy\HIFF Chunks\ACT">
+      <UniqueIdentifier>{0691e0b3-8758-4d70-a335-1d9d1a208dd1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\Engine\audio.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\AvP_AudioStreaming.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\AvP_RingBuffer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\Button.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\graphics.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\sprite.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\utils.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\CIFF.cpp">
+      <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\Loader.cpp">
+      <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\HIFF.cpp">
+      <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\Scene.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\avfft.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\BinkAudio.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\BinkDecoder.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\BinkVideo.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\BitReader.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\dct.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\dct32.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\fft.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\FileStream.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\HuffmanVLC.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\LogError.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\main.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\mdct.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\rdft.c">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\libbinkdec\Util.cpp">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp">
+      <Filter>Source Files\Nancy\HIFF Chunks\ACT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp">
+      <Filter>Source Files\Nancy\HIFF Chunks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\GUI.cpp">
+      <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\audio.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\AvP_RingBuffer.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\Button.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\graphics.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\utils.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\SDL_ptr.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\SDL_TTF_ptr.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\sprite.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\CIFF.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\Loader.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\HIFF.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\Scene.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\BinkDecoder.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\BinkVideo.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\BitReader.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\dct.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\dct32.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\FFmpeg_includes.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\fft.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\fft-internal.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\FileStream.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\HuffmanVLC.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\LogError.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\rdft.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\Util.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\avfft.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\BinkAudio.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\libbinkdec\binkdata.h">
+      <Filter>Source Files\libbinkdec</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h">
+      <Filter>Header Files\Nancy\HIFF Chunks\ACT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h">
+      <Filter>Header Files\Nancy\HIFF Chunks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\GUI.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

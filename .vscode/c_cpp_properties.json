@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "DKP aarch64",
+            "includePath": [
+                "F:\\sdk\\devkitPro\\devkitARM\\lib\\gcc\\arm-none-eabi\\11.2.0\\include",
+                "F:/sdk/devkitPro/devkitA64/aarch64-none-elf/include/**",
+                "F:/sdk/devkitPro/libnx/include/**",
+                "F:/sdk/devkitPro/portlibs/switch/include/**",
+                "${workspaceFolder}/include"
+            ],
+            "defines": [
+                "SWITCH",
+                "__SWITCH__",
+                "DEBUG"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "compilerPath": "F:\\sdk\\devkitPro\\devkitARM\\bin\\arm-none-eabi-g++.exe"
+        }
+    ],
+    "version": 4
+}
