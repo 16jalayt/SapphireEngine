@@ -1,7 +1,8 @@
 #pragma once
 
 const bool oldUI = true;
-const bool debugHot = false;
+const bool debugHot = true;
+//TODO: bik player does not respect
 const bool debugNoSound = true;
 
 //logical canvas resolution

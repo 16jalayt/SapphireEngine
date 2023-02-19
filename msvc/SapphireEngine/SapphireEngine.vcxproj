@@ -72,28 +72,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\include;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source\libbinkdec;$(ProjectDir)..\..\source;$(ProjectDir)..\..\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\..\source\imgui\backends;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source;$(ProjectDir)..\..\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\lib\Win64;$(ProjectDir)..\..\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\include;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source\libbinkdec;$(ProjectDir)..\..\source;$(ProjectDir)..\..\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\..\source\imgui\backends;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source;$(ProjectDir)..\..\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\lib\Win64;$(ProjectDir)..\..\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\include;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source\libbinkdec;$(ProjectDir)..\..\source;$(ProjectDir)..\..\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\..\source\imgui\backends;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source;$(ProjectDir)..\..\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\lib\Win64;$(ProjectDir)..\..\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\include;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\include;$(IncludePath)</IncludePath>
-    <SourcePath>F:\sdk\devkitPro\projects\SapphireEngine\source\imgui\backends;F:\sdk\devkitPro\projects\SapphireEngine\source\imgui;F:\sdk\devkitPro\projects\SapphireEngine\source;F:\sdk\devkitPro\projects\SapphireEngine\source\libbinkdec;$(SourcePath)</SourcePath>
-    <LibraryPath>F:\sdk\devkitPro\projects\SapphireEngine\ref materials\vld-2.5.9-setup\lib\Win64;F:\sdk\devkitPro\projects\SapphireEngine\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\include;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source\libbinkdec;$(ProjectDir)..\..\source;$(ProjectDir)..\..\ext\libbinkdec\include;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir)..\..\source\imgui\backends;$(ProjectDir)..\..\source\imgui;$(ProjectDir)..\..\source;$(ProjectDir)..\..\source\libbinkdec;$(SourcePath)</SourcePath>
+    <LibraryPath>$(ProjectDir)..\..\ref materials\vld-2.5.9-setup\lib\Win64;$(ProjectDir)..\..\ext\libbinkdec\win32\VS2010\x64\$(Configuration);$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

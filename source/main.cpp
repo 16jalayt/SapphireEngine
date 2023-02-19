@@ -59,8 +59,8 @@ int main(int argc, char** argv)
 	//bkFMV->OpenBackground("Video/TUT_DeskCU_TXT_BG.bik");
 
 	//BinkPlayback_ptr menuFMV = BinkPlayback_ptr(new BinkPlayback());
-	BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
-	menuFMV->Open("Video/RKCINEC.bik", 0, 0, true);
+	//BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
+	//menuFMV->Open("Video/RKCINEC.bik", 0, 0, true);
 
 	//16 bits per sample mono
 	//_dataBuffers uint8_t
@@ -113,7 +113,7 @@ int main(int argc, char** argv)
 					if (wait > 0)
 						exit_requested = 1;
 					break;
-			}
+				}
 #else
 			case SDL_KEYDOWN:
 				/* Check the SDLKey values and move change the coords */
@@ -125,8 +125,8 @@ int main(int argc, char** argv)
 					break;
 				}
 #endif
+			}
 		}
-	}
 
 		SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
 		SDL_RenderClear(Graphics::renderer.get());
@@ -139,12 +139,12 @@ int main(int argc, char** argv)
 			//SDL_RenderCopy(Graphics::renderer.get(), helloworld_tex.get(), NULL, &helloworld_rect);
 
 		//bkFMV->Draw();
-		menuFMV->Draw();
+		//menuFMV->Draw();
 
 		SDL_RenderPresent(Graphics::renderer.get());
 
 		graphics->frameWait();
-}
-	menuFMV->Close();
+	}
+	//menuFMV->Close();
 	quit();
 }
