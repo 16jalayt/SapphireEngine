@@ -124,6 +124,7 @@ SDL_Rect ScaledRect_to_SDLRect(Scaled_Rect rect)
 	newRect.h = rect.y2 - rect.y;
 	return newRect;
 }
+
 //TODO:remove
 /*SDL_Rect UnScaledRect_to_SDLRect(UnScaled_Rect rect, int Yoffset, int Xoffset)
 {

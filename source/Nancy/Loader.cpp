@@ -62,28 +62,56 @@ std::ifstream Loader::loadTree(std::string treeName)
 
 std::ifstream Loader::getDataFile(std::string sceneName)
 {
+	if (sceneName.empty())
+		return std::ifstream();
+
 	//TODO: get from tree not path
-	std::ifstream inFile;
+	//std::ifstream inFile;
 	//NOTE: for testing bacause files are named the same
-	if (oldUI)
+	/*if (oldUI)
 		inFile = std::ifstream("DataFiles/CIFTREE/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
 	else
-		inFile = std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+		inFile = std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);*/
 
-	if (inFile.fail())
-	{
-		std::ifstream inFile2("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
-		if (inFile2.fail())
-		{
-			printf("Could not open HIFF file: %s\n", sceneName.c_str());
-			inFile2.close();
-			return std::ifstream();
-		}
-		return inFile2;
+	std::ifstream inFile = std::ifstream("DataFiles/CIFTREE/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return std::ifstream("DataFiles/CIFTREE/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
 	}
-	return inFile;
+
+	inFile = std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+	}
+
+	printf("Could not open HIFF file: %s\n", sceneName.c_str());
+	return std::ifstream();
 }
 
+std::string Loader::getOVL(std::string ovlName)
+{
+	//TODO: get from tree not path
+	if (ovlName.empty())
+		return std::string();
+
+	std::ifstream inFile = std::ifstream("DataFiles/CIFTREE/" + ovlName + ".png", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "DataFiles/CIFTREE/" + ovlName + ".png";
+	}
+
+	inFile = std::ifstream("Ciftree/" + ovlName + ".png", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "Ciftree/" + ovlName + ".png";
+	}
+
+	printf("Could not open OVL file: %s\n", ovlName.c_str());
+	return std::string();
+}
+
+//Note: prefers loose files
 std::string Loader::getBackgroundPath(std::string backName)
 {
 	if (backName.empty())
@@ -101,6 +129,12 @@ std::string Loader::getBackgroundPath(std::string backName)
 		return "CDVideo/" + backName + ".bik";
 	}
 
+	inFile = std::ifstream("CDVideo/" + backName + ".avf", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "CDVideo/" + backName + ".avf";
+	}
+
 	inFile = std::ifstream("HDVideo/" + backName + ".png", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();
@@ -111,6 +145,12 @@ std::string Loader::getBackgroundPath(std::string backName)
 	if (!inFile.fail()) {
 		inFile.close();
 		return "HDVideo/" + backName + ".bik";
+	}
+
+	inFile = std::ifstream("HDVideo/" + backName + ".avf", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "HDVideo/" + backName + ".avf";
 	}
 
 	inFile = std::ifstream("Video/" + backName + ".png", std::ios::in | std::ios::binary | std::ios::ate);
@@ -131,8 +171,19 @@ std::string Loader::getBackgroundPath(std::string backName)
 		return "Video/" + backName + ".jpg";
 	}
 
-	printf("Cannot find background: %s\n", backName.c_str());
+	inFile = std::ifstream("Video/" + backName + ".avf", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "Video/" + backName + ".avf";
+	}
 
+	inFile = std::ifstream("DataFiles/CIFTREE/" + backName + ".png", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "DataFiles/CIFTREE/" + backName + ".png";
+	}
+
+	printf("Cannot find background: %s\n", backName.c_str());
 	return std::string();
 }
 

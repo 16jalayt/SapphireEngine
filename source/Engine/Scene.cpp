@@ -80,6 +80,7 @@ void Scene::setBkg(std::string backName)
 	{
 		//TODO: avf
 		//bk = Sprite_ptr(new Sprite(fileName.c_str(), 0, 0, RenderParent::canvas));
+		printf("AVF not implemented yet!: %s\n", fileName.c_str());
 	}
 	else
 	{

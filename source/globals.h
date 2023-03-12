@@ -1,7 +1,8 @@
 #pragma once
 
 const bool oldUI = true;
-const bool debugHot = true;
+const bool debugHot = false;
+const bool fullscreen = false;
 //TODO: bik player does not respect
 const bool debugNoSound = true;
 
@@ -38,7 +39,37 @@ typedef struct Scaled_Rect
 {
 	int x, y;
 	int x2, y2;
+	//Scaled_Rect() : x(0), y(0), x2(0), y2(0) { }
+	//Scaled_Rect(int 2x=0, int 2y=0, int 2x2=0, int 2y2=0) : x(2x), y(2y), x2(2x2), y2(2y2) { }
+	/*Scaled_Rect(int x, int y, int x2, int y2) {
+		Scaled_Rect sr;
+		sr.x = x;
+		sr.y = y;
+		sr.x2 = x2;
+		sr.y2 = y2;
+	}*/
 } Scaled_Rect;
+
+/*typedef struct Scaled_Rect
+{
+	int x, y;
+	int x2, y2;
+} Scaled_Rect;*/
+
+inline bool operator==(const Scaled_Rect& a, const Scaled_Rect& b)
+{
+	return a.x == b.x && a.y == b.y && a.x2 == b.x2 && a.y2 == b.y2;
+}
+
+inline bool operator!=(const Scaled_Rect& a, const Scaled_Rect& b)
+{
+	return !(a.x == b.x && a.y == b.y && a.x2 == b.x2 && a.y2 == b.y2);
+}
+
+inline bool operator==(const SDL_Rect& a, const SDL_Rect& b)
+{
+	return a.x == b.x && a.y == b.y && a.w == b.w && a.h == b.h;
+}
 
 typedef Scaled_Rect UnScaled_Rect;
 

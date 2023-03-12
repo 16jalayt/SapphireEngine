@@ -80,7 +80,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 		if (testVal != 0)
 			skipBytes(inFile, -1);
 
-		long chunkStart = inFile.tellg();
+		long chunkStart = (long)inFile.tellg();
 		std::string actChunk = readString(inFile, 4);
 		int chunkLen = readInt(inFile, true);
 

@@ -7,7 +7,7 @@
 #include "Engine/utils.h"
 #include <Nancy/GUI.h>
 
-Sprite::Sprite(const char* file, int x, int y, RenderParent parent, int numFrames, int animationSpeed)
+Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial, int numFrames, int animationSpeed)
 {
 	_loaded = false;
 	_width = 0;
@@ -26,8 +26,27 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, int numFrame
 		SDL_Surface* tmpsurf = IMG_Load(file);
 		if (tmpsurf)
 		{
-			_width = tmpsurf->w;
-			_height = tmpsurf->h;
+			if (partial != Scaled_Rect())
+			{
+				_srcSpecified = true;
+				_src = ScaledRect_to_SDLRect(partial);
+
+				//Need to tweak for some reason
+				//to remove
+				_src.x = _src.x + 1;
+				_src.y = _src.y + 1;
+				_src.w = _src.w - 1;
+				_src.h = _src.h - 1;
+
+				_width = _src.w;
+				_height = _src.h;
+			}
+			else
+			{
+				_width = tmpsurf->w;
+				_height = tmpsurf->h;
+			}
+
 			_pos = ScaleRect(x, y, _width, _height);
 			_scale = GlobalScale;
 
@@ -52,9 +71,15 @@ void Sprite::Draw()
 		}
 		else//RenderParent::canvas
 		{
+			//SDL_Rect test = ScaleRect(44, 394, 300, 155);
 			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
-			SDL_RenderClear(Graphics::renderer.get());
-			SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), NULL, &_pos);
+			//SDL_RenderClear(Graphics::renderer.get());
+
+			if (_srcSpecified)
+				//SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), &test, &_pos);
+				SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), &_src, &_pos);
+			else
+				SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), NULL, &_pos);
 			//Detach the texture
 			SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
 		}

@@ -49,9 +49,11 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 #ifdef __SWITCH__
 	flags = SDL_WINDOW_SHOWN;
 #else
-	//full desk ignores real width
-	flags = SDL_WINDOW_SHOWN;
-	//flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
+	if (fullscreen)
+		flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
+	else
+		//full desk ignores real width
+		flags = SDL_WINDOW_SHOWN;
 
 #endif
 	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, REAL_WIDTH, REAL_HEIGHT, flags));
