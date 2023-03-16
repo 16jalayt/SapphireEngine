@@ -125,12 +125,6 @@ SDL_Rect ScaledRect_to_SDLRect(Scaled_Rect rect)
 	return newRect;
 }
 
-//TODO:remove
-/*SDL_Rect UnScaledRect_to_SDLRect(UnScaled_Rect rect, int Yoffset, int Xoffset)
-{
-	return { rect.x + Xoffset, rect.y + Yoffset, rect.x2 - rect.x , rect.y2 - rect.y };
-}*/
-
 SDL_Rect ScaleRect(SDL_Rect rect, float scale)
 {
 	rect.x = (int)(rect.x * scale);
@@ -150,6 +144,7 @@ SDL_Rect ScaleRect(int x, int y, int w, int h, float scale)
 	return rect;
 }
 
+//TODO: add message
 int readInt(std::ifstream& inFile, bool bigEndian)
 {
 	int result = -1;
@@ -166,11 +161,18 @@ int readInt(std::ifstream& inFile, bool bigEndian)
 	return result;
 }
 
-short readShort(std::ifstream& inFile)
+short readShort(std::ifstream& inFile, bool bigEndian)
 {
 	short result = -1;
 
-	inFile.read((char*)&result, sizeof(result));
+	if (bigEndian)
+	{
+		unsigned char buf[2];
+		inFile.read((char*)buf, sizeof(buf) / sizeof(*buf));
+		result = (int)buf[1] | (int)buf[0] << 8;
+	}
+	else
+		inFile.read((char*)&result, sizeof(result));
 
 	return result;
 }
@@ -197,4 +199,18 @@ std::string readString(std::ifstream& inFile, int length)
 void skipBytes(std::ifstream& inFile, int skip)
 {
 	inFile.seekg(skip, std::ios_base::cur);
+}
+
+bool AssertShort(std::ifstream& inFile, short val, bool bigEndian)
+{
+	short readValue = readShort(inFile, bigEndian);
+
+	if (readValue != val)
+	{
+		printf("Value at position: %d\n", ((int)inFile.tellg() - 2));
+		printf("Expected value %d got %d\n", val, readValue);
+
+		return false;
+	}
+	return true;
 }

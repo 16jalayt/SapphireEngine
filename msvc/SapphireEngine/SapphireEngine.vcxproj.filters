@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Nancy\HIFF Chunks\ACT">
       <UniqueIdentifier>{0691e0b3-8758-4d70-a335-1d9d1a208dd1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\hertools">
+      <UniqueIdentifier>{7382427e-a867-451a-9a2a-09a21f6322b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Engine\audio.cpp">
@@ -131,6 +134,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Nancy\GUI.cpp">
       <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\AVF.cpp">
+      <Filter>Source Files\Nancy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\oldhertools\lzss.cpp">
+      <Filter>Source Files\hertools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\oldhertools\colorspace.cpp">
+      <Filter>Source Files\hertools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp">
+      <Filter>Source Files\hertools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +250,18 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Nancy\GUI.h">
       <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\AVF.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\oldhertools\crypt_misc.hpp">
+      <Filter>Source Files\hertools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\oldhertools\lzss.hpp">
+      <Filter>Source Files\hertools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\oldhertools\colorspace.hpp">
+      <Filter>Source Files\hertools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

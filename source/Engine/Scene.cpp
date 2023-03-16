@@ -72,15 +72,9 @@ void Scene::setBkg(std::string backName)
 		bkFMV = make_BinkPlayback_s(new BinkPlayback());
 		bkFMV->OpenBackground(fileName);
 	}
-	else if (ext == ".png" || ext == ".jpg")
+	else if (ext == ".png" || ext == ".jpg" || ext == ".avf")
 	{
 		bk = Sprite_ptr(new Sprite(fileName.c_str(), 0, 0, RenderParent::canvas));
-	}
-	else if (ext == ".avf")
-	{
-		//TODO: avf
-		//bk = Sprite_ptr(new Sprite(fileName.c_str(), 0, 0, RenderParent::canvas));
-		printf("AVF not implemented yet!: %s\n", fileName.c_str());
 	}
 	else
 	{

@@ -75,14 +75,12 @@ std::ifstream Loader::getDataFile(std::string sceneName)
 
 	std::ifstream inFile = std::ifstream("DataFiles/CIFTREE/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
-		inFile.close();
-		return std::ifstream("DataFiles/CIFTREE/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+		return inFile;
 	}
 
 	inFile = std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
-		inFile.close();
-		return std::ifstream("Ciftree/S" + sceneName + ".hiff", std::ios::in | std::ios::binary | std::ios::ate);
+		return inFile;
 	}
 
 	printf("Could not open HIFF file: %s\n", sceneName.c_str());

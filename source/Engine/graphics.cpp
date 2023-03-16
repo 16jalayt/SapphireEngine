@@ -11,6 +11,7 @@
 #include <SDL2/SDL_mixer.h>
 #include "AvP_AudioStreaming.h"
 #include "audio.h"
+#include <iostream>
 
 //Graphics class
 //Holds all information dealing with graphics for the game
@@ -70,6 +71,16 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 		fatalError("%s: SDL could not create renderer! SDL Error: %s", __func__, SDL_GetError());
 		return -1;
 	}
+
+	// dump renderer info
+	/*SDL_RendererInfo info;
+	SDL_GetRendererInfo(renderer.get(), &info);
+	std::cout << "Renderer name: " << info.name << '\n';
+	std::cout << "Texture formats: " << '\n';
+	for (Uint32 i = 0; i < info.num_texture_formats; i++)
+	{
+		std::cout << SDL_GetPixelFormatName(info.texture_formats[i]) << '\n';
+	}*/
 
 	/*int i, display_mode_count;
 	SDL_DisplayMode mode;
