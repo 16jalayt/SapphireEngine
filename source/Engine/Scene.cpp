@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include <Nancy/Loader.h>
 #include "audio.h"
+#include <Nancy/AVF.h>
 
 Scene_ptr currentScene;
 bool sceneChangeFlag = false;
@@ -72,9 +73,13 @@ void Scene::setBkg(std::string backName)
 		bkFMV = make_BinkPlayback_s(new BinkPlayback());
 		bkFMV->OpenBackground(fileName);
 	}
-	else if (ext == ".png" || ext == ".jpg" || ext == ".avf")
+	else if (ext == ".avf")
 	{
-		bk = Sprite_ptr(new Sprite(fileName.c_str(), 0, 0, RenderParent::canvas));
+		bk = Sprite_ptr(new Sprite(AVF::parseAVF(fileName.c_str()), 0, 0));
+	}
+	else if (ext == ".png" || ext == ".jpg")
+	{
+		bk = Sprite_ptr(new Sprite(fileName.c_str(), 0, 0));
 	}
 	else
 	{

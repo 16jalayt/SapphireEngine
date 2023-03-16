@@ -25,57 +25,89 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	//If file name not null or empty
 	if (file && strcmp(file, "") != 0)
 	{
-		SDL_Surface* tmpsurf{};
-		//TODO: try to move format specific out of engine
-		if (std::string(file).find(".avf") != std::string::npos)
+		SDL_Surface* tmpsurf = IMG_Load(file);
+		if (tmpsurf)
 		{
-			//tmpsurf = AVF::parseAVF(file);
-			_tex = SDL_Texture_ptr(AVF::parseAVF(file));
-			SDL_QueryTexture(_tex.get(), NULL, NULL, &_width, &_height);
-			_loaded = true;
-			_pos = ScaleRect(x, y, _width, _height);
-			_scale = GlobalScale;
-			//tmpsurf = IMG_Load(file);
-		}
-		else
-		{
-			tmpsurf = IMG_Load(file);
-
-			if (tmpsurf)
+			if (partial != Scaled_Rect())
 			{
-				if (partial != Scaled_Rect())
-				{
-					_srcSpecified = true;
-					_src = ScaledRect_to_SDLRect(partial);
+				_srcSpecified = true;
+				_src = ScaledRect_to_SDLRect(partial);
 
-					//Need to tweak for some reason
-					//to remove
-					_src.x = _src.x + 1;
-					_src.y = _src.y + 1;
-					_src.w = _src.w - 1;
-					_src.h = _src.h - 1;
+				//Need to tweak for some reason
+				//to remove green border
+				_src.x = _src.x + 1;
+				_src.y = _src.y + 1;
+				_src.w = _src.w - 1;
+				_src.h = _src.h - 1;
 
-					_width = _src.w;
-					_height = _src.h;
-				}
-				else
-				{
-					_width = tmpsurf->w;
-					_height = tmpsurf->h;
-				}
-
-				_pos = ScaleRect(x, y, _width, _height);
-				_scale = GlobalScale;
-
-				_tex = SDL_Texture_ptr(SDL_CreateTextureFromSurface(Graphics::renderer.get(), tmpsurf));
-				SDL_FreeSurface(tmpsurf);
-				_loaded = true;
+				_width = _src.w;
+				_height = _src.h;
 			}
 			else
 			{
-				printf("Unable to open sprite: %s\n", file);
+				_width = tmpsurf->w;
+				_height = tmpsurf->h;
 			}
+
+			_pos = ScaleRect(x, y, _width, _height);
+			_scale = GlobalScale;
+
+			_tex = SDL_Texture_ptr(SDL_CreateTextureFromSurface(Graphics::renderer.get(), tmpsurf));
+			SDL_FreeSurface(tmpsurf);
+			_loaded = true;
 		}
+		else
+		{
+			printf("Unable to open sprite: %s\n", file);
+		}
+	}
+	//}
+}
+
+Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scaled_Rect partial, int numFrames, int animationSpeed)
+{
+	_loaded = false;
+	_width = 0;
+	_height = 0;
+	_visible = true;
+	_scale = 1;
+	_parent = parent;
+
+	//TODO:implement
+	_numFrames = numFrames;
+	_animationSpeed = animationSpeed;
+
+	if (texture)
+	{
+		if (partial != Scaled_Rect())
+		{
+			_srcSpecified = true;
+			_src = ScaledRect_to_SDLRect(partial);
+
+			//Need to tweak for some reason
+			//to remove green border
+			_src.x = _src.x + 1;
+			_src.y = _src.y + 1;
+			_src.w = _src.w - 1;
+			_src.h = _src.h - 1;
+
+			_width = _src.w;
+			_height = _src.h;
+		}
+		else
+		{
+			SDL_QueryTexture(texture.get(), NULL, NULL, &_width, &_height);
+		}
+
+		_pos = ScaleRect(x, y, _width, _height);
+		_scale = GlobalScale;
+
+		_tex = std::move(texture);
+		_loaded = true;
+	}
+	else
+	{
+		printf("Unable to open sprite with texture.\n");
 	}
 }
 
