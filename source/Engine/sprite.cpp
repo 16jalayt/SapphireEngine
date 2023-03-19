@@ -25,6 +25,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	//If file name not null or empty
 	if (file && strcmp(file, "") != 0)
 	{
+		//TODO: move to Loader
 		SDL_Surface* tmpsurf = IMG_Load(file);
 		if (tmpsurf)
 		{
@@ -58,7 +59,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 		}
 		else
 		{
-			printf("Unable to open sprite: %s\n", file);
+			printf("Unable to open sprite: %s , %s\n", file, IMG_GetError());
 		}
 	}
 	//}
@@ -124,6 +125,13 @@ void Sprite::Draw()
 			//SDL_Rect test = ScaleRect(44, 394, 300, 155);
 			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
 			//SDL_RenderClear(Graphics::renderer.get());
+
+			if (_isMask)
+			{
+				SDL_SetTextureBlendMode(_tex.get(), SDL_BLENDMODE_MUL);
+				//max 255
+				//SDL_SetTextureAlphaMod(_tex.get(), 125);
+			}
 
 			if (_srcSpecified)
 				//SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), &test, &_pos);
@@ -215,6 +223,11 @@ int Sprite::getHeight()
 void Sprite::setPos(SDL_Rect pos)
 {
 	_pos = pos;
+}
+
+void Sprite::isMask(bool mask)
+{
+	_isMask = mask;
 }
 
 Sprite::~Sprite()

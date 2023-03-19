@@ -22,7 +22,7 @@ public:
 private:
 	//TODO: make enabled in click handler
 	bool _enabled;
-	bool _debugView;
+	bool _debugView = false;
 	//SDL_Rect _pos = { 0, 0, 0, 0 };
 	//Sprite _graphic;
 };

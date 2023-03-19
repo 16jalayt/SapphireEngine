@@ -20,6 +20,7 @@ bool Loader::Boot()
 
 	//test loose
 	if (oldUI)
+		//HIFF::Load_HIFF("4018");
 		HIFF::Load_HIFF("4141");
 	else
 		//scopa

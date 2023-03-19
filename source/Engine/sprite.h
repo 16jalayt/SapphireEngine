@@ -27,6 +27,7 @@ public:
 	int getWidth();
 	int getHeight();
 	void setPos(SDL_Rect pos);
+	void isMask(bool mask);
 
 protected:
 	bool _loaded = false;
@@ -42,6 +43,7 @@ protected:
 	int _animationSpeed = 1;
 	float _scale = 1;
 	RenderParent _parent = canvas;
+	bool _isMask = false;
 };
 
 using Sprite_ptr = std::shared_ptr<Sprite>;

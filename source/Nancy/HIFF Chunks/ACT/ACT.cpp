@@ -6,7 +6,7 @@
 #include <Engine/Scene.h>
 #include <Nancy/Loader.h>
 
-bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
+bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunkStart)
 {
 	std::string actChunkDesc = readString(inFile, 48);
 	unsigned char chunkType = readByte(inFile);
@@ -16,13 +16,14 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
 
 	switch (chunkType)
 	{
+		//?
+	case 20:
 		//Scene change
-		//TODO:ghostdogs name
 	case 25:
 	{
-		//TODO: Needed?
-		if (chunkType == 25)
-			int cursorNumber = readShort(inFile);
+		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+
+		int cursorNumber = readShort(inFile);
 		//TODO:set cursor
 
 		//scene to change to
@@ -30,6 +31,17 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
 
 		//hot rect
 		Scaled_Rect hot = Scaled_Rect{ readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
+
+		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
+		{
+			//DEPS
+			//TODO:split out to seperate func
+			int depType = readShort(inFile);
+			int label = readShort(inFile);
+			int condition = readShort(inFile);
+			int boolean = readShort(inFile);
+			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
+		}
 
 		Button_ptr testbutton = std::make_shared<Button>(hot, "", RenderParent::canvas);
 		scene->AddHotzone(testbutton);
@@ -99,6 +111,8 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
 	//static overlay
 	case 55:
 	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+
 		//52 in newer games
 		//printf("static overlay not implemented\n");
 
@@ -114,13 +128,17 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
 		Scaled_Rect destRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 		Scaled_Rect srcRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
-		//?
-		int depType = readShort(inFile);
-		int depNumber = readShort(inFile);
-		//?Truth
-		int unknown5 = readByte(inFile);
-
-		skipBytes(inFile, 12);
+		//TODO: while
+		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
+		{
+			//DEPS
+			//TODO:split out to seperate func
+			int depType = readShort(inFile);
+			int label = readShort(inFile);
+			int condition = readShort(inFile);
+			int boolean = readShort(inFile);
+			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
+		}
 
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), destRect.x, destRect.y, RenderParent::canvas, srcRect);
 		scene->AddSprite(ovl);
@@ -131,9 +149,29 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen)
 		//skipBytes(inFile, chunkLen - 49);
 		break;
 	}
+	//Mouselight puzzle (Ghost dogs tunnel flashlight OVL)
+	case 217:
+	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+
+		//Name of the cave frame to show
+		//Cave background is an OVL over top of a black background
+		//So only shows up when flashlight cursor selected
+		std::string ovlImage = readString(inFile, 33);
+
+		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), 0, 0);
+		scene->AddSprite(ovl);
+
+		Sprite_ptr mask = std::make_shared<Sprite>("data/lightmask.png", 0, 0);
+		scene->AddSprite(mask);
+		mask->isMask(true);
+
+		skipBytes(inFile, 19);
+		break;
+	}
 	default:
 	{
-		printf("Invalid ACT chunk:%u Desc:%s in scene:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), scene->sceneFile.c_str(), (long)inFile.tellg() - 57);
+		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), scene->sceneFile.c_str(), (long)inFile.tellg() - 57);
 		//int test = chunkLen - 49;
 		skipBytes(inFile, chunkLen - 50);
 		break;

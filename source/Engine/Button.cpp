@@ -6,7 +6,6 @@
 Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
 {
 	_enabled = enabled;
-	_debugView = false;
 
 	_pos = ScaleRect(x, y, w, h);
 	_width = w;
@@ -16,7 +15,6 @@ Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent
 Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enabled) :Sprite(file, rect.x, rect.y, parent)
 {
 	_enabled = enabled;
-	_debugView = false;
 
 	_pos = ScaleRect(rect);
 	_width = _pos.w;
@@ -26,7 +24,6 @@ Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enable
 Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool enabled) :Sprite(file, rect.x, rect.y, parent)
 {
 	_enabled = enabled;
-	_debugView = false;
 
 	//convert rect type and scale
 	_pos = ScaleRect(ScaledRect_to_SDLRect(rect));
@@ -50,8 +47,10 @@ void Button::Draw()
 		{
 			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
 
-			SDL_SetRenderDrawColor(Graphics::renderer.get(), 0, 0, 135, 0xFF);
+			SDL_SetRenderDrawBlendMode(Graphics::renderer.get(), SDL_BLENDMODE_BLEND);
+			SDL_SetRenderDrawColor(Graphics::renderer.get(), 0, 0, 135, 0x50);
 			SDL_RenderFillRect(Graphics::renderer.get(), &_pos);
+			SDL_SetRenderDrawBlendMode(Graphics::renderer.get(), SDL_BLENDMODE_NONE);
 
 			//Detach the texture
 			SDL_SetRenderTarget(Graphics::renderer.get(), NULL);

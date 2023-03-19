@@ -57,7 +57,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 		int sumLength = readInt(inFile, true);
 		SUM::Parse(inFile, newScene, sceneName);
 	}
-	/*if (sumChunk == "SCENTSUM")
+	/*if (sumChunk == "SCENSUM")
 	{
 		printf("Invalid Summery chunk in file: %s\n", sceneName.c_str());
 		return false;
@@ -73,33 +73,24 @@ bool HIFF::Load_HIFF(std::string sceneName)
 	/////////////////////////////////////////////////
 
 	while (inFile.tellg() != filesize && inFile.tellg() != EOF)
-		//while (inFile.tellg() != filesize)
 	{
-		//If current byte is 0, HER made the count 1 off
-		char testVal = readByte(inFile);
-		if (testVal != 0)
-			skipBytes(inFile, -1);
-
 		long chunkStart = (long)inFile.tellg();
 		std::string actChunk = readString(inFile, 4);
 		int chunkLen = readInt(inFile, true);
 
-		//std::string actChunkDesc = readString(inFile, 48);
-		//unsigned char chunkType = readByte(inFile);
-
 		if (actChunk == "ACT")
-			//if (chunkType == 25)
 		{
-			ACT::Parse(inFile, newScene, chunkLen);
+			ACT::Parse(inFile, newScene, chunkLen, chunkStart);
 		}
 		else
 		{
-			//TODO: put chunk pos, skip bad chunk
-			printf("Invalid chunk:%s in scene: %s  at: %ld\n", actChunk.c_str(), sceneName.c_str(), chunkStart);
+			printf("**Invalid chunk:%s in scene: %s  at: %ld\n", actChunk.c_str(), sceneName.c_str(), chunkStart);
 			skipBytes(inFile, chunkLen);
 		}
-		//unsigned char readCheck = readByte(inFile);
-		//skipBytes(inFile, -1);
+
+		//Make sure next chunk is byte aligned
+		if (((int)inFile.tellg() % 2) != 0)
+			skipBytes(inFile, 1);
 	}
 
 	ChangeScene(newScene);

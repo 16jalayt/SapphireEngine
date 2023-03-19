@@ -1,7 +1,7 @@
 #pragma once
 
 const bool oldUI = true;
-const bool debugHot = false;
+const bool debugHot = true;
 const bool fullscreen = false;
 //TODO: bik player does not respect
 const bool debugNoSound = true;
