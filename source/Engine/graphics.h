@@ -1,10 +1,10 @@
 #pragma once
 
-#include <map>  //NOT available in devkitpro
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL_ttf.h>
+
 #include "SDL_ptr.h"
 #include "SDL_TTF_ptr.h"
 

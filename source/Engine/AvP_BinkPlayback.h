@@ -25,13 +25,14 @@
 #ifndef _BinkPlayback_h_
 #define _BinkPlayback_h_
 
+#include <pthread.h>
+#include <SDL2/SDL.h>
+#include <memory.h>
+
+#include "graphics.h"
 #include "libbinkdec/BinkDecoder.h"
 #include "AvP_AudioStreaming.h"
 #include "AvP_RingBuffer.h"
-#include <pthread.h>
-#include <SDL2/SDL.h>
-#include "graphics.h"
-#include <memory.h>
 
 using AudioStream_ptr = std::shared_ptr<AudioStream>;
 using RingBuffer_ptr = std::shared_ptr<RingBuffer>;

@@ -16,12 +16,16 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 	switch (chunkType)
 	{
-		//?
+		//12
+		//scene change
+		//don't know how different than 25
+
+	//?
 	case 20:
 		//Scene change
 	case 25:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		int cursorNumber = readShort(inFile);
 		//TODO:set cursor
@@ -43,7 +47,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
 		}
 
-		Button_ptr testbutton = std::make_shared<Button>(hot, "", RenderParent::canvas);
+		Button_ptr testbutton = std::make_shared<Button>(hot, "");
 		scene->AddHotzone(testbutton);
 		testbutton->callback = [changeTo = changeTo]
 		{
@@ -111,7 +115,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 	//static overlay
 	case 55:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//52 in newer games
 		//printf("static overlay not implemented\n");
@@ -149,10 +153,59 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//skipBytes(inFile, chunkLen - 49);
 		break;
 	}
+	//Event Flags with Cursor and HS
+	//AT_EVENTFLAGS_CURSOR_HS
+	case 98:
+	{
+		//TODO: incomplete implementation
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		//Flag to update
+		char flag = readShort(inFile);
+
+		//Need cursor value somewhere
+		//Currently unknown
+		skipBytes(inFile, 12);
+
+		Scaled_Rect hotZone = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
+
+		Button_ptr testbutton = std::make_shared<Button>(hotZone, "");
+		scene->AddHotzone(testbutton);
+		testbutton->callback = [flag = flag]
+		{
+			//TODO: set scene flag
+			printf("This would set scene flag num: %d", flag);
+		};
+		if (debugHot)
+			testbutton->setDebug(true);
+
+		break;
+	}
+	//PUSH scene onto stack
+	case 110:
+	{
+		//TODO: incomplete implementation
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		//Unknown, status flag?
+		char unknown = readByte(inFile);
+
+		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
+		{
+			//DEPS
+			//TODO:split out to seperate func
+			int depType = readShort(inFile);
+			int label = readShort(inFile);
+			int condition = readShort(inFile);
+			int boolean = readShort(inFile);
+			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
+		}
+		break;
+	}
 	//Mouselight puzzle (Ghost dogs tunnel flashlight OVL)
 	case 217:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), (long)inFile.tellg() - 57);
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Name of the cave frame to show
 		//Cave background is an OVL over top of a black background
@@ -171,7 +224,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 	}
 	default:
 	{
-		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%ld\n", chunkType, actChunkDesc.c_str(), scene->sceneFile.c_str(), (long)inFile.tellg() - 57);
+		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%d\n", chunkType, actChunkDesc.c_str(), scene->sceneFile.c_str(), chunkStart);
 		//int test = chunkLen - 49;
 		skipBytes(inFile, chunkLen - 50);
 		break;

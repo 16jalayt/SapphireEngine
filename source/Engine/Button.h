@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <functional>
+
 #include "sprite.h"
 #include "SDL_ptr.h"
-#include <globals.h>
-#include <functional>
+#include "globals.h"
 
 class Button : public Sprite
 {

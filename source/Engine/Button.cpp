@@ -1,7 +1,7 @@
 #include "Engine/Button.h"
 #include "Engine/utils.h"
 #include "graphics.h"
-#include <Nancy/GUI.h>
+#include "Nancy/GUI.h"
 
 Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
 {
@@ -46,7 +46,7 @@ void Button::Draw()
 		else//RenderParent::canvas
 		{
 			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
-
+			//TODO:different colors for different hot types
 			SDL_SetRenderDrawBlendMode(Graphics::renderer.get(), SDL_BLENDMODE_BLEND);
 			SDL_SetRenderDrawColor(Graphics::renderer.get(), 0, 0, 135, 0x50);
 			SDL_RenderFillRect(Graphics::renderer.get(), &_pos);

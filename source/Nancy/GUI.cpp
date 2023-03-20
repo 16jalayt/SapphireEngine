@@ -1,11 +1,11 @@
-#include <Nancy/GUI.h>
+#include "Nancy/GUI.h"
 #include <string>
-#include <Engine/utils.h>
-#include <Engine/Button.h>
-#include <Engine/graphics.h>
+#include "Engine/utils.h"
+#include "Engine/Button.h"
+#include "Engine/graphics.h"
 
 std::shared_ptr<SDL_Texture> GUI::canvas;
-//SDL_Rect GUI::canvasRect;
+SDL_Rect GUI::canvasRect;
 
 GUI::GUI()
 {

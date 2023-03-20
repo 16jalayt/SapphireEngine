@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Engine/SDL_ptr.h"
-#include <Engine/sprite.h>
-#include <Engine/AvP_BinkPlayback.h>
-#include <Engine/Button.h>
-
-//designing to be static
-
 #include <string>
+
+#include "Engine/SDL_ptr.h"
+#include "Engine/sprite.h"
+#include "Engine/AvP_BinkPlayback.h"
+#include "Engine/Button.h"
+
+//CurrentScene is static.
+//Use to reference class functions.
 
 class Scene
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include <Engine/Scene.h>
+#include "Engine/Scene.h"
 #include "Engine/SDL_ptr.h"
 
 typedef struct GUI_Rect
@@ -20,7 +20,7 @@ public:
 	std::vector<GUI_Rect> rects;
 
 	static std::shared_ptr<SDL_Texture> canvas;
-	SDL_Rect canvasRect;
+	static SDL_Rect canvasRect;
 
 	void Draw();
 	void EventProc(SDL_Event event);

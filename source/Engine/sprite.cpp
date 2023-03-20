@@ -5,8 +5,9 @@
 #include "Engine/graphics.h"
 #include "globals.h"
 #include "Engine/utils.h"
-#include <Nancy/GUI.h>
-#include <Nancy/AVF.h>
+#include "Nancy/GUI.h"
+#include "Nancy/AVF.h"
+#include "Nancy/GUI.h"
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial, int numFrames, int animationSpeed)
 {
@@ -160,9 +161,22 @@ void Sprite::destroy()
 
 bool Sprite::MouseCollision(SDL_Event event)
 {
-	//Select finger or mouse and test range
-	int x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x;
-	int y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y;
+	int x = 0;
+	int y = 0;
+	if (_parent == window)
+	{
+		//Select finger or mouse and test range
+		x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x;
+		y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y;
+	}
+	//canvas
+	else
+	{
+		//Select finger or mouse and test range
+		x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x - GUI::canvasRect.x;
+		y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y - GUI::canvasRect.y;
+	}
+
 	//Mouse is left of the button
 	if (x < _pos.x)
 	{

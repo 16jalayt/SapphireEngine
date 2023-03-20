@@ -1,7 +1,7 @@
 #include "Scene.h"
-#include <Nancy/Loader.h>
+#include "Nancy/Loader.h"
 #include "audio.h"
-#include <Nancy/AVF.h>
+#include "Nancy/AVF.h"
 
 Scene_ptr currentScene;
 bool sceneChangeFlag = false;
