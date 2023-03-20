@@ -1,11 +1,12 @@
 #pragma once
 
+#include <fstream>
+#include <string>
 #include <SDL2/SDL.h>
+
 #include "SDL_ptr.h"
 #include "globals.h"
 #include "sprite.h"
-#include <fstream>
-#include <string>
 
 void fatalError(const char* fmt, ...);
 void quit();

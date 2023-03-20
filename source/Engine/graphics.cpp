@@ -1,17 +1,16 @@
+#include "graphics.h"
+
 #ifdef __SWITCH__
 #include <switch.h>
 #endif
-
-#include "graphics.h"
-
+#include <iostream>
 #include <SDL2/SDL_image.h>
-
-#include "globals.h"
-#include "utils.h"
 #include <SDL2/SDL_mixer.h>
+
 #include "AvP_AudioStreaming.h"
 #include "audio.h"
-#include <iostream>
+#include "globals.h"
+#include "utils.h"
 
 //Graphics class
 //Holds all information dealing with graphics for the game

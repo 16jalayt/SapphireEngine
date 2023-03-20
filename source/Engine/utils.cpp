@@ -6,11 +6,11 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "utils.h"
-#include "globals.h"
-#include "AvP_AudioStreaming.h"
 #include "audio.h"
+#include "AvP_AudioStreaming.h"
+#include "globals.h"
 #include "graphics.h"
+#include "utils.h"
 
 void fatalError(const char* fmt, ...)
 {

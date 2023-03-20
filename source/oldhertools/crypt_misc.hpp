@@ -6,5 +6,5 @@
 #include <cstdint>
 
 namespace Her {
-    std::vector<uint8_t> sub_offsets(char * fData, uint32_t fSize);
+	std::vector<uint8_t> sub_offsets(char* fData, uint32_t fSize);
 }

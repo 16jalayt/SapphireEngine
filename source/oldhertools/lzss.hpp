@@ -7,5 +7,5 @@
 #include <cstdint>
 
 namespace Her {
-    std::vector<uint8_t> dec_LZSS(std::vector<uint8_t> fData);
+	std::vector<uint8_t> dec_LZSS(std::vector<uint8_t> fData);
 }

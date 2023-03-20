@@ -1,10 +1,11 @@
-#include <Nancy/HIFF Chunks/ACT/ACT.h>
+#include "Nancy/HIFF Chunks/ACT/ACT.h"
 #include <string>
-#include <Engine/utils.h>
-#include <Engine/Button.h>
-#include <Nancy/HIFF.h>
-#include <Engine/Scene.h>
-#include <Nancy/Loader.h>
+
+#include "Engine/utils.h"
+#include "Engine/Button.h"
+#include "Nancy/HIFF.h"
+#include "Engine/Scene.h"
+#include "Nancy/Loader.h"
 
 bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunkStart)
 {

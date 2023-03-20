@@ -23,9 +23,7 @@
 #include <string>
 
 namespace BinkCommon {
-
-void LogError(const std::string &error);
-
+	void LogError(const std::string& error);
 } // close namespace BinkCommon
 
 #endif

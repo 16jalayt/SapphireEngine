@@ -1,14 +1,10 @@
 #include "AvP_audioStreaming.h"
 #include <assert.h>
-//#include <math.h>
-//#include <new>
-//#include "FileStream.h"
+#include <vector>
 #include <AL\al.h>
 #include <AL\alc.h>
 #include <AL\alext.h>
 #include <AL\efx-presets.h>
-//#include <Windows.h>
-#include <vector>
 #include <SDL2/SDL_timer.h>
 
 static bool		soundEnabled = false;

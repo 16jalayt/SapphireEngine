@@ -1,8 +1,11 @@
 #define SDL_MAIN_HANDLED
-//#include <vld.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdarg.h>
+
+#ifdef __SWITCH__
+#include <switch.h>
+#endif
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -11,10 +14,6 @@
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL2_rotozoom.h>
 #include "Engine/SDL_ptr.h"
-
-#ifdef __SWITCH__
-#include <switch.h>
-#endif
 
 #include "globals.h"
 #include "Engine/utils.h"

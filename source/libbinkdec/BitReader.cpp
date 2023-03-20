@@ -21,90 +21,88 @@
 #include "BitReader.h"
 
 namespace BinkCommon {
-
-BitReader::BitReader(BinkCommon::FileStream &file, uint32_t size)
-{
-	this->file = &file;
-	this->totalSize = size;
-	this->nCachedBits = 0;
-	this->currentOffset = 0;
-	this->bytesRead = 0;
-
-	FillCache();
-}
-
-BitReader::~BitReader()
-{
-//	file->Skip(totalSize - (currentOffset/8));
-}
-
-void BitReader::FillCache()
-{
-	if (bytesRead < totalSize)
+	BitReader::BitReader(BinkCommon::FileStream& file, uint32_t size)
 	{
-		this->cache = this->file->ReadByte();
-		nCachedBits = 8;
-		bytesRead++;
-	}
-	else
-	{
-		// TODO: handle this case?
-		assert(0);
-	}
-}
+		this->file = &file;
+		this->totalSize = size;
+		this->nCachedBits = 0;
+		this->currentOffset = 0;
+		this->bytesRead = 0;
 
-uint32_t BitReader::GetSize()
-{
-	return totalSize * 8;
-}
-
-uint32_t BitReader::GetPosition()
-{
-	return currentOffset + (8 - nCachedBits);
-}
-
-uint32_t BitReader::GetBit()
-{
-	if (nCachedBits == 0)
-	{
 		FillCache();
-		currentOffset += 8;
 	}
 
-	uint32_t ret = cache & 1;
-
-	cache >>= 1;
-	nCachedBits--;
-
-	return ret;
-}
-
-uint32_t BitReader::GetBits(uint32_t n)
-{
-	uint32_t ret = 0;
-
-	int bitsTodo = n;
-
-	uint32_t theShift = 0;
-
-	while (bitsTodo)
+	BitReader::~BitReader()
 	{
-		uint32_t bit = GetBit();
-		bit <<= theShift;
-
-		theShift++;
-
-		ret |= bit;
-
-		bitsTodo--;
+		//	file->Skip(totalSize - (currentOffset/8));
 	}
 
-	return ret;
-}
+	void BitReader::FillCache()
+	{
+		if (bytesRead < totalSize)
+		{
+			this->cache = this->file->ReadByte();
+			nCachedBits = 8;
+			bytesRead++;
+		}
+		else
+		{
+			// TODO: handle this case?
+			assert(0);
+		}
+	}
 
-void BitReader::SkipBits(uint32_t n)
-{
-	GetBits(n);
-}
+	uint32_t BitReader::GetSize()
+	{
+		return totalSize * 8;
+	}
 
+	uint32_t BitReader::GetPosition()
+	{
+		return currentOffset + (8 - nCachedBits);
+	}
+
+	uint32_t BitReader::GetBit()
+	{
+		if (nCachedBits == 0)
+		{
+			FillCache();
+			currentOffset += 8;
+		}
+
+		uint32_t ret = cache & 1;
+
+		cache >>= 1;
+		nCachedBits--;
+
+		return ret;
+	}
+
+	uint32_t BitReader::GetBits(uint32_t n)
+	{
+		uint32_t ret = 0;
+
+		int bitsTodo = n;
+
+		uint32_t theShift = 0;
+
+		while (bitsTodo)
+		{
+			uint32_t bit = GetBit();
+			bit <<= theShift;
+
+			theShift++;
+
+			ret |= bit;
+
+			bitsTodo--;
+		}
+
+		return ret;
+	}
+
+	void BitReader::SkipBits(uint32_t n)
+	{
+		GetBits(n);
+	}
 } // close namespace BinkCommon

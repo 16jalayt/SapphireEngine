@@ -26,16 +26,15 @@
 #include <stdint.h>
 
 namespace BinkCommon {
-
-class FileStream
-{
+	class FileStream
+	{
 	public:
 
-		bool Open(const std::string &fileName);
+		bool Open(const std::string& fileName);
 		bool Is_Open();
 		void Close();
 
-		int32_t ReadBytes(uint8_t *data, uint32_t nBytes);
+		int32_t ReadBytes(uint8_t* data, uint32_t nBytes);
 
 		uint32_t ReadUint32LE();
 		uint32_t ReadUint32BE();
@@ -45,10 +44,10 @@ class FileStream
 
 		uint8_t ReadByte();
 
-		enum SeekDirection{
+		enum SeekDirection {
 			kSeekCurrent = 0,
-			kSeekStart   = 1,
-			kSeekEnd     = 2
+			kSeekStart = 1,
+			kSeekEnd = 2
 		};
 
 		bool Seek(int32_t offset, SeekDirection = kSeekStart);
@@ -59,8 +58,7 @@ class FileStream
 
 	private:
 		std::ifstream file;
-};
-
+	};
 } // close namespace BinkCommon
 
 #endif

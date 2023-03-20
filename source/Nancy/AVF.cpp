@@ -1,10 +1,13 @@
-#include "Nancy/AVF.h"
-#include <Engine/utils.h>
+#include <sstream>
+#include <SDL2/SDL_image.h>
+
 #include <oldhertools/lzss.hpp>
 #include <oldhertools/crypt_misc.hpp>
 #include <oldhertools/colorspace.hpp>
-#include <SDL2/SDL_image.h>
-#include <sstream>
+
+#include "Nancy/AVF.h"
+#include "Engine/utils.h"
+
 /* //To test raw images
 typedef struct {
 	int width;

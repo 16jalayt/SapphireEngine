@@ -24,10 +24,10 @@
 
 #include "AvP_BinkPlayback.h"
 #include <assert.h>
-#include <globals.h>
-#include <Engine/utils.h>
 #include <chrono>
-#include <Nancy/GUI.h>
+
+#include "Nancy/GUI.h"
+#include "Engine/utils.h"
 
 static const int kAudioBufferSize = 4096;
 static const int kAudioBufferCount = 3;
