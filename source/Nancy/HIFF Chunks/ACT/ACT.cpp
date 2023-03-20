@@ -162,7 +162,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Flag to update
-		char flag = readShort(inFile);
+		short flag = readShort(inFile);
 
 		//Need cursor value somewhere
 		//Currently unknown
@@ -175,7 +175,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		testbutton->callback = [flag = flag]
 		{
 			//TODO: set scene flag
-			printf("This would set scene flag num: %d", flag);
+			printf("This would set scene flag num: %d\n", flag);
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
