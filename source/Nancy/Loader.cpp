@@ -20,7 +20,11 @@ bool Loader::Boot()
 
 	//test loose
 	if (oldUI)
-		HIFF::Load_HIFF("4151");
+		//Torchlight
+		//HIFF::Load_HIFF("4020");
+	//Puzzle Corrador
+		HIFF::Load_HIFF("4150");
+	// Tunnel by Kennel
 	//HIFF::Load_HIFF("4141");
 	else
 		//scopa

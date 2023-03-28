@@ -3,9 +3,10 @@
 
 #include "Engine/utils.h"
 #include "Engine/Button.h"
-#include "Nancy/HIFF.h"
 #include "Engine/Scene.h"
+#include "Nancy/HIFF.h"
 #include "Nancy/Loader.h"
+#include "Nancy/Dependency.h"
 
 bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunkStart)
 {
@@ -37,16 +38,11 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//hot rect
 		Scaled_Rect hot = Scaled_Rect{ readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
-		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
-		{
-			//DEPS
-			//TODO:split out to seperate func
-			int depType = readShort(inFile);
-			int label = readShort(inFile);
-			int condition = readShort(inFile);
-			int boolean = readShort(inFile);
-			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
-		}
+		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+
+		//TODO: do chunk conditionally
+		if (dep.size() > 0)
+			printf("hit\n");
 
 		Button_ptr testbutton = std::make_shared<Button>(hot, "");
 		scene->AddHotzone(testbutton);
@@ -133,17 +129,11 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		Scaled_Rect destRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 		Scaled_Rect srcRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
-		//TODO: while
-		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
-		{
-			//DEPS
-			//TODO:split out to seperate func
-			int depType = readShort(inFile);
-			int label = readShort(inFile);
-			int condition = readShort(inFile);
-			int boolean = readShort(inFile);
-			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
-		}
+		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+
+		//TODO: do chunk conditionally
+		if (dep.size() > 0)
+			printf("hit\n");
 
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), destRect.x, destRect.y, RenderParent::canvas, srcRect);
 		scene->AddSprite(ovl);
@@ -163,11 +153,19 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 		//Flag to update
 		short flag = readShort(inFile);
+		//?truth
+		int truth = readShort(inFile);
+
+		//Cursor set to -1?
 
 		//Need cursor value somewhere
 		//Currently unknown
-		skipBytes(inFile, 12);
+		skipBytes(inFile, 8);
 
+		//one of the ones might be PUSH_SCENE=1
+
+		//Frame hotspot is active in?
+		int frame = readShort(inFile);
 		Scaled_Rect hotZone = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
 		Button_ptr testbutton = std::make_shared<Button>(hotZone, "");
@@ -191,16 +189,27 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//Unknown, status flag?
 		char unknown = readByte(inFile);
 
-		if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
+		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+
+		//TODO: do chunk conditionally
+		if (dep.size() > 0)
+			printf("hit\n");
+
+		//Notes on order
+		//hs sets 1000
+		//push and sc check dep 1000
+		//Manual flag set does't have effect
+		//Recheck conditions on click?
+
+		//Can't check in game. Change ev0, scene reloads and resets
+
+		//TODO: respect deps
+		if (true)
 		{
-			//DEPS
-			//TODO:split out to seperate func
-			int depType = readShort(inFile);
-			int label = readShort(inFile);
-			int condition = readShort(inFile);
-			int boolean = readShort(inFile);
-			Scaled_Rect time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
+			//Push current scene file name to scene stack
+			prevScene = scene->sceneName;
 		}
+
 		break;
 	}
 	//Mouselight puzzle (Ghost dogs tunnel flashlight OVL)

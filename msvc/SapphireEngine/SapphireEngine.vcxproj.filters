@@ -263,5 +263,8 @@
     <ClInclude Include="..\..\source\oldhertools\colorspace.hpp">
       <Filter>Source Files\hertools</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Nancy\Dependency.h">
+      <Filter>Header Files\Nancy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

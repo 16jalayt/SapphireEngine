@@ -239,6 +239,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\libbinkdec\Util.h" />
     <ClInclude Include="..\..\source\Nancy\AVF.h" />
     <ClInclude Include="..\..\source\Nancy\CIFF.h" />
+    <ClInclude Include="..\..\source\Nancy\Dependency.h" />
     <ClInclude Include="..\..\source\Nancy\GUI.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h" />
