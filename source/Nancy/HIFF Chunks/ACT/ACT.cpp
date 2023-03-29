@@ -201,6 +201,9 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//Manual flag set does't have effect
 		//Recheck conditions on click?
 
+		//Ghost dogs has 575ish EVs
+		//Names hard coded into exe
+
 		//Can't check in game. Change ev0, scene reloads and resets
 
 		//TODO: respect deps
