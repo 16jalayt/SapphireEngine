@@ -17,6 +17,11 @@
 std::shared_ptr<SDL_Window> Graphics::window;
 std::shared_ptr<SDL_Renderer> Graphics::renderer;
 
+Graphics::~Graphics()
+{
+	quit();
+}
+
 int Graphics::init(SDL_Texture_sptr loading_tex)
 {
 #ifdef __SWITCH__
@@ -55,6 +60,8 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 		//full desk ignores real width
 		flags = SDL_WINDOW_SHOWN;
 
+	//For IMGUI
+	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 #endif
 	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, REAL_WIDTH, REAL_HEIGHT, flags));
 	if (!window)
@@ -113,6 +120,8 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	SDL_GetRendererOutputSize(renderer, &current.w, &current.h);
 	SDL_GetCurrentDisplayMode(0, &current);
 	printf("Display #%d: current display mode is %dx%dpx @ %dhz.\n", 0, current.w, current.h, current.refresh_rate);*/
+
+	init_imgui();
 
 	loadingscreen(renderer, loading_tex);
 
@@ -185,6 +194,11 @@ void Graphics::frameWait()
 }
 void Graphics::Quit()
 {
+	// Cleanup IMGUI
+	ImGui_ImplSDLRenderer_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();
@@ -202,3 +216,22 @@ SDL_Texture_ptr Graphics::render_text(const char* text, TTF_Font* font, SDL_Colo
 
 	return texture;
 }*/
+
+void Graphics::init_imgui()
+{
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+	io.IniFilename = NULL;
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
+	//ImGui::StyleColorsLight();
+
+	// Setup Platform/Renderer backends
+	ImGui_ImplSDL2_InitForSDLRenderer(window.get(), renderer.get());
+	ImGui_ImplSDLRenderer_Init(renderer.get());
+}

@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL_ttf.h>
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer.h"
 
 #include "SDL_ptr.h"
 #include "SDL_TTF_ptr.h"
@@ -11,6 +14,7 @@
 class Graphics
 {
 public:
+	~Graphics();
 	int init(SDL_Texture_sptr loading_tex);
 
 	std::shared_ptr<SDL_Window> getWindow() const;
@@ -26,6 +30,7 @@ public:
 	static void Quit();
 
 private:
+	void init_imgui();
 	//std::shared_ptr<SDL_Window> window;
 	//std::shared_ptr<TTF_Font> _font;
 	FPSmanager _fpsm;

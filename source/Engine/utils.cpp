@@ -40,6 +40,8 @@ void fatalError(const char* fmt, ...)
 #endif
 }
 
+//Only gets called if close window
+//Closing console will just force close
 void quit()
 {
 	Graphics::Quit();

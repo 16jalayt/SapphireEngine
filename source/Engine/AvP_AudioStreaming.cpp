@@ -74,23 +74,21 @@ void PlatEndSoundSys()
 	alcCloseDevice(device);
 
 #ifdef _DEBUG
-	//printf("Uninitialised OpenAL successfully\n");
+	printf("Uninitialised OpenAL successfully\n");
 #endif
 }
 
 int PlatStartSoundSys()
 {
 #ifdef _DEBUG
-	char buf[256];
-	//printf("Starting to initialise OpenAL\n");
+	printf("Starting to initialise OpenAL\n");
 #endif
 
 	uint32_t sampleRate = 44100;
 	char* DefaultDevice = (char*)alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
 
 #ifdef _DEBUG
-	sprintf(buf, "Using default device \"%s\" for OpenAL", DefaultDevice);
-	//printf(buf);
+	printf("Using default device \"%s\" for OpenAL\n", DefaultDevice);
 #endif
 
 	device = alcOpenDevice(NULL);
@@ -112,10 +110,11 @@ int PlatStartSoundSys()
 	alcMakeContextCurrent(context);
 	AlCheckError();
 
-	alGetError(); // clear error stack
+	//alGetError(); // clear error stack
 
 	// try create up to 255 sources
-	for (size_t i = 0; i < 255; i++)
+	//TODO:make less sources
+	for (size_t i = 0; i < 10; i++)
 	{
 		sndSource newSource;
 		alGenSources(1, &newSource._alSource);
@@ -137,7 +136,7 @@ int PlatStartSoundSys()
 		alGetError(); // clear error stack
 	}
 
-	if (sourceList.size() == 0) { // should we allow less than 255? 32 sources?
+	if (sourceList.size() == 0) {
 		printf("Source creation failed for OpenAL\n");
 		PlatEndSoundSys();
 		return 0;
@@ -145,7 +144,7 @@ int PlatStartSoundSys()
 #ifdef _DEBUG
 	else
 	{
-		sprintf(buf, "Created %zu sources for OpenAL\n", sourceList.size());
+		//sprintf(buf, "Created %zu sources for OpenAL\n", sourceList.size());
 		//printf(buf);
 	}
 #endif
@@ -157,7 +156,7 @@ int PlatStartSoundSys()
 	AlCheckError();
 
 #ifdef _DEBUG
-	//printf("Initialised OpenAL successfully\n");
+	printf("Initialised OpenAL successfully\n");
 #endif
 
 	soundEnabled = true;
@@ -464,4 +463,6 @@ AudioStream::~AudioStream()
 		delete[] _dataBuffers;
 		_dataBuffers = NULL;
 	}
+
+	PlatEndSoundSys();
 }

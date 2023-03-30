@@ -114,9 +114,6 @@
     <ClCompile Include="..\..\source\libbinkdec\LogError.cpp">
       <Filter>Source Files\libbinkdec</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\main.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\libbinkdec\mdct.c">
       <Filter>Source Files\libbinkdec</Filter>
     </ClCompile>
@@ -146,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp">
       <Filter>Source Files\hertools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

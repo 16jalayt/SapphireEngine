@@ -13,12 +13,14 @@
 //#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL2_rotozoom.h>
-#include "Engine/SDL_ptr.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer.h"
 
 #include "globals.h"
 #include "Engine/utils.h"
 #include "Engine/graphics.h"
 #include "Engine/sprite.h"
+#include "Engine/SDL_ptr.h"
 #include "Engine/Button.h"
 #include "Engine/AvP_BinkPlayback.h"
 #include "Engine/Scene.h"
@@ -27,8 +29,31 @@
 
 //TODO: config manager
 
+//Fixes openal error when closing console
+#ifdef _WIN32
+#include <windows.h>
+BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType) {
+	if (CTRL_CLOSE_EVENT == dwCtrlType) {
+		printf("exiting");
+		//hangs?
+		//quit();
+		return true;
+	}
+
+	return false;
+}
+#endif
+
 int main(int argc, char** argv)
 {
+	//Fixes openal error when closing console
+#ifdef _WIN32
+	if (SetConsoleCtrlHandler(ConsoleHandlerRoutine, TRUE) == FALSE) {
+		// Cannot register your handler? Check GetLastError()
+		printf("Error registering windows exit handler.");
+	}
+#endif
+
 	Graphics_ptr graphics = Graphics_ptr(new Graphics());
 
 	//TODO: dont need anymore?
@@ -69,6 +94,8 @@ int main(int argc, char** argv)
 	int exit_requested = 0;
 	int wait = 25;
 	SDL_Event event;
+	ImGuiIO& io = ImGui::GetIO();
+	bool show_another_window = true;
 
 #ifdef __SWITCH__
 	while (!exit_requested && appletMainLoop())
@@ -84,11 +111,25 @@ int main(int argc, char** argv)
 
 		while (SDL_PollEvent(&event))
 		{
+			// Poll and handle events (inputs, window resize, etc.)
+		// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
+		// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
+		// - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
+		// Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+			ImGui_ImplSDL2_ProcessEvent(&event);
+
+			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(Graphics::window.get()))
+			{
+				exit_requested = 1;
+				break;
+			}
+
 			switch (event.type)
 			{
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_FINGERDOWN:
-				currentScene->EventProc(event);
+				if (!io.WantCaptureMouse)
+					currentScene->EventProc(event);
 				break;
 			case SDL_QUIT:
 				exit_requested = 1;
@@ -115,6 +156,8 @@ int main(int argc, char** argv)
 				}
 #else
 			case SDL_KEYDOWN:
+				if (io.WantCaptureKeyboard)
+					break;
 				/* Check the SDLKey values and move change the coords */
 				switch (event.key.keysym.sym)
 				{
@@ -126,6 +169,15 @@ int main(int argc, char** argv)
 #endif
 			}
 		}
+
+		// Start the Dear ImGui frame
+		ImGui_ImplSDLRenderer_NewFrame();
+		ImGui_ImplSDL2_NewFrame();
+		ImGui::NewFrame();
+
+		//bool show_demo_window = true;
+		//if (show_demo_window)
+		//    ImGui::ShowDemoWindow(&show_demo_window);
 
 		SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
 		SDL_RenderClear(Graphics::renderer.get());
@@ -140,10 +192,30 @@ int main(int argc, char** argv)
 		//bkFMV->Draw();
 		//menuFMV->Draw();
 
+		if (show_another_window)
+		{
+			//Forces to be immoveable
+			//ImGui::SetNextWindowPos(ImVec2(0, 0));
+			ImGui::SetNextWindowSize(ImVec2(200, 300));
+			// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+			ImGui::Begin("Another Window", &show_another_window,
+				ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
+
+			ImGui::Text("Hello from another window!");
+			if (ImGui::Button("Close Me"))
+				printf("ouch\n");
+			ImGui::End();
+		}
+
+		// Rendering
+		ImGui::Render();
+		ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+
 		SDL_RenderPresent(Graphics::renderer.get());
 
 		graphics->frameWait();
 	}
+
 	//menuFMV->Close();
-	quit();
+	//quit();
 }
