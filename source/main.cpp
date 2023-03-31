@@ -44,6 +44,75 @@ BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType) {
 }
 #endif
 
+#include "imgui_internal.h"
+
+void ToggleButton(const char* str_id, bool* v)
+{
+	ImVec2 p = ImGui::GetCursorScreenPos();
+	ImDrawList* draw_list = ImGui::GetWindowDrawList();
+
+	float height = ImGui::GetFrameHeight();
+	float width = height * 1.55f;
+	float radius = height * 0.50f;
+
+	ImGui::InvisibleButton(str_id, ImVec2(width, height));
+	if (ImGui::IsItemClicked())
+		*v = !*v;
+
+	float t = *v ? 1.0f : 0.0f;
+
+	ImGuiContext& g = *GImGui;
+	float ANIM_SPEED = 0.08f;
+	if (g.LastActiveId == g.CurrentWindow->GetID(str_id))// && g.LastActiveIdTimer < ANIM_SPEED)
+	{
+		float t_anim = ImSaturate(g.LastActiveIdTimer / ANIM_SPEED);
+		t = *v ? (t_anim) : (1.0f - t_anim);
+	}
+
+	ImU32 col_bg;
+	if (ImGui::IsItemHovered())
+		col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.78f, 0.78f, 0.78f, 1.0f), ImVec4(0.64f, 0.83f, 0.34f, 1.0f), t));
+	else
+		col_bg = ImGui::GetColorU32(ImLerp(ImVec4(0.85f, 0.85f, 0.85f, 1.0f), ImVec4(0.56f, 0.83f, 0.26f, 1.0f), t));
+
+	draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), col_bg, height * 0.5f);
+	draw_list->AddCircleFilled(ImVec2(p.x + radius + t * (width - radius * 2.0f), p.y + radius), radius - 1.5f, IM_COL32(255, 255, 255, 255));
+}
+
+void ToggleButtonV2(const char* str_id, bool* v)
+{
+	ImVec4* colors = ImGui::GetStyle().Colors;
+	ImVec2 p = ImGui::GetCursorScreenPos();
+	ImDrawList* draw_list = ImGui::GetWindowDrawList();
+
+	float height = ImGui::GetFrameHeight();
+	float width = height * 1.55f;
+	float radius = height * 0.50f;
+
+	ImGui::InvisibleButton(str_id, ImVec2(width, height));
+	if (ImGui::IsItemClicked()) *v = !*v;
+	ImGuiContext& gg = *GImGui;
+	float ANIM_SPEED = 0.085f;
+	if (gg.LastActiveId == gg.CurrentWindow->GetID(str_id))// && g.LastActiveIdTimer < ANIM_SPEED)
+		float t_anim = ImSaturate(gg.LastActiveIdTimer / ANIM_SPEED);
+	if (ImGui::IsItemHovered())
+		draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), ImGui::GetColorU32(*v ? colors[ImGuiCol_ButtonActive] : ImVec4(0.78f, 0.78f, 0.78f, 1.0f)), height * 0.5f);
+	else
+		draw_list->AddRectFilled(p, ImVec2(p.x + width, p.y + height), ImGui::GetColorU32(*v ? colors[ImGuiCol_Button] : ImVec4(0.85f, 0.85f, 0.85f, 1.0f)), height * 0.50f);
+	draw_list->AddCircleFilled(ImVec2(p.x + radius + (*v ? 1 : 0) * (width - radius * 2.0f), p.y + radius), radius - 1.5f, IM_COL32(255, 255, 255, 255));
+}
+
+void ShowHelpMarker(const char* desc) {
+	ImGui::TextDisabled("(?)");
+	if (ImGui::IsItemHovered()) {
+		ImGui::BeginTooltip();
+		ImGui::PushTextWrapPos(450.0f);
+		ImGui::TextUnformatted(desc);
+		ImGui::PopTextWrapPos();
+		ImGui::EndTooltip();
+	}
+}
+
 int main(int argc, char** argv)
 {
 	//Fixes openal error when closing console
@@ -96,6 +165,9 @@ int main(int argc, char** argv)
 	SDL_Event event;
 	ImGuiIO& io = ImGui::GetIO();
 	bool show_another_window = true;
+	bool toggle = true;
+	int scenenum = 0;
+	bool check = false;
 
 #ifdef __SWITCH__
 	while (!exit_requested && appletMainLoop())
@@ -175,9 +247,9 @@ int main(int argc, char** argv)
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
 
-		//bool show_demo_window = true;
-		//if (show_demo_window)
-		//    ImGui::ShowDemoWindow(&show_demo_window);
+		bool show_demo_window = true;
+		if (show_demo_window)
+			ImGui::ShowDemoWindow(&show_demo_window);
 
 		SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
 		SDL_RenderClear(Graphics::renderer.get());
@@ -191,25 +263,6 @@ int main(int argc, char** argv)
 
 		//bkFMV->Draw();
 		//menuFMV->Draw();
-
-		if (show_another_window)
-		{
-			//Forces to be immoveable
-			//ImGui::SetNextWindowPos(ImVec2(0, 0));
-			ImGui::SetNextWindowSize(ImVec2(200, 300));
-			// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-			ImGui::Begin("Another Window", &show_another_window,
-				ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
-
-			ImGui::Text("Hello from another window!");
-			if (ImGui::Button("Close Me"))
-				printf("ouch\n");
-			ImGui::End();
-		}
-
-		// Rendering
-		ImGui::Render();
-		ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 
 		SDL_RenderPresent(Graphics::renderer.get());
 

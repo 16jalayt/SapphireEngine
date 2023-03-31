@@ -30,7 +30,6 @@ public:
 	static void Quit();
 
 private:
-	void init_imgui();
 	//std::shared_ptr<SDL_Window> window;
 	//std::shared_ptr<TTF_Font> _font;
 	FPSmanager _fpsm;

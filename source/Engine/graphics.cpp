@@ -121,8 +121,6 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	SDL_GetCurrentDisplayMode(0, &current);
 	printf("Display #%d: current display mode is %dx%dpx @ %dhz.\n", 0, current.w, current.h, current.refresh_rate);*/
 
-	init_imgui();
-
 	loadingscreen(renderer, loading_tex);
 
 	// 800x600 render and 1080 target gets 1.8 for scale
@@ -194,11 +192,6 @@ void Graphics::frameWait()
 }
 void Graphics::Quit()
 {
-	// Cleanup IMGUI
-	ImGui_ImplSDLRenderer_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
-
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();
@@ -216,22 +209,3 @@ SDL_Texture_ptr Graphics::render_text(const char* text, TTF_Font* font, SDL_Colo
 
 	return texture;
 }*/
-
-void Graphics::init_imgui()
-{
-	// Setup Dear ImGui context
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-	io.IniFilename = NULL;
-
-	// Setup Dear ImGui style
-	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsLight();
-
-	// Setup Platform/Renderer backends
-	ImGui_ImplSDL2_InitForSDLRenderer(window.get(), renderer.get());
-	ImGui_ImplSDLRenderer_Init(renderer.get());
-}

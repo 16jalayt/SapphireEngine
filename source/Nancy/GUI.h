@@ -16,6 +16,7 @@ class GUI
 {
 public:
 	GUI();
+	~GUI();
 	std::vector<Sprite_ptr> statics;
 	std::vector<Button_ptr> buttons;
 	std::vector<GUI_Rect> rects;
@@ -28,7 +29,13 @@ public:
 	void AddSprite(Sprite_ptr sprite);
 	void AddButton(Button_ptr button);
 	void AddRect(GUI_Rect rect);
-protected:
+private:
+	void StyleSteam();
+	void StyleClean();
+	void StyleCleanBlue();
+	void drawCheatSheet();
+
+	bool cheatSheetShown = true;
 };
 
 using GUI_ptr = std::shared_ptr<GUI>;
