@@ -6,6 +6,8 @@
 
 bool HIFF::Load_HIFF(std::string sceneName)
 {
+	sceneNum = std::stoi(sceneName);
+
 	std::ifstream inFile = Loader::getDataFile(sceneName);
 
 	//Starts at end of file because | std::ios::ate

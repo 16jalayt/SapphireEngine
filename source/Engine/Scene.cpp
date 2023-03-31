@@ -7,6 +7,7 @@
 Scene_ptr currentScene;
 bool sceneChangeFlag = false;
 std::string sceneChangeName;
+int sceneNum = 0;
 std::string prevScene;
 
 Scene::Scene(std::string bk, std::string name, std::string sceneFile)

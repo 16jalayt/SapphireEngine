@@ -60,6 +60,15 @@ void GUI::Draw()
 	if (canvas)
 		SDL_RenderCopy(Graphics::renderer.get(), canvas.get(), NULL, &canvasRect);
 
+	// Start the Dear ImGui frame
+	ImGui_ImplSDLRenderer_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
+	bool show_demo_window = true;
+	if (show_demo_window)
+		ImGui::ShowDemoWindow(&show_demo_window);
+
 	drawCheatSheet();
 
 	// Rendering
@@ -349,8 +358,19 @@ void GUI::drawCheatSheet()
 		{
 			if (ImGui::BeginTabItem("General"))
 			{
-				//ImGui::InputInt("Scene Num", &scenenum);
+				if (ImGui::InputInt("Scene Num", &sceneNum, 1, 100, ImGuiInputTextFlags_EnterReturnsTrue))
+				{
+					//TODO:doesn't get set first scene
+					//printf("changed!\n");
+					std::string sceneName = std::to_string(sceneNum);
+					sceneChangeName = sceneName;
+					//sceneNum already set
+					//sceneNum = changeTo;
+					sceneChangeFlag = true;
+				}
 				//ToggleButtonV2("hi", &toggle);
+				if (ImGui::Button("Click Me"))
+					printf("Ow! Stop it!\n");
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Inventory"))

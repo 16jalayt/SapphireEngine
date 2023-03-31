@@ -54,6 +54,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 			//set flag to change scene and have sceneproc load
 			std::string sceneName = std::to_string(changeTo);
 			sceneChangeName = sceneName;
+			//sceneNum = changeTo;
 			sceneChangeFlag = true;
 			//HIFF::Load_HIFF(string.c_str());
 		};
