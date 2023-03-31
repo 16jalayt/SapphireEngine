@@ -349,7 +349,8 @@ void GUI::drawCheatSheet()
 		ImGui::SetNextWindowSize(ImVec2(700, 500));
 		// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 		ImGui::Begin("Cheet Sheet", &cheatSheetShown,
-			ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
+			ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
+		//ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
 
 		//ImGui::SameLine();
 		//ImGui::Separator();
@@ -380,14 +381,14 @@ void GUI::drawCheatSheet()
 			}
 			if (ImGui::BeginTabItem("Events"))
 			{
-				if (ImGui::BeginTable("table1", 5))
+				if (ImGui::BeginTable("table1", 4))
 				{
-					for (int i = 0; i < 500; i++)
+					for (int i = 0; i < 550; i++)
 					{
 						ImGui::TableNextColumn();
-						bool check = false;
-						ImGui::Checkbox(std::to_string(i + 1000).c_str(), &check);
-						//ImGui::Text("var %d", i + 1000);
+						ImGui::Checkbox((std::to_string(i + 1000) + ":" + flagDesc[i]).c_str(), &flags[i]);
+						if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal)) // With a delay
+							ImGui::SetTooltip(flagDesc[i].c_str());
 					}
 					ImGui::EndTable();
 				}

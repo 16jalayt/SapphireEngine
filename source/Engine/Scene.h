@@ -41,5 +41,7 @@ extern bool sceneChangeFlag;
 extern std::string sceneChangeName;
 extern std::string prevScene;
 extern int sceneNum;
+extern bool flags[];
+extern std::string flagDesc[];
 
 void ChangeScene(Scene_ptr newScene);

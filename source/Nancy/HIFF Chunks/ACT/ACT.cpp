@@ -171,10 +171,10 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 		Button_ptr testbutton = std::make_shared<Button>(hotZone, "");
 		scene->AddHotzone(testbutton);
-		testbutton->callback = [flag = flag]
+		testbutton->callback = [flag = flag, truth = truth]
 		{
-			//TODO: set scene flag
-			printf("This would set scene flag num: %d\n", flag);
+			flags[flag - 1000] = truth;
+			printf("set scene flag num: %d\n", flag);
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
