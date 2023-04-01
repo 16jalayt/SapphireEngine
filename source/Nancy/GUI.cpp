@@ -361,7 +361,6 @@ void GUI::drawCheatSheet()
 			{
 				if (ImGui::InputInt("Scene Num", &sceneNum, 1, 100, ImGuiInputTextFlags_EnterReturnsTrue))
 				{
-					//TODO:doesn't get set first scene
 					//printf("changed!\n");
 					std::string sceneName = std::to_string(sceneNum);
 					sceneChangeName = sceneName;
@@ -370,13 +369,15 @@ void GUI::drawCheatSheet()
 					sceneChangeFlag = true;
 				}
 				//ToggleButtonV2("hi", &toggle);
-				if (ImGui::Button("Click Me"))
-					printf("Ow! Stop it!\n");
+				if (ImGui::Button("Reload scene"))
+					sceneChangeFlag = true;
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Inventory"))
 			{
 				//ImGui::Checkbox("test", &check);
+				if (ImGui::Button("Click Me"))
+					printf("Ow! Stop it!\n");
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Events"))

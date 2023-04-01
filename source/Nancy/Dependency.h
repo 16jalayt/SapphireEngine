@@ -4,7 +4,7 @@ typedef struct Dependency
 {
 	int depType;
 	int label;
-	int condition;
+	bool condition;
 	int boolean;
 	Scaled_Rect time;
 } Dependency;
@@ -23,4 +23,20 @@ std::vector<Dependency> parseDeps(std::ifstream& inFile, int chunkLen, int chunk
 		deps.push_back(dep);
 	}
 	return deps;
+}
+
+bool checkDeps(std::vector<Dependency> deps)
+{
+	if (deps.size() == 0)
+		return true;
+	for (Dependency dep : deps)
+	{
+		//Todo: use condition too
+		if (flags[dep.label - 1000] == dep.condition)
+			continue;
+		else
+			return false;
+	}
+
+	return true;
 }

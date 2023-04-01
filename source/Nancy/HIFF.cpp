@@ -7,6 +7,7 @@
 bool HIFF::Load_HIFF(std::string sceneName)
 {
 	sceneNum = std::stoi(sceneName);
+	sceneChangeName = sceneName;
 
 	std::ifstream inFile = Loader::getDataFile(sceneName);
 

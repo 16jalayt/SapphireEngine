@@ -38,11 +38,10 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//hot rect
 		Scaled_Rect hot = Scaled_Rect{ readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
-		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
 
-		//TODO: do chunk conditionally
-		if (dep.size() > 0)
-			printf("hit\n");
+		if (!checkDeps(deps))
+			break;
 
 		Button_ptr testbutton = std::make_shared<Button>(hot, "");
 		scene->AddHotzone(testbutton);
@@ -130,11 +129,10 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		Scaled_Rect destRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 		Scaled_Rect srcRect = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
-		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
 
-		//TODO: do chunk conditionally
-		if (dep.size() > 0)
-			printf("hit\n");
+		if (!checkDeps(deps))
+			break;
 
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), destRect.x, destRect.y, RenderParent::canvas, srcRect);
 		scene->AddSprite(ovl);
@@ -175,6 +173,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		{
 			flags[flag - 1000] = truth;
 			printf("set scene flag num: %d\n", flag);
+			HIFF::Load_HIFF(sceneChangeName);
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
@@ -190,11 +189,10 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//Unknown, status flag?
 		char unknown = readByte(inFile);
 
-		std::vector<Dependency> dep = parseDeps(inFile, chunkStart, chunkLen);
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
 
-		//TODO: do chunk conditionally
-		if (dep.size() > 0)
-			printf("hit\n");
+		if (!checkDeps(deps))
+			break;
 
 		//Notes on order
 		//hs sets 1000
@@ -207,12 +205,8 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 		//Can't check in game. Change ev0, scene reloads and resets
 
-		//TODO: respect deps
-		if (true)
-		{
-			//Push current scene file name to scene stack
-			prevScene = scene->sceneName;
-		}
+		//Push current scene file name to scene stack
+		prevScene = scene->sceneName;
 
 		break;
 	}
