@@ -96,7 +96,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 			skipBytes(inFile, 1);
 	}
 
-	ChangeScene(newScene);
+	//ChangeScene(newScene);
 
 	inFile.close();
 	return true;

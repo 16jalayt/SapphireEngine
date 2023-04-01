@@ -19,12 +19,30 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 	switch (chunkType)
 	{
 		//12
-		//scene change
-		//don't know how different than 25
+		//scene change from flags
+	case 12:
+	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		//Scene to change to
+		short changeTo = readShort(inFile);
+
+		skipBytes(inFile, 18);
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
+		sceneChangeName = std::to_string(changeTo);
+		sceneChangeFlag = true;
+
+		break;
+	}
 
 	//?
 	case 20:
-		//Scene change
+		//Scene change with HS
 	case 25:
 	{
 		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
@@ -51,8 +69,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 			//TODO: IMPORTANT: lambda creates new thread and deletes object mid execution
 			//find way to rejoin
 			//set flag to change scene and have sceneproc load
-			std::string sceneName = std::to_string(changeTo);
-			sceneChangeName = sceneName;
+			sceneChangeName = std::to_string(changeTo);
 			//sceneNum = changeTo;
 			sceneChangeFlag = true;
 			//HIFF::Load_HIFF(string.c_str());
@@ -152,7 +169,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 		//Flag to update
 		short flag = readShort(inFile);
-		//?truth
+		//truth
 		int truth = readShort(inFile);
 
 		//Cursor set to -1?
@@ -173,7 +190,8 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		{
 			flags[flag - 1000] = truth;
 			printf("set scene flag num: %d\n", flag);
-			HIFF::Load_HIFF(sceneChangeName);
+			sceneChangeName = currentScene->sceneFile;
+			sceneChangeFlag = true;
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
@@ -183,7 +201,6 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 	//PUSH scene onto stack
 	case 110:
 	{
-		//TODO: incomplete implementation
 		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Unknown, status flag?
@@ -198,7 +215,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//hs sets 1000
 		//push and sc check dep 1000
 		//Manual flag set does't have effect
-		//Recheck conditions on click?
+		//Recheck conditions constantly?
 
 		//Ghost dogs has 575ish EVs
 		//Names hard coded into exe
@@ -206,7 +223,27 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//Can't check in game. Change ev0, scene reloads and resets
 
 		//Push current scene file name to scene stack
-		prevScene = scene->sceneName;
+		prevScene = scene->sceneFile;
+
+		break;
+	}
+	//POP scene from stack and transition
+	case 111:
+	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		//Unknown, status flag?
+		char unknown = readByte(inFile);
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
+		//Remove current scene and change to that scene
+		sceneChangeName = prevScene;
+		sceneChangeFlag = true;
+		prevScene = "";
 
 		break;
 	}
