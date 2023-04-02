@@ -184,7 +184,8 @@ int main(int argc, char** argv)
 			//Used as scene control variable
 			//flags[0] = false;
 			//HIFF::Load_HIFF(sceneChangeName);
-			Loader::loadScene(sceneChangeName);
+			if(sceneChangeName != "9999")
+				Loader::loadScene(sceneChangeName);
 		}
 
 		while (SDL_PollEvent(&event))

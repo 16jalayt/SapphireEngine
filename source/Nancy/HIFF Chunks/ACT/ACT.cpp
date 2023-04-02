@@ -69,10 +69,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			//TODO: IMPORTANT: lambda creates new thread and deletes object mid execution
 			//find way to rejoin
 			//set flag to change scene and have sceneproc load
-			sceneChangeName = std::to_string(changeTo);
-			//sceneNum = changeTo;
-			sceneChangeFlag = true;
-			//HIFF::Load_HIFF(string.c_str());
+			//sceneChangeName = std::to_string(changeTo);
+			//sceneChangeFlag = true;
+			ChangeScene(std::to_string(changeTo));
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
@@ -247,10 +246,18 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		break;
 	}
-	//Sound
-	case 159:
+	//Random sound CC
+	case 151:
 	{
-		std::string sound = readString(inFile, 33);
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		int numSounds = readShort(inFile);
+		std::vector<std::string> sounds;
+		for (int i = 0; i < numSounds; i++)
+		{
+			std::string sound = readString(inFile, 33);
+			sounds.push_back(sound);
+		}
 
 		int channel = readShort(inFile);
 		int loop = readInt(inFile);
@@ -258,11 +265,28 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		int volR = readShort(inFile);
 
 		//next scene before sound ends
-		bool beforeNextScene = readByte(inFile);
+		bool waitOnSound = readByte(inFile);
 		//Scene to change to
 		int changeTo = readShort(inFile);
 
-		skipBytes(inFile, 102);
+		int i = 0;
+		//TODO: cc data
+		do
+		{
+			//Length of closed caption data
+			int length = readShort(inFile);
+			skipBytes(inFile, length);
+			//int unknown = readShort(inFile);
+			//no idea why sometimes all cc data and sometimes one chunk
+			if (length > 100)
+				break;
+			i++;
+		} while (i < numSounds);
+
+		//No idea
+		int unknown = readShort(inFile);
+		if (unknown != 0)
+			skipBytes(inFile, -2);
 
 		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
 
@@ -271,7 +295,40 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		//TODO: Play sound
 
-		sceneChangeName = sceneChangeName = std::to_string(changeTo);
+		sceneChangeName = std::to_string(changeTo);
+		sceneChangeFlag = true;
+
+		break;
+	}
+	//Sound
+	case 159:
+	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		std::string sound = readString(inFile, 33);
+
+		int channel = readShort(inFile);
+		int loop = readInt(inFile);
+		int volL = readShort(inFile);
+		int volR = readShort(inFile);
+
+		//next scene before sound ends
+		bool waitOnSound = readByte(inFile);
+		//Scene to change to
+		int changeTo = readShort(inFile);
+
+		//Length of closed caption data
+		int length = readShort(inFile);
+		skipBytes(inFile, length);
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
+		//TODO: Play sound
+
+		sceneChangeName = std::to_string(changeTo);
 		sceneChangeFlag = true;
 
 		break;
@@ -287,6 +344,13 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		//So only shows up when flashlight cursor selected
 		std::string ovlImage = readString(inFile, 33);
 
+		skipBytes(inFile, 18);
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), 0, 0);
 		nextScene->AddSprite(ovl);
 
@@ -294,7 +358,6 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		nextScene->AddSprite(mask);
 		mask->isMask(true);
 
-		skipBytes(inFile, 19);
 		break;
 	}
 	default:

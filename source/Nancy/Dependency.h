@@ -12,7 +12,8 @@ typedef struct Dependency
 std::vector<Dependency> parseDeps(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
 	std::vector<Dependency> deps;
-	if ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
+	//if not last byte in chunk
+	while ((chunkStart + chunkLen + 8) != (int)inFile.tellg())
 	{
 		Dependency dep{};
 		dep.depType = readShort(inFile);
@@ -21,6 +22,7 @@ std::vector<Dependency> parseDeps(std::ifstream& inFile, int chunkLen, int chunk
 		dep.boolean = readShort(inFile);
 		dep.time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
 		deps.push_back(dep);
+		printf("    --Dep DepType:%d Label:%d Cond:%d  Bool:%d\n", dep.depType, dep.label, dep.condition, dep.boolean);
 	}
 	return deps;
 }
@@ -31,11 +33,21 @@ bool checkDeps(std::vector<Dependency> deps)
 		return true;
 	for (Dependency dep : deps)
 	{
-		//Todo: use condition too
-		if (flags[dep.label - 1000] == dep.condition)
-			continue;
+		//if should or
+		if (dep.boolean)
+		{
+			if (flags[dep.label - 1000] == dep.condition)
+				continue;
+			else
+				return false;
+		}
 		else
-			return false;
+		{
+			if (flags[dep.label - 1000] == dep.condition)
+				continue;
+			else
+				return false;
+		}
 	}
 
 	return true;

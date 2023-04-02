@@ -17,6 +17,11 @@ bool Loader::Boot()
 	//load cals, cifs, and loose hifs
 	//load scene boot
 
+	//Startup Flags:
+	flags[1081 - 1000] = true;
+	//DEBUG:
+	flags[1146 - 1000] = true;
+
 	UIInit();
 
 	//test loose
@@ -25,7 +30,7 @@ bool Loader::Boot()
 		//HIFF::Load_HIFF("4020");
 	//Puzzle Corrador
 		//HIFF::Load_HIFF("4150");
-		loadScene("4150");
+		loadScene("4069");
 	// Tunnel by Kennel
 	//HIFF::Load_HIFF("4141");
 	else
