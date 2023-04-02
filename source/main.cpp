@@ -164,7 +164,6 @@ int main(int argc, char** argv)
 	int wait = 25;
 	SDL_Event event;
 	ImGuiIO& io = ImGui::GetIO();
-	bool show_another_window = true;
 	bool toggle = true;
 	int scenenum = 0;
 	bool check = false;
@@ -175,12 +174,17 @@ int main(int argc, char** argv)
 	while (!exit_requested)
 #endif
 	{
+		if (sceneReloadFlag)
+		{
+			ReloadScene();
+		}
 		if (sceneChangeFlag)
 		{
 			sceneChangeFlag = false;
 			//Used as scene control variable
-			flags[0] = false;
-			HIFF::Load_HIFF(sceneChangeName.c_str());
+			//flags[0] = false;
+			//HIFF::Load_HIFF(sceneChangeName);
+			Loader::loadScene(sceneChangeName);
 		}
 
 		while (SDL_PollEvent(&event))
@@ -227,7 +231,7 @@ int main(int argc, char** argv)
 					if (wait > 0)
 						exit_requested = 1;
 					break;
-			}
+				}
 #else
 			case SDL_KEYDOWN:
 				if (io.WantCaptureKeyboard)
@@ -241,8 +245,8 @@ int main(int argc, char** argv)
 					break;
 				}
 #endif
+			}
 		}
-	}
 
 		SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
 		SDL_RenderClear(Graphics::renderer.get());
@@ -260,7 +264,7 @@ int main(int argc, char** argv)
 		SDL_RenderPresent(Graphics::renderer.get());
 
 		graphics->frameWait();
-}
+	}
 
 	//menuFMV->Close();
 	//quit();

@@ -6,7 +6,7 @@
 
 bool HIFF::Load_HIFF(std::string sceneName)
 {
-	sceneNum = std::stoi(sceneName);
+	//sceneNum = std::stoi(sceneName);
 	sceneChangeName = sceneName;
 
 	std::ifstream inFile = Loader::getDataFile(sceneName);
@@ -16,8 +16,6 @@ bool HIFF::Load_HIFF(std::string sceneName)
 	//infile.fail() doesn't seem to work
 	if (filesize == -1)
 		return false;
-
-	Scene_ptr newScene;
 
 	inFile.seekg(0);
 
@@ -58,7 +56,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 	if (subChunk == "SCENTSUM")
 	{
 		int sumLength = readInt(inFile, true);
-		SUM::Parse(inFile, newScene, sceneName);
+		SUM::Parse(inFile, sceneName);
 	}
 	/*if (sumChunk == "SCENSUM")
 	{
@@ -71,7 +69,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 		return false;
 	}
 
-	newScene->sceneFile = sceneName;
+	nextScene->sceneFile = sceneName;
 
 	/////////////////////////////////////////////////
 
@@ -83,7 +81,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 
 		if (actChunk == "ACT")
 		{
-			ACT::Parse(inFile, newScene, chunkLen, chunkStart);
+			ACT::Parse(inFile, chunkLen, chunkStart);
 		}
 		else
 		{

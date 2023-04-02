@@ -14,7 +14,8 @@ class Scene
 {
 public:
 	~Scene();
-	Scene(std::string bk, std::string number, std::string sceneFile);
+	Scene();
+	void SetHeader(std::string name, std::string sceneFile);
 	Sprite_ptr bk;
 	BinkPlayback_ptr bkFMV;
 	std::vector<Sprite_ptr> ovls;
@@ -37,11 +38,15 @@ protected:
 using Scene_ptr = std::shared_ptr<Scene>;
 
 extern Scene_ptr currentScene;
+extern Scene_ptr nextScene;
 extern bool sceneChangeFlag;
+extern bool sceneReloadFlag;
 extern std::string sceneChangeName;
 extern std::string prevScene;
-extern int sceneNum;
+//extern int sceneNum;
 extern bool flags[];
 extern std::string flagDesc[];
+//extern bool firstLoad;
 
-void ChangeScene(Scene_ptr newScene);
+void ChangeScene(std::string sceneName);
+void ReloadScene();

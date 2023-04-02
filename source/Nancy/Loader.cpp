@@ -7,7 +7,8 @@ bool Loader::Boot()
 {
 	//empty scene to not nullptr rendering at begining
 	//Scene_ptr scene = Scene_ptr(new Scene("", "Boot"));
-	ChangeScene(Scene_ptr(new Scene("", "Boot", "")));
+	//ChangeScene(Scene_ptr(new Scene("", "Boot", "")));
+	loadScene("Boot");
 
 	CIFF::Load_Tree((char*)"DataFiles/CIFTREE.dat");
 	//From danger by design. Split between cds
@@ -23,12 +24,14 @@ bool Loader::Boot()
 		//Torchlight
 		//HIFF::Load_HIFF("4020");
 	//Puzzle Corrador
-		HIFF::Load_HIFF("4150");
+		//HIFF::Load_HIFF("4150");
+		loadScene("4150");
 	// Tunnel by Kennel
 	//HIFF::Load_HIFF("4141");
 	else
 		//scopa
-		HIFF::Load_HIFF("4450");
+		//HIFF::Load_HIFF("4450");
+		loadScene("4450");
 
 	return true;
 }
@@ -58,6 +61,14 @@ void Loader::UIInit()
 		SDL_Rect lowermatte = ScaledRect_to_SDLRect(Scaled_Rect{ 0, 536, 800, 600 });
 		currentGUI->AddRect(GUI_Rect{ lowermatte, 0, 0, 0 });
 	}
+}
+
+void Loader::loadScene(std::string sceneName)
+{
+	if (currentScene && sceneName == currentScene->sceneFile)
+		ReloadScene();
+	else
+		ChangeScene(sceneName);
 }
 
 std::ifstream Loader::loadTree(std::string treeName)

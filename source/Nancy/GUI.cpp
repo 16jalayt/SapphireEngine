@@ -1,5 +1,9 @@
 #include "Nancy/GUI.h"
 #include <string>
+#include "imgui.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer.h"
+#include "imgui_stdlib.h"
 
 #include "Engine/utils.h"
 #include "Engine/Button.h"
@@ -359,18 +363,20 @@ void GUI::drawCheatSheet()
 		{
 			if (ImGui::BeginTabItem("General"))
 			{
-				if (ImGui::InputInt("Scene Num", &sceneNum, 1, 100, ImGuiInputTextFlags_EnterReturnsTrue))
+				std::string inputScene = sceneChangeName;
+				//TODO:redo flags
+				if (ImGui::InputText("Scene Num", &inputScene, ImGuiInputTextFlags_EnterReturnsTrue))
 				{
 					//printf("changed!\n");
-					std::string sceneName = std::to_string(sceneNum);
-					sceneChangeName = sceneName;
+					//std::string sceneName = std::to_string(sceneNum);
+					sceneChangeName = inputScene;
 					//sceneNum already set
 					//sceneNum = changeTo;
 					sceneChangeFlag = true;
 				}
 				//ToggleButtonV2("hi", &toggle);
 				if (ImGui::Button("Reload scene"))
-					sceneChangeFlag = true;
+					ReloadScene();
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Inventory"))

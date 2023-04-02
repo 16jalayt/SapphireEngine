@@ -8,7 +8,7 @@
 #include "Nancy/Loader.h"
 #include "Nancy/Dependency.h"
 
-bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunkStart)
+bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
 	std::string actChunkDesc = readString(inFile, 48);
 	unsigned char chunkType = readByte(inFile);
@@ -62,7 +62,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 			break;
 
 		Button_ptr testbutton = std::make_shared<Button>(hot, "");
-		scene->AddHotzone(testbutton);
+		nextScene->AddHotzone(testbutton);
 		testbutton->callback = [changeTo = changeTo]
 		{
 			//printf("lambda called\n");
@@ -152,7 +152,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 			break;
 
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), destRect.x, destRect.y, RenderParent::canvas, srcRect);
-		scene->AddSprite(ovl);
+		nextScene->AddSprite(ovl);
 
 		//Bad hack because lengh in hiff file is off by 1.
 		//TODO:This is because new act chunk needs to be even addr
@@ -185,7 +185,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		Scaled_Rect hotZone = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
 		Button_ptr testbutton = std::make_shared<Button>(hotZone, "");
-		scene->AddHotzone(testbutton);
+		nextScene->AddHotzone(testbutton);
 		testbutton->callback = [flag = flag, truth = truth]
 		{
 			flags[flag - 1000] = truth;
@@ -223,7 +223,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		//Can't check in game. Change ev0, scene reloads and resets
 
 		//Push current scene file name to scene stack
-		prevScene = scene->sceneFile;
+		prevScene = nextScene->sceneFile;
 
 		break;
 	}
@@ -247,6 +247,36 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 
 		break;
 	}
+	//Sound
+	case 159:
+	{
+		std::string sound = readString(inFile, 33);
+
+		int channel = readShort(inFile);
+		int loop = readInt(inFile);
+		int volL = readShort(inFile);
+		int volR = readShort(inFile);
+
+		//next scene before sound ends
+		bool beforeNextScene = readByte(inFile);
+		//Scene to change to
+		int changeTo = readShort(inFile);
+
+		skipBytes(inFile, 102);
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
+		//TODO: Play sound
+
+		sceneChangeName = sceneChangeName = std::to_string(changeTo);
+		sceneChangeFlag = true;
+
+		break;
+	}
+
 	//Mouselight puzzle (Ghost dogs tunnel flashlight OVL)
 	case 217:
 	{
@@ -258,10 +288,10 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 		std::string ovlImage = readString(inFile, 33);
 
 		Sprite_ptr ovl = std::make_shared<Sprite>(Loader::getOVL(ovlImage).c_str(), 0, 0);
-		scene->AddSprite(ovl);
+		nextScene->AddSprite(ovl);
 
 		Sprite_ptr mask = std::make_shared<Sprite>("data/lightmask.png", 0, 0);
-		scene->AddSprite(mask);
+		nextScene->AddSprite(mask);
 		mask->isMask(true);
 
 		skipBytes(inFile, 19);
@@ -269,7 +299,7 @@ bool ACT::Parse(std::ifstream& inFile, Scene_ptr& scene, int chunkLen, int chunk
 	}
 	default:
 	{
-		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%d\n", chunkType, actChunkDesc.c_str(), scene->sceneFile.c_str(), chunkStart);
+		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%d\n", chunkType, actChunkDesc.c_str(), nextScene->sceneFile.c_str(), chunkStart);
 		//int test = chunkLen - 49;
 		skipBytes(inFile, chunkLen - 50);
 		break;
