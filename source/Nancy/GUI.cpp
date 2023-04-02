@@ -8,6 +8,7 @@
 #include "Engine/utils.h"
 #include "Engine/Button.h"
 #include "Engine/graphics.h"
+#include "Loader.h"
 
 std::shared_ptr<SDL_Texture> GUI::canvas;
 SDL_Rect GUI::canvasRect;
@@ -363,16 +364,17 @@ void GUI::drawCheatSheet()
 		{
 			if (ImGui::BeginTabItem("General"))
 			{
-				std::string inputScene = sceneChangeName;
+				std::string inputScene = currentScene->sceneName;
 				//TODO:redo flags
 				if (ImGui::InputText("Scene Num", &inputScene, ImGuiInputTextFlags_EnterReturnsTrue))
 				{
 					//printf("changed!\n");
 					//std::string sceneName = std::to_string(sceneNum);
-					sceneChangeName = inputScene;
+					//sceneChangeName = inputScene;
 					//sceneNum already set
 					//sceneNum = changeTo;
-					sceneChangeFlag = true;
+					//sceneChangeFlag = true;
+					Loader::loadScene(inputScene);
 				}
 				//ToggleButtonV2("hi", &toggle);
 				if (ImGui::Button("Reload scene"))
@@ -402,6 +404,7 @@ void GUI::drawCheatSheet()
 
 				ImGui::EndTabItem();
 			}
+			//TODO: new tab with map like Humongous
 			ImGui::EndTabBar();
 		}
 

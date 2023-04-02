@@ -172,11 +172,27 @@ void Scene::AddSound(std::string sound, int channel, int loop, int chan1, int ch
 	Mix_SetPanning(channel, chan1, chan2);
 }
 
-void ChangeScene(std::string sceneName)
+//For internal use. Call Loader::loadScene instead
+void _ChangeScene(std::string sceneName)
+{
+	if (sceneName != "9999")
+	{
+		sceneChangeName = sceneName;
+		sceneChangeFlag = true;
+	}
+}
+
+//For internal use. Call Loader::loadScene instead
+void _LoadScene(std::string sceneName)
 {
 	nextScene = Scene_ptr(new Scene());
 	//used for navigaiton
+	//TODO: go all the way to 30?
 	flags[0] = false;
+	flags[1] = false;
+	flags[2] = false;
+	flags[3] = false;
+	flags[4] = false;
 	HIFF::Load_HIFF(sceneName);
 	currentScene = nextScene;
 	currentScene->Run();

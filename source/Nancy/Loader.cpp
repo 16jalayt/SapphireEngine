@@ -20,7 +20,10 @@ bool Loader::Boot()
 	//Startup Flags:
 	flags[1081 - 1000] = true;
 	//DEBUG:
+	//fixed flashlight
 	flags[1146 - 1000] = true;
+	//solved dog tile
+	flags[1407 - 1000] = true;
 
 	UIInit();
 
@@ -30,7 +33,9 @@ bool Loader::Boot()
 		//HIFF::Load_HIFF("4020");
 	//Puzzle Corrador
 		//HIFF::Load_HIFF("4150");
-		loadScene("4069");
+		//tun stairs
+		//loadScene("4069");
+		loadScene("4150");
 	// Tunnel by Kennel
 	//HIFF::Load_HIFF("4141");
 	else
@@ -68,12 +73,17 @@ void Loader::UIInit()
 	}
 }
 
+void Loader::loadScene(int sceneName)
+{
+	Loader::loadScene(std::to_string(sceneName));
+}
+
 void Loader::loadScene(std::string sceneName)
 {
 	if (currentScene && sceneName == currentScene->sceneFile)
 		ReloadScene();
 	else
-		ChangeScene(sceneName);
+		_ChangeScene(sceneName);
 }
 
 std::ifstream Loader::loadTree(std::string treeName)

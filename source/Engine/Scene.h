@@ -48,5 +48,8 @@ extern bool flags[];
 extern std::string flagDesc[];
 //extern bool firstLoad;
 
-void ChangeScene(std::string sceneName);
+//For internal use. Call Loader::loadScene instead
+void _ChangeScene(std::string sceneName);
+//For internal use. Call Loader::loadScene instead
+void _LoadScene(std::string sceneName);
 void ReloadScene();

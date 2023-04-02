@@ -34,8 +34,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		if (!checkDeps(deps))
 			break;
 
-		sceneChangeName = std::to_string(changeTo);
-		sceneChangeFlag = true;
+		//sceneChangeName = std::to_string(changeTo);
+		//sceneChangeFlag = true;
+		Loader::loadScene(changeTo);
 
 		break;
 	}
@@ -71,7 +72,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			//set flag to change scene and have sceneproc load
 			//sceneChangeName = std::to_string(changeTo);
 			//sceneChangeFlag = true;
-			ChangeScene(std::to_string(changeTo));
+			Loader::loadScene(changeTo);
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
@@ -189,8 +190,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		{
 			flags[flag - 1000] = truth;
 			printf("set scene flag num: %d\n", flag);
-			sceneChangeName = currentScene->sceneFile;
-			sceneChangeFlag = true;
+			//sceneChangeName = currentScene->sceneFile;
+			//sceneChangeFlag = true;
+			Loader::loadScene(currentScene->sceneFile);
 		};
 		if (debugHot)
 			testbutton->setDebug(true);
@@ -240,8 +242,10 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			break;
 
 		//Remove current scene and change to that scene
-		sceneChangeName = prevScene;
-		sceneChangeFlag = true;
+		//sceneChangeName = prevScene;
+		//sceneChangeFlag = true;
+
+		Loader::loadScene(prevScene);
 		prevScene = "";
 
 		break;
@@ -295,8 +299,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		//TODO: Play sound
 
-		sceneChangeName = std::to_string(changeTo);
-		sceneChangeFlag = true;
+		//sceneChangeName = std::to_string(changeTo);
+		//sceneChangeFlag = true;
+		Loader::loadScene(changeTo);
 
 		break;
 	}
@@ -328,8 +333,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		//TODO: Play sound
 
-		sceneChangeName = std::to_string(changeTo);
-		sceneChangeFlag = true;
+		//sceneChangeName = std::to_string(changeTo);
+		//sceneChangeFlag = true;
+		Loader::loadScene(changeTo);
 
 		break;
 	}
