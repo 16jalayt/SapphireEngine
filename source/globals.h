@@ -9,6 +9,7 @@ const bool debugNoSound = true;
 //logical canvas resolution
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
+const int ANIMATION_RATE = 15;
 
 #ifdef __SWITCH__
 const int REAL_WIDTH = 1280;

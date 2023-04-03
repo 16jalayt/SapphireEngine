@@ -7,6 +7,7 @@
 #include "Nancy/HIFF.h"
 #include "Nancy/Loader.h"
 #include "Nancy/Dependency.h"
+#include "Engine/AvP_BinkPlayback.h"
 
 bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
@@ -42,7 +43,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	}
 
 	//?
-	case 20:
+	//case 20:
 		//Scene change with HS
 	case 25:
 	{
@@ -77,6 +78,19 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		if (debugHot)
 			testbutton->setDebug(true);
 		//testbutton->visible(false);
+		break;
+	}
+	//Movie playback
+	case 53:
+	{
+		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+
+		std::string video = readString(inFile, 66);
+
+		BinkPlayback_ptr menuFMV = BinkPlayback_ptr(new BinkPlayback());
+		std::string path = Loader::getVideoPath(video);
+		menuFMV->Open(path, 0, 0, true);
+
 		break;
 	}
 	//Scene Change with Frame

@@ -19,7 +19,7 @@ public:
 	static std::ifstream loadTree(std::string treeName);
 	static std::ifstream getDataFile(std::string sceneName);
 	static std::string getOVL(std::string ovlName);
-	static std::string getBackgroundPath(std::string backName);
+	static std::string getVideoPath(std::string backName);
 	static std::string getSoundPath(std::string soundName);
 };
 

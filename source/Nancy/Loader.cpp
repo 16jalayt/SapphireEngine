@@ -141,7 +141,7 @@ std::string Loader::getOVL(std::string ovlName)
 }
 
 //Note: prefers loose files
-std::string Loader::getBackgroundPath(std::string backName)
+std::string Loader::getVideoPath(std::string backName)
 {
 	if (backName.empty())
 		return std::string();

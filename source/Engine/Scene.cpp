@@ -73,7 +73,7 @@ void Scene::setBkg(std::string backName)
 
 	printf("Background: %s\n", backName.c_str());
 
-	std::string fileName = Loader::getBackgroundPath(backName);
+	std::string fileName = Loader::getVideoPath(backName);
 
 	//don't need much validation. Sub objects will handle that.
 	if (fileName.empty())

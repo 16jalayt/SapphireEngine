@@ -9,7 +9,7 @@
 #include "Nancy/AVF.h"
 #include "Nancy/GUI.h"
 
-Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial, int numFrames, int animationSpeed)
+Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
 	//TODO: upgrade to string?
 	_loaded = false;
@@ -19,9 +19,8 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	_scale = 1;
 	_parent = parent;
 
-	//TODO:implement
-	_numFrames = numFrames;
-	_animationSpeed = animationSpeed;
+	_numFrames = -1;
+	_animationSpeed = -1;
 
 	//If file name not null or empty
 	if (file && strcmp(file, "") != 0)
@@ -66,7 +65,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	//}
 }
 
-Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scaled_Rect partial, int numFrames, int animationSpeed)
+Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
 	_loaded = false;
 	_width = 0;
@@ -75,9 +74,8 @@ Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scale
 	_scale = 1;
 	_parent = parent;
 
-	//TODO:implement
-	_numFrames = numFrames;
-	_animationSpeed = animationSpeed;
+	_numFrames = -1;
+	_animationSpeed = -1;
 
 	if (texture)
 	{
@@ -100,6 +98,53 @@ Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scale
 		{
 			SDL_QueryTexture(texture.get(), NULL, NULL, &_width, &_height);
 		}
+
+		_pos = ScaleRect(x, y, _width, _height);
+		_scale = GlobalScale;
+
+		_tex = std::move(texture);
+		_loaded = true;
+	}
+	else
+	{
+		printf("Unable to open sprite with texture.\n");
+	}
+}
+
+Sprite::Sprite(SDL_Texture_ptr textures[], int x, int y, RenderParent parent, int numFrames, int animationSpeed)
+{
+	_loaded = false;
+	_width = 0;
+	_height = 0;
+	_visible = true;
+	_scale = 1;
+	_parent = parent;
+
+	//TODO:implement
+	_numFrames = numFrames;
+	_animationSpeed = animationSpeed;
+
+	if (textures)
+	{
+		/*if (partial != Scaled_Rect())
+		{
+			_srcSpecified = true;
+			_src = ScaledRect_to_SDLRect(partial);
+
+			//Need to tweak for some reason
+			//to remove green border
+			_src.x = _src.x + 1;
+			_src.y = _src.y + 1;
+			_src.w = _src.w - 1;
+			_src.h = _src.h - 1;
+
+			_width = _src.w;
+			_height = _src.h;
+		}
+		else
+		{*/
+		SDL_QueryTexture(textures[0].get(), NULL, NULL, &_width, &_height);
+		//}
 
 		_pos = ScaleRect(x, y, _width, _height);
 		_scale = GlobalScale;
