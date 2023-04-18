@@ -168,6 +168,13 @@ int main(int argc, char** argv)
 	int scenenum = 0;
 	bool check = false;
 
+	/*std::vector<BinkPlayback_ptr> test;
+	std::string path = Loader::getVideoPath("YogiCine_");
+	BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
+	menuFMV->Open(path, 0, 0, false);
+	test.push_back(menuFMV);
+	//nextScene->AddMovie(menuFMV);*/
+
 #ifdef __SWITCH__
 	while (!exit_requested && appletMainLoop())
 #else
@@ -259,6 +266,9 @@ int main(int argc, char** argv)
 			//SDL_RenderCopy(Graphics::renderer.get(), helloworld_tex.get(), NULL, &helloworld_rect);
 
 		//bkFMV->Draw();
+		/*for (auto& fmv : test) {
+			fmv->Draw();
+		}*/
 		//menuFMV->Draw();
 
 		SDL_RenderPresent(Graphics::renderer.get());

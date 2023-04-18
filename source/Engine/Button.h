@@ -13,7 +13,6 @@ public:
 	Button(int x, int y, int w, int h, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
 	Button(SDL_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
 	Button(Scaled_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
-	virtual ~Button();
 	void Draw();
 	void Event(SDL_Event event);
 	void setDebug(bool debug);

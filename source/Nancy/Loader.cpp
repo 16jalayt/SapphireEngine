@@ -35,7 +35,7 @@ bool Loader::Boot()
 		//HIFF::Load_HIFF("4150");
 		//tun stairs
 		//loadScene("4069");
-		loadScene("4150");
+		loadScene("4604");
 	// Tunnel by Kennel
 	//HIFF::Load_HIFF("4141");
 	else

@@ -14,7 +14,6 @@ public:
 	Sprite() = default;
 	Sprite(const char* fileName, int x = 0, int y = 0, RenderParent parent = RenderParent::canvas, Scaled_Rect partial = Scaled_Rect());
 	Sprite(SDL_Texture_ptr texture, int x = 0, int y = 0, RenderParent parent = RenderParent::canvas, Scaled_Rect partial = Scaled_Rect());
-	Sprite(SDL_Texture_ptr textures[], int x = 0, int y = 0, RenderParent parent = RenderParent::canvas, int numFrames = 1, int animationSpeed = ANIMATION_RATE);
 	//Sprite(SDL_Renderer_sptr renderer, const char* file, Scaled_Rect rect, int numFrames = 1, int animationSpeed = 0);
 	void Draw();
 	virtual ~Sprite();
@@ -41,8 +40,6 @@ protected:
 	SDL_Rect _pos = { 0, 0, 0, 0 };
 	SDL_Rect _src = { 0, 0, 0, 0 };
 	bool _srcSpecified = false;
-	int _numFrames = 1;
-	int _animationSpeed = 1;
 	float _scale = 1;
 	RenderParent _parent = canvas;
 	bool _isMask = false;

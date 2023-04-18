@@ -76,7 +76,3 @@ void Button::setDebug(bool debug)
 {
 	_debugView = debug;
 }
-
-Button::~Button()
-{
-}

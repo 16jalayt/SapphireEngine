@@ -52,6 +52,10 @@ void Scene::Draw()
 		for (auto& hot : hots) {
 			hot->Draw();
 		}
+
+		for (auto& fmv : fmvs) {
+			fmv->Draw();
+		}
 	}
 }
 
@@ -89,7 +93,7 @@ void Scene::setBkg(std::string backName)
 	}
 	else if (ext == ".avf")
 	{
-		bk = Sprite_ptr(new Sprite(AVF::parseAVF(fileName.c_str()), 0, 0));
+		bk = Sprite_ptr(new Sprite(std::move(AVF::parseAVF(fileName.c_str())[0]), 0, 0));
 	}
 	else if (ext == ".png" || ext == ".jpg")
 	{
@@ -109,6 +113,11 @@ void Scene::AddSprite(Sprite_ptr sprite)
 void Scene::AddHotzone(Button_ptr hot)
 {
 	hots.push_back(hot);
+}
+
+void Scene::AddMovie(BinkPlayback_ptr fmv)
+{
+	fmvs.push_back(fmv);
 }
 
 //create music paused
@@ -202,12 +211,17 @@ void ReloadScene()
 {
 	currentScene->ovls.clear();
 	currentScene->hots.clear();
+	currentScene->fmvs.clear();
 	HIFF::Load_HIFF(currentScene->sceneFile);
 	currentScene->Run();
 }
 
 void Scene::Run()
 {
+	for (auto& fmv : fmvs) {
+		fmv->_fmvPlaying = true;
+	}
+
 	if (!debugNoSound)
 	{
 		//Start music if not holding over from last scene

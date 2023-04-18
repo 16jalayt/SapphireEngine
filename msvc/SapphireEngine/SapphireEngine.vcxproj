@@ -173,6 +173,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\source\Engine\AnimatedSprite.cpp" />
     <ClCompile Include="..\..\source\Engine\audio.cpp" />
     <ClCompile Include="..\..\source\Engine\AvP_AudioStreaming.cpp" />
     <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp" />
@@ -182,6 +183,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Engine\Scene.cpp" />
     <ClCompile Include="..\..\source\Engine\sprite.cpp" />
     <ClCompile Include="..\..\source\Engine\utils.cpp" />
+    <ClCompile Include="..\..\source\Engine\Movie.cpp" />
     <ClCompile Include="..\..\source\libbinkdec\avfft.c" />
     <ClCompile Include="..\..\source\libbinkdec\BinkAudio.cpp" />
     <ClCompile Include="..\..\source\libbinkdec\BinkDecoder.cpp" />
@@ -209,6 +211,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\oldhertools\lzss.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\Engine\AnimatedSprite.h" />
     <ClInclude Include="..\..\source\Engine\audio.h" />
     <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h" />
     <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h" />
@@ -220,6 +223,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Engine\SDL_TTF_ptr.h" />
     <ClInclude Include="..\..\source\Engine\sprite.h" />
     <ClInclude Include="..\..\source\Engine\utils.h" />
+    <ClInclude Include="..\..\source\Engine\Movie.h" />
     <ClInclude Include="..\..\source\globals.h" />
     <ClInclude Include="..\..\source\libbinkdec\avfft.h" />
     <ClInclude Include="..\..\source\libbinkdec\BinkAudio.h" />

@@ -108,6 +108,7 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 	}
 
 	_fmvPlaying = true;
+	_fmvPaused = false;
 	_audioStarted = false;
 	_frameReady = false;
 	_texturesReady = false;
@@ -147,6 +148,7 @@ void BinkPlayback::Close()
 
 		if (_decodeThreadInited) {
 			pthread_join(_decodeThreadHandle, NULL);
+			//pthread_detach(_decodeThreadHandle);
 		}
 		if (_audioThreadInited) {
 			pthread_join(_audioThreadHandle, NULL);
@@ -376,7 +378,8 @@ void BinkPlayback::Draw()
 
 int	BinkPlayback::OpenPaused(const std::string& fileName, int x, int y, bool isLooped)
 {
-	//TODO:do
+	Open(fileName, x, y, isLooped);
+	_fmvPaused = true;
 	return -1;
 }
 

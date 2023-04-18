@@ -80,6 +80,7 @@ public:
 	pthread_mutex_t _frameCriticalSection;
 
 	volatile bool _fmvPlaying;
+	volatile bool _fmvPaused;
 	volatile bool _frameReady;
 	bool _audioStarted;
 	volatile bool _texturesReady;
@@ -99,6 +100,7 @@ public:
 		_x(0),
 		_y(0),
 		_fmvPlaying(false),
+		_fmvPaused(false),
 		_frameReady(false),
 		_audioStarted(false),
 		_texturesReady(false),
