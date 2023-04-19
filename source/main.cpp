@@ -123,8 +123,8 @@ int main(int argc, char** argv)
 		printf("Error registering windows exit handler.");
 	}
 #endif
-
-	Graphics_ptr graphics = Graphics_ptr(new Graphics());
+	Graphics_ptr graphics = std::make_unique<Graphics>();
+	//Graphics_ptr graphics = Graphics_ptr(new Graphics());
 
 	//TODO: dont need anymore?
 	SDL_Texture_sptr loading_tex;
