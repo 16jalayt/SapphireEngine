@@ -26,13 +26,16 @@ void Movie::Draw()
 	{
 		if (FMV)
 		{
-			if ((Bink_GetCurrentFrameNum(FMV->_handle) < Bink_GetNumFrames(FMV->_handle)) && !FMV->IsEnding()) {
-				// Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
-				int test = Bink_GetNextFrame(FMV->_handle, FMV->_yuvBuffer);
-				printf("frame:%i\n", test);
+			if (singleThreadVideo)
+			{
+				if ((Bink_GetCurrentFrameNum(FMV->_handle) < Bink_GetNumFrames(FMV->_handle)) && !FMV->IsEnding()) {
+					// Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
+					int test = Bink_GetNextFrame(FMV->_handle, FMV->_yuvBuffer);
+					printf("frame:%i\n", test);
 
-				// we have a new frame and we're ready to use it
-				FMV->_frameReady = true;
+					// we have a new frame and we're ready to use it
+					FMV->_frameReady = true;
+				}
 			}
 
 			FMV->Draw();

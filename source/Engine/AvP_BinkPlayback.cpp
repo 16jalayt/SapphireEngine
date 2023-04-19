@@ -123,7 +123,8 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 	/*if (pthread_create(&_decodeThreadHandle, NULL, BinkDecodeThread, static_cast<void*>(this)) != 0) {
 		return false;
 	}*/
-	//_decodeThreadHandle = std::thread(BinkDecodeThread, static_cast<void*>(this));
+	if (!singleThreadVideo)
+		_decodeThreadHandle = std::thread(BinkDecodeThread, static_cast<void*>(this));
 
 	if (_nAudioTracks) {
 		/*if (pthread_create(&_audioThreadHandle, NULL, BinkAudioThread, static_cast<void*>(this)) != 0) {

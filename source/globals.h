@@ -3,8 +3,9 @@
 const bool oldUI = true;
 const bool debugHot = true;
 const bool fullscreen = false;
-//TODO: bik player does not respect
 const bool debugNoSound = true;
+//For easier debuging
+const bool singleThreadVideo = true;
 
 //logical canvas resolution
 const int SCREEN_WIDTH = 800;
