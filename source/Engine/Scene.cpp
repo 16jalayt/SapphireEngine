@@ -115,7 +115,7 @@ void Scene::AddHotzone(Button_ptr hot)
 	hots.push_back(hot);
 }
 
-void Scene::AddMovie(BinkPlayback_ptr fmv)
+void Scene::AddMovie(Movie_ptr fmv)
 {
 	fmvs.push_back(fmv);
 }
@@ -219,7 +219,7 @@ void ReloadScene()
 void Scene::Run()
 {
 	for (auto& fmv : fmvs) {
-		fmv->_fmvPlaying = true;
+		fmv->FMV->_fmvPaused = false;
 	}
 
 	if (!debugNoSound)

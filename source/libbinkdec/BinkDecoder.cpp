@@ -47,7 +47,8 @@
 #include "LogError.h"
 #include "FFmpeg_includes.h"
 
-std::vector<class BinkDecoder*> classInstances;
+   //std::vector<class BinkDecoder*> classInstances;
+std::vector<BinkDecoder_ptr> classInstances;
 
 BinkHandle Bink_Open(const char* fileName)
 {
@@ -55,25 +56,17 @@ BinkHandle Bink_Open(const char* fileName)
 	newHandle.isValid = false;
 	newHandle.instanceIndex = -1;
 
-	BinkDecoder* newDecoder = new BinkDecoder();
+	//BinkDecoder* newDecoder = new BinkDecoder();
+	BinkDecoder_ptr newDecoder = std::make_shared<BinkDecoder>();
 	if (!newDecoder->Open(fileName))
 	{
-		delete newDecoder;
+		//delete newDecoder;
 		return newHandle;
 	}
 
 	// loaded ok, make handle valid
 	newHandle.isValid = true;
-#if 0
-	// find a free slot if available
-	for (int i = 0; i < classInstances.size(); i++)
-	{
-		if (!classInstances[i])
-		{
-			class
-		}
-	}
-#endif
+
 	// add instance to global instance vector
 	classInstances.push_back(newDecoder);
 
@@ -92,7 +85,7 @@ void Bink_Close(BinkHandle& handle)
 	}
 
 	// close bink decoder
-	delete classInstances[handle.instanceIndex];
+	//delete classInstances[handle.instanceIndex];
 	classInstances[handle.instanceIndex] = 0;
 
 	handle.instanceIndex = -1;
@@ -125,6 +118,8 @@ uint32_t Bink_GetAudioData(BinkHandle& handle, uint32_t trackIndex, int16_t* dat
 
 uint32_t Bink_GetNumFrames(BinkHandle& handle)
 {
+	if (classInstances.size() == 0)
+		return -1;
 	return classInstances[handle.instanceIndex]->GetNumFrames();
 }
 
@@ -136,12 +131,15 @@ void Bink_GetFrameSize(BinkHandle& handle, uint32_t& width, uint32_t& height)
 
 uint32_t Bink_GetCurrentFrameNum(BinkHandle& handle)
 {
+	//TODO: better way to fix?
+	if (classInstances.size() == 0)
+		return -1;
 	return classInstances[handle.instanceIndex]->GetCurrentFrameNum();
 }
 
 uint32_t Bink_GetNextFrame(BinkHandle& handle, YUVbuffer yuv)
 {
-	BinkDecoder* decoder = classInstances[handle.instanceIndex];
+	BinkDecoder_ptr decoder = classInstances[handle.instanceIndex];
 
 	uint32_t frameIndex = decoder->GetCurrentFrameNum();
 
@@ -168,11 +166,12 @@ BinkDecoder::BinkDecoder()
 
 BinkDecoder::~BinkDecoder()
 {
-	for (uint32_t i = 0; i < planes.size(); i++)
+	//TODO: can cause crash
+	/*for (uint32_t i = 0; i < planes.size(); i++)
 	{
 		delete[] planes[i].current;
 		delete[] planes[i].last;
-	}
+	}*/
 
 	for (uint32_t i = 0; i < audioTracks.size(); i++)
 	{
@@ -186,6 +185,7 @@ BinkDecoder::~BinkDecoder()
 
 		delete audioTracks[i];
 	}
+	FreeBundles();
 }
 
 uint32_t BinkDecoder::GetNumFrames()

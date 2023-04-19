@@ -35,7 +35,9 @@ enum
 };
 
 #include <AL\al.h>
-#include <pthread.h>
+//#include <pthread.h>
+#include <thread>
+#include <mutex>
 #include <deque>
 
 struct sndSource
@@ -102,10 +104,12 @@ public:
 
 	uint32_t	_bufferCount;
 	sndSource* _source;
-	pthread_t	_playbackThread;
+	//pthread_t	_playbackThread;
+	std::thread _playbackThread;
 	uint64_t	_totalBytesPlayed;
 	uint32_t	_bufferSize;
-	pthread_mutex_t _bufferMutex;
+	//pthread_mutex_t _bufferMutex;
+	std::mutex _bufferMutex;
 
 	bool _isPaused;
 	bool _isPlaying;

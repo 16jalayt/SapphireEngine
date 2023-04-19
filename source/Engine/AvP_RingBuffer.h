@@ -25,8 +25,10 @@
 #pragma once
 
 #include <stdint.h>
-#include <pthread.h>
+//#include <pthread.h>
+#include <thread>
 #include <memory>
+#include <mutex>
 
 class RingBuffer
 {
@@ -36,16 +38,17 @@ private:
 	uint32_t	_amountFilled;
 	std::unique_ptr<uint8_t> _buffer;
 	uint32_t	_bufferCapacity;
-	pthread_mutex_t _criticalSection;
-	bool _criticalSectionInited;
+	//pthread_mutex_t _criticalSection;
+	std::mutex _criticalSection;
+	//bool _criticalSectionInited;
 
 public:
 	RingBuffer() :
 		_readPos(0),
 		_writePos(0),
 		_amountFilled(0),
-		_bufferCapacity(0),
-		_criticalSectionInited(false)
+		_bufferCapacity(0)
+		//_criticalSectionInited(false)
 	{
 	}
 	bool Init(uint32_t size);

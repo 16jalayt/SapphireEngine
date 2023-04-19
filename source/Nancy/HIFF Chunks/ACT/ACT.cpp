@@ -88,12 +88,15 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		//std::string video = readString(inFile, 66);
 		skipBytes(inFile, chunkLen - 50);
 
-		std::string path = Loader::getVideoPath("YogiCine_");
-		//Movie_ptr fmv = Movie_ptr(new Movie(path, 0, 0, true));
-		//nextScene->AddMovie(fmv);
-		BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
-		menuFMV->OpenPaused(path, 0, 0, false);
-		nextScene->AddMovie(menuFMV);
+		if (nextScene->fmvs.size() < 1)
+		{
+			std::string path = Loader::getVideoPath("YogiCine_");
+			Movie_ptr fmv = Movie_ptr(new Movie(path, 0, 0, true));
+			nextScene->AddMovie(fmv);
+		}
+		//BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
+		//menuFMV->OpenPaused(path, 0, 0, false);
+		//nextScene->AddMovie(menuFMV);
 
 		break;
 	}

@@ -194,6 +194,7 @@ std::string readString(std::ifstream& inFile, int length)
 	inFile.read(buf, length);
 	std::string result = std::string(buf, length);
 	result.erase(std::find(result.begin(), result.end(), '\0'), result.end());
+	delete[] buf;
 
 	return result;
 }

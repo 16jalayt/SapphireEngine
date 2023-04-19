@@ -7,7 +7,10 @@
 #include <AL\efx-presets.h>
 #include <SDL2/SDL_timer.h>
 
-static bool		soundEnabled = false;
+#include "globals.h"
+//#include <SDL2/SDL_timer.h>
+
+static bool		soundEnabled = debugNoSound;
 static ALCdevice* device = 0;
 static ALCcontext* context = 0;
 std::vector<sndSource> sourceList;
@@ -59,6 +62,9 @@ static const float vol_to_gain_table[] = {
 //UPDATE: nope
 void PlatEndSoundSys()
 {
+	if (!soundEnabled) {
+		return;
+	}
 	// lets check all sounds are stopped and released here (important to handle alt+f4 close)
 	//SoundSys_RemoveAll();
 
@@ -80,6 +86,9 @@ void PlatEndSoundSys()
 
 int PlatStartSoundSys()
 {
+	if (!soundEnabled) {
+		return 1;
+	}
 #ifdef _DEBUG
 	printf("Starting to initialise OpenAL\n");
 #endif
@@ -281,13 +290,13 @@ bool AudioStream::Init(uint32_t nChannels, uint32_t rate, uint32_t bitsPerSample
 	for (uint32_t i = 0; i < nBuffers; i++) {
 		_freeBufferQueue.push_back(_buffers[i]);
 	}
-
-	if (pthread_create(&_playbackThread, NULL, CheckProcessedBuffers, static_cast<void*>(this)) != 0) {
+	_playbackThread = std::thread(CheckProcessedBuffers, static_cast<void*>(this));
+	/*if (pthread_create(&_playbackThread, NULL, CheckProcessedBuffers, static_cast<void*>(this)) != 0) {
 		return false;
 	}
 	if (pthread_mutex_init(&_bufferMutex, NULL) != 0) {
 		return false;
-	}
+	}*/
 
 	return true;
 }
@@ -301,7 +310,8 @@ uint32_t AudioStream::WriteData(uint8_t* audioData, uint32_t size)
 	alGetError();
 
 	if (_freeBufferQueue.size()) {
-		pthread_mutex_lock(&_bufferMutex);
+		//pthread_mutex_lock(&_bufferMutex);
+		_bufferMutex.lock();
 
 		ALuint buffer = _freeBufferQueue.front();
 		_freeBufferQueue.pop_front();
@@ -315,7 +325,8 @@ uint32_t AudioStream::WriteData(uint8_t* audioData, uint32_t size)
 		alSourceQueueBuffers(_source->_alSource, 1, &buffer);
 		AlCheckError();
 
-		pthread_mutex_unlock(&_bufferMutex);
+		//pthread_mutex_unlock(&_bufferMutex);
+		_bufferMutex.unlock();
 	}
 
 	_currentBuffer++;
@@ -351,7 +362,8 @@ void* CheckProcessedBuffers(void* args)
 
 			if (nProcessed && (stream->_freeBufferQueue.size() < stream->_bufferCount))
 			{
-				pthread_mutex_lock(&stream->_bufferMutex);
+				//pthread_mutex_lock(&stream->_bufferMutex);
+				stream->_bufferMutex.lock();
 
 				ALuint buffer;
 				alSourceUnqueueBuffers(stream->_source->_alSource, 1, &buffer);
@@ -360,7 +372,8 @@ void* CheckProcessedBuffers(void* args)
 				stream->_freeBufferQueue.push_back(buffer);
 				stream->_totalBytesPlayed += stream->_bufferSize;
 
-				pthread_mutex_unlock(&stream->_bufferMutex);
+				//pthread_mutex_unlock(&stream->_bufferMutex);
+				stream->_bufferMutex.unlock();
 			}
 			else {
 				// wait and try again
@@ -439,8 +452,9 @@ AudioStream::~AudioStream()
 {
 	Stop();
 
-	pthread_join(_playbackThread, NULL);
-	pthread_mutex_destroy(&_bufferMutex);
+	//pthread_join(_playbackThread, NULL);
+	_playbackThread.join();
+	//pthread_mutex_destroy(&_bufferMutex);
 
 	alSourcei(_source->_alSource, AL_BUFFER, NULL);
 	alDeleteSources(1, &_source->_alSource);
@@ -464,5 +478,5 @@ AudioStream::~AudioStream()
 		_dataBuffers = NULL;
 	}
 
-	PlatEndSoundSys();
+	//PlatEndSoundSys();
 }

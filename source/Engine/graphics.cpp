@@ -36,7 +36,8 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 		return -1;
 	}
 
-	//if (!SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengl"))
+	//software opengl direct3d
+	//if (!SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, "opengl", SDL_HINT_OVERRIDE))
 	if (!SDL_SetHintWithPriority(SDL_HINT_RENDER_DRIVER, "opengl", SDL_HINT_OVERRIDE))
 	{
 		fatalError("%s: Warning: backend fail: %s", __func__, SDL_GetError());

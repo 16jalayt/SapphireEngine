@@ -21,7 +21,7 @@ public:
 	BinkPlayback_ptr bkFMV;
 	std::vector<Sprite_ptr> ovls;
 	std::vector<Button_ptr> hots;
-	std::vector<BinkPlayback_ptr> fmvs;
+	std::vector<Movie_ptr> fmvs;
 	std::string sceneFile;
 	std::string sceneName;
 	bool changeMusic;
@@ -32,7 +32,7 @@ public:
 	void setBkg(std::string fileName);
 	void AddSprite(Sprite_ptr sprite);
 	void AddHotzone(Button_ptr hot);
-	void AddMovie(BinkPlayback_ptr fmv);
+	void AddMovie(Movie_ptr fmv);
 	void AddMusic(std::string sound, int channel, int loop, int chan1, int chan2);
 	void AddSound(std::string sound, int channel, int loop, int chan1, int chan2);
 

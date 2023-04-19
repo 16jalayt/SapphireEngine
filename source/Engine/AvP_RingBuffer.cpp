@@ -39,19 +39,19 @@ bool RingBuffer::Init(uint32_t size)
 	_writePos = 0;
 	_amountFilled = 0;
 
-	if (pthread_mutex_init(&_criticalSection, NULL) != 0) {
+	/*if (pthread_mutex_init(&_criticalSection, NULL) != 0) {
 		return false;
 	}
-	_criticalSectionInited = true;
+	_criticalSectionInited = true;*/
 	return true;
 }
 
 RingBuffer::~RingBuffer()
 {
 	//delete[] _buffer;
-	if (_criticalSectionInited) {
+	/*if (_criticalSectionInited) {
 		pthread_mutex_destroy(&_criticalSection);
-	}
+	}*/
 }
 
 uint32_t RingBuffer::GetWritableSize()
@@ -59,7 +59,8 @@ uint32_t RingBuffer::GetWritableSize()
 	// load ring buffer
 	int32_t freeSpace = 0;
 
-	pthread_mutex_lock(&_criticalSection);
+	//pthread_mutex_lock(&_criticalSection);
+	std::lock_guard<std::mutex> guard(_criticalSection);
 
 	// if our read and write positions are at the same location, does that mean the buffer is empty or full?
 	if (_readPos == _writePos)
@@ -85,7 +86,7 @@ uint32_t RingBuffer::GetWritableSize()
 		}
 	}
 
-	pthread_mutex_unlock(&_criticalSection);
+	//pthread_mutex_unlock(&_criticalSection);
 
 	return freeSpace;
 }
@@ -95,7 +96,8 @@ uint32_t RingBuffer::GetReadableSize()
 	// find out how we need to read data. do we split into 2 memcpy-s or not?
 	int32_t readableSpace = 0;
 
-	pthread_mutex_lock(&_criticalSection);
+	//pthread_mutex_lock(&_criticalSection);
+	std::lock_guard<std::mutex> guard(_criticalSection);
 
 	// if our read and write positions are at the same location, does that mean the buffer is empty or full?
 	if (_readPos == _writePos)
@@ -121,7 +123,7 @@ uint32_t RingBuffer::GetReadableSize()
 		}
 	}
 
-	pthread_mutex_unlock(&_criticalSection);
+	//pthread_mutex_unlock(&_criticalSection);
 
 	return readableSpace;
 }
@@ -138,7 +140,8 @@ uint32_t RingBuffer::ReadData(uint8_t* destData, uint32_t amountToRead)
 	// grab how much readable data there is
 	uint32_t readableSpace = GetReadableSize();
 
-	pthread_mutex_lock(&_criticalSection);
+	//pthread_mutex_lock(&_criticalSection);
+	std::lock_guard<std::mutex> guard(_criticalSection);
 
 	if (amountToRead > readableSpace)
 	{
@@ -168,7 +171,7 @@ uint32_t RingBuffer::ReadData(uint8_t* destData, uint32_t amountToRead)
 	_readPos = (_readPos + totalRead) % _bufferCapacity;
 	_amountFilled -= totalRead;
 
-	pthread_mutex_unlock(&_criticalSection);
+	//pthread_mutex_unlock(&_criticalSection);
 
 	return totalRead;
 }
@@ -185,7 +188,8 @@ uint32_t RingBuffer::WriteData(uint8_t* srcData, uint32_t srcDataSize)
 	// grab how much writable space there is
 	uint32_t availableSpace = GetWritableSize();
 
-	pthread_mutex_lock(&_criticalSection);
+	//pthread_mutex_lock(&_criticalSection);
+	std::lock_guard<std::mutex> guard(_criticalSection);
 
 	if (srcDataSize > availableSpace)
 	{
@@ -217,7 +221,7 @@ uint32_t RingBuffer::WriteData(uint8_t* srcData, uint32_t srcDataSize)
 	_writePos = (_writePos + firstSize + secondSize) % _bufferCapacity;
 	_amountFilled += firstSize + secondSize;
 
-	pthread_mutex_unlock(&_criticalSection);
+	//pthread_mutex_unlock(&_criticalSection);
 
 	return totalWritten;
 }

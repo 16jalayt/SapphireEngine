@@ -1,6 +1,7 @@
 #include "audio.h"
 #include <SDL2/SDL_mixer.h>
 
+#include "globals.h"
 #include "Engine/utils.h"
 #include "AvP_AudioStreaming.h"
 
@@ -10,7 +11,10 @@ Mix_Chunk* soundChannels[8];
 
 int Audio::Init()
 {
-	// SDL_InitSubSystem(SDL_INIT_AUDIO);
+	if (debugNoSound) {
+		return 0;
+	}
+	SDL_InitSubSystem(SDL_INIT_AUDIO);
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
@@ -32,6 +36,9 @@ int Audio::Init()
 
 void Audio::Quit()
 {
+	if (debugNoSound) {
+		return;
+	}
 	// stop sounds and free loaded data
 	Mix_HaltChannel(-1);
 	Mix_CloseAudio();

@@ -23,6 +23,7 @@ size_t ppm_save(ppm_image* img, FILE* outfile) {
 	return n;
 }*/
 
+//TODO: Everything touched by avf leaks memory becasue it is static
 std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 {
 	std::vector<SDL_Texture_ptr> frames;
@@ -78,6 +79,7 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 		inFile.read(compressedImage, compressedLength);
 
 		std::vector<uint8_t> frame = Her::dec_LZSS(Her::sub_offsets(compressedImage, compressedLength));
+		delete[] compressedImage;
 
 		//To test raw array before bmp header
 		/*uint8_t* array = &frame[0];

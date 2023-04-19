@@ -144,7 +144,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D

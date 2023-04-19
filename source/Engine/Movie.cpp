@@ -8,8 +8,9 @@ Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent par
 
 	if (ext == ".bik")
 	{
-		FMV = make_BinkPlayback_s(new BinkPlayback());
-		FMV->Open(fileName, x, y);
+		//FMV = make_BinkPlayback_s(new BinkPlayback());
+		FMV = std::make_shared<BinkPlayback>();
+		FMV->OpenPaused(fileName, x, y);
 	}
 	else if (ext == ".avf")
 	{
@@ -24,7 +25,21 @@ void Movie::Draw()
 	if (this != NULL)
 	{
 		if (FMV)
+		{
+			if ((Bink_GetCurrentFrameNum(FMV->_handle) < Bink_GetNumFrames(FMV->_handle)) && !FMV->IsEnding()) {
+				// Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
+				int test = Bink_GetNextFrame(FMV->_handle, FMV->_yuvBuffer);
+				printf("frame:%i\n", test);
+
+				// we have a new frame and we're ready to use it
+				FMV->_frameReady = true;
+			}
+
 			FMV->Draw();
+			//if (!FMV->_fmvEnding)
+				//FMV->Close();
+		}
+
 		else if (ASprite)
 			ASprite->Draw();
 	}
@@ -32,6 +47,6 @@ void Movie::Draw()
 
 Movie::~Movie()
 {
-	if (FMV)
-		FMV->Close();
+	//if (FMV)
+		//FMV->Close();
 }

@@ -186,7 +186,7 @@ private:
 	void InitTrees();
 	void Merge(BinkCommon::BitReader& bits, uint8_t* dst, uint8_t* src, int size);
 	void ReadTree(BinkCommon::BitReader& bits, Tree* tree);
-	uint8_t GetHuff(BinkCommon::BitReader& bits);
+	//uint8_t GetHuff(BinkCommon::BitReader& bits);
 	uint8_t GetHuffSymbol(BinkCommon::BitReader& bits, Tree& tree);
 
 	// video related functions
@@ -218,5 +218,6 @@ private:
 	void AudioPacket(uint32_t trackIndex, uint32_t packetSize);
 	void DecodeAudioBlock(uint32_t trackIndex, BinkCommon::BitReader& bits);
 };
+using BinkDecoder_ptr = std::shared_ptr<BinkDecoder>;
 
 #endif

@@ -28,6 +28,7 @@
 
 #include "Nancy/GUI.h"
 #include "Engine/utils.h"
+#include "globals.h"
 
 static const int kAudioBufferSize = 4096;
 static const int kAudioBufferCount = 3;
@@ -107,26 +108,28 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 		return 2;
 	}
 
-	_fmvPlaying = true;
+	_fmvEnding = false;
 	_fmvPaused = false;
 	_audioStarted = false;
 	_frameReady = false;
 	_texturesReady = false;
 
-	if (pthread_mutex_init(&_frameCriticalSection, NULL) != 0) {
+	/*if (pthread_mutex_init(&_frameCriticalSection, NULL) != 0) {
 		return false;
-	}
-	_frameCriticalSectionInited = true;
+	}*/
+	//_frameCriticalSectionInited = true;
 
 	// now start the threads
-	if (pthread_create(&_decodeThreadHandle, NULL, BinkDecodeThread, static_cast<void*>(this)) != 0) {
+	/*if (pthread_create(&_decodeThreadHandle, NULL, BinkDecodeThread, static_cast<void*>(this)) != 0) {
 		return false;
-	}
+	}*/
+	//_decodeThreadHandle = std::thread(BinkDecodeThread, static_cast<void*>(this));
 
 	if (_nAudioTracks) {
-		if (pthread_create(&_audioThreadHandle, NULL, BinkAudioThread, static_cast<void*>(this)) != 0) {
+		/*if (pthread_create(&_audioThreadHandle, NULL, BinkAudioThread, static_cast<void*>(this)) != 0) {
 			return false;
-		}
+		}*/
+		_audioThreadHandle = std::thread(BinkAudioThread, static_cast<void*>(this));
 		_audioThreadInited = true;
 	}
 
@@ -137,6 +140,7 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 
 BinkPlayback::~BinkPlayback()
 {
+	//Redundant. In header ptr deleter
 	this->Close();
 }
 
@@ -144,38 +148,42 @@ void BinkPlayback::Close()
 {
 	if (this)
 	{
-		_fmvPlaying = false;
+		_fmvEnding = true;
 
 		if (_decodeThreadInited) {
-			pthread_join(_decodeThreadHandle, NULL);
+			//pthread_join(_decodeThreadHandle, NULL);
 			//pthread_detach(_decodeThreadHandle);
+			//_decodeThreadHandle.detach();
+			//_decodeThreadHandle.join();
 		}
 		if (_audioThreadInited) {
-			pthread_join(_audioThreadHandle, NULL);
+			//pthread_join(_audioThreadHandle, NULL);
+			_audioThreadHandle.join();
 		}
 
-		if (_frameCriticalSectionInited)
+		/*if (_frameCriticalSectionInited)
 		{
 			pthread_mutex_destroy(&_frameCriticalSection);
 			_frameCriticalSectionInited = false;
-		}
+		}*/
 	}
 }
 
-bool BinkPlayback::IsPlaying()
+bool BinkPlayback::IsEnding()
 {
-	return _fmvPlaying;
+	return _fmvEnding;
 }
 
 // copies a decoded Theora YUV frame to texture(s) for GPU to convert via shader
 bool BinkPlayback::ConvertFrame()
 {
-	if (!_fmvPlaying) {
+	/*if (!_fmvEnding) {
 		return false;
-	}
+	}*/
 
 	// critical section
-	pthread_mutex_lock(&_frameCriticalSection);
+	//pthread_mutex_lock(&_frameCriticalSection);
+	std::lock_guard<std::mutex> guard(_frameCriticalSection);
 
 	SDL_UpdateYUVTexture(
 		_texture.get(),
@@ -187,13 +195,12 @@ bool BinkPlayback::ConvertFrame()
 		_yuvBuffer[2].data,
 		_yuvBuffer[2].pitch
 	);
-
 	// set this value to true so we can now begin to draw the textured fmv frame
 	_texturesReady = true;
 
 	_frameReady = false;
 
-	pthread_mutex_unlock(&_frameCriticalSection);
+	//pthread_mutex_unlock(&_frameCriticalSection);
 
 	return true;
 }
@@ -201,49 +208,66 @@ bool BinkPlayback::ConvertFrame()
 void* BinkDecodeThread(void* args)
 {
 	BinkPlayback* fmv = static_cast<BinkPlayback*>(args);
+	//Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
 
 	while (Bink_GetCurrentFrameNum(fmv->_handle) < Bink_GetNumFrames(fmv->_handle))
 	{
 		// check if we should still be playing or not
-		if (!fmv->IsPlaying()) {
+		if (fmv->IsEnding()) {
 			break;
+		}
+
+		if (fmv->_fmvPaused)
+		{
+			SDL_Delay(1);
+			continue;
 		}
 
 		auto now = std::chrono::high_resolution_clock::now();
 
 		// critical section
-		pthread_mutex_lock(&fmv->_frameCriticalSection);
+		//pthread_mutex_lock(&fmv->_frameCriticalSection);
+		fmv->_frameCriticalSection.lock();
 
-		Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
+		//Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
+		int test = Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
+		printf("frame:%i\n", test);
 
 		// we have a new frame and we're ready to use it
 		fmv->_frameReady = true;
 
-		pthread_mutex_unlock(&fmv->_frameCriticalSection);
+		//pthread_mutex_unlock(&fmv->_frameCriticalSection);
+		fmv->_frameCriticalSection.unlock();
 
-		uint32_t audioSize = Bink_GetAudioData(fmv->_handle, 0, (int16_t*)fmv->_audioDataBuffer.get());
+		if (!debugNoSound) {
+			uint32_t audioSize = Bink_GetAudioData(fmv->_handle, 0, (int16_t*)fmv->_audioDataBuffer.get());
 
-		if (audioSize)
-		{
-			uint32_t freeSpace = fmv->_ringBuffer->GetWritableSize();
-
-			//			assert(freeSpace >= audioSize);
-
-			if (audioSize > freeSpace)
+			if (audioSize)
 			{
-				while (audioSize > fmv->_ringBuffer->GetWritableSize())
+				uint32_t freeSpace = fmv->_ringBuffer->GetWritableSize();
+
+				//			assert(freeSpace >= audioSize);
+
+				if (audioSize > freeSpace)
 				{
-					// little bit of insurance in case we get stuck in here
-					if (!fmv->_fmvPlaying) {
-						break;
+					while (audioSize > fmv->_ringBuffer->GetWritableSize())
+					{
+						// little bit of insurance in case we get stuck in here
+						if (fmv->_fmvEnding) {
+							break;
+						}
+
+						// wait for the audio buffer to tell us it's just freed up another audio buffer for us to fill
+						fmv->_audioStream->WaitForFreeBuffer();
 					}
-
-					// wait for the audio buffer to tell us it's just freed up another audio buffer for us to fill
-					fmv->_audioStream->WaitForFreeBuffer();
 				}
-			}
 
-			fmv->_ringBuffer->WriteData((uint8_t*)&fmv->_audioDataBuffer.get()[0], audioSize);
+				fmv->_ringBuffer->WriteData((uint8_t*)&fmv->_audioDataBuffer.get()[0], audioSize);
+			}
+		}
+
+		if (fmv->IsEnding()) {
+			break;
 		}
 
 		auto then = std::chrono::high_resolution_clock::now();
@@ -266,8 +290,9 @@ void* BinkDecodeThread(void* args)
 	}
 
 	//We might get to this point because we've played all frames - rather than the game code asking us to stop,
-	//or the user interrupting the FMV. Setting _fmvPlaying to false will ensure that the audio decoding thread knows to quit
-	fmv->_fmvPlaying = false;
+	//or the user interrupting the FMV. Setting _fmvEnding to false will ensure that the audio decoding thread knows to quit
+	fmv->_fmvEnding = true;
+	//std::terminate();
 	return 0;
 }
 
@@ -279,8 +304,14 @@ void* BinkAudioThread(void* args)
 
 	int timetoSleep = 0;
 
-	while (fmv->_fmvPlaying)
+	while (!fmv->_fmvEnding)
 	{
+		if (fmv->_fmvPaused)
+		{
+			SDL_Delay(1);
+			continue;
+		}
+
 		auto now = std::chrono::high_resolution_clock::now();
 
 		uint32_t nBuffersFree = fmv->_audioStream->GetNumFreeBuffers();

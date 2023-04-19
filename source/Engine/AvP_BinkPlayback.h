@@ -25,7 +25,9 @@
 #ifndef _BinkPlayback_h_
 #define _BinkPlayback_h_
 
-#include <pthread.h>
+//#include <pthread.h>
+#include <thread>
+#include <mutex>
 #include <SDL2/SDL.h>
 #include <memory.h>
 
@@ -42,11 +44,13 @@ class BinkPlayback
 {
 private:
 	// thread handles
-	pthread_t _decodeThreadHandle;
-	pthread_t _audioThreadHandle;
+	//pthread_t _decodeThreadHandle;
+	std::thread _decodeThreadHandle;
+	//pthread_t _audioThreadHandle;
+	std::thread _audioThreadHandle;
 	bool _decodeThreadInited;
 	bool _audioThreadInited;
-	bool _frameCriticalSectionInited;
+	//bool _frameCriticalSectionInited;
 
 public:
 	//TODO: change assesability and use getters
@@ -77,9 +81,10 @@ public:
 	float _scale;
 	SDL_Rect _dims = { 0, 0, 0, 0 };
 
-	pthread_mutex_t _frameCriticalSection;
+	//pthread_mutex_t _frameCriticalSection;
+	std::mutex _frameCriticalSection;
 
-	volatile bool _fmvPlaying;
+	volatile bool _fmvEnding;
 	volatile bool _fmvPaused;
 	volatile bool _frameReady;
 	bool _audioStarted;
@@ -90,7 +95,7 @@ public:
 	BinkPlayback() :
 		_decodeThreadInited(false),
 		_audioThreadInited(false),
-		_frameCriticalSectionInited(false),
+		//_frameCriticalSectionInited(false),
 		_nAudioTracks(0),
 		_audioDataBuffer(0),
 		_audioDataBufferSize(0),
@@ -99,7 +104,7 @@ public:
 		_frameHeight(0),
 		_x(0),
 		_y(0),
-		_fmvPlaying(false),
+		_fmvEnding(false),
 		_fmvPaused(false),
 		_frameReady(false),
 		_audioStarted(false),
@@ -114,7 +119,7 @@ public:
 	// functions
 	int	Open(const std::string& fileName, int x, int y, bool isLooped = false);
 	void Close();
-	bool IsPlaying();
+	bool IsEnding();
 	bool ConvertFrame();
 	void SeekFrame(int framenum);
 	int GetFrameNum();
@@ -132,7 +137,7 @@ struct BinkPlayback_Deleter
 {
 	void operator()(BinkPlayback* fmv)
 	{
-		fmv->Close();
+		//fmv->Close();
 	}
 
 	/*static void close(BinkPlayback* fp) {
