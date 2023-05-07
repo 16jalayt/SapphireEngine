@@ -60,7 +60,7 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 	_audioTrackInfos.resize(_nAudioTracks);
 
 	// init the sound and video api stuff we need
-	if (_nAudioTracks)
+	if (_nAudioTracks && !debugNoSound)
 	{
 		// get audio information for all available tracks
 		for (uint32_t i = 0; i < _audioTrackInfos.size(); i++) {
@@ -124,9 +124,9 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 		return false;
 	}*/
 	if (!singleThreadVideo)
-		_decodeThreadHandle = std::thread(BinkDecodeThread, static_cast<void*>(this));
+		_decodeThreadHandle = std::make_shared<std::thread>(BinkDecodeThread, static_cast<void*>(this));
 
-	if (_nAudioTracks) {
+	if (_nAudioTracks && !debugNoSound) {
 		/*if (pthread_create(&_audioThreadHandle, NULL, BinkAudioThread, static_cast<void*>(this)) != 0) {
 			return false;
 		}*/
@@ -142,7 +142,10 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 BinkPlayback::~BinkPlayback()
 {
 	//Redundant. In header ptr deleter
-	this->Close();
+	//this->Close();
+	_fmvEnding = true;
+	if (_decodeThreadHandle->joinable())
+		_decodeThreadHandle->join();
 }
 
 void BinkPlayback::Close()
@@ -155,11 +158,15 @@ void BinkPlayback::Close()
 			//pthread_join(_decodeThreadHandle, NULL);
 			//pthread_detach(_decodeThreadHandle);
 			//_decodeThreadHandle.detach();
-			//_decodeThreadHandle.join();
+			//TODO:reenable?
+			if (_decodeThreadHandle->joinable())
+				_decodeThreadHandle->join();
+			_decodeThreadInited = false;
 		}
 		if (_audioThreadInited) {
 			//pthread_join(_audioThreadHandle, NULL);
 			_audioThreadHandle.join();
+			_audioThreadInited = false;
 		}
 
 		/*if (_frameCriticalSectionInited)
@@ -220,7 +227,8 @@ void* BinkDecodeThread(void* args)
 
 		if (fmv->_fmvPaused)
 		{
-			SDL_Delay(1);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			//SDL_Delay(1);
 			continue;
 		}
 
@@ -232,7 +240,7 @@ void* BinkDecodeThread(void* args)
 
 		//Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
 		int test = Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
-		printf("frame:%i\n", test);
+		//printf("frame:%i\n", test);
 
 		// we have a new frame and we're ready to use it
 		fmv->_frameReady = true;
@@ -279,7 +287,9 @@ void* BinkDecodeThread(void* args)
 			timeToSleep = 1;
 		}
 
-		SDL_Delay(timeToSleep);
+		//TODO: fix conversion?
+		std::this_thread::sleep_for(std::chrono::milliseconds(timeToSleep));
+		//SDL_Delay(timeToSleep);
 
 		if (fmv->_isLooped)
 		{
@@ -309,7 +319,8 @@ void* BinkAudioThread(void* args)
 	{
 		if (fmv->_fmvPaused)
 		{
-			SDL_Delay(1);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
+			//SDL_Delay(1);
 			continue;
 		}
 

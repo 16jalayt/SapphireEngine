@@ -1,20 +1,43 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(SDL_Texture_ptr textures[], int x, int y, RenderParent parent, Scaled_Rect partial) :Sprite(SDL_Texture_ptr(textures[0].get()), x, y, parent)
+AnimatedSprite::AnimatedSprite(std::vector<SDL_Texture_ptr> frames, int x, int y, RenderParent parent, Scaled_Rect partial) :Sprite(SDL_Texture_ptr(frames[0].get()), x, y, parent)
 {
-	if (textures)
+	if (!frames.empty())
 	{
+		_frames = std::move(frames);
+		//for(auto frame : frames)
+		//_frames.insert( std::move(frame));
 	}
 	else
 	{
-		printf("Unable to open animated sprite with texture.\n");
+		printf("Unable to open animated sprite with empty vector.\n");
 	}
 }
 
 void AnimatedSprite::Draw()
 {
-	if (_visible)
+	if (currentFrameNum > _frames.size()) {
+		playing = false;
+	}
+
+	//TODO: make possible to play while not visible
+	if (_visible && playing)
 	{
-		Sprite::Draw();
+		auto now = std::chrono::high_resolution_clock::now();
+
+		if ((1000 / (int32_t)framerate) >= (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(lastFrameTime - now).count()))
+		{
+			currentFrameNum++;
+			Sprite::Draw();
+			lastFrameTime = std::chrono::high_resolution_clock::now();
+		}
+
+		if (looped)
+		{
+			// handle looping
+			if (currentFrameNum == _frames.size()) {
+				currentFrameNum = 0;
+			}
+		}
 	}
 }

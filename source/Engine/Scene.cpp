@@ -115,7 +115,8 @@ void Scene::AddHotzone(Button_ptr hot)
 
 void Scene::AddMovie(Movie_ptr fmv)
 {
-	fmvs.push_back(fmv);
+	if (fmv)
+		fmvs.push_back(fmv);
 }
 
 //create music paused
@@ -217,7 +218,8 @@ void ReloadScene()
 void Scene::Run()
 {
 	for (auto& fmv : fmvs) {
-		fmv->FMV->_fmvPaused = false;
+		if (fmv->FMV)
+			fmv->FMV->_fmvPaused = false;
 	}
 
 	if (!debugNoSound)

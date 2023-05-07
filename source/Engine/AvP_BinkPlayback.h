@@ -45,7 +45,7 @@ class BinkPlayback
 private:
 	// thread handles
 	//pthread_t _decodeThreadHandle;
-	std::thread _decodeThreadHandle;
+	std::shared_ptr<std::thread> _decodeThreadHandle;
 	//pthread_t _audioThreadHandle;
 	std::thread _audioThreadHandle;
 	bool _decodeThreadInited;

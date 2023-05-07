@@ -11,10 +11,19 @@ Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent par
 		//FMV = make_BinkPlayback_s(new BinkPlayback());
 		FMV = std::make_shared<BinkPlayback>();
 		FMV->OpenPaused(fileName, x, y);
+		FMV->_isLooped = isLooped;
 	}
 	else if (ext == ".avf")
 	{
+		std::vector<SDL_Texture_ptr> test = AVF::parseAVF(fileName.c_str());
+		if (test.empty())
+		{
+			printf("parseAVF returned empty for: %s\n", fileName.c_str());
+			return;
+		}
+		ASprite = std::make_unique<AnimatedSprite>(std::move(test), 0, 0);
 		//ASprite = AnimatedSprite_ptr(new AnimatedSprite(std::move(AVF::parseAVF(fileName.c_str())), 0, 0));
+		ASprite->looped = isLooped;
 	}
 	else
 		printf("Unknown Movie type in: %s\n", fileName.c_str());
@@ -47,6 +56,9 @@ void Movie::Draw()
 			ASprite->Draw();
 	}
 }
+
+//TODO:
+//void setLooped
 
 Movie::~Movie()
 {

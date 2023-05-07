@@ -10,7 +10,7 @@
 #include "globals.h"
 //#include <SDL2/SDL_timer.h>
 
-static bool		soundEnabled = debugNoSound;
+static bool		soundEnabled = !debugNoSound;
 static ALCdevice* device = 0;
 static ALCcontext* context = 0;
 std::vector<sndSource> sourceList;
@@ -103,6 +103,7 @@ int PlatStartSoundSys()
 	device = alcOpenDevice(NULL);
 	if (device == NULL) {
 		printf("alcOpenDevice failed for OpenAL\n");
+		soundEnabled = false;
 		PlatEndSoundSys();
 		return 0;
 	}
@@ -110,6 +111,7 @@ int PlatStartSoundSys()
 	context = alcCreateContext(device, NULL);
 	if (context == NULL) {
 		printf("alcCreateContext failed for OpenAL\n");
+		soundEnabled = false;
 		PlatEndSoundSys();
 		return 0;
 	}
@@ -147,6 +149,7 @@ int PlatStartSoundSys()
 
 	if (sourceList.size() == 0) {
 		printf("Source creation failed for OpenAL\n");
+		soundEnabled = false;
 		PlatEndSoundSys();
 		return 0;
 	}
@@ -168,7 +171,7 @@ int PlatStartSoundSys()
 	printf("Initialised OpenAL successfully\n");
 #endif
 
-	soundEnabled = true;
+	//soundEnabled = true;
 
 	return 1;
 }
@@ -341,7 +344,8 @@ uint32_t AudioStream::WriteData(uint8_t* audioData, uint32_t size)
 void AudioStream::WaitForFreeBuffer()
 {
 	while (_freeBufferQueue.size() == 0) {
-		SDL_Delay(20);
+		//SDL_Delay(20);
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 }
 
@@ -377,7 +381,8 @@ void* CheckProcessedBuffers(void* args)
 			}
 			else {
 				// wait and try again
-				SDL_Delay(1000 / 60);
+				std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 60));
+				//SDL_Delay(1000 / 60);
 			}
 		}
 	}

@@ -81,6 +81,10 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 		std::vector<uint8_t> frame = Her::dec_LZSS(Her::sub_offsets(compressedImage, compressedLength));
 		delete[] compressedImage;
 
+		std::ofstream outFileBinary("testStream.dat", std::ios::out | std::ios::binary);
+		outFileBinary.write((char*)frame.data(), frame.size() * sizeof(uint8_t));
+		outFileBinary.close();
+
 		//To test raw array before bmp header
 		/*uint8_t* array = &frame[0];
 		ppm_image* test = new ppm_image();
@@ -121,15 +125,21 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 		}*/
 
 		//////////////////
+
+		//To test memory bitmap corectness
+		/*std::ofstream outFileColor("testcolor.bmp", std::ios::out | std::ios::binary);
+		outFileColor.write((char*)frameConv.data(), frameConv.size() * sizeof(uint8_t));
+		outFileColor.close();*/
+
 		std::vector<uint8_t> bmpHeader = createBMPHeader(frameConv.size(), width, height);
 		frameConv.insert(frameConv.begin(), bmpHeader.begin(), bmpHeader.end());
 
 		//To test memory bitmap corectness
-		/*std::ofstream outFile("testStream.bmp", std::ios::out | std::ios::binary);
-		outFile.write((char*)&frameConv[0], frameConv.size() * sizeof(uint8_t));
-		outFile.close();*/
+		std::ofstream outFileBitmap("testStream.bmp", std::ios::out | std::ios::binary);
+		outFileBitmap.write((char*)frameConv.data(), frameConv.size() * sizeof(uint8_t));
+		outFileBitmap.close();
 
-		SDL_RWops* rw = SDL_RWFromMem(&frameConv[0], frameConv.size());
+		SDL_RWops* rw = SDL_RWFromMem(frameConv.data(), frameConv.size());
 		//16jalayt's original solution
 		/*SDL_Surface* tmpsurf = IMG_Load_RW(rw, 1);
 		if (tmpsurf == NULL)
@@ -150,6 +160,8 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 			return std::vector<SDL_Texture_ptr>();
 		}
 		frames.push_back(std::move(SDL_Texture_ptr(buffer)));
+		//Deletes texture and gives blank screen
+		//delete buffer;
 	}
 
 	inFile.close();
