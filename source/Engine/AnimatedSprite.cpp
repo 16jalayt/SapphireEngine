@@ -7,6 +7,7 @@ AnimatedSprite::AnimatedSprite(std::vector<SDL_Texture_ptr> frames, int x, int y
 		_frames = std::move(frames);
 		//for(auto frame : frames)
 		//_frames.insert( std::move(frame));
+		playing = true;
 	}
 	else
 	{
@@ -27,9 +28,11 @@ void AnimatedSprite::Draw()
 
 		if ((1000 / (int32_t)framerate) >= (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(lastFrameTime - now).count()))
 		{
-			currentFrameNum++;
+			//Get pointer and create new smart pointer because texture is unique_ptr
+			_tex = SDL_Texture_ptr(_frames.at(currentFrameNum).get());
 			Sprite::Draw();
 			lastFrameTime = std::chrono::high_resolution_clock::now();
+			currentFrameNum++;
 		}
 
 		if (looped)

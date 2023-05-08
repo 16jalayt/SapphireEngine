@@ -43,16 +43,16 @@ void Scene::Draw()
 		else if (bk)
 			bk->Draw();
 
+		for (auto& fmv : fmvs) {
+			fmv->Draw();
+		}
+
 		for (auto& ovl : ovls) {
 			ovl->Draw();
 		}
 
 		for (auto& hot : hots) {
 			hot->Draw();
-		}
-
-		for (auto& fmv : fmvs) {
-			fmv->Draw();
 		}
 	}
 }
