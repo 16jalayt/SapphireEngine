@@ -208,6 +208,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Nancy\Loader.cpp" />
     <ClCompile Include="..\..\source\oldhertools\colorspace.cpp" />
     <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp" />
+    <ClCompile Include="..\..\source\oldhertools\fileidx.cpp" />
     <ClCompile Include="..\..\source\oldhertools\lzss.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +250,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF.h" />
     <ClInclude Include="..\..\source\Nancy\Loader.h" />
+    <ClInclude Include="..\..\source\oldhertools\avf.hpp" />
     <ClInclude Include="..\..\source\oldhertools\colorspace.hpp" />
     <ClInclude Include="..\..\source\oldhertools\crypt_misc.hpp" />
     <ClInclude Include="..\..\source\oldhertools\lzss.hpp" />

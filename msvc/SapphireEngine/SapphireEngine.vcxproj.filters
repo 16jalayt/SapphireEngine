@@ -153,6 +153,9 @@
     <ClCompile Include="..\..\source\Engine\Movie.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\oldhertools\fileidx.cpp">
+      <Filter>Source Files\hertools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\globals.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Engine\AnimatedSprite.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\oldhertools\avf.hpp">
+      <Filter>Source Files\hertools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

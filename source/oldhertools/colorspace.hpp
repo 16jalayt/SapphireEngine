@@ -4,10 +4,12 @@
 
 #include <vector>
 #include <cstdint>
-#include <SDL2/SDL_render.h>
+//#include <SDL2/SDL_render.h>
+#include <png++/png.hpp>
 
 namespace Her {
 	std::vector<uint8_t> RGB555_888(std::vector<uint8_t> col555);
-	void RGB555_888_SDL(std::vector<uint8_t> col555, SDL_Texture*& texture);
-	std::vector<uint8_t> RGB888_YCbCr(std::vector<uint8_t> img_RGB);
+
+	std::vector<uint8_t> RGB555_888BGR(std::vector<uint8_t> col555);
+	png::image<png::rgb_pixel> MakePNG(std::vector<uint8_t> col555, int width, int height);
 }
