@@ -1,4 +1,6 @@
 #pragma once
+//SDL #define _USE_MATH_DEFINES, FFMPEG defines it's own version
+#pragma warning(disable: 4005)
 
 extern "C"
 {
@@ -27,6 +29,7 @@ public:
 	void clear();
 
 	static int getAudioPacket(AudioPacket*, AVPacket*, int);
+	AVCodecParameters* pCodecAudioParameters = NULL;
 
 private:
 	static Player* instance;
@@ -51,7 +54,6 @@ private:
 	AVFormatContext* pFormatCtx = NULL;
 
 	AVCodecParameters* pCodecParameters = NULL;
-	AVCodecParameters* pCodecAudioParameters = NULL;
 
 	AVCodecContext* pCodecCtx = NULL;
 	AVCodecContext* pCodecAudioCtx = NULL;
