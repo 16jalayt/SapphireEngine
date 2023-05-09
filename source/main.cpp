@@ -28,6 +28,9 @@
 #include "Nancy/Loader.h"
 #include "Nancy/GUI.h"
 
+#include <player-cpp-ffmpeg-sdl/Player.h>
+//#include "player-cpp-ffmpeg-sdl/stdafx.h"
+
 //TODO: config manager
 
 //Fixes openal error when closing console
@@ -77,6 +80,7 @@ int main(int argc, char** argv)
 	// TODO: smart pointers (in sdl_ptr.h?)
 
 	Loader::Boot();
+	Player::get_instance()->run("HDVideo/RKCINEC.bik");
 
 	// render text as texture
 	//SDL_Rect helloworld_rect = { 0, SCREEN_HEIGHT - 36, 0, 0 };

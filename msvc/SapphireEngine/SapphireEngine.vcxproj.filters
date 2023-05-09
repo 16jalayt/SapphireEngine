@@ -43,6 +43,9 @@
     <Filter Include="Source Files\hertools">
       <UniqueIdentifier>{7382427e-a867-451a-9a2a-09a21f6322b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="player-cpp-ffmpeg-sdl">
+      <UniqueIdentifier>{ba75b591-c0c8-4354-8076-f12ff4fad989}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Engine\audio.cpp">
@@ -155,6 +158,18 @@
     </ClCompile>
     <ClCompile Include="..\..\source\oldhertools\fileidx.cpp">
       <Filter>Source Files\hertools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\Player.cpp">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.cpp">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.cpp">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.cpp">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +298,27 @@
     </ClInclude>
     <ClInclude Include="..\..\source\oldhertools\avf.hpp">
       <Filter>Source Files\hertools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\Player.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioPacket.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h">
+      <Filter>player-cpp-ffmpeg-sdl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

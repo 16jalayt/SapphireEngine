@@ -137,7 +137,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -210,6 +210,10 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp" />
     <ClCompile Include="..\..\source\oldhertools\fileidx.cpp" />
     <ClCompile Include="..\..\source\oldhertools\lzss.cpp" />
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.cpp" />
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.cpp" />
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\Player.cpp" />
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Engine\AnimatedSprite.h" />
@@ -254,6 +258,13 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\oldhertools\colorspace.hpp" />
     <ClInclude Include="..\..\source\oldhertools\crypt_misc.hpp" />
     <ClInclude Include="..\..\source\oldhertools\lzss.hpp" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioPacket.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\Player.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
