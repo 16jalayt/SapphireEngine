@@ -99,6 +99,10 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			std::string path = Loader::getVideoPath("CEM_TombStairs_ANIM");
 			Movie_ptr fmv = Movie_ptr(new Movie(path, 0, 0, true));
 			nextScene->AddMovie(fmv);
+
+			path = Loader::getVideoPath("RKCINEC");
+			Movie_ptr fmv2 = Movie_ptr(new Movie(path, 0, 0, true));
+			nextScene->AddMovie(fmv2);
 		}
 		//BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
 		//menuFMV->OpenPaused(path, 0, 0, false);

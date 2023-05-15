@@ -212,8 +212,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\oldhertools\lzss.cpp" />
     <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.cpp" />
     <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.cpp" />
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\Player.cpp" />
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.cpp" />
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\Engine\AnimatedSprite.h" />
@@ -262,9 +261,8 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.h" />
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioPacket.h" />
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h" />
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\Player.h" />
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.h" />
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h" />
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

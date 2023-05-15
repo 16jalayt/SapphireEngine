@@ -16,26 +16,28 @@ extern "C"
 
 #include <SDL2/SDL_audio.h>
 #include "AudioPacket.h"
+#include <memory>
 
 class FFAudio
 {
 public:
-	static FFAudio* get_instance();
+	FFAudio(AVCodecContext*);
 
 	struct SwrContext* swrCtx = NULL;
 	AVFrame wanted_frame;
 
 	AudioPacket audioq;
 
-	void open();
-	void malloc(AVCodecContext*);
-	void init_audio_packet(AudioPacket*);
+	void open(int numchannels);
+
+	static int getAudioPacket(AudioPacket*, AVPacket*, int);
 	int audio_decode_frame(AVCodecContext*, uint8_t*, int);
 	int put_audio_packet(AVPacket*);
 
 private:
-	FFAudio() {}
 	static FFAudio* instance;
 
 	SDL_AudioSpec wantedSpec = { 0 }, audioSpec = { 0 };
 };
+
+using FFAudio_ptr = std::shared_ptr<FFAudio>;

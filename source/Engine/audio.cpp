@@ -30,7 +30,7 @@ int Audio::Init()
 
 	//Mix_AllocateChannels(5);
 
-	PlatStartSoundSys();
+	//PlatStartSoundSys();
 	return 0;
 }
 
@@ -43,5 +43,5 @@ void Audio::Quit()
 	Mix_HaltChannel(-1);
 	Mix_CloseAudio();
 	Mix_Quit();
-	PlatEndSoundSys();
+	//PlatEndSoundSys();
 }

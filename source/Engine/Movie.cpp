@@ -9,9 +9,12 @@ Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent par
 	if (ext == ".bik")
 	{
 		//FMV = make_BinkPlayback_s(new BinkPlayback());
-		FMV = std::make_shared<BinkPlayback>();
+		/*FMV = std::make_shared<BinkPlayback>();
 		FMV->OpenPaused(fileName, x, y);
-		FMV->_isLooped = isLooped;
+		FMV->_isLooped = isLooped;*/
+
+		FMV = std::make_shared<FFPlayer>(fileName);
+		//FMV->_isLooped = isLooped;
 	}
 	else if (ext == ".avf")
 	{
@@ -35,7 +38,7 @@ void Movie::Draw()
 	{
 		if (FMV)
 		{
-			if (singleThreadVideo)
+			/*if (singleThreadVideo)
 			{
 				if ((Bink_GetCurrentFrameNum(FMV->_handle) < Bink_GetNumFrames(FMV->_handle)) && !FMV->IsEnding()) {
 					// Bink_GetNextFrame(fmv->_handle, fmv->_yuvBuffer);
@@ -45,7 +48,7 @@ void Movie::Draw()
 					// we have a new frame and we're ready to use it
 					FMV->_frameReady = true;
 				}
-			}
+			}*/
 
 			FMV->Draw();
 			//if (!FMV->_fmvEnding)

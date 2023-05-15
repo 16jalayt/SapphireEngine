@@ -1,14 +1,29 @@
 #include "FFAudio.h"
 #include "AudioCallback.h"
+#include "FFPlayer.h"
 
 FFAudio* AudioCallback::audio_instance = 0;
 void AudioCallback::set_audio_instance(FFAudio* audio_instance)
 {
 	AudioCallback::audio_instance = audio_instance;
 }
+bool stopaudio = true;
 
+//NOTE: stops calling callback when repeating
 void AudioCallback::audio_callback(void* userdata, Uint8* stream, int len)
 {
+	/*bool test = FFPlayer::get_instance()->playing;
+	if (!test)
+	{
+		if (stopaudio)
+		{
+			SDL_PauseAudio(0);
+			stopaudio = false;
+		}
+
+		return;
+	}*/
+
 	AVCodecContext* aCodecCtx = (AVCodecContext*)userdata;
 	int len1, audio_size;
 

@@ -19,34 +19,29 @@ extern "C"
 #include <iostream>
 #include <SDL2/SDL_render.h>
 #include "AudioPacket.h"
+#include "FFAudio.h"
 
-class Player
+class FFPlayer
 {
 public:
-	static Player* get_instance();
+	FFPlayer(std::string filename);
+	~FFPlayer();
 
-	void run(std::string);
-	void clear();
-
-	static int getAudioPacket(AudioPacket*, AVPacket*, int);
 	AVCodecParameters* pCodecAudioParameters = NULL;
+	void Draw();
+
+	//TODO:implement
+	bool playing = true;
+	bool looped = false;
 
 private:
-	static Player* instance;
-	Player() {}
-
-	void open();
+	void OpenStream(std::string filename);
 
 	int malloc(void);
-	int display_video(void);
-	int create_display(void);
 
 	int get_video_stream(void);
 
 	int read_audio_video_codec(void);
-
-	std::string video_addr;
-	std::string window_name;
 
 	int videoStream = 0;
 	int audioStream = 0;
@@ -68,4 +63,8 @@ private:
 	SDL_Texture* bmp = NULL;
 
 	struct SwsContext* sws_ctx = NULL;
+
+	FFAudio_ptr audio;
 };
+
+using Player_ptr = std::shared_ptr<FFPlayer>;

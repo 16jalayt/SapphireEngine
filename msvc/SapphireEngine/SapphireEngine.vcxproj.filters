@@ -159,10 +159,7 @@
     <ClCompile Include="..\..\source\oldhertools\fileidx.cpp">
       <Filter>Source Files\hertools</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\Player.cpp">
-      <Filter>player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.cpp">
+    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.cpp">
       <Filter>player-cpp-ffmpeg-sdl</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.cpp">
@@ -299,13 +296,10 @@
     <ClInclude Include="..\..\source\oldhertools\avf.hpp">
       <Filter>Source Files\hertools</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\Player.h">
+    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.h">
       <Filter>player-cpp-ffmpeg-sdl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h">
-      <Filter>player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFUtils.h">
       <Filter>player-cpp-ffmpeg-sdl</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.h">

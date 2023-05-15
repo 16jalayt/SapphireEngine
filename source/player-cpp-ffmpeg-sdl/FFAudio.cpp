@@ -1,54 +1,18 @@
 #include <assert.h>
 #include "defs.h"
-#include "Player.h"
 #include "FFAudio.h"
 #include "AudioCallback.h"
-#include "FFUtils.h"
 
-FFAudio* FFAudio::instance = 0;
-
-FFAudio* FFAudio::get_instance()
-{
-	if (instance == 0)
-		instance = new FFAudio();
-	return instance;
-}
-
-void FFAudio::open()
-{
-	SDL_AudioInit("directsound");
-	if (SDL_OpenAudio(&wantedSpec, &audioSpec) < 0)
-		FFUtils::display_exception("Failed to open audio");
-
-	wanted_frame.format = AV_SAMPLE_FMT_S16;
-	wanted_frame.sample_rate = audioSpec.freq;
-
-	AVChannelLayout default_ch_layout;
-	av_channel_layout_default(&default_ch_layout, Player::get_instance()->pCodecAudioParameters->ch_layout.nb_channels);
-	wanted_frame.ch_layout = default_ch_layout;
-
-	//wanted_frame.channel_layout = av_get_default_channel_layout(audioSpec.channels);
-	//wanted_frame.channels = audioSpec.channels;
-
-	init_audio_packet(&audioq);
-	SDL_PauseAudio(0);
-}
-
-void FFAudio::init_audio_packet(AudioPacket* q)
-{
-	q->last = NULL;
-	q->first = NULL;
-	q->mutex = SDL_CreateMutex();
-	q->cond = SDL_CreateCond();
-}
-
-void FFAudio::malloc(AVCodecContext* pCodecAudioCtx)
+FFAudio::FFAudio(AVCodecContext* pCodecAudioCtx)
 {
 	AudioCallback::set_audio_instance(this);
 
 	swrCtx = swr_alloc();
 	if (swrCtx == NULL)
-		FFUtils::display_exception("Failed to load audio");
+	{
+		printf("FFAudio: Failed to load audio\n");
+		return;
+	}
 
 	av_opt_set_chlayout(swrCtx, "in_channel_layout", &pCodecAudioCtx->ch_layout, 0);
 	av_opt_set_chlayout(swrCtx, "out_channel_layout", &pCodecAudioCtx->ch_layout, 0);
@@ -62,7 +26,10 @@ void FFAudio::malloc(AVCodecContext* pCodecAudioCtx)
 	int res = swr_init(swrCtx);
 
 	if (res != 0)
-		FFUtils::display_exception("Failed to initialize audio");
+	{
+		printf("FFAudio: Failed to initialize audio\n");
+		return;
+	}
 
 	memset(&wantedSpec, 0, sizeof(wantedSpec));
 
@@ -76,6 +43,34 @@ void FFAudio::malloc(AVCodecContext* pCodecAudioCtx)
 	wantedSpec.callback = AudioCallback::audio_callback;
 }
 
+void FFAudio::open(int numchannels)
+{
+	//SDL_AudioInit("winmm");
+	SDL_AudioInit("directsound");
+	if (SDL_OpenAudio(&wantedSpec, &audioSpec) < 0)
+	{
+		printf("FFAudio: Failed to open audio\n");
+		return;
+	}
+
+	wanted_frame.format = AV_SAMPLE_FMT_S16;
+	wanted_frame.sample_rate = audioSpec.freq;
+
+	AVChannelLayout default_ch_layout;
+	av_channel_layout_default(&default_ch_layout, numchannels);
+	wanted_frame.ch_layout = default_ch_layout;
+
+	//wanted_frame.channel_layout = av_get_default_channel_layout(audioSpec.channels);
+	//wanted_frame.channels = audioSpec.channels;
+
+	audioq.last = NULL;
+	audioq.first = NULL;
+	audioq.mutex = SDL_CreateMutex();
+	audioq.cond = SDL_CreateCond();
+
+	SDL_PauseAudio(0);
+}
+
 int FFAudio::audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, int buf_size) {
 	static AVPacket pkt;
 	static uint8_t* audio_pkt_data = NULL;
@@ -87,81 +82,87 @@ int FFAudio::audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, i
 
 	SwrContext* swr_ctx = NULL;
 
-	while (1)
+	//while (1)
+	//{
+	while (audio_pkt_size > 0)
 	{
-		while (audio_pkt_size > 0)
+		int got_frame = 0;
+
+		avcodec_send_packet(aCodecCtx, &pkt);
+		avcodec_receive_frame(aCodecCtx, &frame);
+
+		len1 = frame.pkt_size;
+		if (len1 < 0)
 		{
-			int got_frame = 0;
-
-			avcodec_send_packet(aCodecCtx, &pkt);
-			avcodec_receive_frame(aCodecCtx, &frame);
-
-			len1 = frame.pkt_size;
-			if (len1 < 0)
-			{
-				audio_pkt_size = 0;
-				break;
-			}
-
-			audio_pkt_data += len1;
-			audio_pkt_size -= len1;
-
-			data_size = 0;
-
-			if (got_frame)
-			{
-				int linesize = 1;
-				data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->ch_layout.nb_channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
-				//data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
-				assert(data_size <= buf_size);
-				memcpy(audio_buf, frame.data[0], data_size);
-			}
-
-			/*if (frame.channels > 0 && frame.channel_layout == 0)
-				frame.channel_layout = av_get_default_channel_layout(frame.channels);
-			else if (frame.channels == 0 && frame.channel_layout > 0)
-				frame.channels = av_get_channel_layout_nb_channels(frame.channel_layout);*/
-
-			if (swr_ctx)
-			{
-				swr_free(&swr_ctx);
-				swr_ctx = NULL;
-			}
-
-			swr_alloc_set_opts2(&swr_ctx, &wanted_frame.ch_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
-				&frame.ch_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
-			//swr_ctx = swr_alloc_set_opts(NULL, wanted_frame.channel_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
-			//frame.channel_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
-
-			if (!swr_ctx || swr_init(swr_ctx) < 0)
-				FFUtils::display_exception("swr_init failed");
-
-			int dst_nb_samples = (int)av_rescale_rnd(swr_get_delay(swr_ctx, frame.sample_rate) + frame.nb_samples,
-				wanted_frame.sample_rate, wanted_frame.format, AV_ROUND_INF);
-
-			int len2 = swr_convert(swr_ctx, &audio_buf, dst_nb_samples,
-				(const uint8_t**)frame.data, frame.nb_samples);
-			if (len2 < 0)
-				FFUtils::display_exception("swr_convert failed");
-
-			av_packet_unref(&pkt);
-
-			if (swr_ctx)
-			{
-				swr_free(&swr_ctx);
-				swr_ctx = NULL;
-			}
-
-			//return wanted_frame.ch_layout.nb_channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
-			return wanted_frame.channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
+			audio_pkt_size = 0;
+			break;
 		}
 
-		if (Player::get_instance()->getAudioPacket(&audioq, &pkt, 1) < 0)
-			return -1;
+		audio_pkt_data += len1;
+		audio_pkt_size -= len1;
 
-		audio_pkt_data = pkt.data;
-		audio_pkt_size = pkt.size;
+		data_size = 0;
+
+		if (got_frame)
+		{
+			int linesize = 1;
+			data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->ch_layout.nb_channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
+			//data_size = av_samples_get_buffer_size(&linesize, aCodecCtx->channels, frame.nb_samples, aCodecCtx->sample_fmt, 1);
+			assert(data_size <= buf_size);
+			memcpy(audio_buf, frame.data[0], data_size);
+		}
+
+		/*if (frame.channels > 0 && frame.channel_layout == 0)
+			frame.channel_layout = av_get_default_channel_layout(frame.channels);
+		else if (frame.channels == 0 && frame.channel_layout > 0)
+			frame.channels = av_get_channel_layout_nb_channels(frame.channel_layout);*/
+
+		if (swr_ctx)
+		{
+			swr_free(&swr_ctx);
+			swr_ctx = NULL;
+		}
+
+		swr_alloc_set_opts2(&swr_ctx, &wanted_frame.ch_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
+			&frame.ch_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
+		//swr_ctx = swr_alloc_set_opts(NULL, wanted_frame.channel_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
+		//frame.channel_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
+
+		if (!swr_ctx || swr_init(swr_ctx) < 0)
+		{
+			printf("FFAudio: swr_init failed\n");
+			return 0;
+		}
+
+		int dst_nb_samples = (int)av_rescale_rnd(swr_get_delay(swr_ctx, frame.sample_rate) + frame.nb_samples,
+			wanted_frame.sample_rate, wanted_frame.format, AV_ROUND_INF);
+
+		int len2 = swr_convert(swr_ctx, &audio_buf, dst_nb_samples,
+			(const uint8_t**)frame.data, frame.nb_samples);
+		if (len2 < 0)
+		{
+			printf("FFAudio: swr_convert failed\n");
+			return 0;
+		}
+
+		av_packet_unref(&pkt);
+
+		if (swr_ctx)
+		{
+			swr_free(&swr_ctx);
+			swr_ctx = NULL;
+		}
+
+		return wanted_frame.ch_layout.nb_channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
+		//return wanted_frame.channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
 	}
+
+	if (getAudioPacket(&audioq, &pkt, 1) < 0)
+		return -1;
+
+	audio_pkt_data = pkt.data;
+	audio_pkt_size = pkt.size;
+	//}
 }
 
 int FFAudio::put_audio_packet(AVPacket* packet)
@@ -196,4 +197,43 @@ int FFAudio::put_audio_packet(AVPacket* packet)
 	SDL_UnlockMutex(audioq.mutex);
 
 	return 0;
+}
+
+int FFAudio::getAudioPacket(AudioPacket* q, AVPacket* pkt, int block) {
+	AVPacketList* pktl;
+	int ret;
+
+	SDL_LockMutex(q->mutex);
+
+	while (1)
+	{
+		pktl = q->first;
+		if (pktl)
+		{
+			q->first = pktl->next;
+			if (!q->first)
+				q->last = NULL;
+
+			q->nb_packets--;
+			q->size -= pktl->pkt.size;
+
+			*pkt = pktl->pkt;
+			av_free(pktl);
+			ret = 1;
+			break;
+		}
+		else if (!block)
+		{
+			ret = 0;
+			break;
+		}
+		else
+		{
+			SDL_CondWait(q->cond, q->mutex);
+		}
+	}
+
+	SDL_UnlockMutex(q->mutex);
+
+	return ret;
 }
