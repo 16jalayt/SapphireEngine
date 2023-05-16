@@ -222,7 +222,7 @@ int FFPlayer::malloc(void)
 	return 1;
 }
 
-//TODO: thread?, frame timer
+//TODO: thread?
 void FFPlayer::parsePacket()
 {
 	AVPacket packet;
@@ -290,4 +290,12 @@ void FFPlayer::Draw()
 	SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
 	SDL_RenderCopy(Graphics::renderer.get(), bmp, NULL, NULL);
 	SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
+}
+
+SDL_Texture_ptr FFPlayer::GetFrame()
+{
+	videoFrameThisFrame = false;
+	parsePacket();
+
+	return SDL_Texture_ptr(bmp);
 }

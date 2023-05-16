@@ -192,6 +192,10 @@ int main(int argc, char** argv)
 		//TODO: only render not canvas?
 		SDL_RenderClear(Graphics::renderer.get());
 
+		/*SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
+		SDL_RenderClear(Graphics::renderer.get());
+		SDL_SetRenderTarget(Graphics::renderer.get(), NULL);*/
+
 		currentGUI->Draw();
 		currentScene->Draw();
 

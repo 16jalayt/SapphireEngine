@@ -18,7 +18,8 @@ public:
 	Scene();
 	void SetHeader(std::string name, std::string sceneFile);
 	Sprite_ptr bk;
-	BinkPlayback_ptr bkFMV;
+	//BinkPlayback_ptr bkFMV;
+	SDL_Texture_ptr bkFMV;
 	std::vector<Sprite_ptr> ovls;
 	std::vector<Button_ptr> hots;
 	std::vector<Movie_ptr> fmvs;

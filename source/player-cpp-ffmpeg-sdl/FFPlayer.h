@@ -17,9 +17,10 @@ extern "C"
 }
 
 #include <iostream>
-#include <SDL2/SDL_render.h>
+#include <SDL2/SDL.h>
 #include "AudioPacket.h"
 #include "FFAudio.h"
+#include "Engine/SDL_ptr.h"
 #include <chrono>
 
 class FFPlayer
@@ -30,6 +31,7 @@ public:
 
 	AVCodecParameters* pCodecAudioParameters = NULL;
 	void Draw();
+	SDL_Texture_ptr GetFrame();
 
 	//TODO:implement
 	//bool playing = true;
@@ -70,4 +72,4 @@ private:
 	FFAudio_ptr audio;
 };
 
-using Player_ptr = std::shared_ptr<FFPlayer>;
+using FFPlayer_ptr = std::shared_ptr<FFPlayer>;

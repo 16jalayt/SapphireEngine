@@ -10,7 +10,7 @@ public:
 	~Movie();
 	void Draw();
 	//BinkPlayback_ptr FMV;
-	Player_ptr FMV;
+	FFPlayer_ptr FMV;
 	AnimatedSprite_ptr ASprite;
 
 private:

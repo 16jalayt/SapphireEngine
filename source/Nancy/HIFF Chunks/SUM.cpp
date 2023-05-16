@@ -20,8 +20,6 @@ bool SUM::Parse(std::ifstream& inFile, std::string sceneName)
 	std::string sceneBack = readString(inFile, 33);
 	nextScene->setBkg(sceneBack);
 
-	//nextScene = Scene_ptr(new Scene(sceneBack, sceneDesc, sceneName));
-
 	//Ambient sound file
 	std::string sound = readString(inFile, 33);
 

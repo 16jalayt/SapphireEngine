@@ -30,8 +30,6 @@ void Scene::SetHeader(std::string description, std::string sceneFile)
 
 Scene::~Scene()
 {
-	if (bkFMV)
-		bkFMV->Close();
 }
 
 void Scene::Draw()
@@ -39,7 +37,11 @@ void Scene::Draw()
 	if (this != NULL)
 	{
 		if (bkFMV)
-			bkFMV->Draw();
+		{
+			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
+			SDL_RenderCopy(Graphics::renderer.get(), bkFMV.get(), NULL, NULL);
+			SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
+		}
 		else if (bk)
 			bk->Draw();
 
@@ -86,8 +88,10 @@ void Scene::setBkg(std::string backName)
 
 	if (ext == ".bik")
 	{
-		bkFMV = make_BinkPlayback_s(new BinkPlayback());
-		bkFMV->OpenBackground(fileName);
+		//bkFMV = make_BinkPlayback_s(new BinkPlayback());
+		//bkFMV->OpenBackground(fileName);
+		FFPlayer_ptr player = std::make_shared<FFPlayer>(fileName, 0, 0);
+		bkFMV = player->GetFrame();
 	}
 	else if (ext == ".avf")
 	{
