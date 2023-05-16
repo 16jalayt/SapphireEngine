@@ -188,6 +188,8 @@ int main(int argc, char** argv)
 		}
 
 		SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
+
+		//TODO: only render not canvas?
 		SDL_RenderClear(Graphics::renderer.get());
 
 		currentGUI->Draw();

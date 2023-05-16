@@ -146,7 +146,7 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	SDL_initFramerate(&_fpsm);
 	//Uint32 time_passed = 0;
 	//defaults to 30
-	SDL_setFramerate(&_fpsm, 60);
+	SDL_setFramerate(&_fpsm, globalframerate);
 
 	if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) < 0)
 	{

@@ -3,7 +3,6 @@
 #include "audio.h"
 #include "Nancy/AVF.h"
 #include "Nancy/Loader.h"
-#include <player-cpp-ffmpeg-sdl/FFPlayer.h>
 
 Scene_ptr currentScene;
 Scene_ptr nextScene;
@@ -47,8 +46,6 @@ void Scene::Draw()
 		for (auto& fmv : fmvs) {
 			fmv->Draw();
 		}
-
-		//FFPlayer::get_instance()->draw();
 
 		for (auto& ovl : ovls) {
 			ovl->Draw();
@@ -220,10 +217,10 @@ void ReloadScene()
 
 void Scene::Run()
 {
-	/*for (auto& fmv : fmvs) {
+	for (auto& fmv : fmvs) {
 		if (fmv->FMV)
-			fmv->FMV->_fmvPaused = false;
-	}*/
+			fmv->FMV->_paused = false;
+	}
 
 	if (!debugNoSound)
 	{

@@ -3,8 +3,11 @@
 #include "defs.h"
 #include <Nancy/GUI.h>
 
-FFPlayer::FFPlayer(std::string filename)
+//TODO: expose startPaused somewhere
+FFPlayer::FFPlayer(std::string filename, int x, int y, bool looped, bool startPaused)
 {
+	_paused = startPaused;
+	_looped = looped;
 	this->OpenStream(filename);
 	this->malloc();
 }
@@ -170,8 +173,6 @@ int FFPlayer::malloc(void)
 	//TODO: error handling for audio not initing
 	if (!debugNoSound)
 	{
-		//FFAudio::get_instance()->malloc(pCodecAudioCtx);
-		//FFAudio::get_instance()->open(this);
 		audio = std::make_shared<FFAudio>(pCodecAudioCtx);
 		audio->open(pCodecAudioParameters->ch_layout.nb_channels);
 	}
@@ -221,45 +222,72 @@ int FFPlayer::malloc(void)
 	return 1;
 }
 
-void FFPlayer::Draw()
+//TODO: thread?, frame timer
+void FFPlayer::parsePacket()
 {
-	if (!playing)
-		return;
-
 	AVPacket packet;
 
 	if (av_read_frame(pFormatCtx, &packet))
 	{
-		playing = false;
+		_ended = true;
+		av_packet_unref(&packet);
 		return;
 	}
 
-	if (!debugNoSound && packet.stream_index == audioStream) {
-		audio->put_audio_packet(&packet);
-	}
+	if (packet.stream_index == audioStream) {
+		if (!debugNoSound)
+			audio->put_audio_packet(&packet);
 
-	if (packet.stream_index == videoStream)
+		//Need to get the accompanying video packet this frame
+		//parsePacket();
+	}
+	else if (packet.stream_index == videoStream)
 	{
+		videoFrameThisFrame = true;
+
 		int res = avcodec_send_packet(pCodecCtx, &packet);
 		if (res < 0)
 		{
 			char error_buf[ERROR_SIZE];
 			av_strerror(res, error_buf, ERROR_SIZE);
 			printf(error_buf);
+			av_packet_unref(&packet);
 			return;
 		}
 
 		res = avcodec_receive_frame(pCodecCtx, pFrame);
 
-		SDL_UpdateYUVTexture(bmp, NULL, pFrame->data[0], pFrame->linesize[0],
+		SDL_UpdateYUVTexture(bmp, NULL,
+			pFrame->data[0], pFrame->linesize[0],
 			pFrame->data[1], pFrame->linesize[1],
 			pFrame->data[2], pFrame->linesize[2]);
-
-		SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
-		SDL_RenderCopy(Graphics::renderer.get(), bmp, NULL, NULL);
-		SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
-		SDL_Delay(1000 / 30);
 	}
-
 	av_packet_unref(&packet);
+
+	if (!videoFrameThisFrame)
+		parsePacket();
+}
+
+void FFPlayer::Draw()
+{
+	if (_ended)
+		return;
+
+	//TODO: kind of stuttery, needs seperate thread?
+	//TODO: change in avf player too
+	auto now = std::chrono::high_resolution_clock::now();
+	//int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
+	int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
+	//printf("%d\n", timeSinceLastFrame);
+	if (frameTime < timeSinceLastFrame) {
+		videoFrameThisFrame = false;
+		parsePacket();
+		prevFrame = now;
+	}
+	//videoFrameThisFrame = false;
+	//parsePacket();
+
+	SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
+	SDL_RenderCopy(Graphics::renderer.get(), bmp, NULL, NULL);
+	SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
 }

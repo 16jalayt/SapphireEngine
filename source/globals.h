@@ -1,16 +1,23 @@
 #pragma once
 
+//TODO: namespace file so like Globals::oldUI
 const bool oldUI = true;
 const bool debugHot = true;
 const bool fullscreen = false;
 const bool debugNoSound = true;
-//For easier debuging. Does not repsect framerate.
+//For easier debuging. Does not repsect globalframerate.
 const bool singleThreadVideo = true;
+
+//NOTE: brakes FFPlayer
+const int globalframerate = 30;
+const float frameTime = 1000 / globalframerate;
 
 //logical canvas resolution
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 const int ANIMATION_RATE = 15;
+
+//const float frameTime = 1000 / ANIMATION_RATE;
 
 #ifdef __SWITCH__
 const int REAL_WIDTH = 1280;

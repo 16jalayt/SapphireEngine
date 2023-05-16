@@ -20,29 +20,32 @@ extern "C"
 #include <SDL2/SDL_render.h>
 #include "AudioPacket.h"
 #include "FFAudio.h"
+#include <chrono>
 
 class FFPlayer
 {
 public:
-	FFPlayer(std::string filename);
+	FFPlayer(std::string filename, int x = 0, int y = 0, bool looped = false, bool startPaused = false);
 	~FFPlayer();
 
 	AVCodecParameters* pCodecAudioParameters = NULL;
 	void Draw();
 
 	//TODO:implement
-	bool playing = true;
-	bool looped = false;
+	//bool playing = true;
+	bool _ended = false;
+	bool _looped = false;
+	bool _paused = false;
 
 private:
 	void OpenStream(std::string filename);
-
 	int malloc(void);
-
 	int get_video_stream(void);
-
 	int read_audio_video_codec(void);
+	void parsePacket();
 
+	bool videoFrameThisFrame = false;
+	std::chrono::high_resolution_clock::time_point prevFrame;
 	int videoStream = 0;
 	int audioStream = 0;
 
