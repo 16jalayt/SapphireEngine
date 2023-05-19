@@ -20,7 +20,7 @@ namespace SDL_Deleter
 		{
 			if (texture != nullptr)
 			{
-				//SDL_DestroyTexture(texture);
+				SDL_DestroyTexture(texture);
 				texture = 0;
 			}
 		}
