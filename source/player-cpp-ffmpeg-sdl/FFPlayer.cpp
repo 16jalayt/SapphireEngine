@@ -271,18 +271,32 @@ void FFPlayer::parsePacket()
 void FFPlayer::Draw()
 {
 	if (_ended)
-		return;
+	{
+		if (_looped)
+		{
+			//To seek to timebase not frames
+			//frmseekPos = av_rescale(seekPos, ic->streams[videoStream]->time_base.den, ic->streams[videoStream]->time_base.num);
+			//frmseekPos /= 1000;
+			av_seek_frame(pFormatCtx, videoStream, 0, AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_FRAME);
+			_ended = false;
+		}
+		else
+			return;
+	}
 
-	//TODO: kind of stuttery, needs seperate thread?
-	//TODO: change in avf player too
-	auto now = std::chrono::high_resolution_clock::now();
-	//int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
-	int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
-	//printf("%d\n", timeSinceLastFrame);
-	if (frameTime < timeSinceLastFrame) {
-		videoFrameThisFrame = false;
-		parsePacket();
-		prevFrame = now;
+	if (!_paused)
+	{
+		//TODO: kind of stuttery, needs seperate thread?
+		//TODO: change in avf player too
+		auto now = std::chrono::high_resolution_clock::now();
+		//int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
+		int32_t timeSinceLastFrame = (int32_t)(std::chrono::duration_cast<std::chrono::milliseconds>(now - prevFrame).count());
+		//printf("%d\n", timeSinceLastFrame);
+		if (frameTime < timeSinceLastFrame) {
+			videoFrameThisFrame = false;
+			parsePacket();
+			prevFrame = now;
+		}
 	}
 	//videoFrameThisFrame = false;
 	//parsePacket();

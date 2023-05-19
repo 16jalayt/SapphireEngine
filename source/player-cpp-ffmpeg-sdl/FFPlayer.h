@@ -33,8 +33,6 @@ public:
 	void Draw();
 	SDL_Texture_ptr GetFrame();
 
-	//TODO:implement
-	//bool playing = true;
 	bool _ended = false;
 	bool _looped = false;
 	bool _paused = false;
