@@ -22,6 +22,7 @@ public:
 
 private:
 	AudioCallback() {}
-
 	static FFAudio* audio_instance;
 };
+
+static bool stopaudio = false;

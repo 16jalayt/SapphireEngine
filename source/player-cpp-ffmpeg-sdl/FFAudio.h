@@ -22,6 +22,7 @@ class FFAudio
 {
 public:
 	FFAudio(AVCodecContext*);
+	~FFAudio();
 
 	struct SwrContext* swrCtx = NULL;
 	AVFrame wanted_frame;
@@ -36,7 +37,6 @@ public:
 
 private:
 	static FFAudio* instance;
-
 	SDL_AudioSpec wantedSpec = { 0 }, audioSpec = { 0 };
 };
 

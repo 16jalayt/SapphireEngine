@@ -5,8 +5,6 @@ const bool oldUI = true;
 const bool debugHot = true;
 const bool fullscreen = false;
 const bool debugNoSound = true;
-//For easier debuging. Does not repsect globalframerate.
-const bool singleThreadVideo = true;
 
 //NOTE: brakes FFPlayer
 const int globalframerate = 30;

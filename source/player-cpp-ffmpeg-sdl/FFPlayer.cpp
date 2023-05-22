@@ -2,6 +2,7 @@
 #include <Engine/graphics.h>
 #include "defs.h"
 #include <Nancy/GUI.h>
+#include <Engine/audio.h>
 
 //TODO: expose startPaused somewhere
 FFPlayer::FFPlayer(std::string filename, int x, int y, bool looped, bool startPaused)
@@ -171,7 +172,7 @@ Alloc memory for the display
 int FFPlayer::malloc(void)
 {
 	//TODO: error handling for audio not initing
-	if (!debugNoSound)
+	if (!debugNoSound && !binkAudioLock)
 	{
 		audio = std::make_shared<FFAudio>(pCodecAudioCtx);
 		audio->open(pCodecAudioParameters->ch_layout.nb_channels);
