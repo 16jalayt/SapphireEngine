@@ -1,9 +1,9 @@
 #include "audio.h"
 #include <SDL2/SDL_mixer.h>
 
-#include "globals.h"
 #include "Engine/utils.h"
 #include "AvP_AudioStreaming.h"
+#include "Config.h"
 
 std::string currentMusicName;
 Mix_Music* currentMusic;
@@ -11,7 +11,7 @@ Mix_Chunk* soundChannels[8];
 
 int Audio::Init()
 {
-	if (debugNoSound) {
+	if (Config::debugNoSound) {
 		return 0;
 	}
 	SDL_InitSubSystem(SDL_INIT_AUDIO);
@@ -36,7 +36,7 @@ int Audio::Init()
 
 void Audio::Quit()
 {
-	if (debugNoSound) {
+	if (Config::debugNoSound) {
 		return;
 	}
 	// stop sounds and free loaded data

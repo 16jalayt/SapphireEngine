@@ -165,7 +165,7 @@ int FFAudio::audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, i
 		audio_pkt_data = pkt.data;
 		audio_pkt_size = pkt.size;
 	}
-	//return -1;
+	return -1;
 }
 
 int FFAudio::put_audio_packet(AVPacket* packet)

@@ -5,9 +5,8 @@
 #include "Engine/graphics.h"
 #include "globals.h"
 #include "Engine/utils.h"
-#include "Nancy/GUI.h"
+#include "Engine/GUI.h"
 #include "Nancy/AVF.h"
-#include "Nancy/GUI.h"
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {

@@ -179,7 +179,9 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp" />
     <ClCompile Include="..\..\source\Engine\AvP_RingBuffer.cpp" />
     <ClCompile Include="..\..\source\Engine\Button.cpp" />
+    <ClCompile Include="..\..\source\Engine\Config.cpp" />
     <ClCompile Include="..\..\source\Engine\graphics.cpp" />
+    <ClCompile Include="..\..\source\Engine\GUI.cpp" />
     <ClCompile Include="..\..\source\Engine\Scene.cpp" />
     <ClCompile Include="..\..\source\Engine\sprite.cpp" />
     <ClCompile Include="..\..\source\Engine\utils.cpp" />
@@ -198,10 +200,10 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\libbinkdec\mdct.c" />
     <ClCompile Include="..\..\source\libbinkdec\rdft.c" />
     <ClCompile Include="..\..\source\libbinkdec\Util.cpp" />
+    <ClCompile Include="..\..\source\loguru.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Nancy\AVF.cpp" />
     <ClCompile Include="..\..\source\Nancy\CIFF.cpp" />
-    <ClCompile Include="..\..\source\Nancy\GUI.cpp" />
     <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp" />
     <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp" />
     <ClCompile Include="..\..\source\Nancy\HIFF.cpp" />
@@ -215,13 +217,16 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\source\cxxopts.hpp" />
     <ClInclude Include="..\..\source\Engine\AnimatedSprite.h" />
     <ClInclude Include="..\..\source\Engine\audio.h" />
     <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h" />
     <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h" />
     <ClInclude Include="..\..\source\Engine\AvP_RingBuffer.h" />
     <ClInclude Include="..\..\source\Engine\Button.h" />
+    <ClInclude Include="..\..\source\Engine\Config.h" />
     <ClInclude Include="..\..\source\Engine\graphics.h" />
+    <ClInclude Include="..\..\source\Engine\GUI.h" />
     <ClInclude Include="..\..\source\Engine\Scene.h" />
     <ClInclude Include="..\..\source\Engine\SDL_ptr.h" />
     <ClInclude Include="..\..\source\Engine\SDL_TTF_ptr.h" />
@@ -245,10 +250,10 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\libbinkdec\LogError.h" />
     <ClInclude Include="..\..\source\libbinkdec\rdft.h" />
     <ClInclude Include="..\..\source\libbinkdec\Util.h" />
+    <ClInclude Include="..\..\source\loguru.hpp" />
     <ClInclude Include="..\..\source\Nancy\AVF.h" />
     <ClInclude Include="..\..\source\Nancy\CIFF.h" />
     <ClInclude Include="..\..\source\Nancy\Dependency.h" />
-    <ClInclude Include="..\..\source\Nancy\GUI.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h" />
     <ClInclude Include="..\..\source\Nancy\HIFF.h" />
@@ -263,6 +268,30 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h" />
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.h" />
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h" />
+    <ClInclude Include="..\..\source\toml\color.hpp" />
+    <ClInclude Include="..\..\source\toml\combinator.hpp" />
+    <ClInclude Include="..\..\source\toml\comments.hpp" />
+    <ClInclude Include="..\..\source\toml\datetime.hpp" />
+    <ClInclude Include="..\..\source\toml\exception.hpp" />
+    <ClInclude Include="..\..\source\toml\from.hpp" />
+    <ClInclude Include="..\..\source\toml\get.hpp" />
+    <ClInclude Include="..\..\source\toml\into.hpp" />
+    <ClInclude Include="..\..\source\toml\lexer.hpp" />
+    <ClInclude Include="..\..\source\toml\literal.hpp" />
+    <ClInclude Include="..\..\source\toml\macros.hpp" />
+    <ClInclude Include="..\..\source\toml\parser.hpp" />
+    <ClInclude Include="..\..\source\toml\region.hpp" />
+    <ClInclude Include="..\..\source\toml\result.hpp" />
+    <ClInclude Include="..\..\source\toml\serializer.hpp" />
+    <ClInclude Include="..\..\source\toml\source_location.hpp" />
+    <ClInclude Include="..\..\source\toml\storage.hpp" />
+    <ClInclude Include="..\..\source\toml\string.hpp" />
+    <ClInclude Include="..\..\source\toml\toml.hpp" />
+    <ClInclude Include="..\..\source\toml\traits.hpp" />
+    <ClInclude Include="..\..\source\toml\types.hpp" />
+    <ClInclude Include="..\..\source\toml\utility.hpp" />
+    <ClInclude Include="..\..\source\toml\value.hpp" />
+    <ClInclude Include="..\..\source\toml\version.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,8 +1,10 @@
 #include "FFPlayer.h"
 #include <Engine/graphics.h>
 #include "defs.h"
-#include <Nancy/GUI.h>
 #include <Engine/audio.h>
+#include <globals.h>
+#include <Engine/GUI.h>
+#include <Engine/Config.h>
 
 //TODO: expose startPaused somewhere
 FFPlayer::FFPlayer(std::string filename, int x, int y, bool looped, bool startPaused)
@@ -172,7 +174,7 @@ Alloc memory for the display
 int FFPlayer::malloc(void)
 {
 	//TODO: error handling for audio not initing
-	if (!debugNoSound && !binkAudioLock)
+	if (!Config::debugNoSound && !binkAudioLock)
 	{
 		audio = std::make_shared<FFAudio>(pCodecAudioCtx);
 		audio->open(pCodecAudioParameters->ch_layout.nb_channels);
@@ -236,7 +238,7 @@ void FFPlayer::parsePacket()
 	}
 
 	if (packet.stream_index == audioStream) {
-		if (!debugNoSound)
+		if (!Config::debugNoSound)
 			audio->put_audio_packet(&packet);
 
 		//Need to get the accompanying video packet this frame

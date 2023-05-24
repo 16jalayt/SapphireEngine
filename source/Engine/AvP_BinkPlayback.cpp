@@ -26,9 +26,9 @@
 #include <assert.h>
 #include <chrono>
 
-#include "Nancy/GUI.h"
+#include "Engine/GUI.h"
 #include "Engine/utils.h"
-#include "globals.h"
+#include "Config.h"
 
 static const int kAudioBufferSize = 4096;
 static const int kAudioBufferCount = 3;
@@ -60,7 +60,7 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 	_audioTrackInfos.resize(_nAudioTracks);
 
 	// init the sound and video api stuff we need
-	if (_nAudioTracks && !debugNoSound)
+	if (_nAudioTracks && !Config::debugNoSound)
 	{
 		// get audio information for all available tracks
 		for (uint32_t i = 0; i < _audioTrackInfos.size(); i++) {
@@ -126,7 +126,7 @@ int BinkPlayback::Open(const std::string& fileName, int x, int y, bool isLooped)
 	//if (!singleThreadVideo)
 	_decodeThreadHandle = std::make_shared<std::thread>(BinkDecodeThread, static_cast<void*>(this));
 
-	if (_nAudioTracks && !debugNoSound) {
+	if (_nAudioTracks && !Config::debugNoSound) {
 		/*if (pthread_create(&_audioThreadHandle, NULL, BinkAudioThread, static_cast<void*>(this)) != 0) {
 			return false;
 		}*/
@@ -248,7 +248,7 @@ void* BinkDecodeThread(void* args)
 		//pthread_mutex_unlock(&fmv->_frameCriticalSection);
 		fmv->_frameCriticalSection.unlock();
 
-		if (!debugNoSound) {
+		if (!Config::debugNoSound) {
 			uint32_t audioSize = Bink_GetAudioData(fmv->_handle, 0, (int16_t*)fmv->_audioDataBuffer.get());
 
 			if (audioSize)

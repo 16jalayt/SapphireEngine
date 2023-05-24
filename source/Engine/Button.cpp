@@ -1,7 +1,7 @@
 #include "Engine/Button.h"
 #include "Engine/utils.h"
 #include "graphics.h"
-#include "Nancy/GUI.h"
+#include "Engine/GUI.h"
 
 Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
 {

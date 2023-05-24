@@ -132,9 +132,6 @@
     <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp">
       <Filter>Source Files\Nancy\HIFF Chunks</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\GUI.cpp">
-      <Filter>Source Files\Nancy</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Nancy\AVF.cpp">
       <Filter>Source Files\Nancy</Filter>
     </ClCompile>
@@ -167,6 +164,15 @@
     </ClCompile>
     <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.cpp">
       <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Engine\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\loguru.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,9 +275,6 @@
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h">
       <Filter>Header Files\Nancy\HIFF Chunks</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\GUI.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Nancy\AVF.h">
       <Filter>Header Files\Nancy</Filter>
     </ClInclude>
@@ -313,6 +316,90 @@
     </ClInclude>
     <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h">
       <Filter>player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\cxxopts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\color.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\combinator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\comments.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\datetime.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\exception.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\from.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\get.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\into.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\lexer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\literal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\macros.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\region.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\result.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\serializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\source_location.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\storage.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\toml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\traits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\types.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\utility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\value.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\toml\version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\loguru.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

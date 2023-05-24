@@ -3,6 +3,7 @@
 #include "audio.h"
 #include "Nancy/AVF.h"
 #include "Nancy/Loader.h"
+#include "Config.h"
 
 Scene_ptr currentScene;
 Scene_ptr nextScene;
@@ -226,7 +227,7 @@ void Scene::Run()
 			fmv->FMV->_paused = false;
 	}
 
-	if (!debugNoSound)
+	if (!Config::debugNoSound)
 	{
 		//Start music if not holding over from last scene
 		if (currentMusic != NULL && changeMusic)

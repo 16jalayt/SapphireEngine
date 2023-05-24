@@ -8,9 +8,10 @@
 #include <SDL2/SDL_timer.h>
 
 #include "globals.h"
+#include "Config.h"
 //#include <SDL2/SDL_timer.h>
 
-static bool		soundEnabled = !debugNoSound;
+static bool		soundEnabled = !Config::debugNoSound;
 static ALCdevice* device = 0;
 static ALCcontext* context = 0;
 std::vector<sndSource> sourceList;

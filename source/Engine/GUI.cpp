@@ -1,4 +1,5 @@
-#include "Nancy/GUI.h"
+//TODO: update convention for engine includes
+#include "Engine/GUI.h"
 #include <string>
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
@@ -8,7 +9,7 @@
 #include "Engine/utils.h"
 #include "Engine/Button.h"
 #include "Engine/graphics.h"
-#include "Loader.h"
+#include "Nancy/Loader.h"
 #include <imgui_internal.h>
 
 std::shared_ptr<SDL_Texture> GUI::canvas;
@@ -66,6 +67,7 @@ void GUI::Draw()
 	if (canvas)
 		SDL_RenderCopy(Graphics::renderer.get(), canvas.get(), NULL, &canvasRect);
 
+	//TODO:imgui cursor position doesn't work fullscreen
 	// Start the Dear ImGui frame
 	ImGui_ImplSDLRenderer_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
@@ -353,6 +355,7 @@ void GUI::drawCheatSheet()
 		//Forces to be immoveable
 		//ImGui::SetNextWindowPos(ImVec2(0, 0));
 		ImGui::SetNextWindowSize(ImVec2(700, 500));
+		ImGui::SetNextWindowCollapsed(true);
 		// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 		ImGui::Begin("Cheet Sheet", &cheatSheetShown,
 			ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);

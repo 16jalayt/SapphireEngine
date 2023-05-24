@@ -1,4 +1,8 @@
 #define SDL_MAIN_HANDLED
+//Added to loguru.cpp. Alternately use VCPKG
+#define LOGURU_WITH_STREAMS 1
+#include <loguru.hpp>
+
 #include <time.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -26,34 +30,41 @@
 #include "Engine/AvP_BinkPlayback.h"
 #include "Engine/Scene.h"
 #include "Nancy/Loader.h"
-#include "Nancy/GUI.h"
+#include "Engine/GUI.h"
+#include <Engine/Config.h>
 
-//TODO: config manager
-
-//Fixes openal error when closing console
-#ifdef _WIN32
-#include <windows.h>
-BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType) {
-	if (CTRL_CLOSE_EVENT == dwCtrlType) {
-		printf("exiting");
-		//hangs?
-		//quit();
-		return true;
-	}
-
-	return false;
-}
-#endif
+/*void tracetest()
+{
+	LOG_S(ERROR) << loguru::stacktrace(1).c_str();
+}*/
 
 int main(int argc, char** argv)
 {
-	//Fixes openal error when closing console
-#ifdef _WIN32
-	if (SetConsoleCtrlHandler(ConsoleHandlerRoutine, TRUE) == FALSE) {
-		// Cannot register your handler? Check GetLastError()
-		printf("Error registering windows exit handler.");
-	}
+	Config::parse(argc, argv);
+
+#ifdef _DEBUG
+	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
+#else
+	loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
 #endif
+
+	//field length modified at loguru.hpp line 131
+	loguru::g_preamble_uptime = false;
+	loguru::g_preamble_date = false;
+
+	//init important for crash logging
+	loguru::init(argc, argv);
+	//Init sets to main thread by default
+	//loguru::set_thread_name("Main Thread");
+	loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_WARNING);
+	/*LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
+	//LOG_S(INFO) << "Some float: " << 3.14;
+	LOG_S(ERROR) << "My vec3: " << 3.14;
+	//LOG_S(ERROR) << loguru::stacktrace(1).c_str();
+	//tracetest();*/
+
+	//LOG_SCOPE_FUNCTION(INFO);
+	//VLOG_SCOPE_F(1, "Iteration %d", 5);
 
 	//TODO: update everything to this syntax?
 	Graphics_ptr graphics = std::make_unique<Graphics>();
@@ -196,8 +207,8 @@ int main(int argc, char** argv)
 		SDL_RenderClear(Graphics::renderer.get());
 		SDL_SetRenderTarget(Graphics::renderer.get(), NULL);*/
 
-		currentGUI->Draw();
 		currentScene->Draw();
+		currentGUI->Draw();
 
 		// put text on screen
 		//if (helloworld_tex)

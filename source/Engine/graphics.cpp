@@ -11,6 +11,7 @@
 #include "audio.h"
 #include "globals.h"
 #include "utils.h"
+#include "Config.h"
 
 //Graphics class
 //Holds all information dealing with graphics for the game
@@ -55,7 +56,7 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 #ifdef __SWITCH__
 	flags = SDL_WINDOW_SHOWN;
 #else
-	if (fullscreen)
+	if (Config::fullscreen)
 		flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
 	else
 		//full desk ignores real width

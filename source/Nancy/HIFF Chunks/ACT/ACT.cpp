@@ -8,6 +8,7 @@
 #include "Nancy/Loader.h"
 #include "Nancy/Dependency.h"
 #include "Engine/AvP_BinkPlayback.h"
+#include <Engine/Config.h>
 
 bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
@@ -75,7 +76,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			//sceneChangeFlag = true;
 			Loader::loadScene(changeTo);
 		};
-		if (debugHot)
+		if (Config::debugHot)
 			testbutton->setDebug(true);
 		//testbutton->visible(false);
 		break;
@@ -225,7 +226,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			//sceneChangeFlag = true;
 			Loader::loadScene(currentScene->sceneFile);
 		};
-		if (debugHot)
+		if (Config::debugHot)
 			testbutton->setDebug(true);
 
 		break;
@@ -366,7 +367,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		//sceneChangeName = std::to_string(changeTo);
 		//sceneChangeFlag = true;
-		Loader::loadScene(changeTo);
+
+		// supposed to trigger after sound plays
+		//Loader::loadScene(changeTo);
 
 		break;
 	}

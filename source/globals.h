@@ -1,10 +1,6 @@
 #pragma once
 
-//TODO: namespace file so like Globals::oldUI
 const bool oldUI = true;
-const bool debugHot = true;
-const bool fullscreen = false;
-const bool debugNoSound = true;
 
 //NOTE: brakes FFPlayer
 const int globalframerate = 30;
