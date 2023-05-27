@@ -11,6 +11,7 @@
 #include "globals.h"
 #include "graphics.h"
 #include "utils.h"
+#include <loguru.hpp>
 
 void fatalError(const char* fmt, ...)
 {
@@ -35,7 +36,7 @@ void fatalError(const char* fmt, ...)
 	va_start(va, fmt);
 	vprintf(fmt, va);
 	va_end(va);
-	printf("\nExiting...\n");
+	LOG_F(ERROR, "\nExiting...\n");
 	exit(-1);
 #endif
 }
@@ -210,8 +211,8 @@ bool AssertShort(std::ifstream& inFile, short val, bool bigEndian)
 
 	if (readValue != val)
 	{
-		printf("Value at position: %d\n", ((int)inFile.tellg() - 2));
-		printf("Expected value %d got %d\n", val, readValue);
+		LOG_F(ERROR, "Value at position: %d\n", ((int)inFile.tellg() - 2));
+		LOG_F(ERROR, "Expected value %d got %d\n", val, readValue);
 
 		return false;
 	}

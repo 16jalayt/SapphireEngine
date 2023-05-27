@@ -1,4 +1,5 @@
 #include "globals.h"
+#include <loguru.hpp>
 
 typedef struct Dependency
 {
@@ -22,7 +23,7 @@ std::vector<Dependency> parseDeps(std::ifstream& inFile, int chunkLen, int chunk
 		dep.boolean = readShort(inFile);
 		dep.time = { readShort(inFile), readShort(inFile), readShort(inFile), readShort(inFile) };
 		deps.push_back(dep);
-		printf("    --Dep DepType:%d Label:%d Cond:%d  Bool:%d\n", dep.depType, dep.label, dep.condition, dep.boolean);
+		LOG_F(INFO, "    --Dep DepType:%d Label:%d Cond:%d  Bool:%d", dep.depType, dep.label, dep.condition, dep.boolean);
 	}
 	return deps;
 }
@@ -31,7 +32,7 @@ bool checkDeps(std::vector<Dependency> deps)
 {
 	if (deps.size() == 0)
 		return true;
-	for (Dependency dep : deps)
+	for (const Dependency dep : deps)
 	{
 		//if should or
 		if (dep.boolean)

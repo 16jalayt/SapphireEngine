@@ -1,4 +1,5 @@
 #include "Nancy/CIFF.h"
+#include <loguru.hpp>
 
 //static because shoud only be one ciff structure per game
 //optionally patched by the promotree or loose chunks
@@ -11,7 +12,7 @@ bool CIFF::Load_Tree(char* filename)
 	std::ifstream inFile(filename, std::ios::in | std::ios::binary | std::ios::ate);
 
 	if (inFile.fail()) {
-		printf("Could not open CIFF file: %s\n", filename);
+		LOG_F(ERROR, "Could not open CIFF file: %s", filename);
 		inFile.close();
 		return false;
 	}

@@ -56,7 +56,7 @@ int main(int argc, char** argv)
 	loguru::init(argc, argv);
 	//Init sets to main thread by default
 	//loguru::set_thread_name("Main Thread");
-	loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_WARNING);
+	loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_INFO);
 	/*LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
 	//LOG_S(INFO) << "Some float: " << 3.14;
 	LOG_S(ERROR) << "My vec3: " << 3.14;
@@ -190,7 +190,7 @@ int main(int argc, char** argv)
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_ESCAPE:
-					printf("\nShutting down engine\n");
+					LOG_F(ERROR, "\nShutting down engine\n");
 					exit_requested = 1;
 					break;
 				}

@@ -12,6 +12,7 @@
 #include <png++/png.hpp>
 #include <iostream>
 #include <iomanip>
+#include <loguru.hpp>
 
 //TODO: Everything touched by avf leaks memory becasue it is static
 std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
@@ -19,7 +20,7 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 	std::ifstream inFile = std::ifstream(file, std::ios::in | std::ios::binary | std::ios::ate);
 	if (inFile.fail()) {
 		inFile.close();
-		printf("Unable to open AVF file:%s\n", file);
+		LOG_F(ERROR, "Unable to open AVF file:%s", file);
 		return std::vector<SDL_Texture_ptr>();
 	}
 
@@ -28,14 +29,14 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 	std::string magic = readString(inFile, 15);
 	if (magic != "AVF WayneSikes")
 	{
-		printf("Invalid header in file: %s\n", file);
+		LOG_F(ERROR, "Invalid header in file: %s", file);
 		return std::vector<SDL_Texture_ptr>();
 	}
 
 	//ver major													ver minor
 	if (!AssertShort(inFile, 2, true) || !AssertShort(inFile, 0, true))
 	{
-		printf("Invalid version in file: %s\n", file);
+		LOG_F(ERROR, "Invalid version in file: %s", file);
 		return std::vector<SDL_Texture_ptr>();
 	}
 
@@ -67,7 +68,7 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 
 		if (buffer == NULL)
 		{
-			printf("Failed to load AVF: %s\n",
+			LOG_F(ERROR, "Failed to load AVF: %s",
 				IMG_GetError());
 			return std::vector<SDL_Texture_ptr>();
 		}
@@ -100,7 +101,7 @@ SDL_Texture* RGB555_888_SDL(std::vector<uint8_t> col555, int width, int height) 
 	if (SDL_LockTexture(texture, nullptr, (void**)&pixels, &pitch))
 	{
 		// If the locking fails, you might want to handle it somehow. SDL_GetError(); or something here.
-		printf("Failed to lock AVF");
+		LOG_F(ERROR, "Failed to lock AVF");
 	}
 
 	memcpy(pixels, col555.data(), pitch * height);

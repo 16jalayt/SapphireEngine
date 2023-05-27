@@ -1,5 +1,6 @@
 #include "Movie.h"
 #include <Nancy/AVF.h>
+#include <loguru.hpp>
 
 Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent parent, Scaled_Rect partial)
 {
@@ -20,7 +21,7 @@ Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent par
 		std::vector<SDL_Texture_ptr> test = AVF::parseAVF(fileName.c_str());
 		if (test.empty())
 		{
-			printf("parseAVF returned empty for: %s\n", fileName.c_str());
+			LOG_F(WARNING, "parseAVF returned empty for: %s\n", fileName.c_str());
 			return;
 		}
 		ASprite = std::make_unique<AnimatedSprite>(std::move(test), x, y);
@@ -28,7 +29,7 @@ Movie::Movie(std::string fileName, int x, int y, bool isLooped, RenderParent par
 		ASprite->looped = isLooped;
 	}
 	else
-		printf("Unknown Movie type in: %s\n", fileName.c_str());
+		LOG_F(WARNING, "Unknown Movie type in: %s\n", fileName.c_str());
 }
 
 void Movie::Draw()

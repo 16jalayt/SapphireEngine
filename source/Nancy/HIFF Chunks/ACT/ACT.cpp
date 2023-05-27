@@ -9,6 +9,7 @@
 #include "Nancy/Dependency.h"
 #include "Engine/AvP_BinkPlayback.h"
 #include <Engine/Config.h>
+#include <loguru.hpp>
 
 bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
@@ -24,7 +25,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		//scene change from flags
 	case 12:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Scene to change to
 		short changeTo = readShort(inFile);
@@ -48,7 +49,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		//Scene change with HS
 	case 25:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		int cursorNumber = readShort(inFile);
 		//TODO:set cursor
@@ -84,7 +85,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//Movie playback
 	case 53:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		std::string video = readString(inFile, 66);
 		skipBytes(inFile, chunkLen - 116);
@@ -161,7 +162,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//static overlay
 	case 55:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//52 in newer games
 		//printf("static overlay not implemented\n");
@@ -197,7 +198,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	case 98:
 	{
 		//TODO: incomplete implementation
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Flag to update
 		short flag = readShort(inFile);
@@ -221,7 +222,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		testbutton->callback = [flag = flag, truth = truth]
 		{
 			flags[flag - 1000] = truth;
-			printf("set scene flag num: %d\n", flag);
+			LOG_F(INFO, "set scene flag num: %d\n", flag);
 			//sceneChangeName = currentScene->sceneFile;
 			//sceneChangeFlag = true;
 			Loader::loadScene(currentScene->sceneFile);
@@ -234,7 +235,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//PUSH scene onto stack
 	case 110:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Unknown, status flag?
 		char unknown = readByte(inFile);
@@ -263,7 +264,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//POP scene from stack and transition
 	case 111:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Unknown, status flag?
 		char unknown = readByte(inFile);
@@ -285,7 +286,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//Random sound CC
 	case 151:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		int numSounds = readShort(inFile);
 		std::vector<std::string> sounds;
@@ -340,7 +341,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//Sound
 	case 159:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		std::string sound = readString(inFile, 33);
 
@@ -377,7 +378,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	//Mouselight puzzle (Ghost dogs tunnel flashlight OVL)
 	case 217:
 	{
-		printf("Processing ACT chunk:%u Desc:%s  at:%d\n", chunkType, actChunkDesc.c_str(), chunkStart);
+		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		//Name of the cave frame to show
 		//Cave background is an OVL over top of a black background
@@ -402,7 +403,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	}
 	default:
 	{
-		printf("**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%d\n", chunkType, actChunkDesc.c_str(), nextScene->sceneFile.c_str(), chunkStart);
+		LOG_F(ERROR, "**Invalid ACT chunk:%u Desc:%s in scene:%s  at:%d", chunkType, actChunkDesc.c_str(), nextScene->sceneFile.c_str(), chunkStart);
 		//int test = chunkLen - 49;
 		skipBytes(inFile, chunkLen - 50);
 		break;

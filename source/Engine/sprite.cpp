@@ -7,6 +7,7 @@
 #include "Engine/utils.h"
 #include "Engine/GUI.h"
 #include "Nancy/AVF.h"
+#include <loguru.hpp>
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
@@ -55,7 +56,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 		}
 		else
 		{
-			printf("Unable to open sprite: %s , %s\n", file, IMG_GetError());
+			LOG_F(ERROR, "Unable to open sprite: %s , %s\n", file, IMG_GetError());
 		}
 	}
 	//}
@@ -100,7 +101,7 @@ Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scale
 	}
 	else
 	{
-		printf("Unable to open sprite with texture.\n");
+		LOG_F(ERROR, "Unable to open sprite with texture.\n");
 	}
 }
 

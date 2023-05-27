@@ -1,5 +1,6 @@
 #include "Nancy/Loader.h"
 #include <Engine/Scene.h>
+#include <loguru.hpp>
 
 GUI_ptr currentGUI;
 
@@ -115,7 +116,7 @@ std::ifstream Loader::getDataFile(std::string sceneName)
 		return inFile;
 	}
 
-	printf("Could not open HIFF file: %s\n", sceneName.c_str());
+	LOG_F(ERROR, "Could not open HIFF file: %s", sceneName.c_str());
 	return std::ifstream();
 }
 
@@ -137,7 +138,7 @@ std::string Loader::getOVL(std::string ovlName)
 		return "Ciftree/" + ovlName + ".png";
 	}
 
-	printf("Could not open OVL file: %s\n", ovlName.c_str());
+	LOG_F(ERROR, "Could not open OVL file: %s", ovlName.c_str());
 	return std::string();
 }
 
@@ -214,7 +215,7 @@ std::string Loader::getVideoPath(std::string backName)
 		return "DataFiles/CIFTREE/" + backName + ".png";
 	}
 
-	printf("Cannot find background: %s\n", backName.c_str());
+	LOG_F(ERROR, "Cannot find background: %s", backName.c_str());
 	return std::string();
 }
 
@@ -238,7 +239,7 @@ std::string Loader::getSoundPath(std::string soundName)
 	inFile = std::ifstream("HDSound/" + soundName + ".his", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();
-		printf("HIS not supported yet!\n");
+		LOG_F(ERROR, "HIS not supported yet!\n");
 		//return "HDSound/" + soundName + ".his";
 		return std::string();
 	}
@@ -246,7 +247,7 @@ std::string Loader::getSoundPath(std::string soundName)
 	inFile = std::ifstream("CDSound/" + soundName + ".his", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();
-		printf("HIS not supported yet!\n");
+		LOG_F(ERROR, "HIS not supported yet!\n");
 		//return "CDSound/" + soundName + ".his";
 		return std::string();
 	}

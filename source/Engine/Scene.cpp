@@ -4,6 +4,7 @@
 #include "Nancy/AVF.h"
 #include "Nancy/Loader.h"
 #include "Config.h"
+#include <loguru.hpp>
 
 Scene_ptr currentScene;
 Scene_ptr nextScene;
@@ -25,7 +26,7 @@ Scene::Scene()
 
 void Scene::SetHeader(std::string description, std::string sceneFile)
 {
-	printf("\n\n*******New scene: %s: %s*******\n", sceneFile.c_str(), description.c_str());
+	LOG_F(INFO, "\n\n*******New scene: %s: %s*******", sceneFile.c_str(), description.c_str());
 	sceneName = sceneFile;
 }
 
@@ -76,7 +77,7 @@ void Scene::setBkg(std::string backName)
 	if (backName.empty())
 		return;
 
-	printf("Background: %s\n", backName.c_str());
+	LOG_F(INFO, "Background: %s", backName.c_str());
 
 	std::string fileName = Loader::getVideoPath(backName);
 
@@ -104,7 +105,7 @@ void Scene::setBkg(std::string backName)
 	}
 	else
 	{
-		printf("Unknown background type in: %s\n", fileName.c_str());
+		LOG_F(ERROR, "Unknown background type in: %s", fileName.c_str());
 	}
 }
 
@@ -136,7 +137,7 @@ void Scene::AddMusic(std::string sound, int channel, int loop, int chan1, int ch
 		std::string path = Loader::getSoundPath(sound);
 		if (path.empty())
 		{
-			printf("Sound could not be found: %s\n", sound.c_str());
+			LOG_F(ERROR, "Sound could not be found: %s", sound.c_str());
 			return;
 		}
 		//change music
@@ -144,7 +145,7 @@ void Scene::AddMusic(std::string sound, int channel, int loop, int chan1, int ch
 		currentMusic = Mix_LoadMUS(path.c_str());
 		if (!currentMusic)
 		{
-			printf("Sound could not be loaded: %s SDL_Error: %s\n", sound.c_str(), SDL_GetError());
+			LOG_F(ERROR, "Sound could not be loaded: %s SDL_Error: %s", sound.c_str(), SDL_GetError());
 			return;
 		}
 	}
@@ -160,21 +161,21 @@ void Scene::AddSound(std::string sound, int channel, int loop, int chan1, int ch
 	std::string path = Loader::getSoundPath(sound);
 	if (path.empty())
 	{
-		printf("Sound could not be found: %s\n", sound.c_str());
+		LOG_F(ERROR, "Sound could not be found: %s", sound.c_str());
 		return;
 	}
 
 	Mix_Chunk* waves = Mix_LoadWAV(path.c_str());
 	if (!waves)
 	{
-		printf(".WAV sound '%s' could not be loaded!\n SDL_Error: %s\n", "", SDL_GetError());
+		LOG_F(ERROR, ".WAV sound '%s' could not be loaded! SDL_Error: %s", "", SDL_GetError());
 		return;
 	}
 
 	// Play waves sound
 	if (Mix_PlayChannel(channel, waves, loop) == -1)
 	{
-		printf("Waves sound could not be played!\n SDL_Error: %s\n", SDL_GetError());
+		LOG_F(ERROR, "Waves sound could not be played! SDL_Error: %s", SDL_GetError());
 		Mix_FreeChunk(waves);
 		return;
 	}
@@ -236,8 +237,8 @@ void Scene::Run()
 			Mix_PauseMusic();
 			if (Mix_PlayMusic(currentMusic, -1) == -1)
 			{
-				printf("Sound could not be played!\n"
-					"SDL_Error: %s\n", SDL_GetError());
+				LOG_F(ERROR, "Sound could not be played!\n"
+					"SDL_Error: %s", SDL_GetError());
 			}
 		}
 

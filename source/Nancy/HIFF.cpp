@@ -3,6 +3,7 @@
 #include "Loader.h"
 #include "HIFF Chunks/ACT/ACT.h"
 #include "HIFF Chunks/SUM.h"
+#include <loguru.hpp>
 
 bool HIFF::Load_HIFF(std::string sceneName)
 {
@@ -23,7 +24,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 
 	if (magic != "DATA")
 	{
-		printf("Missing Data chunk in file: %s\n", sceneName.c_str());
+		LOG_F(ERROR, "Missing Data chunk in file: %s", sceneName.c_str());
 		return false;
 	}
 
@@ -31,7 +32,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 	//fails on newer games with flagevnt
 	/*if (chunkLenInt != (filesize - 8))
 	{
-		printf("Invalid data chunk length in file: %s\n", sceneName.c_str());
+		LOG_F(ERROR, "Invalid data chunk length in file: %s\n", sceneName.c_str());
 		return false;
 	}*/
 
@@ -45,7 +46,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 
 		if (magic != "DATA")
 		{
-			printf("Missing Data chunk in file: %s\n", sceneName.c_str());
+			LOG_F(ERROR, "Missing Data chunk in file: %s", sceneName.c_str());
 			return false;
 		}
 
@@ -60,12 +61,12 @@ bool HIFF::Load_HIFF(std::string sceneName)
 	}
 	/*if (sumChunk == "SCENSUM")
 	{
-		printf("Invalid Summery chunk in file: %s\n", sceneName.c_str());
+		LOG_F(ERROR, "Invalid Summery chunk in file: %s\n", sceneName.c_str());
 		return false;
 	}*/
 	else
 	{
-		printf("Invalid data chunk:%s in file:%s\n", subChunk.c_str(), sceneName.c_str());
+		LOG_F(ERROR, "Invalid data chunk:%s in file:%s", subChunk.c_str(), sceneName.c_str());
 		return false;
 	}
 
@@ -85,7 +86,7 @@ bool HIFF::Load_HIFF(std::string sceneName)
 		}
 		else
 		{
-			printf("**Invalid chunk:%s in scene: %s  at: %ld\n", actChunk.c_str(), sceneName.c_str(), chunkStart);
+			LOG_F(ERROR, "**Invalid chunk:%s in scene: %s  at: %ld", actChunk.c_str(), sceneName.c_str(), chunkStart);
 			skipBytes(inFile, chunkLen);
 		}
 
