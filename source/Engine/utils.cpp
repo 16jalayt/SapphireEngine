@@ -7,7 +7,6 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "audio.h"
-#include "AvP_AudioStreaming.h"
 #include "globals.h"
 #include "graphics.h"
 #include "utils.h"

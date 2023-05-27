@@ -1,5 +1,4 @@
 #include "sprite.h"
-#include "AvP_BinkPlayback.h"
 #include "AnimatedSprite.h"
 #include <player-cpp-ffmpeg-sdl/FFPlayer.h>
 

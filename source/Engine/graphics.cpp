@@ -7,7 +7,6 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
-#include "AvP_AudioStreaming.h"
 #include "audio.h"
 #include "globals.h"
 #include "utils.h"

@@ -175,9 +175,6 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
   <ItemGroup>
     <ClCompile Include="..\..\source\Engine\AnimatedSprite.cpp" />
     <ClCompile Include="..\..\source\Engine\audio.cpp" />
-    <ClCompile Include="..\..\source\Engine\AvP_AudioStreaming.cpp" />
-    <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp" />
-    <ClCompile Include="..\..\source\Engine\AvP_RingBuffer.cpp" />
     <ClCompile Include="..\..\source\Engine\Button.cpp" />
     <ClCompile Include="..\..\source\Engine\Config.cpp" />
     <ClCompile Include="..\..\source\Engine\graphics.cpp" />
@@ -186,20 +183,6 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Engine\sprite.cpp" />
     <ClCompile Include="..\..\source\Engine\utils.cpp" />
     <ClCompile Include="..\..\source\Engine\Movie.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\avfft.c" />
-    <ClCompile Include="..\..\source\libbinkdec\BinkAudio.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\BinkDecoder.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\BinkVideo.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\BitReader.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\dct.c" />
-    <ClCompile Include="..\..\source\libbinkdec\dct32.c" />
-    <ClCompile Include="..\..\source\libbinkdec\fft.c" />
-    <ClCompile Include="..\..\source\libbinkdec\FileStream.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\HuffmanVLC.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\LogError.cpp" />
-    <ClCompile Include="..\..\source\libbinkdec\mdct.c" />
-    <ClCompile Include="..\..\source\libbinkdec\rdft.c" />
-    <ClCompile Include="..\..\source\libbinkdec\Util.cpp" />
     <ClCompile Include="..\..\source\loguru.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Nancy\AVF.cpp" />
@@ -234,22 +217,6 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Engine\utils.h" />
     <ClInclude Include="..\..\source\Engine\Movie.h" />
     <ClInclude Include="..\..\source\globals.h" />
-    <ClInclude Include="..\..\source\libbinkdec\avfft.h" />
-    <ClInclude Include="..\..\source\libbinkdec\BinkAudio.h" />
-    <ClInclude Include="..\..\source\libbinkdec\binkdata.h" />
-    <ClInclude Include="..\..\source\libbinkdec\BinkDecoder.h" />
-    <ClInclude Include="..\..\source\libbinkdec\BinkVideo.h" />
-    <ClInclude Include="..\..\source\libbinkdec\BitReader.h" />
-    <ClInclude Include="..\..\source\libbinkdec\dct.h" />
-    <ClInclude Include="..\..\source\libbinkdec\dct32.h" />
-    <ClInclude Include="..\..\source\libbinkdec\FFmpeg_includes.h" />
-    <ClInclude Include="..\..\source\libbinkdec\fft-internal.h" />
-    <ClInclude Include="..\..\source\libbinkdec\fft.h" />
-    <ClInclude Include="..\..\source\libbinkdec\FileStream.h" />
-    <ClInclude Include="..\..\source\libbinkdec\HuffmanVLC.h" />
-    <ClInclude Include="..\..\source\libbinkdec\LogError.h" />
-    <ClInclude Include="..\..\source\libbinkdec\rdft.h" />
-    <ClInclude Include="..\..\source\libbinkdec\Util.h" />
     <ClInclude Include="..\..\source\loguru.hpp" />
     <ClInclude Include="..\..\source\Nancy\AVF.h" />
     <ClInclude Include="..\..\source\Nancy\CIFF.h" />
@@ -292,6 +259,13 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\toml\utility.hpp" />
     <ClInclude Include="..\..\source\toml\value.hpp" />
     <ClInclude Include="..\..\source\toml\version.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SapphireEngine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

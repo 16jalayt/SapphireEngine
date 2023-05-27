@@ -1,5 +1,8 @@
 #include "Config.h"
 
+//Added to loguru.cpp. Alternately use VCPKG
+#define LOGURU_WITH_STREAMS 1
+#include <loguru.hpp>
 #include <iostream>
 
 //cmd parse
@@ -8,20 +11,28 @@
 #include <toml/toml.hpp>
 
 bool Config::fullscreen;
+bool Config::logfile;
+
 bool Config::debugHot;
 bool Config::debugNoSound;
+bool Config::lograw;
+
+//TODO:add option for startup scene
 
 void Config::parse(int argc, char** argv)
 {
 	//Parse the config file first so command line arguments can overwrite
 	try
 	{
+		//TODO: Create config file if not exist
 		auto data = toml::parse("config.toml");
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
+		Config::logfile = toml::find_or<bool>(data, "logfile", false);
 
 		const auto& debug = toml::find(data, "debug");
 		Config::debugHot = toml::find_or<bool>(debug, "debugHot", false);
 		Config::debugNoSound = toml::find_or<bool>(debug, "debugNoSound", false);
+		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
 		//std::cout << apple << std::endl;
 	}
 	catch (std::ios_base::failure& e)
@@ -63,4 +74,42 @@ void Config::parse(int argc, char** argv)
 		printf("Invalid argument");
 		exit(-5);
 	}
+
+	initLog(argc, argv);
+}
+
+void Config::initLog(int argc, char** argv)
+{
+#ifdef _DEBUG
+	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
+#else
+	loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
+#endif
+
+	//field length modified at loguru.hpp line 131
+	if (Config::lograw)
+	{
+		loguru::g_preamble_header = false;
+		loguru::g_preamble = false;
+	}
+	else
+	{
+		loguru::g_preamble_uptime = false;
+		loguru::g_preamble_date = false;
+	}
+
+	//init important for crash logging
+	loguru::init(argc, argv);
+	//Init sets to main thread by default
+	//loguru::set_thread_name("Main Thread");
+	if (Config::logfile)
+		loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_INFO);
+	/*LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
+	//LOG_S(INFO) << "Some float: " << 3.14;
+	LOG_S(ERROR) << "My vec3: " << 3.14;
+	//LOG_S(ERROR) << loguru::stacktrace(1).c_str();
+	//tracetest();*/
+
+	//LOG_SCOPE_FUNCTION(INFO);
+	//VLOG_SCOPE_F(1, "Iteration %d", 5);
 }

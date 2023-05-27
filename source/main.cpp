@@ -1,7 +1,4 @@
 #define SDL_MAIN_HANDLED
-//Added to loguru.cpp. Alternately use VCPKG
-#define LOGURU_WITH_STREAMS 1
-#include <loguru.hpp>
 
 #include <time.h>
 #include <stdio.h>
@@ -20,6 +17,7 @@
 #include "imgui_impl_sdl2.h"
 #include "imgui_impl_sdlrenderer.h"
 //#include "vld.h"
+#include <loguru.hpp>
 
 #include "globals.h"
 #include "Engine/utils.h"
@@ -27,7 +25,6 @@
 #include "Engine/sprite.h"
 #include "Engine/SDL_ptr.h"
 #include "Engine/Button.h"
-#include "Engine/AvP_BinkPlayback.h"
 #include "Engine/Scene.h"
 #include "Nancy/Loader.h"
 #include "Engine/GUI.h"
@@ -41,30 +38,6 @@
 int main(int argc, char** argv)
 {
 	Config::parse(argc, argv);
-
-#ifdef _DEBUG
-	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
-#else
-	loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
-#endif
-
-	//field length modified at loguru.hpp line 131
-	loguru::g_preamble_uptime = false;
-	loguru::g_preamble_date = false;
-
-	//init important for crash logging
-	loguru::init(argc, argv);
-	//Init sets to main thread by default
-	//loguru::set_thread_name("Main Thread");
-	loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_INFO);
-	/*LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
-	//LOG_S(INFO) << "Some float: " << 3.14;
-	LOG_S(ERROR) << "My vec3: " << 3.14;
-	//LOG_S(ERROR) << loguru::stacktrace(1).c_str();
-	//tracetest();*/
-
-	//LOG_SCOPE_FUNCTION(INFO);
-	//VLOG_SCOPE_F(1, "Iteration %d", 5);
 
 	//TODO: update everything to this syntax?
 	Graphics_ptr graphics = std::make_unique<Graphics>();

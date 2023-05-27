@@ -26,7 +26,7 @@ Scene::Scene()
 
 void Scene::SetHeader(std::string description, std::string sceneFile)
 {
-	LOG_F(INFO, "\n\n*******New scene: %s: %s*******", sceneFile.c_str(), description.c_str());
+	LOG_F(INFO, "\n\n\n\n*******New scene: %s: %s*******", sceneFile.c_str(), description.c_str());
 	sceneName = sceneFile;
 }
 

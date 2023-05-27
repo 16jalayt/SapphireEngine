@@ -25,9 +25,6 @@
     <Filter Include="Source Files\Nancy">
       <UniqueIdentifier>{b408e32b-d38f-4834-8a23-c6f530c59460}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\libbinkdec">
-      <UniqueIdentifier>{4e654913-b181-4c39-acc6-53e6d806893e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Nancy\HIFF Chunks">
       <UniqueIdentifier>{10d3c1d6-3b6d-4b63-af4c-772af5eb4c51}</UniqueIdentifier>
     </Filter>
@@ -49,15 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Engine\audio.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\AvP_AudioStreaming.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\AvP_BinkPlayback.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\AvP_RingBuffer.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Engine\Button.cpp">
@@ -83,48 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Engine\Scene.cpp">
       <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\avfft.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\BinkAudio.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\BinkDecoder.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\BinkVideo.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\BitReader.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\dct.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\dct32.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\fft.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\FileStream.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\HuffmanVLC.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\LogError.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\mdct.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\rdft.c">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\libbinkdec\Util.cpp">
-      <Filter>Source Files\libbinkdec</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp">
       <Filter>Source Files\Nancy\HIFF Chunks\ACT</Filter>
@@ -220,54 +166,6 @@
     </ClInclude>
     <ClInclude Include="..\..\source\Engine\Scene.h">
       <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\BinkDecoder.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\BinkVideo.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\BitReader.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\dct.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\dct32.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\FFmpeg_includes.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\fft.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\fft-internal.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\FileStream.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\HuffmanVLC.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\LogError.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\rdft.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\Util.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\avfft.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\BinkAudio.h">
-      <Filter>Source Files\libbinkdec</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\libbinkdec\binkdata.h">
-      <Filter>Source Files\libbinkdec</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h">
       <Filter>Header Files\Nancy\HIFF Chunks\ACT</Filter>
@@ -401,5 +299,18 @@
     <ClInclude Include="..\..\source\loguru.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SapphireEngine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
