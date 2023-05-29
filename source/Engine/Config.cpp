@@ -8,7 +8,7 @@
 //cmd parse
 #include "cxxopts.hpp"
 //config file
-#include <toml/toml.hpp>
+#include <toml11/toml.hpp>
 
 bool Config::fullscreen;
 bool Config::logfile;
