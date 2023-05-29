@@ -157,15 +157,20 @@ int main(int argc, char** argv)
 				}
 #else
 			case SDL_KEYDOWN:
-				if (io.WantCaptureKeyboard)
-					break;
-				/* Check the SDLKey values and move change the coords */
-				switch (event.key.keysym.sym)
+				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
-				case SDLK_ESCAPE:
 					LOG_F(ERROR, "\nShutting down engine\n");
 					exit_requested = 1;
 					break;
+				}
+				if (io.WantCaptureKeyboard)
+					break;
+				switch (event.key.keysym.sym)
+				{
+					/*case SDLK_ESCAPE:
+						LOG_F(ERROR, "\nShutting down engine\n");
+						exit_requested = 1;
+						break;*/
 				}
 #endif
 			}

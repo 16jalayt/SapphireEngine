@@ -1,7 +1,8 @@
 #include "Config.h"
 
-//Added to loguru.cpp. Alternately use VCPKG
+//Made changes to loguru.cpp. loguru is also in VCPKG
 #define LOGURU_WITH_STREAMS 1
+#define TOML11_COLORIZE_ERROR_MESSAGE 1
 #include <loguru.hpp>
 #include <iostream>
 
@@ -21,11 +22,12 @@ bool Config::lograw;
 
 void Config::parse(int argc, char** argv)
 {
+	const std::string configName = "config.toml";
 	//Parse the config file first so command line arguments can overwrite
 	try
 	{
 		//TODO: Create config file if not exist
-		auto data = toml::parse("config.toml");
+		auto data = toml::parse(configName);
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
 		Config::logfile = toml::find_or<bool>(data, "logfile", false);
 
@@ -37,7 +39,14 @@ void Config::parse(int argc, char** argv)
 	}
 	catch (std::ios_base::failure& e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cout << "The config file: " << configName << " not found. Creating..." << std::endl;
+		const toml::value data{
+			{"fullscreen", Config::fullscreen},
+			{ "logfile", Config::logfile },
+		};
+		std::ofstream out(configName);
+		out << data;
+		out.close();
 		exit(-2);
 	}
 	catch (toml::syntax_error& e)
