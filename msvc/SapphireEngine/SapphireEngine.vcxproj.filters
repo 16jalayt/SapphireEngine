@@ -123,21 +123,15 @@
     <ClCompile Include="..\..\source\loguru.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Engine\AudioClip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Engine\audio.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\AvP_RingBuffer.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Engine\Button.h">
@@ -304,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="..\..\source\toml11\macros.hpp">
       <Filter>Header Files\toml11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\AudioClip.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

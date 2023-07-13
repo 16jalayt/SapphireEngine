@@ -91,6 +91,14 @@ int main(int argc, char** argv)
 	test.push_back(menuFMV);
 	//nextScene->AddMovie(menuFMV);*/
 
+	/*Mix_Chunk* gMedium = Mix_LoadWAV("HDSound/NGD198.ogg");
+	//Mix_Chunk* gMedium = Mix_LoadWAV("data/pop1.wav");
+	if (gMedium == NULL)
+	{
+		printf("Failed to load medium sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+	}
+	Mix_PlayChannel(-1, gMedium, 0);*/
+
 #ifdef __SWITCH__
 	while (!exit_requested && appletMainLoop())
 #else

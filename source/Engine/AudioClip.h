@@ -1,0 +1,25 @@
+#pragma once
+
+#include "SDL_ptr.h"
+#include <SDL2/SDL_mixer.h>
+#include <string>
+
+class AudioClip
+{
+public:
+	std::string ClipName = "";
+	SDL_Mix_Music_ptr Music = NULL;
+	SDL_Mix_Chunk_ptr Clip = NULL;
+	int channel = -1;
+	bool loop = false;
+	int volL = -1;
+	int volR = -1;
+	bool hasPlayedOnce = false;
+	std::string changeTo = "";
+
+	void Play();
+
+protected:
+};
+
+using AudioClip_ptr = std::shared_ptr<AudioClip>;

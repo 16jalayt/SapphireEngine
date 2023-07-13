@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <memory>
+#include <SDL2/SDL_mixer.h>
 
 namespace SDL_Deleter
 {
@@ -107,6 +108,20 @@ namespace SDL_Deleter
 			SDL_FreeWAV(audio_buf);
 		}
 	};
+	struct SDL_Mix_Chunk_Deleter
+	{
+		void operator()(Mix_Chunk* chunk)
+		{
+			Mix_FreeChunk(chunk);
+		}
+	};
+	struct SDL_Mix_Music_Deleter
+	{
+		void operator()(Mix_Music* music)
+		{
+			Mix_FreeMusic(music);
+		}
+	};
 }
 
 using namespace SDL_Deleter;
@@ -134,6 +149,10 @@ using SDL_Palette_ptr = std::unique_ptr<SDL_Palette, SDL_Palette_Deleter>;
 using SDL_RWops_ptr = std::unique_ptr<SDL_RWops, SDL_RWops_Deleter>;
 
 using SDL_Uint8_WAV_ptr = std::unique_ptr<Uint8, SDL_Unit8_WAV_Deleter>;
+
+using SDL_Mix_Chunk_ptr = std::unique_ptr<Mix_Chunk, SDL_Mix_Chunk_Deleter>;
+
+using SDL_Mix_Music_ptr = std::unique_ptr<Mix_Music, SDL_Mix_Music_Deleter>;
 
 //Unique
 /// ///////////////////////////////////////////////////////////////////////////
@@ -228,6 +247,20 @@ std::shared_ptr<Uint8> make_SDL_Uint8_WAV_s(Args&&... args)
 {
 	return std::shared_ptr<Uint8>(std::forward<Args>(args)...,
 		SDL_Unit8_WAV_Deleter{});
+}
+
+template <class... Args>
+std::shared_ptr<Mix_Chunk> make_SDL_Mix_Chunk_s(Args&&... args)
+{
+	return std::shared_ptr<Mix_Chunk>(std::forward<Args>(args)...,
+		SDL_Mix_Chunk_Deleter{});
+}
+
+template <class... Args>
+std::shared_ptr<Mix_Music> make_SDL_Mix_Music_s(Args&&... args)
+{
+	return std::shared_ptr<Mix_Music>(std::forward<Args>(args)...,
+		SDL_Mix_Music_Deleter{});
 }
 
 #endif // !SDL_PTR_H

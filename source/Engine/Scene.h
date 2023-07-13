@@ -5,6 +5,7 @@
 #include "Engine/SDL_ptr.h"
 #include "Engine/sprite.h"
 #include "Engine/Button.h"
+#include "AudioClip.h"
 #include "Movie.h"
 
 //CurrentScene is static.
@@ -24,7 +25,6 @@ public:
 	std::vector<Movie_ptr> fmvs;
 	std::string sceneFile;
 	std::string sceneName;
-	bool changeMusic;
 
 	void Draw();
 	void Run();
@@ -35,6 +35,8 @@ public:
 	void AddMovie(Movie_ptr fmv);
 	void AddMusic(std::string sound, int channel, int loop, int chan1, int chan2);
 	void AddSound(std::string sound, int channel, int loop, int chan1, int chan2);
+	static void AddSound(std::string sound, int channel, int loop, int chan1, int chan2, int scene);
+	static void AddSound(std::string sound, int channel, int loop, int chan1, int chan2, std::string scene);
 
 protected:
 };

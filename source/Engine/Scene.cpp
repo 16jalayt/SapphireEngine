@@ -21,7 +21,6 @@ Scene::Scene()
 {
 	sceneFile = "";
 	sceneName = "";
-	changeMusic = false;
 }
 
 void Scene::SetHeader(std::string description, std::string sceneFile)
@@ -58,6 +57,8 @@ void Scene::Draw()
 		for (auto& hot : hots) {
 			hot->Draw();
 		}
+
+		Audio::CheckTransitions();
 	}
 }
 
@@ -126,64 +127,27 @@ void Scene::AddMovie(Movie_ptr fmv)
 }
 
 //create music paused
-void Scene::AddMusic(std::string sound, int channel, int loop, int chan1, int chan2)
+void Scene::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
 {
-	//So as to not restart music at every scene change
-	if (currentMusicName != sound)
-	{
-		changeMusic = true;
-		currentMusicName = sound;
-
-		std::string path = Loader::getSoundPath(sound);
-		if (path.empty())
-		{
-			LOG_F(ERROR, "Sound could not be found: %s", sound.c_str());
-			return;
-		}
-		//change music
-		//only 1 music at a time
-		currentMusic = Mix_LoadMUS(path.c_str());
-		if (!currentMusic)
-		{
-			LOG_F(ERROR, "Sound could not be loaded: %s SDL_Error: %s", sound.c_str(), SDL_GetError());
-			return;
-		}
-	}
-
-	//TODO: make chanel map and play at start?
-	//create array at default 8 with err catch. can resize.
-	//need deiunit for sound?
+	Audio::AddMusic(sound, channel, loop, volL, volR);
 }
 
 //create audio paused
-void Scene::AddSound(std::string sound, int channel, int loop, int chan1, int chan2)
+void Scene::AddSound(std::string sound, int channel, int loop, int volL, int volR)
 {
-	std::string path = Loader::getSoundPath(sound);
-	if (path.empty())
-	{
-		LOG_F(ERROR, "Sound could not be found: %s", sound.c_str());
-		return;
-	}
+	Audio::AddSound(sound, channel, loop, volL, volR);
+}
 
-	Mix_Chunk* waves = Mix_LoadWAV(path.c_str());
-	if (!waves)
-	{
-		LOG_F(ERROR, ".WAV sound '%s' could not be loaded! SDL_Error: %s", "", SDL_GetError());
-		return;
-	}
+//create audio paused with a scene to change to after ending
+void Scene::AddSound(std::string sound, int channel, int loop, int volL, int volR, int scene)
+{
+	Audio::AddSound(sound, channel, loop, volL, volR, std::to_string(scene));
+}
 
-	// Play waves sound
-	if (Mix_PlayChannel(channel, waves, loop) == -1)
-	{
-		LOG_F(ERROR, "Waves sound could not be played! SDL_Error: %s", SDL_GetError());
-		Mix_FreeChunk(waves);
-		return;
-	}
-	//Make sure channel paused
-	if (!Mix_Paused(channel))
-		Mix_Pause(channel);
-	//only works on se, not sure how useful in ND over mono volume
-	Mix_SetPanning(channel, chan1, chan2);
+//create audio paused with a scene to change to after ending
+void Scene::AddSound(std::string sound, int channel, int loop, int volL, int volR, std::string scene)
+{
+	Audio::AddSound(sound, channel, loop, volL, volR, scene);
 }
 
 //For internal use. Call Loader::loadScene instead
@@ -230,8 +194,15 @@ void Scene::Run()
 
 	if (!Config::debugNoSound)
 	{
+		Audio::currentMusic->Play();
+
+		for (auto sound : Audio::sounds)
+		{
+			sound->Play();
+		}
+
 		//Start music if not holding over from last scene
-		if (currentMusic != NULL && changeMusic)
+		/*if (currentMusic != NULL && changeMusic)
 		{
 			changeMusic = false;
 			Mix_PauseMusic();
@@ -250,7 +221,7 @@ void Scene::Run()
 			{
 				Mix_Pause(i);
 			}
-		}
+		}*/
 	}
 	//start video
 }

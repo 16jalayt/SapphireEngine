@@ -73,7 +73,7 @@ void GUI::Draw()
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	bool show_demo_window = true;
+	bool show_demo_window = false;
 	if (show_demo_window)
 		ImGui::ShowDemoWindow(&show_demo_window);
 
@@ -107,6 +107,78 @@ void GUI::AddButton(Button_ptr button)
 void GUI::AddRect(GUI_Rect rect)
 {
 	rects.push_back(rect);
+}
+
+void GUI::drawCheatSheet()
+{
+	//TODO: key combo to toggle
+	if (cheatSheetOpen)
+	{
+		//Forces to be immoveable
+		//ImGui::SetNextWindowPos(ImVec2(0, 0));
+		ImGui::SetNextWindowSize(ImVec2(700, 500));
+
+		//Todo: temp
+		//ImGui::SetNextWindowCollapsed(true);
+
+		// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		ImGui::Begin("Cheet Sheet", &cheatSheetOpen,
+			ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
+		//ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
+
+		//ImGui::SameLine();
+		//ImGui::Separator();
+		//HelpMarker("Using TableNextRow() + calling TableSetColumnIndex() _before_ each cell, in a loop.");
+		if (ImGui::BeginTabBar("MyTabBar"))
+		{
+			if (ImGui::BeginTabItem("General"))
+			{
+				std::string inputScene = currentScene->sceneName;
+				//TODO:redo flags
+				if (ImGui::InputText("Scene Num", &inputScene, ImGuiInputTextFlags_EnterReturnsTrue))
+				{
+					//printf("changed!\n");
+					//std::string sceneName = std::to_string(sceneNum);
+					//sceneChangeName = inputScene;
+					//sceneNum already set
+					//sceneNum = changeTo;
+					//sceneChangeFlag = true;
+					Loader::loadScene(inputScene);
+				}
+				//ToggleButtonV2("hi", &toggle);
+				if (ImGui::Button("Reload scene"))
+					ReloadScene();
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem("Inventory"))
+			{
+				//ImGui::Checkbox("test", &check);
+				if (ImGui::Button("Click Me"))
+					printf("Ow! Stop it!\n");
+				ImGui::EndTabItem();
+			}
+			if (ImGui::BeginTabItem("Events"))
+			{
+				if (ImGui::BeginTable("table1", 4))
+				{
+					for (int i = 0; i < 550; i++)
+					{
+						ImGui::TableNextColumn();
+						ImGui::Checkbox((std::to_string(i + 1000) + ":" + flagDesc[i]).c_str(), &flags[i]);
+						if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal)) // With a delay
+							ImGui::SetTooltip(flagDesc[i].c_str());
+					}
+					ImGui::EndTable();
+				}
+
+				ImGui::EndTabItem();
+			}
+			//TODO: new tab with map like Humongous
+			ImGui::EndTabBar();
+		}
+
+		ImGui::End();
+	}
 }
 
 void GUI::StyleSteam()
@@ -346,74 +418,6 @@ void GUI::StyleCleanBlue()
 	static ImVec3 color_for_body = ImVec3(44.f / 255.f, 62.f / 255.f, 80.f / 255.f);
 	static ImVec3 color_for_pops = ImVec3(33.f / 255.f, 46.f / 255.f, 60.f / 255.f);
 	imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops);
-}
-
-void GUI::drawCheatSheet()
-{
-	if (cheatSheetShown)
-	{
-		//Forces to be immoveable
-		//ImGui::SetNextWindowPos(ImVec2(0, 0));
-		ImGui::SetNextWindowSize(ImVec2(700, 500));
-		ImGui::SetNextWindowCollapsed(true);
-		// Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Begin("Cheet Sheet", &cheatSheetShown,
-			ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoSavedSettings);
-		//ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings);
-
-		//ImGui::SameLine();
-		//ImGui::Separator();
-		//HelpMarker("Using TableNextRow() + calling TableSetColumnIndex() _before_ each cell, in a loop.");
-		if (ImGui::BeginTabBar("MyTabBar"))
-		{
-			if (ImGui::BeginTabItem("General"))
-			{
-				std::string inputScene = currentScene->sceneName;
-				//TODO:redo flags
-				if (ImGui::InputText("Scene Num", &inputScene, ImGuiInputTextFlags_EnterReturnsTrue))
-				{
-					//printf("changed!\n");
-					//std::string sceneName = std::to_string(sceneNum);
-					//sceneChangeName = inputScene;
-					//sceneNum already set
-					//sceneNum = changeTo;
-					//sceneChangeFlag = true;
-					Loader::loadScene(inputScene);
-				}
-				//ToggleButtonV2("hi", &toggle);
-				if (ImGui::Button("Reload scene"))
-					ReloadScene();
-				ImGui::EndTabItem();
-			}
-			if (ImGui::BeginTabItem("Inventory"))
-			{
-				//ImGui::Checkbox("test", &check);
-				if (ImGui::Button("Click Me"))
-					printf("Ow! Stop it!\n");
-				ImGui::EndTabItem();
-			}
-			if (ImGui::BeginTabItem("Events"))
-			{
-				if (ImGui::BeginTable("table1", 4))
-				{
-					for (int i = 0; i < 550; i++)
-					{
-						ImGui::TableNextColumn();
-						ImGui::Checkbox((std::to_string(i + 1000) + ":" + flagDesc[i]).c_str(), &flags[i]);
-						if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayNormal)) // With a delay
-							ImGui::SetTooltip(flagDesc[i].c_str());
-					}
-					ImGui::EndTable();
-				}
-
-				ImGui::EndTabItem();
-			}
-			//TODO: new tab with map like Humongous
-			ImGui::EndTabBar();
-		}
-
-		ImGui::End();
-	}
 }
 
 void ToggleButton(const char* str_id, bool* v)

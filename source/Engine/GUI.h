@@ -35,7 +35,7 @@ private:
 	void StyleCleanBlue();
 	void drawCheatSheet();
 
-	bool cheatSheetShown = true;
+	bool cheatSheetOpen = true;
 };
 
 using GUI_ptr = std::shared_ptr<GUI>;

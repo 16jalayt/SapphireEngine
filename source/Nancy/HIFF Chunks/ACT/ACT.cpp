@@ -330,6 +330,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			break;
 
 		//TODO: Play sound
+		//nextScene->AddSound(sound, channel, loop, volL, volR);
 
 		//sceneChangeName = std::to_string(changeTo);
 		//sceneChangeFlag = true;
@@ -343,6 +344,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		std::string sound = readString(inFile, 33);
+		LOG_F(INFO, "  Sound: %s", sound.c_str());
 
 		int channel = readShort(inFile);
 		int loop = readInt(inFile);
@@ -360,10 +362,13 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 
 		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
 
+		//TODO: check deps not working
 		if (!checkDeps(deps))
 			break;
 
-		//TODO: Play sound
+		LOG_F(INFO, "  valid");
+		//TODO: ptr gets destroyed at end of scene
+		nextScene->AddSound(sound, channel, loop, volL, volR, changeTo);
 
 		//sceneChangeName = std::to_string(changeTo);
 		//sceneChangeFlag = true;

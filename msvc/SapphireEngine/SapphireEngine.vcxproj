@@ -175,6 +175,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
   <ItemGroup>
     <ClCompile Include="..\..\source\Engine\AnimatedSprite.cpp" />
     <ClCompile Include="..\..\source\Engine\audio.cpp" />
+    <ClCompile Include="..\..\source\Engine\AudioClip.cpp" />
     <ClCompile Include="..\..\source\Engine\Button.cpp" />
     <ClCompile Include="..\..\source\Engine\Config.cpp" />
     <ClCompile Include="..\..\source\Engine\graphics.cpp" />
@@ -203,9 +204,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\cxxopts.hpp" />
     <ClInclude Include="..\..\source\Engine\AnimatedSprite.h" />
     <ClInclude Include="..\..\source\Engine\audio.h" />
-    <ClInclude Include="..\..\source\Engine\AvP_AudioStreaming.h" />
-    <ClInclude Include="..\..\source\Engine\AvP_BinkPlayback.h" />
-    <ClInclude Include="..\..\source\Engine\AvP_RingBuffer.h" />
+    <ClInclude Include="..\..\source\Engine\AudioClip.h" />
     <ClInclude Include="..\..\source\Engine\Button.h" />
     <ClInclude Include="..\..\source\Engine\Config.h" />
     <ClInclude Include="..\..\source\Engine\graphics.h" />

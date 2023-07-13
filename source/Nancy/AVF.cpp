@@ -90,6 +90,7 @@ SDL_Texture* AVFPNG(std::vector<uint8_t> frame, int width, int height)
 	//SDL_RWops* rw = SDL_RWFromMem(buffer2, size);
 	SDL_RWops* rw = SDL_RWFromFile("tmp.png", "r");
 	return IMG_LoadTexture_RW(Graphics::renderer.get(), rw, 1); //1 means free rw after loading
+	//TODO: delete tmp?
 }
 
 SDL_Texture* RGB555_888_SDL(std::vector<uint8_t> col555, int width, int height) {

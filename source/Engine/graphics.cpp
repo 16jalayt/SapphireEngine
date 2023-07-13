@@ -150,7 +150,7 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 
 	if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) < 0)
 	{
-		fatalError("%s: SDL could not initialize image formats! SDL Error: %s", __func__, SDL_GetError());
+		fatalError("%s: SDL could not initialize image formats! SDL Error: %s", __func__, IMG_GetError());
 		return -1;
 	}
 	/*if (TTF_Init() < 0)
