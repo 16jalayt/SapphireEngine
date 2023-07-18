@@ -1,5 +1,6 @@
 #include "Nancy/HIFF Chunks/ACT/ACT.h"
 #include <string>
+#include <random>
 
 #include "Engine/utils.h"
 #include "Engine/Button.h"
@@ -329,8 +330,12 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		if (!checkDeps(deps))
 			break;
 
-		//TODO: Play sound
-		//nextScene->AddSound(sound, channel, loop, volL, volR);
+		std::mt19937 gen{std::random_device{}()}; // generates random numbers
+		std::uniform_int_distribution<std::size_t> dist(0, sounds.size() - 1); // maps the random number to [0..number of sounds]
+
+		int index = dist(gen);
+		std::string sound = sounds[index];
+		nextScene->AddSound(sound, channel, loop, volL, volR);
 
 		//sceneChangeName = std::to_string(changeTo);
 		//sceneChangeFlag = true;
@@ -367,7 +372,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			break;
 
 		LOG_F(INFO, "  valid");
-		//TODO: ptr gets destroyed at end of scene
+
 		nextScene->AddSound(sound, channel, loop, volL, volR, changeTo);
 
 		//sceneChangeName = std::to_string(changeTo);

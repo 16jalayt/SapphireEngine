@@ -7,7 +7,7 @@ void AudioClip::Play()
 		Mix_HaltMusic();
 		Mix_PlayMusic(Music.get(), loop ? 1 : -1);
 	}
-	else
+	else if (Clip)
 	{
 		//TODO: error handle
 		if (!hasPlayedOnce)

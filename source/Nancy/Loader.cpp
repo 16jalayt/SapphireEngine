@@ -222,6 +222,7 @@ std::string Loader::getVideoPath(std::string backName)
 
 std::string Loader::getSoundPath(std::string soundName)
 {
+	//TODO: handle SILENCE
 	if (soundName.empty())
 		return std::string();
 

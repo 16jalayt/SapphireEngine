@@ -86,6 +86,7 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 
 void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
 {
+	//TODO: loop music
 	AudioClip_ptr player = std::make_shared<AudioClip>();
 
 	std::string path = Loader::getSoundPath(sound);

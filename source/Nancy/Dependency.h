@@ -38,7 +38,7 @@ bool checkDeps(std::vector<Dependency> deps)
 		if (dep.boolean)
 		{
 			//TODO: figure out or. All dependencies?
-			if (flags[dep.label - 1000] == dep.condition)
+			if (flags[dep.label - 1000] || dep.condition)
 				continue;
 			else
 				return false;

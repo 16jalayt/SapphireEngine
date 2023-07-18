@@ -15,7 +15,7 @@ std::string sceneChangeName;
 std::string prevScene;
 //bool firstLoad = true;
 //Number for ghost dogs
-bool flags[576];
+bool flags[576] = {};
 
 Scene::Scene()
 {
