@@ -2,7 +2,7 @@
 
 void AudioClip::Play()
 {
-	if (Music && Mix_PlayingMusic() == 0)
+	if (Music && !Mix_PlayingMusic())
 	{
 		Mix_HaltMusic();
 		Mix_PlayMusic(Music.get(), loop ? 1 : -1);

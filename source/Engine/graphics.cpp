@@ -11,6 +11,7 @@
 #include "globals.h"
 #include "utils.h"
 #include "Config.h"
+#include "Cursor.h"
 
 //Graphics class
 //Holds all information dealing with graphics for the game
@@ -171,6 +172,7 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
 	Audio::Init();
+	Cursor::Init();
 
 	return 0;
 }

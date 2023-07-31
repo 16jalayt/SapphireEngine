@@ -15,9 +15,11 @@ int Audio::Init()
 	if (Config::debugNoSound) {
 		return 0;
 	}
-	SDL_InitSubSystem(SDL_INIT_AUDIO);
+	//SDL_InitSubSystem(SDL_INIT_AUDIO);
 
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	//Buffer size partially fixes stuttering
+	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
 	{
 		fatalError("%s: Failed to load Audio: %s", __func__, Mix_GetError());
 		return -1;
@@ -86,7 +88,6 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 
 void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
 {
-	//TODO: loop music
 	AudioClip_ptr player = std::make_shared<AudioClip>();
 
 	std::string path = Loader::getSoundPath(sound);

@@ -23,6 +23,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	if (file && strcmp(file, "") != 0)
 	{
 		//TODO: move to Loader
+		//TODO: upgrade to smart pointer
 		SDL_Surface* tmpsurf = IMG_Load(file);
 		if (tmpsurf)
 		{

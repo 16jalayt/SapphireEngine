@@ -178,6 +178,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\Engine\AudioClip.cpp" />
     <ClCompile Include="..\..\source\Engine\Button.cpp" />
     <ClCompile Include="..\..\source\Engine\Config.cpp" />
+    <ClCompile Include="..\..\source\Engine\Cursor.cpp" />
     <ClCompile Include="..\..\source\Engine\graphics.cpp" />
     <ClCompile Include="..\..\source\Engine\GUI.cpp" />
     <ClCompile Include="..\..\source\Engine\Scene.cpp" />
@@ -207,6 +208,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Engine\AudioClip.h" />
     <ClInclude Include="..\..\source\Engine\Button.h" />
     <ClInclude Include="..\..\source\Engine\Config.h" />
+    <ClInclude Include="..\..\source\Engine\Cursor.h" />
     <ClInclude Include="..\..\source\Engine\graphics.h" />
     <ClInclude Include="..\..\source\Engine\GUI.h" />
     <ClInclude Include="..\..\source\Engine\Scene.h" />

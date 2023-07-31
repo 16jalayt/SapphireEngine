@@ -29,6 +29,7 @@
 #include "Nancy/Loader.h"
 #include "Engine/GUI.h"
 #include <Engine/Config.h>
+#include <Engine/Cursor.h>
 
 /*void tracetest()
 {
@@ -139,6 +140,10 @@ int main(int argc, char** argv)
 			case SDL_FINGERDOWN:
 				if (!io.WantCaptureMouse)
 					currentScene->EventProc(event);
+				break;
+			case SDL_MOUSEMOTION:
+				if (!io.WantCaptureMouse)
+					Cursor::UpdateCursor();
 				break;
 			case SDL_QUIT:
 				exit_requested = 1;

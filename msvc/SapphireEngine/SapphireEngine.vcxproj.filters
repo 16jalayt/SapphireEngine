@@ -126,6 +126,9 @@
     <ClCompile Include="..\..\source\Engine\AudioClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\Engine\Cursor.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\globals.h">
@@ -300,6 +303,9 @@
       <Filter>Header Files\toml11</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\Engine\AudioClip.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Engine\Cursor.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

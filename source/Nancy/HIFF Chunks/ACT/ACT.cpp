@@ -54,6 +54,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		int cursorNumber = readShort(inFile);
 		//TODO:set cursor
 
+		//15 hilight?
+		//14 uturn?
+
 		//scene to change to
 		int changeTo = readShort(inFile);
 
@@ -333,7 +336,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		std::mt19937 gen{std::random_device{}()}; // generates random numbers
 		std::uniform_int_distribution<std::size_t> dist(0, sounds.size() - 1); // maps the random number to [0..number of sounds]
 
-		int index = dist(gen);
+		size_t index = dist(gen);
 		std::string sound = sounds[index];
 		nextScene->AddSound(sound, channel, loop, volL, volR);
 
