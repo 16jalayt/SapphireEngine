@@ -8,6 +8,7 @@
 #include "Engine/GUI.h"
 #include "Nancy/AVF.h"
 #include <loguru.hpp>
+#include "Cursor.h"
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
@@ -152,6 +153,26 @@ void Sprite::destroy()
 	_loaded = false;
 }
 
+void Sprite::Event(SDL_Event event)
+{
+	//HoverCheck(event);
+
+	switch (event.type)
+	{
+	case SDL_MOUSEBUTTONDOWN:
+	case SDL_FINGERDOWN:
+		if (MouseCollision(event) && callback)
+		{
+			//TODO: skeliton key crashes with empty callback
+			callback();
+		}
+		break;
+	case SDL_MOUSEMOTION:
+		HoverCheck(event);
+		break;
+	}
+}
+
 bool Sprite::MouseCollision(SDL_Event event)
 {
 	int x = 0;
@@ -193,6 +214,15 @@ bool Sprite::MouseCollision(SDL_Event event)
 
 	return true;
 }
+
+void Sprite::HoverCheck(SDL_Event event)
+{
+	if (MouseCollision(event))
+		Cursor::setCursor(hoverCursor);
+	//else
+		//Cursor::resetCursor();
+}
+
 SDL_Rect Sprite::getPos()
 {
 	return _pos;

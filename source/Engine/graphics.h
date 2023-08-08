@@ -6,7 +6,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer.h"
+#include "imgui_impl_sdlrenderer2.h"
 
 #include "SDL_ptr.h"
 #include "SDL_TTF_ptr.h"

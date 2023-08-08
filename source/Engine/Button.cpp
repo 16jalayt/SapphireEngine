@@ -58,20 +58,6 @@ void Button::Draw()
 	}
 }
 
-void Button::Event(SDL_Event event)
-{
-	switch (event.type)
-	{
-	case SDL_MOUSEBUTTONDOWN:
-	case SDL_FINGERDOWN:
-		if (MouseCollision(event))
-		{
-			callback();
-		}
-		break;
-	}
-}
-
 void Button::setDebug(bool debug)
 {
 	_debugView = debug;

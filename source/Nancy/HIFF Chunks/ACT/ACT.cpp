@@ -10,6 +10,7 @@
 #include "Nancy/Dependency.h"
 #include <Engine/Config.h>
 #include <loguru.hpp>
+#include <Engine/Cursor.h>
 
 bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 {
@@ -49,13 +50,10 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		//Scene change with HS
 	case 25:
 	{
+		//TODO: add x and y to log
 		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s  at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
 		int cursorNumber = readShort(inFile);
-		//TODO:set cursor
-
-		//15 hilight?
-		//14 uturn?
 
 		//scene to change to
 		int changeTo = readShort(inFile);
@@ -82,6 +80,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		};
 		if (Config::debugHot)
 			testbutton->setDebug(true);
+		testbutton->hoverCursor = cursorNumber;
 		//testbutton->visible(false);
 		break;
 	}
@@ -209,14 +208,25 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		int truth = readShort(inFile);
 
 		//Cursor set to -1?
+		LOG_F(INFO, "Cursor unknown pos:%d", (int)inFile.tellg());
 
 		//Need cursor value somewhere
 		//Currently unknown
-		skipBytes(inFile, 8);
+		//skipBytes(inFile, 8);
+
+		//Always -1?
+		//TODO: assert
+		int unknown1 = readShort(inFile);
+		int unknown2 = readShort(inFile);
+
+		int cursorNumber = readShort(inFile);
+
+		int unknown3 = readShort(inFile);
 
 		//one of the ones might be PUSH_SCENE=1
 
 		//Frame hotspot is active in?
+		//TODO: for rotating node
 		int frame = readShort(inFile);
 		Scaled_Rect hotZone = { readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
 
@@ -230,6 +240,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			//sceneChangeFlag = true;
 			Loader::loadScene(currentScene->sceneFile);
 		};
+		testbutton->hoverCursor = cursorNumber;
 		if (Config::debugHot)
 			testbutton->setDebug(true);
 

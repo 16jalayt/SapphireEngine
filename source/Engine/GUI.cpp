@@ -3,7 +3,7 @@
 #include <string>
 #include "imgui.h"
 #include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer.h"
+#include "imgui_impl_sdlrenderer2.h"
 #include "imgui_stdlib.h"
 
 #include "Engine/utils.h"
@@ -31,7 +31,7 @@ GUI::GUI()
 
 	// Setup Platform/Renderer backends
 	ImGui_ImplSDL2_InitForSDLRenderer(Graphics::window.get(), Graphics::renderer.get());
-	ImGui_ImplSDLRenderer_Init(Graphics::renderer.get());
+	ImGui_ImplSDLRenderer2_Init(Graphics::renderer.get());
 
 	//StyleClean();
 	StyleCleanBlue();
@@ -41,7 +41,7 @@ GUI::GUI()
 GUI::~GUI()
 {
 	// Cleanup IMGUI
-	ImGui_ImplSDLRenderer_Shutdown();
+	ImGui_ImplSDLRenderer2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 }
@@ -69,7 +69,7 @@ void GUI::Draw()
 
 	//TODO:imgui cursor position doesn't work fullscreen
 	// Start the Dear ImGui frame
-	ImGui_ImplSDLRenderer_NewFrame();
+	ImGui_ImplSDLRenderer2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
@@ -81,7 +81,7 @@ void GUI::Draw()
 
 	// Rendering
 	ImGui::Render();
-	ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 }
 
 void GUI::EventProc(SDL_Event event)

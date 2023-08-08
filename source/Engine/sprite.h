@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <functional>
 
 #include "SDL_ptr.h"
 #include "utils.h"
@@ -20,7 +21,9 @@ public:
 	void destroy();
 	bool isloaded();
 	bool isVisible();
+	void Event(SDL_Event event);
 	bool MouseCollision(SDL_Event event);
+	void HoverCheck(SDL_Event event);
 	SDL_Rect getPos();
 	void visible(bool visible);
 	void setScale(float scale);
@@ -29,6 +32,9 @@ public:
 	int getHeight();
 	void setPos(SDL_Rect pos);
 	void isMask(bool mask);
+
+	int hoverCursor = 0;
+	std::function<void()> callback;
 
 protected:
 	bool _loaded = false;

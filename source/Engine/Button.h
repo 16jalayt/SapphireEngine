@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <functional>
 
 #include "sprite.h"
 #include "SDL_ptr.h"
@@ -14,10 +13,7 @@ public:
 	Button(SDL_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
 	Button(Scaled_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
 	void Draw();
-	void Event(SDL_Event event);
 	void setDebug(bool debug);
-	//void (*callback)();
-	std::function<void()> callback;
 
 private:
 	//TODO: make enabled in click handler

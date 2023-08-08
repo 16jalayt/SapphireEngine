@@ -15,7 +15,7 @@
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL2_rotozoom.h>
 #include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer.h"
+#include "imgui_impl_sdlrenderer2.h"
 //#include "vld.h"
 #include <loguru.hpp>
 
@@ -143,7 +143,11 @@ int main(int argc, char** argv)
 				break;
 			case SDL_MOUSEMOTION:
 				if (!io.WantCaptureMouse)
-					Cursor::UpdateCursor();
+				{
+					//TODO: explicitly set to system cursor for IMGUI?
+					Cursor::CursorChanged = false;
+					currentScene->EventProc(event);
+				}
 				break;
 			case SDL_QUIT:
 				exit_requested = 1;
@@ -210,6 +214,14 @@ int main(int argc, char** argv)
 			fmv->Draw();
 		}*/
 		//menuFMV->Draw();
+
+		//Doesn't have to be here. Handled by SDL
+		Cursor::DrawCursor();
+		/*if (Cursor::CursorChanged)
+		{
+			Cursor::DrawCursor();
+			Cursor::CursorChanged = false;
+		}*/
 
 		SDL_RenderPresent(Graphics::renderer.get());
 
