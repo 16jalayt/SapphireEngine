@@ -1,6 +1,6 @@
 #pragma once
 
-#define SDL_MAIN_HANDLED
+//#define SDL_MAIN_HANDLED
 #define ERROR_SIZE 128
 #define VIDEO_FORMAT AV_PIX_FMT_RGB24
 #define SDL_AUDIO_BUFFER_SIZE 1024;

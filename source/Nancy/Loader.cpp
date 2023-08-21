@@ -238,6 +238,18 @@ std::string Loader::getSoundPath(std::string soundName)
 		return "CDSound/" + soundName + ".ogg";
 	}
 
+	inFile = std::ifstream("HDSound/" + soundName + ".wav", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "HDSound/" + soundName + ".wav";
+	}
+
+	inFile = std::ifstream("CDSound/" + soundName + ".wav", std::ios::in | std::ios::binary | std::ios::ate);
+	if (!inFile.fail()) {
+		inFile.close();
+		return "CDSound/" + soundName + ".wav";
+	}
+
 	inFile = std::ifstream("HDSound/" + soundName + ".his", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();

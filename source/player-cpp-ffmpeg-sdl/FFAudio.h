@@ -1,5 +1,9 @@
 #pragma once
 
+#include <SDL2/SDL_audio.h>
+#include "AudioPacket.h"
+#include <memory>
+
 extern "C"
 {
 #include <libavcodec/avcodec.h>
@@ -13,10 +17,6 @@ extern "C"
 #include <libavutil/frame.h>
 #include <libavutil/imgutils.h>
 }
-
-#include <SDL2/SDL_audio.h>
-#include "AudioPacket.h"
-#include <memory>
 
 class FFAudio
 {

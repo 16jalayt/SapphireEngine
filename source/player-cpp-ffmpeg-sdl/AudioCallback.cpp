@@ -1,6 +1,19 @@
-#include "FFAudio.h"
 #include "AudioCallback.h"
 #include "FFPlayer.h"
+
+extern "C"
+{
+#include <libavcodec/avcodec.h>
+#include <libavdevice/avdevice.h>
+#include <libavfilter/avfilter.h>
+#include <libavformat/avformat.h>
+#include <libavformat/avio.h>
+#include <libavutil/avutil.h>
+#include <libswresample/swresample.h>
+#include <libswscale/swscale.h>
+#include <libavutil/frame.h>
+#include <libavutil/imgutils.h>
+}
 
 FFAudio* AudioCallback::audio_instance = 0;
 void AudioCallback::set_audio_instance(FFAudio* audio_instance)

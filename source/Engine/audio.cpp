@@ -58,26 +58,32 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 
 	//if hdAudio then mus, else cdAudio chunk
 	std::string path = Loader::getSoundPath(sound);
-	if (path.empty())
+	if (path.empty() && sound != "silence")
 	{
 		LOG_F(ERROR, "Could not find sound: %s", sound.c_str());
 		return;
 	}
 
-	LOG_F(INFO, "Opening sound: %s as chunk.", path.c_str());
-	player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV(path.c_str()));
-	if (player->Clip == NULL)
+	if (sound != "silence")
 	{
-		LOG_F(ERROR, "Failed to load sound: %s , %s", path.c_str(), Mix_GetError());
-		return;
-	}
+		LOG_F(INFO, "Opening sound: %s as chunk.", path.c_str());
+		player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV(path.c_str()));
+		if (player->Clip == NULL)
+		{
+			LOG_F(ERROR, "Failed to load sound: %s , %s", path.c_str(), Mix_GetError());
+			return;
+		}
 
-	player->ClipName = path;
+		player->ClipName = path;
+	}
+	else
+		LOG_F(INFO, "    Silencing channel %d", channel);
+
 	player->channel = channel;
 	player->volL = volL;
 	player->volR = volR;
 	player->loop = loop;
-	//Means don't transition
+	//Means just play, don't transition after
 	if (scene != "9999")
 		player->changeTo = scene;
 

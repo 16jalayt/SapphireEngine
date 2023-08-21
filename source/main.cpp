@@ -182,13 +182,15 @@ int main(int argc, char** argv)
 				}
 				if (io.WantCaptureKeyboard)
 					break;
-				switch (event.key.keysym.sym)
+				/*switch (event.key.keysym.sym)
 				{
-					/*case SDLK_ESCAPE:
+					case SDLK_ESCAPE:
 						LOG_F(ERROR, "\nShutting down engine\n");
 						exit_requested = 1;
-						break;*/
-				}
+						break;
+				default:
+					break;
+				}*/
 #endif
 			}
 		}
