@@ -217,3 +217,16 @@ bool AssertShort(std::ifstream& inFile, short val, bool bigEndian)
 	}
 	return true;
 }
+bool AssertInt(std::ifstream& inFile, int val, bool bigEndian)
+{
+	int readValue = readInt(inFile, false);
+
+	if (readValue != val)
+	{
+		LOG_F(ERROR, "Value at position: %d\n", ((int)inFile.tellg() - 2));
+		LOG_F(ERROR, "Expected value %d got %d\n", val, readValue);
+
+		return false;
+	}
+	return true;
+}

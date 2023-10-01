@@ -253,17 +253,17 @@ std::string Loader::getSoundPath(std::string soundName)
 	inFile = std::ifstream("HDSound/" + soundName + ".his", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();
-		LOG_F(ERROR, "HIS not supported yet!\n");
-		//return "HDSound/" + soundName + ".his";
-		return std::string();
+		//LOG_F(ERROR, "HIS not supported yet!\n");
+		return "HDSound/" + soundName + ".his";
+		//return std::string();
 	}
 
 	inFile = std::ifstream("CDSound/" + soundName + ".his", std::ios::in | std::ios::binary | std::ios::ate);
 	if (!inFile.fail()) {
 		inFile.close();
-		LOG_F(ERROR, "HIS not supported yet!\n");
-		//return "CDSound/" + soundName + ".his";
-		return std::string();
+		//LOG_F(ERROR, "HIS not supported yet!\n");
+		return "CDSound/" + soundName + ".his";
+		//return std::string();
 	}
 
 	return std::string();

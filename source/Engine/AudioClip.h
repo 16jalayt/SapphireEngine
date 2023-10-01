@@ -3,12 +3,14 @@
 #include "SDL_ptr.h"
 #include <SDL2/SDL_mixer.h>
 #include <string>
+#include <vector>
 
 class AudioClip
 {
 public:
 	std::string ClipName = "";
 	SDL_Mix_Music_ptr Music = NULL;
+	std::vector<unsigned char> musicMem;
 	SDL_Mix_Chunk_ptr Clip = NULL;
 	int channel = -1;
 	bool loop = false;

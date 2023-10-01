@@ -19,6 +19,7 @@ SDL_Rect ScaleRect(int x, int y, int w, int h, float scale = GlobalScale);
 int readInt(std::ifstream& inFile, bool bigEndian = false);
 short readShort(std::ifstream& inFile, bool bigEndian = false);
 bool AssertShort(std::ifstream& inFile, short val, bool bigEndian = false);
+bool AssertInt(std::ifstream& inFile, int val, bool bigEndian = false);
 char readByte(std::ifstream& inFile);
 std::string readString(std::ifstream& inFile, int length);
 void skipBytes(std::ifstream& inFile, int skip);

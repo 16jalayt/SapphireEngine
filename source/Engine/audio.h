@@ -23,6 +23,12 @@ public:
 	static void RemoveAllSounds();
 	static void AddTransition(std::string scene);
 	static void CheckTransitions();
+
+private:
+	static bool CheckIfOgg(std::basic_ifstream<unsigned char>* file);
+	static void pushIntToVector(int value, std::vector<unsigned char>* v);
+	static void pushShortToVector(short value, std::vector<unsigned char>* v);
+	static void pushSringToVector(std::string value, std::vector<unsigned char>* v);
 };
 //Currently due to callback, only one bink can play audio at a time.
 static bool binkAudioLock = false;

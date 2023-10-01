@@ -1,5 +1,6 @@
 #include "audio.h"
 #include <SDL2/SDL_mixer.h>
+#include <iostream>
 
 #include "Engine/utils.h"
 #include "Config.h"
@@ -43,8 +44,8 @@ void Audio::Quit()
 	}
 	// stop sounds and free loaded data
 	Mix_HaltChannel(-1);
-	Mix_CloseAudio();
 	Mix_Quit();
+	Mix_CloseAudio();
 }
 
 void Audio::AddSound(std::string sound, int channel, int loop, int volL, int volR)
@@ -61,19 +62,116 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 	if (path.empty() && sound != "silence")
 	{
 		LOG_F(ERROR, "Could not find sound: %s", sound.c_str());
-		return;
+		//Still need to store sound, so can transition
+		//return;
 	}
 
-	if (sound != "silence")
+	//silence is placeholder for default
+	//Path will be empty if sound not found
+	if (sound != "silence" && path != "")
 	{
 		LOG_F(INFO, "Opening sound: %s as chunk.", path.c_str());
-		player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV(path.c_str()));
-		if (player->Clip == NULL)
+		std::string ext = path.substr(path.length() - 4, 4);
+		if (ext == ".his")
 		{
-			LOG_F(ERROR, "Failed to load sound: %s , %s", path.c_str(), Mix_GetError());
-			return;
-		}
+			std::basic_ifstream<unsigned char> file(path, std::ios::binary);
+			if (file)
+			{
+				std::vector<unsigned char> v;
+				//wav
+				if (!CheckIfOgg(&file))
+				{
+					std::ifstream inFile = std::ifstream(path, std::ios::in | std::ios::binary | std::ios::ate);
+					if (inFile.fail()) {
+						inFile.close();
+						LOG_F(ERROR, "Unable to open HIF file:%s", path.c_str());
+						//return;
+					}
 
+					inFile.seekg(0);
+
+					std::string magic = readString(inFile, 4);
+					if (magic != "HIS\0")
+					{
+						LOG_F(ERROR, "Invalid header in file: %s", path.c_str());
+						//return;
+					}
+
+					//ver major													ver minor
+					if (!AssertShort(inFile, 2) || !AssertShort(inFile, 0))
+					{
+						LOG_F(ERROR, "Invalid version in file: %s", path.c_str());
+						//return;
+					}
+
+					short wavFormat = readShort(inFile);
+					short numChannels = readShort(inFile);
+					int samplerate = readInt(inFile);
+					int avgBytesPerSecond = readInt(inFile);
+					short bitsPerSample = readShort(inFile);
+					short blockAlign = readShort(inFile);
+					//Only seems to be valid with wav data
+					int fileLength = readInt(inFile);
+					//version?
+					readShort(inFile);
+
+					//Calculated values
+					samplerate = samplerate / numChannels;
+
+					//tmp lazy hardcode
+					file.seekg(0x18);
+					std::vector<unsigned char> soundData = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
+						std::istreambuf_iterator<unsigned char>());
+
+					//Construct WAV header for sdl_mixer
+					pushSringToVector("RIFF", &v);
+					pushIntToVector(fileLength + 32, &v);
+					pushSringToVector("WAVEfmt ", &v);
+					pushIntToVector(16, &v);
+					pushShortToVector(wavFormat, &v);
+					pushShortToVector(numChannels, &v);
+					pushIntToVector(samplerate, &v);
+					pushIntToVector(avgBytesPerSecond, &v);
+					pushShortToVector(bitsPerSample, &v);
+					pushShortToVector(blockAlign, &v);
+					pushSringToVector("data", &v);
+
+					//insert pcm data
+					v.insert(v.end(), soundData.begin(), soundData.end());
+
+					//Does  not work
+					//player->Clip = SDL_Mix_Chunk_ptr(Mix_QuickLoad_RAW(v.data(), v.size()));
+				}
+				//ogg
+				else
+				{
+					file.seekg(0x1e, std::ios::beg);
+					v = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
+						std::istreambuf_iterator<unsigned char>());
+				}
+				SDL_RWops* rw = SDL_RWFromMem((void*)v.data(), (int)v.size());
+				if (!rw)
+				{
+					LOG_F(ERROR, "Could not create RWop: %s", SDL_GetError());
+					//Still need to store sound, so can transition
+					//return;
+				}
+				else
+					player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV_RW(rw, 1));
+			}
+			else
+				LOG_F(ERROR, "Failed to load sound file: %s", path.c_str());
+		}
+		//not .his - ogg or wav
+		else
+		{
+			player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV(path.c_str()));
+			if (player->Clip == NULL)
+			{
+				LOG_F(ERROR, "Failed to load sound: %s , %s", path.c_str(), Mix_GetError());
+				return;
+			}
+		}
 		player->ClipName = path;
 	}
 	else
@@ -94,22 +192,49 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 
 void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
 {
+	if (currentMusic && sound == currentMusic->ClipName)
+		return;
+
 	AudioClip_ptr player = std::make_shared<AudioClip>();
 
 	std::string path = Loader::getSoundPath(sound);
 
-	//TODO: check name insted of path?
-	if (currentMusic && path == currentMusic->ClipName)
-		return;
-
 	LOG_F(INFO, "Opening sound: %s as music.", path.c_str());
-	player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS(path.c_str()));
-	if (player->Music == NULL)
+
+	std::string ext = path.substr(path.length() - 4, 4);
+	if (ext == ".his")
+	{
+		std::basic_ifstream<unsigned char> file(path, std::ios::binary);
+		if (file)
+		{
+			if (CheckIfOgg(&file))
+			{
+				file.seekg(0x1e);
+				player->musicMem = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
+					std::istreambuf_iterator<unsigned char>());
+
+				SDL_RWops* rw = SDL_RWFromMem((void*)player->musicMem.data(), (int)player->musicMem.size());
+				//Mix_Music* mus = Mix_LoadMUSType_RW(rw, MUS_OGG, 1);
+				//Seems to require v to continue to exist
+				player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS_RW(rw, 1));
+			}
+			else
+			{
+				LOG_F(ERROR, "Only Ogg supported as music right now: %s", path.c_str());
+			}
+		}
+	}
+	else
+	{
+		player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS(path.c_str()));
+	}
+
+	if (player->Music.get() == NULL)
 	{
 		LOG_F(ERROR, "Failed to load music: %s , %s", path.c_str(), Mix_GetError());
 	}
 
-	player->ClipName = path;
+	player->ClipName = sound;
 	player->channel = channel;
 	player->volL = volL;
 	player->volR = volR;
@@ -120,6 +245,7 @@ void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int vol
 
 void Audio::CheckTransitions()
 {
+	//TODO: Doesn't transfer when file not found
 	for (auto sound : sounds)
 	{
 		//if sound not playing and scene transition set
@@ -144,4 +270,32 @@ void Audio::RemoveAllSounds()
 
 void Audio::AddTransition(std::string scene)
 {
+}
+
+bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
+{
+	//Where ogg file should start
+	file->seekg(0x1E);
+	unsigned char testVal = 0;
+	file->get(testVal);
+	return (char)testVal == 'O';
+}
+
+void Audio::pushIntToVector(int value, std::vector<unsigned char>* v)
+{
+	v->push_back(value);
+	v->push_back(value >> 8);
+	v->push_back(value >> 16);
+	v->push_back(value >> 24);
+}
+
+void Audio::pushShortToVector(short value, std::vector<unsigned char>* v)
+{
+	v->push_back(value);
+	v->push_back(value >> 8);
+}
+
+void Audio::pushSringToVector(std::string value, std::vector<unsigned char>* v)
+{
+	v->insert(v->end(), value.begin(), value.end());
 }

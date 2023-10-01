@@ -12,8 +12,12 @@ std::string Cursor::spriteSheetPath;
 
 SDL_Cursor_ptr Cursor::loadCursorFromSheet(std::string filename, SDL_Rect rect)
 {
+	//Cache sprite sheet to improve performance
 	if (spriteSheetPath != filename)
+	{
+		spriteSheetPath = filename;
 		spriteSheet = SDL_Surface_ptr(IMG_Load(filename.c_str()));
+	}
 	if (!spriteSheet)
 	{
 		LOG_F(ERROR, "Unable to load cursor Sprite Sheet: %s.\n", filename.c_str());
@@ -30,7 +34,7 @@ SDL_Cursor_ptr Cursor::loadCursorFromSheet(std::string filename, SDL_Rect rect)
 
 	SDL_BlitSurface(spriteSheet.get(), &rect, sprite, NULL);
 
-	SDL_FreeSurface(spriteSheet.get());
+	//SDL_FreeSurface(spriteSheet.get());
 
 	SDL_Cursor_ptr cursor = SDL_Cursor_ptr(SDL_CreateColorCursor(sprite, 10, 10));
 
@@ -40,27 +44,30 @@ SDL_Cursor_ptr Cursor::loadCursorFromSheet(std::string filename, SDL_Rect rect)
 int Cursor::Init()
 {
 	//TODO: make default placeholder, bug with random starting cursor
+	//TODO: split out game specific
+
+	std::string sheetName = "DataFiles/CIFTREE/OBJECT0.png";
 
 	//Default Magnifying
-	cursors[0] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 506, 3, 30, 40 }));
+	cursors[0] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 506, 3, 30, 40 }));
 	//Highlight Magnifying
-	cursors[1] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 537, 3, 30, 40 }));
+	cursors[1] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 537, 3, 30, 40 }));
 	//Left Arrow
-	cursors[6] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 568, 167, 30, 40 }));
+	cursors[6] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 568, 167, 30, 40 }));
 	//Right Arrow
-	cursors[7] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 568, 208, 30, 40 }));
+	cursors[7] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 568, 208, 30, 40 }));
 	//Back Arrow
-	cursors[9] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 506, 290, 30, 40 }));
+	cursors[9] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 506, 290, 30, 40 }));
 	//Uturn Arrow
-	cursors[14] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 568, 85, 30, 40 }));
+	cursors[14] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 568, 85, 30, 40 }));
 	//Forward Arrow
-	cursors[15] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 475, 290, 30, 40 }));
+	cursors[15] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 475, 290, 30, 40 }));
 	//Back Arrow (duplicate)
-	cursors[16] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 506, 290, 30, 40 }));
+	cursors[16] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 506, 290, 30, 40 }));
 	//Left Arrow (duplicate)
-	cursors[22] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 568, 167, 30, 40 }));
+	cursors[22] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 568, 167, 30, 40 }));
 	//Right Arrow (duplicate)
-	cursors[23] = std::move(loadCursorFromSheet("DataFiles/CIFTREE/OBJECT0.png", SDL_Rect{ 568, 208, 30, 40 }));
+	cursors[23] = std::move(loadCursorFromSheet(sheetName, SDL_Rect{ 568, 208, 30, 40 }));
 
 	return 0;
 }
