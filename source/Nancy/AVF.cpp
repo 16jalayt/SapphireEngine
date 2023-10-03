@@ -9,7 +9,7 @@
 #include "Engine/utils.h"
 #include <oldhertools/avf.hpp>
 
-#include <png++/png.hpp>
+//#include <png++/png.hpp>
 #include <iostream>
 #include <iomanip>
 #include <loguru.hpp>
@@ -82,7 +82,8 @@ std::vector<SDL_Texture_ptr> AVF::parseAVF(const char* file)
 	return frames;
 }
 
-SDL_Texture* AVFPNG(std::vector<uint8_t> frame, int width, int height)
+//tmp png is not great method
+/*SDL_Texture* AVFPNG(std::vector<uint8_t> frame, int width, int height)
 {
 	png::image<png::rgb_pixel> frameimg = Her::MakePNG(frame, width, height);
 
@@ -91,7 +92,7 @@ SDL_Texture* AVFPNG(std::vector<uint8_t> frame, int width, int height)
 	SDL_RWops* rw = SDL_RWFromFile("tmp.png", "r");
 	return IMG_LoadTexture_RW(Graphics::renderer.get(), rw, 1); //1 means free rw after loading
 	//TODO: delete tmp?
-}
+}*/
 
 SDL_Texture* RGB555_888_SDL(std::vector<uint8_t> col555, int width, int height) {
 	unsigned char* pixels = nullptr;

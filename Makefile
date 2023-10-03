@@ -39,9 +39,11 @@ include $(DEVKITPRO)/libnx/switch_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source source/Engine source/Nancy source/libbinkdec
+SOURCES		:=	source source/Engine source/Nancy source/Nancy/HIFFChunks source/Nancy/HIFFChunks/ACT source/libbinkdec source/oldhertools source/player-cpp-ffmpeg-sdl source/toml11
+#source/Switch/imgui
 DATA		:=	data
-INCLUDES	:=	source source/Engine source/Nancy source/libbinkdec
+INCLUDES	:=	source source/Engine source/Nancy source/Nancy/HIFFChunks source/Nancy/HIFFChunks/ACT source/libbinkdec source/oldhertools source/player-cpp-ffmpeg-sdl source/toml11
+#source/Switch/imgui
 ROMFS		:=	romfs
 
 APP_TITLE   := SDL2 Test
@@ -53,19 +55,20 @@ ICON		:=	icon.png
 #---------------------------------------------------------------------------------
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 
-CFLAGS	:=	`$(PREFIX)pkg-config --cflags sdl2 SDL2_mixer SDL2_image` -Wno-comment -Wall -O2 -ffunction-sections \
+CFLAGS	:=	`$(PREFIX)pkg-config --cflags sdl2 SDL2_mixer SDL2_image libavcodec libavfilter libavformat libavutil` -Wno-comment -Wall -O2 -ffunction-sections \
 			$(ARCH) $(DEFINES)
 
 CFLAGS	+=	$(INCLUDE) -D__SWITCH__
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
+CXXFLAGS	:= $(CFLAGS) -fno-rtti 
+#-fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
 LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
-LIBS	:=	`$(PREFIX)pkg-config --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_gfx openal` \
-			-lnx
-
+LIBS	:=	`$(PREFIX)pkg-config --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_gfx openal libavcodec libavfilter libavformat libavutil` \
+			-lnx -pthread -lm -lz
+			#-lnx -pthread -lavformat -lavcodec -lswresample -lswscale -lavutil -lbz2 -lass -lvorbis -logg -lm -lz -lopus -lpng -lbz2 -lfribidi
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib

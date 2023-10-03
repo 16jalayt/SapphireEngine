@@ -6,6 +6,10 @@
 
 #ifdef __SWITCH__
 #include <switch.h>
+#else
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_sdlrenderer2.h>
 #endif
 
 #include <SDL2/SDL.h>
@@ -14,8 +18,7 @@
 //#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL2_framerate.h>
 #include <SDL2/SDL2_rotozoom.h>
-#include "imgui_impl_sdl2.h"
-#include "imgui_impl_sdlrenderer2.h"
+
 //#include "vld.h"
 #include <loguru.hpp>
 
@@ -38,7 +41,9 @@
 
 int main(int argc, char** argv)
 {
+#ifndef __SWITCH__
 	Config::parse(argc, argv);
+#endif
 
 	//TODO: update everything to this syntax?
 	Graphics_ptr graphics = std::make_unique<Graphics>();
@@ -80,7 +85,9 @@ int main(int argc, char** argv)
 	int exit_requested = 0;
 	int wait = 25;
 	SDL_Event event;
+#ifndef __SWITCH__
 	ImGuiIO& io = ImGui::GetIO();
+#endif
 	bool toggle = true;
 	int scenenum = 0;
 	bool check = false;
@@ -121,13 +128,14 @@ int main(int argc, char** argv)
 
 		while (SDL_PollEvent(&event))
 		{
+#ifndef __SWITCH__
 			// Poll and handle events (inputs, window resize, etc.)
 		// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
 		// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
 		// - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
 		// Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
 			ImGui_ImplSDL2_ProcessEvent(&event);
-
+#endif
 			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(Graphics::window.get()))
 			{
 				exit_requested = 1;
@@ -136,27 +144,13 @@ int main(int argc, char** argv)
 
 			switch (event.type)
 			{
-			case SDL_MOUSEBUTTONDOWN:
-			case SDL_FINGERDOWN:
-				if (!io.WantCaptureMouse)
-					currentScene->EventProc(event);
-				break;
-			case SDL_MOUSEMOTION:
-				if (!io.WantCaptureMouse)
-				{
-					//TODO: explicitly set to system cursor for IMGUI?
-					Cursor::CursorChanged = false;
-					currentScene->EventProc(event);
-				}
-				break;
 			case SDL_QUIT:
 				exit_requested = 1;
 				break;
 
 				// use joystick
-			case SDL_JOYBUTTONDOWN:
-
 #ifdef __SWITCH__
+			case SDL_JOYBUTTONDOWN:
 				switch (event.type)
 				{
 				case KEY_LSTICK_UP:
@@ -180,8 +174,30 @@ int main(int argc, char** argv)
 					exit_requested = 1;
 					break;
 				}
+#ifndef __SWITCH__
 				if (io.WantCaptureKeyboard)
+#endif
 					break;
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_FINGERDOWN:
+#ifndef __SWITCH__
+				if (!io.WantCaptureMouse)
+#endif
+					currentScene->EventProc(event);
+				break;
+			case SDL_MOUSEMOTION:
+#ifndef __SWITCH__
+				if (!io.WantCaptureMouse)
+				{
+#endif
+					//TODO: explicitly set to system cursor for IMGUI?
+					Cursor::CursorChanged = false;
+					currentScene->EventProc(event);
+#ifndef __SWITCH__
+				}
+#endif
+				break;
+
 				/*switch (event.key.keysym.sym)
 				{
 					case SDLK_ESCAPE:

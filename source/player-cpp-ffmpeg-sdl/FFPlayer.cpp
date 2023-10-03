@@ -177,7 +177,7 @@ int FFPlayer::malloc(void)
 	if (!Config::debugNoSound && !binkAudioLock)
 	{
 		audio = std::make_shared<FFAudio>(pCodecAudioCtx);
-		audio->open(pCodecAudioParameters->ch_layout.nb_channels);
+		audio->open();
 	}
 
 	pFrame = av_frame_alloc();

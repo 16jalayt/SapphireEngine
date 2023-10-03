@@ -15,10 +15,8 @@ FFAudio::FFAudio(AVCodecContext* pCodecAudioCtx)
 		return;
 	}
 
-	av_opt_set_chlayout(swrCtx, "in_channel_layout", &pCodecAudioCtx->ch_layout, 0);
-	av_opt_set_chlayout(swrCtx, "out_channel_layout", &pCodecAudioCtx->ch_layout, 0);
-	//av_opt_set_channel_layout(swrCtx, "in_channel_layout", pCodecAudioCtx->channel_layout, 0);
-	//av_opt_set_channel_layout(swrCtx, "out_channel_layout", pCodecAudioCtx->channel_layout, 0);
+	av_opt_set_channel_layout(swrCtx, "in_channel_layout", pCodecAudioCtx->channel_layout, 0);
+	av_opt_set_channel_layout(swrCtx, "out_channel_layout", pCodecAudioCtx->channel_layout, 0);
 	av_opt_set_int(swrCtx, "in_sample_rate", pCodecAudioCtx->sample_rate, 0);
 	av_opt_set_int(swrCtx, "out_sample_rate", pCodecAudioCtx->sample_rate, 0);
 	av_opt_set_sample_fmt(swrCtx, "in_sample_fmt", pCodecAudioCtx->sample_fmt, 0);
@@ -34,9 +32,8 @@ FFAudio::FFAudio(AVCodecContext* pCodecAudioCtx)
 
 	memset(&wantedSpec, 0, sizeof(wantedSpec));
 
-	wantedSpec.channels = pCodecAudioCtx->ch_layout.nb_channels;
-	//wantedSpec.channels = pCodecAudioCtx->channels;
-	wantedSpec.freq = 44100;
+	wantedSpec.channels = pCodecAudioCtx->channels;
+	wantedSpec.freq = pCodecAudioCtx->sample_rate;
 	wantedSpec.format = AUDIO_S16SYS;
 	wantedSpec.silence = 0;
 	wantedSpec.samples = SDL_AUDIO_BUFFER_SIZE;
@@ -51,7 +48,7 @@ FFAudio::~FFAudio()
 	binkAudioLock = false;
 }
 
-void FFAudio::open(int numchannels)
+void FFAudio::open()
 {
 	//SDL_AudioInit("winmm");
 	SDL_AudioInit("directsound");
@@ -65,13 +62,8 @@ void FFAudio::open(int numchannels)
 
 	wanted_frame.format = AV_SAMPLE_FMT_S16;
 	wanted_frame.sample_rate = audioSpec.freq;
-
-	AVChannelLayout default_ch_layout;
-	av_channel_layout_default(&default_ch_layout, numchannels);
-	wanted_frame.ch_layout = default_ch_layout;
-
-	//wanted_frame.channel_layout = av_get_default_channel_layout(audioSpec.channels);
-	//wanted_frame.channels = audioSpec.channels;
+	wanted_frame.channel_layout = av_get_default_channel_layout(audioSpec.channels);
+	wanted_frame.channels = audioSpec.channels;
 
 	audioq.nb_packets = 0;
 	audioq.size = 0;
@@ -125,10 +117,8 @@ int FFAudio::audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, i
 				swr_ctx = NULL;
 			}
 
-			swr_alloc_set_opts2(&swr_ctx, &wanted_frame.ch_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
-				&frame.ch_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
-			//swr_ctx = swr_alloc_set_opts(NULL, wanted_frame.channel_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
-			//frame.channel_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
+			swr_ctx = swr_alloc_set_opts(NULL, wanted_frame.channel_layout, (AVSampleFormat)wanted_frame.format, wanted_frame.sample_rate,
+				frame.channel_layout, (AVSampleFormat)frame.format, frame.sample_rate, 0, NULL);
 
 			if (!swr_ctx || swr_init(swr_ctx) < 0)
 			{
@@ -155,8 +145,7 @@ int FFAudio::audio_decode_frame(AVCodecContext* aCodecCtx, uint8_t* audio_buf, i
 				swr_ctx = NULL;
 			}
 
-			return wanted_frame.ch_layout.nb_channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
-			//return wanted_frame.channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
+			return wanted_frame.channels * len2 * av_get_bytes_per_sample(AV_SAMPLE_FMT_S16);
 		}
 
 		if (getAudioPacket(&audioq, &pkt, 1) < 0)

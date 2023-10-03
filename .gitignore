@@ -371,3 +371,6 @@ ref materials/
 x86/
 x64/
 obj/
+*.elf
+*.nacp
+*.nro

@@ -1,4 +1,4 @@
-#include <Nancy/HIFF Chunks/SUM.h>
+#include <Nancy/HIFFChunks/SUM.h>
 #include <string>
 #include <Engine/utils.h>
 #include <Engine/Button.h>

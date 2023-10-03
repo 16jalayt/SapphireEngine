@@ -21,12 +21,6 @@
     <Filter Include="Source Files\Nancy">
       <UniqueIdentifier>{b408e32b-d38f-4834-8a23-c6f530c59460}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Nancy\HIFF Chunks">
-      <UniqueIdentifier>{10d3c1d6-3b6d-4b63-af4c-772af5eb4c51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Nancy\HIFF Chunks\ACT">
-      <UniqueIdentifier>{264ca047-1085-49ec-b732-c20452f7064e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Nancy\HIFF Chunks">
       <UniqueIdentifier>{15487682-b8e1-49a5-8fee-cb9033f8cceb}</UniqueIdentifier>
     </Filter>
@@ -45,6 +39,12 @@
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Nancy\HIFFChunks">
+      <UniqueIdentifier>{10d3c1d6-3b6d-4b63-af4c-772af5eb4c51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nancy\HIFFChunks\ACT">
+      <UniqueIdentifier>{264ca047-1085-49ec-b732-c20452f7064e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +74,6 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Engine\Scene.cpp">
       <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp">
-      <Filter>Source Files\Nancy\HIFF Chunks\ACT</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp">
-      <Filter>Source Files\Nancy\HIFF Chunks</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Nancy\AVF.cpp">
       <Filter>Source Files\Nancy</Filter>
@@ -128,6 +122,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Engine\Cursor.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\HIFFChunks\SUM.cpp">
+      <Filter>Source Files\Nancy\HIFFChunks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Nancy\HIFFChunks\ACT\ACT.cpp">
+      <Filter>Source Files\Nancy\HIFFChunks\ACT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

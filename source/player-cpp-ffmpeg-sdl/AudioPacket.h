@@ -3,7 +3,7 @@
 extern "C"
 {
 #include <libavcodec/avcodec.h>
-#include <libavdevice/avdevice.h>
+	//#include <libavdevice/avdevice.h>
 #include <libavfilter/avfilter.h>
 #include <libavformat/avformat.h>
 #include <libavformat/avio.h>
@@ -12,6 +12,7 @@ extern "C"
 #include <libswscale/swscale.h>
 #include <libavutil/frame.h>
 #include <libavutil/imgutils.h>
+#include <libavutil/opt.h>
 }
 
 #include "SDL2/SDL_thread.h"

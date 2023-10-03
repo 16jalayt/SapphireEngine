@@ -54,7 +54,7 @@ namespace Her {
 		return col888;
 	}
 
-	png::image<png::rgb_pixel> MakePNG(std::vector<uint8_t> col555, int width, int height) {
+	/*png::image<png::rgb_pixel> MakePNG(std::vector<uint8_t> col555, int width, int height) {
 		std::vector<uint8_t> col888;
 		png::image<png::rgb_pixel> outImg(width, height);
 
@@ -78,7 +78,7 @@ namespace Her {
 		}
 
 		return outImg;
-	}
+	}*/
 
 	/*void RGB555_888_SDL(std::vector<uint8_t> col555, SDL_Texture*& texture) {
 		Uint8 colR;

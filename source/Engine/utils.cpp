@@ -15,6 +15,9 @@
 void fatalError(const char* fmt, ...)
 {
 #ifdef __SWITCH__
+	Graphics::Quit();
+	Audio::Quit();
+
 	consoleInit(NULL);
 	va_list va;
 	va_start(va, fmt);

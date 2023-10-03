@@ -7,7 +7,7 @@
 extern "C"
 {
 #include <libavcodec/avcodec.h>
-#include <libavdevice/avdevice.h>
+	//#include <libavdevice/avdevice.h>
 #include <libavfilter/avfilter.h>
 #include <libavformat/avformat.h>
 #include <libavformat/avio.h>
@@ -16,6 +16,8 @@ extern "C"
 #include <libswscale/swscale.h>
 #include <libavutil/frame.h>
 #include <libavutil/imgutils.h>
+#include <libavutil/opt.h>
+#include <libavutil/channel_layout.h>
 }
 
 class FFAudio
@@ -29,7 +31,7 @@ public:
 
 	AudioPacket audioq;
 
-	void open(int numchannels);
+	void open();
 
 	static int getAudioPacket(AudioPacket*, AVPacket*, int);
 	int audio_decode_frame(AVCodecContext*, uint8_t*, int);

@@ -1,4 +1,4 @@
-#include "Nancy/HIFF Chunks/ACT/ACT.h"
+#include "Nancy/HIFFChunks/ACT/ACT.h"
 #include <string>
 #include <random>
 
@@ -69,15 +69,15 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		Button_ptr testbutton = std::make_shared<Button>(hot, "");
 		nextScene->AddHotzone(testbutton);
 		testbutton->callback = [changeTo = changeTo]
-		{
-			//printf("lambda called\n");
-			//TODO: IMPORTANT: lambda creates new thread and deletes object mid execution
-			//find way to rejoin
-			//set flag to change scene and have sceneproc load
-			//sceneChangeName = std::to_string(changeTo);
-			//sceneChangeFlag = true;
-			Loader::loadScene(changeTo);
-		};
+			{
+				//printf("lambda called\n");
+				//TODO: IMPORTANT: lambda creates new thread and deletes object mid execution
+				//find way to rejoin
+				//set flag to change scene and have sceneproc load
+				//sceneChangeName = std::to_string(changeTo);
+				//sceneChangeFlag = true;
+				Loader::loadScene(changeTo);
+			};
 		if (Config::debugHot)
 			testbutton->setDebug(true);
 		testbutton->hoverCursor = cursorNumber;
@@ -233,13 +233,13 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		Button_ptr testbutton = std::make_shared<Button>(hotZone, "");
 		nextScene->AddHotzone(testbutton);
 		testbutton->callback = [flag = flag, truth = truth]
-		{
-			flags[flag - 1000] = truth;
-			LOG_F(INFO, "set scene flag num: %d\n", flag);
-			//sceneChangeName = currentScene->sceneFile;
-			//sceneChangeFlag = true;
-			Loader::loadScene(currentScene->sceneFile);
-		};
+			{
+				flags[flag - 1000] = truth;
+				LOG_F(INFO, "set scene flag num: %d\n", flag);
+				//sceneChangeName = currentScene->sceneFile;
+				//sceneChangeFlag = true;
+				Loader::loadScene(currentScene->sceneFile);
+			};
 		testbutton->hoverCursor = cursorNumber;
 		if (Config::debugHot)
 			testbutton->setDebug(true);
@@ -344,7 +344,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		if (!checkDeps(deps))
 			break;
 
-		std::mt19937 gen{std::random_device{}()}; // generates random numbers
+		std::mt19937 gen{ std::random_device{}() }; // generates random numbers
 		std::uniform_int_distribution<std::size_t> dist(0, sounds.size() - 1); // maps the random number to [0..number of sounds]
 
 		size_t index = dist(gen);

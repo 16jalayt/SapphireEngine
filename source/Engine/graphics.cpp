@@ -7,6 +7,12 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
+#ifndef __SWITCH__
+#include <imgui.h>
+#include <imgui_impl_sdl2.h>
+#include <imgui_impl_sdlrenderer2.h>
+#endif
+
 #include "audio.h"
 #include "globals.h"
 #include "utils.h"

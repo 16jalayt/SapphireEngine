@@ -189,9 +189,9 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Nancy\AVF.cpp" />
     <ClCompile Include="..\..\source\Nancy\CIFF.cpp" />
-    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.cpp" />
-    <ClCompile Include="..\..\source\Nancy\HIFF Chunks\SUM.cpp" />
     <ClCompile Include="..\..\source\Nancy\HIFF.cpp" />
+    <ClCompile Include="..\..\source\Nancy\HIFFChunks\ACT\ACT.cpp" />
+    <ClCompile Include="..\..\source\Nancy\HIFFChunks\SUM.cpp" />
     <ClCompile Include="..\..\source\Nancy\Loader.cpp" />
     <ClCompile Include="..\..\source\oldhertools\colorspace.cpp" />
     <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp" />

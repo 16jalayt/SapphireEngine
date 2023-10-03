@@ -25,6 +25,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	{
 		//TODO: move to Loader
 		//TODO: upgrade to smart pointer
+		//TODO: change all texture loading to IMG_LoadTexture to skip tmpsurf
 		SDL_Surface* tmpsurf = IMG_Load(file);
 		if (tmpsurf)
 		{

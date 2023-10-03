@@ -115,6 +115,8 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 					//version?
 					readShort(inFile);
 
+					inFile.close();
+
 					//Calculated values
 					samplerate = samplerate / numChannels;
 
