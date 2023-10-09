@@ -2,6 +2,7 @@
 #include "Engine/utils.h"
 #include "graphics.h"
 #include "Engine/GUI.h"
+#include "Config.h"
 
 Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
 {
@@ -35,7 +36,7 @@ void Button::Draw()
 {
 	Sprite::Draw();
 
-	if (_visible && _debugView == true)
+	if (_visible && Config::debugHot)
 	{
 		if (_parent == RenderParent::window)
 		{
@@ -56,9 +57,4 @@ void Button::Draw()
 			SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
 		}
 	}
-}
-
-void Button::setDebug(bool debug)
-{
-	_debugView = debug;
 }

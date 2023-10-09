@@ -17,6 +17,7 @@ void fatalError(const char* fmt, ...)
 #ifdef __SWITCH__
 	Graphics::Quit();
 	Audio::Quit();
+	romfsExit();
 
 	consoleInit(NULL);
 	va_list va;

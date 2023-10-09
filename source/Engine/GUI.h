@@ -30,10 +30,10 @@ public:
 	void AddButton(Button_ptr button);
 	void AddRect(GUI_Rect rect);
 private:
-	void StyleSteam();
-	void StyleClean();
-	void StyleCleanBlue();
 	void drawCheatSheet();
+	void ToggleButton(const char* str_id, bool* v);
+	void ToggleButtonV2(const char* str_id, bool* v);
+	void ShowHelpMarker(const char* desc);
 
 	bool cheatSheetOpen = true;
 };

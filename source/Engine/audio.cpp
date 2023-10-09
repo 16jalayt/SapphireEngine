@@ -175,21 +175,20 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 			}
 		}
 		player->ClipName = path;
+		player->channel = channel;
+		player->volL = volL;
+		player->volR = volR;
+		player->loop = loop;
+		//Means just play, don't transition after
+		if (scene != "9999")
+			player->changeTo = scene;
+
+		Audio::sounds.push_back(std::move(player));
+
+		//TODO: vol here and music
 	}
 	else
 		LOG_F(INFO, "    Silencing channel %d", channel);
-
-	player->channel = channel;
-	player->volL = volL;
-	player->volR = volR;
-	player->loop = loop;
-	//Means just play, don't transition after
-	if (scene != "9999")
-		player->changeTo = scene;
-
-	Audio::sounds.push_back(player);
-
-	//TODO: vol here and music
 }
 
 void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
@@ -248,30 +247,63 @@ void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int vol
 void Audio::CheckTransitions()
 {
 	//TODO: Doesn't transfer when file not found
-	for (auto sound : sounds)
+	for (int i = 0; i < sounds.size(); i++)
 	{
-		//if sound not playing and scene transition set
-		if (Mix_Playing(sound->channel) != 0 && !sound->changeTo.empty())
+		//TODO: investigate null clip names being created
+		//same remote button twice loops
+		//clicker can still get stuck sometimes
+
+		if (!sounds.at(i) || sounds.at(i)->ClipName == "")
+			LOG_F(WARNING, "clip name empty or null");
+		else
 		{
-			Loader::loadScene(sound->changeTo);
+			//if sound not playing and scene transition set
+			if (!sounds.at(i)->changeTo.empty() && Mix_Playing(sounds.at(i)->channel) != 0)
+			{
+				Loader::loadScene(sounds.at(i)->changeTo);
+			}
 		}
 	}
+
+	//Causes problems with iterator for some reason
+	/*for (auto& sound : sounds)
+	{
+		//TODO: investigate null clip names being created
+		//same remote button twice loops
+		//clicker can still get stuck sometimes
+
+		if (!sound || sound->channel < 0 || sound->ClipName == "")
+			LOG_F(WARNING, "clip name empty or null");
+		else
+		{
+			LOG_F(ERROR, "%d", sound->channel);
+			//if sound not playing and scene transition set
+			if (!sound->changeTo.empty() && Mix_Playing(sound->channel) != 0)
+			{
+				Loader::loadScene(sound->changeTo);
+			}
+		}
+	}*/
 }
 
 void Audio::PlaySound()
 {
+	LOG_F(WARNING, "Audio::PlaySound Stub");
 }
 
 void Audio::PauseSound()
 {
+	LOG_F(WARNING, "Audio::PauseSound Stub");
 }
 
 void Audio::RemoveAllSounds()
 {
+	sounds.clear();
 }
 
 void Audio::AddTransition(std::string scene)
 {
+	LOG_F(WARNING, "Audio::AddTransition Stub");
 }
 
 bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
@@ -293,7 +325,7 @@ void Audio::pushIntToVector(int value, std::vector<unsigned char>* v)
 
 void Audio::pushShortToVector(short value, std::vector<unsigned char>* v)
 {
-	v->push_back(value);
+	v->push_back((unsigned char)value);
 	v->push_back(value >> 8);
 }
 

@@ -170,6 +170,11 @@ void _ChangeScene(std::string sceneName)
 void _LoadScene(std::string sceneName)
 {
 	nextScene = Scene_ptr(new Scene());
+
+	//TODO: sounds in audio never gets cleared.
+	//This is not the place to do it. GC?
+	//Audio::RemoveAllSounds();
+
 	//used for navigaiton
 	//TODO: go all the way to 30?
 	flags[0] = false;
@@ -184,6 +189,7 @@ void _LoadScene(std::string sceneName)
 
 void ReloadScene()
 {
+	Audio::RemoveAllSounds();
 	currentScene->ovls.clear();
 	currentScene->hots.clear();
 	currentScene->fmvs.clear();

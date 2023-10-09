@@ -1,6 +1,7 @@
 #pragma once
 
 const bool oldUI = true;
+static bool isEditing = false;
 
 //NOTE: brakes FFPlayer
 const int globalframerate = 30;

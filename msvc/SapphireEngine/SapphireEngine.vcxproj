@@ -218,6 +218,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     <ClInclude Include="..\..\source\Engine\utils.h" />
     <ClInclude Include="..\..\source\Engine\Movie.h" />
     <ClInclude Include="..\..\source\globals.h" />
+    <ClInclude Include="..\..\source\GuiStyles.h" />
     <ClInclude Include="..\..\source\loguru.hpp" />
     <ClInclude Include="..\..\source\Nancy\AVF.h" />
     <ClInclude Include="..\..\source\Nancy\CIFF.h" />

@@ -78,8 +78,9 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 				//sceneChangeFlag = true;
 				Loader::loadScene(changeTo);
 			};
-		if (Config::debugHot)
-			testbutton->setDebug(true);
+		//Now handled in button
+		//if (Config::debugHot)
+			//testbutton->setDebug(true);
 		testbutton->hoverCursor = cursorNumber;
 		//testbutton->visible(false);
 		break;
@@ -234,6 +235,7 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 		nextScene->AddHotzone(testbutton);
 		testbutton->callback = [flag = flag, truth = truth]
 			{
+				//TODO: make some sort of setFlag(flag);
 				flags[flag - 1000] = truth;
 				LOG_F(INFO, "set scene flag num: %d\n", flag);
 				//sceneChangeName = currentScene->sceneFile;
@@ -241,8 +243,6 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 				Loader::loadScene(currentScene->sceneFile);
 			};
 		testbutton->hoverCursor = cursorNumber;
-		if (Config::debugHot)
-			testbutton->setDebug(true);
 
 		break;
 	}
