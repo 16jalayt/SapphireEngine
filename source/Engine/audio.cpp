@@ -20,7 +20,9 @@ int Audio::Init()
 
 	//Buffer size partially fixes stuttering
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
+	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
+	//TODO: try to put back after switch audio
+	if (Mix_OpenAudio(48000, AUDIO_S16, 2, 4096) == -1)
 	{
 		fatalError("%s: Failed to load Audio: %s", __func__, Mix_GetError());
 		return -1;
@@ -211,6 +213,7 @@ void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int vol
 			if (CheckIfOgg(&file))
 			{
 				file.seekg(0x1e);
+				//TODO: switch does not like this
 				player->musicMem = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
 					std::istreambuf_iterator<unsigned char>());
 
@@ -306,6 +309,7 @@ void Audio::AddTransition(std::string scene)
 	LOG_F(WARNING, "Audio::AddTransition Stub");
 }
 
+//problems with switch reading char
 bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
 {
 	//Where ogg file should start
@@ -314,6 +318,25 @@ bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
 	file->get(testVal);
 	return (char)testVal == 'O';
 }
+/*bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
+{
+	//Where ogg file should start
+	file->seekg(0x1E);
+	//unsigned char testVal = 1;
+	//file->get(testVal);
+	unsigned char testVal = 0;
+	//file->read(&testVal, 1);
+	std::vector<unsigned char> musicMem;
+	musicMem = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(*file)),
+		std::istreambuf_iterator<unsigned char>());
+
+	testVal = musicMem[0x1E];
+	LOG_F(ERROR, "testval: %c", testVal);
+
+	//New method lowercase?
+	//return (char)testVal == 'O';
+	return (char)testVal == 'o';
+}*/
 
 void Audio::pushIntToVector(int value, std::vector<unsigned char>* v)
 {

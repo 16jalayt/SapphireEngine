@@ -4,4 +4,5 @@ SET "CDIR=%~dp0"
 SET "CDIR=%CDIR:~0,-1%"
 FOR %%i IN ("%CDIR%") DO SET "PARENTFOLDERNAME=%%~nxi"
 @echo on
-nxlink.exe %PARENTFOLDERNAME%.nro -a 192.168.1.57
+nxlink.exe %PARENTFOLDERNAME%.nro -a 192.168.1.57 -s
+PAUSE

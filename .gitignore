@@ -368,9 +368,11 @@ build/
 out/
 romfs/
 ref materials/
+SapphireEngine/
 x86/
 x64/
 obj/
 *.elf
 *.nacp
 *.nro
+*.7z

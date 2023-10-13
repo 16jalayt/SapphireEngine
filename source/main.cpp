@@ -41,9 +41,27 @@
 
 int main(int argc, char** argv)
 {
-#ifndef __SWITCH__
-	Config::parse(argc, argv);
+#ifdef __SWITCH__
+
+	//Log to Ryujinx
+	consoleDebugInit(debugDevice_SVC);
+
+	//Log to nxlink on actual hardware
+	socketInitializeDefault();
+	nxlinkStdio();
+	//use cerr for both to work
+
+	//Running off sd card now so no romfs
+	/*Result rc = romfsInit();
+	if (R_FAILED(rc))
+		printf("romfsInit: %08X\n", rc);
+	chdir("romfs:/");*/
+
+	chdir("/switch/SapphireEngine/");
+
 #endif
+
+	Config::parse(argc, argv);
 
 	//TODO: update everything to this syntax?
 	Graphics_ptr graphics = std::make_unique<Graphics>();

@@ -46,9 +46,9 @@ INCLUDES	:=	source source/Engine source/Nancy source/Nancy/HIFFChunks source/Nan
 #source/Switch/imgui
 ROMFS		:=	romfs
 
-APP_TITLE   := SDL2 Test
+APP_TITLE   := Sapphire Engine
 APP_AUTHOR  := 16jalayt
-ICON		:=	icon.png
+ICON		:=	icon.jpg
 
 #---------------------------------------------------------------------------------
 # options for code generation

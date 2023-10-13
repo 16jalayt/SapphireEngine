@@ -12,35 +12,53 @@
 #include "utils.h"
 #include <loguru.hpp>
 
+//to test switch romfs
+void printfile(const char* path)
+{
+	FILE* f = fopen(path, "r");
+	if (f)
+	{
+		char mystring[100];
+		while (fgets(mystring, sizeof(mystring), f))
+		{
+			int a = strlen(mystring);
+			if (mystring[a - 1] == '\n')
+			{
+				mystring[a - 1] = 0;
+				if (mystring[a - 2] == '\r')
+					mystring[a - 2] = 0;
+			}
+			puts(mystring);
+		}
+		printf(">>EOF<<\n");
+		fclose(f);
+	}
+	else {
+		printf("errno is %d, %s\n", errno, strerror(errno));
+	}
+}
+
 void fatalError(const char* fmt, ...)
 {
 #ifdef __SWITCH__
-	Graphics::Quit();
-	Audio::Quit();
-	romfsExit();
-
-	consoleInit(NULL);
 	va_list va;
 	va_start(va, fmt);
-	vprintf(fmt, va);
+	vfprintf(stderr, fmt, va);
 	va_end(va);
-	printf("\nPlease return to the home menu and restart the application.\n");
-	//Keep looping forever. For some reason libnx app crashes on proper exit.
-	while (appletMainLoop())
-	{
-		//Reduce the update interval to not thrash the cpu
-		SDL_Delay(50);
-		consoleUpdate(NULL);
-	}
 
+	printf("fstest!\n");
+	printfile("folder/file.txt");
+
+	//Kernel panics
 	quit();
+
 #else
 	va_list va;
 	va_start(va, fmt);
 	vprintf(fmt, va);
 	va_end(va);
 	LOG_F(ERROR, "\nExiting...\n");
-	exit(-1);
+	quit();
 #endif
 }
 
@@ -86,6 +104,7 @@ void initControls()
 
 void loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex)
 {
+	//TODO: convert to direct texture func
 	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load("data/Nintendo_Switch_Logo_resized.png"));
 	if (loading_surf)
 	{

@@ -4,4 +4,4 @@ SET "CDIR=%~dp0"
 SET "CDIR=%CDIR:~0,-1%"
 FOR %%i IN ("%CDIR%") DO SET "PARENTFOLDERNAME=%%~nxi"
 @echo on
-E:\Emu\ryujinx-1.1.58-win_x64\publish\Ryujinx.exe %PARENTFOLDERNAME%.nro
+F:\Emu\ryujinx-1.1.58-win_x64\publish\Ryujinx.exe %PARENTFOLDERNAME%.nro

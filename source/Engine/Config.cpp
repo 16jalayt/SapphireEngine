@@ -89,10 +89,16 @@ void Config::parse(int argc, char** argv)
 
 void Config::initLog(int argc, char** argv)
 {
+	//TODO: add to config
 #ifdef _DEBUG
 	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
 #else
 	loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
+#endif
+
+	//Force to max because switch hard to debug
+#ifdef __SWITCH__
+	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
 #endif
 
 	//field length modified at loguru.hpp line 131

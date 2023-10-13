@@ -31,11 +31,6 @@ Graphics::~Graphics()
 
 int Graphics::init(SDL_Texture_sptr loading_tex)
 {
-#ifdef __SWITCH__
-	romfsInit();
-	chdir("romfs:/");
-#endif
-
 	//Only init video to display load screen faster.
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -59,14 +54,18 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	}*/
 
 	int flags = 0;
-#ifdef __SWITCH__
-	flags = SDL_WINDOW_SHOWN;
-#else
+
 	if (Config::fullscreen)
 		flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
 	else
 		//full desk ignores real width
 		flags = SDL_WINDOW_SHOWN;
+
+#ifdef __SWITCH__
+	//seems to be fine
+	//Not sure what fullscreen flag would do on switch
+	//flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
+#else
 
 	//For IMGUI
 	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");

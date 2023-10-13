@@ -110,6 +110,7 @@
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\SapphireEngine\" "$(TargetDir)\" /E /Y /I /D
 XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -131,6 +132,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\SapphireEngine\" "$(TargetDir)\" /E /Y /I /D
 XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -148,6 +150,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\SapphireEngine\" "$(TargetDir)\" /E /Y /I /D
 XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -169,6 +172,7 @@ XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarge
     </Link>
     <PostBuildEvent>
       <Command>XCOPY "$(SolutionDir)..\..\romfs\" "$(TargetDir)\" /E /Y /I /D
+XCOPY "$(SolutionDir)..\..\SapphireEngine\" "$(TargetDir)\" /E /Y /I /D
 XCOPY "$(SolutionDir)..\..\ref materials\libbinkdec\win32\VS2010\$(PlatformTarget)\$(Configuration)\libbinkdec.dll"  "$(TargetDir)\"/Y /D</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
