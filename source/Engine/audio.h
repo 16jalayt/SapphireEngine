@@ -25,10 +25,10 @@ public:
 	static void CheckTransitions();
 
 private:
-	static bool CheckIfOgg(std::basic_ifstream<unsigned char>* file);
-	static void pushIntToVector(int value, std::vector<unsigned char>* v);
-	static void pushShortToVector(short value, std::vector<unsigned char>* v);
-	static void pushSringToVector(std::string value, std::vector<unsigned char>* v);
+	static bool CheckIfOgg(SDL_RWops* file);
+	static void pushIntToVector(int value, std::vector<char>* v);
+	static void pushShortToVector(short value, std::vector<char>* v);
+	static void pushSringToVector(std::string value, std::vector<char>* v);
 };
 //Currently due to callback, only one bink can play audio at a time.
 static bool binkAudioLock = false;

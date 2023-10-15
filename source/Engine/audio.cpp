@@ -22,7 +22,12 @@ int Audio::Init()
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
 	//TODO: try to put back after switch audio
-	if (Mix_OpenAudio(48000, AUDIO_S16, 2, 4096) == -1)
+	//if (Mix_OpenAudio(48000, AUDIO_S16, 2, 4096) == -1)
+#ifdef __SWITCH__
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+#else
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
+#endif
 	{
 		fatalError("%s: Failed to load Audio: %s", __func__, Mix_GetError());
 		return -1;
@@ -76,12 +81,12 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 		std::string ext = path.substr(path.length() - 4, 4);
 		if (ext == ".his")
 		{
-			std::basic_ifstream<unsigned char> file(path, std::ios::binary);
+			SDL_RWops* file = SDL_RWFromFile(path.c_str(), "rb");
 			if (file)
 			{
-				std::vector<unsigned char> v;
+				std::vector<char> v;
 				//wav
-				if (!CheckIfOgg(&file))
+				if (!CheckIfOgg(file))
 				{
 					std::ifstream inFile = std::ifstream(path, std::ios::in | std::ios::binary | std::ios::ate);
 					if (inFile.fail()) {
@@ -122,10 +127,24 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 					//Calculated values
 					samplerate = samplerate / numChannels;
 
+					//TODO: error handle file
+					file->seek(file, 0, RW_SEEK_END);
+					unsigned long fileLen = SDL_RWtell(file);
 					//tmp lazy hardcode
-					file.seekg(0x18);
-					std::vector<unsigned char> soundData = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
-						std::istreambuf_iterator<unsigned char>());
+					file->seek(file, 0x18, RW_SEEK_SET);
+
+					char* buffer;
+					buffer = (char*)malloc(fileLen - 0x18 + 1);
+					if (!buffer)
+					{
+						fprintf(stderr, "Memory error!");
+						SDL_RWclose(file);
+						return;
+					}
+
+					//Read file contents into buffer
+					SDL_RWread(file, buffer, fileLen, 1);
+					SDL_RWclose(file);
 
 					//Construct WAV header for sdl_mixer
 					pushSringToVector("RIFF", &v);
@@ -141,27 +160,27 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 					pushSringToVector("data", &v);
 
 					//insert pcm data
-					v.insert(v.end(), soundData.begin(), soundData.end());
+					char* end = buffer + fileLen;
+					v.insert(v.end(), buffer, end);
+					free(buffer);
 
-					//Does  not work
-					//player->Clip = SDL_Mix_Chunk_ptr(Mix_QuickLoad_RAW(v.data(), v.size()));
+					SDL_RWops* rw = SDL_RWFromMem((void*)v.data(), (int)v.size());
+					if (!rw)
+					{
+						LOG_F(ERROR, "Could not create RWop: %s", SDL_GetError());
+						//Still need to store sound, so can transition
+						//return;
+					}
+					else
+						player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV_RW(rw, 1));
 				}
 				//ogg
 				else
 				{
-					file.seekg(0x1e, std::ios::beg);
-					v = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
-						std::istreambuf_iterator<unsigned char>());
+					SDL_RWops* file = SDL_RWFromFile(path.c_str(), "rb");
+					file->seek(file, 0x1e, RW_SEEK_SET);
+					player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV_RW(file, 1));
 				}
-				SDL_RWops* rw = SDL_RWFromMem((void*)v.data(), (int)v.size());
-				if (!rw)
-				{
-					LOG_F(ERROR, "Could not create RWop: %s", SDL_GetError());
-					//Still need to store sound, so can transition
-					//return;
-				}
-				else
-					player->Clip = SDL_Mix_Chunk_ptr(Mix_LoadWAV_RW(rw, 1));
 			}
 			else
 				LOG_F(ERROR, "Failed to load sound file: %s", path.c_str());
@@ -207,20 +226,13 @@ void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int vol
 	std::string ext = path.substr(path.length() - 4, 4);
 	if (ext == ".his")
 	{
-		std::basic_ifstream<unsigned char> file(path, std::ios::binary);
+		SDL_RWops* file = SDL_RWFromFile(path.c_str(), "rb");
 		if (file)
 		{
-			if (CheckIfOgg(&file))
+			if (CheckIfOgg(file))
 			{
-				file.seekg(0x1e);
-				//TODO: switch does not like this
-				player->musicMem = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(file)),
-					std::istreambuf_iterator<unsigned char>());
-
-				SDL_RWops* rw = SDL_RWFromMem((void*)player->musicMem.data(), (int)player->musicMem.size());
-				//Mix_Music* mus = Mix_LoadMUSType_RW(rw, MUS_OGG, 1);
-				//Seems to require v to continue to exist
-				player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS_RW(rw, 1));
+				file->seek(file, 0x1e, RW_SEEK_SET);
+				player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS_RW(file, 1));
 			}
 			else
 			{
@@ -267,26 +279,6 @@ void Audio::CheckTransitions()
 			}
 		}
 	}
-
-	//Causes problems with iterator for some reason
-	/*for (auto& sound : sounds)
-	{
-		//TODO: investigate null clip names being created
-		//same remote button twice loops
-		//clicker can still get stuck sometimes
-
-		if (!sound || sound->channel < 0 || sound->ClipName == "")
-			LOG_F(WARNING, "clip name empty or null");
-		else
-		{
-			LOG_F(ERROR, "%d", sound->channel);
-			//if sound not playing and scene transition set
-			if (!sound->changeTo.empty() && Mix_Playing(sound->channel) != 0)
-			{
-				Loader::loadScene(sound->changeTo);
-			}
-		}
-	}*/
 }
 
 void Audio::PlaySound()
@@ -310,35 +302,17 @@ void Audio::AddTransition(std::string scene)
 }
 
 //problems with switch reading char
-bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
+bool Audio::CheckIfOgg(SDL_RWops* file)
 {
 	//Where ogg file should start
-	file->seekg(0x1E);
-	unsigned char testVal = 0;
-	file->get(testVal);
+	file->seek(file, 0x1e, RW_SEEK_SET);
+	char testVal = 0;
+	file->read(file, &testVal, 1, 1);
+	//LOG_F(ERROR, "testval: %c", testVal);
 	return (char)testVal == 'O';
 }
-/*bool Audio::CheckIfOgg(std::basic_ifstream<unsigned char>* file)
-{
-	//Where ogg file should start
-	file->seekg(0x1E);
-	//unsigned char testVal = 1;
-	//file->get(testVal);
-	unsigned char testVal = 0;
-	//file->read(&testVal, 1);
-	std::vector<unsigned char> musicMem;
-	musicMem = std::vector<unsigned char>((std::istreambuf_iterator<unsigned char>(*file)),
-		std::istreambuf_iterator<unsigned char>());
 
-	testVal = musicMem[0x1E];
-	LOG_F(ERROR, "testval: %c", testVal);
-
-	//New method lowercase?
-	//return (char)testVal == 'O';
-	return (char)testVal == 'o';
-}*/
-
-void Audio::pushIntToVector(int value, std::vector<unsigned char>* v)
+void Audio::pushIntToVector(int value, std::vector<char>* v)
 {
 	v->push_back(value);
 	v->push_back(value >> 8);
@@ -346,13 +320,13 @@ void Audio::pushIntToVector(int value, std::vector<unsigned char>* v)
 	v->push_back(value >> 24);
 }
 
-void Audio::pushShortToVector(short value, std::vector<unsigned char>* v)
+void Audio::pushShortToVector(short value, std::vector<char>* v)
 {
-	v->push_back((unsigned char)value);
+	v->push_back((char)value);
 	v->push_back(value >> 8);
 }
 
-void Audio::pushSringToVector(std::string value, std::vector<unsigned char>* v)
+void Audio::pushSringToVector(std::string value, std::vector<char>* v)
 {
 	v->insert(v->end(), value.begin(), value.end());
 }

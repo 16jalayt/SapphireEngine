@@ -5,8 +5,8 @@ void AudioClip::Play()
 	if (Music && !Mix_PlayingMusic())
 	{
 		Mix_HaltMusic();
-		//TODO: should be 0 not 1?
-		Mix_PlayMusic(Music.get(), loop ? 1 : -1);
+		//TODO: music does not loop
+		Mix_PlayMusic(Music.get(), loop ? 0 : -1);
 	}
 	else if (Clip)
 	{
