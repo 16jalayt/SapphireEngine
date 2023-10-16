@@ -36,7 +36,16 @@ SDL_Cursor_ptr Cursor::loadCursorFromSheet(std::string filename, SDL_Rect rect)
 
 	//SDL_FreeSurface(spriteSheet.get());
 
+	//TODO: returns null on switch
 	SDL_Cursor_ptr cursor = SDL_Cursor_ptr(SDL_CreateColorCursor(sprite, 10, 10));
+	if (!cursor)
+	{
+		//Does not work on switch so suppress logging
+#ifndef __SWITCH__
+		LOG_F(ERROR, "Unable to create cursor.\n");
+#endif
+		return NULL;
+	}
 
 	return cursor;
 }
@@ -79,7 +88,10 @@ void Cursor::DrawCursor()
 
 	if (!cursors[currentCursor])
 	{
+		//Does not work on switch so suppress logging
+#ifndef __SWITCH__
 		LOG_F(ERROR, "Invalid cursor id: %d\n", currentCursor);
+#endif
 		currentCursor = baseCursor;
 	}
 
