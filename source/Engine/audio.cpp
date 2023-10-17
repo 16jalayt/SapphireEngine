@@ -13,6 +13,7 @@ std::vector<AudioClip_ptr> Audio::sounds;
 
 int Audio::Init()
 {
+	//TODO:remove or disable error handling
 	if (Config::debugNoSound) {
 		return 0;
 	}

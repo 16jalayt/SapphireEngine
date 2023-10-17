@@ -176,21 +176,18 @@ void Sprite::Event(SDL_Event event)
 
 bool Sprite::MouseCollision(SDL_Event event)
 {
-	int x = 0;
-	int y = 0;
-	if (_parent == window)
+	//Select finger or mouse and test range
+	int x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x;
+	int y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y;
+
+	//subtract off the gui offset
+	if (_parent == canvas)
 	{
-		//Select finger or mouse and test range
-		x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x;
-		y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y;
+		x = x - GUI::canvasRect.x;
+		y = y - GUI::canvasRect.y;
 	}
-	//canvas
-	else
-	{
-		//Select finger or mouse and test range
-		x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x - GUI::canvasRect.x;
-		y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y - GUI::canvasRect.y;
-	}
+
+	//LOG_F(ERROR, "Touch at: %d,%d\n", x, y);
 
 	//Mouse is left of the button
 	if (x < _pos.x)

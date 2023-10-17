@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 				break;
 
 				// use joystick
-#ifdef __SWITCH__
+/*#ifdef __SWITCH__
 			case SDL_JOYBUTTONDOWN:
 				switch (event.type)
 				{
@@ -184,7 +184,7 @@ int main(int argc, char** argv)
 						exit_requested = 1;
 					break;
 				}
-#else
+#else*/
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
@@ -201,13 +201,17 @@ int main(int argc, char** argv)
 #ifndef __SWITCH__
 				if (!io.WantCaptureMouse)
 #endif
+					//LOG_F(ERROR, "FingerDown");
 					currentScene->EventProc(event);
+				//LOG_F(ERROR, "Touch at: %d,%d\n", event.tfinger.x, event.tfinger.y);
 				break;
 			case SDL_MOUSEMOTION:
+			case SDL_FINGERMOTION:
 #ifndef __SWITCH__
 				if (!io.WantCaptureMouse)
 				{
 #endif
+					//LOG_F(ERROR, "Fingermotion");
 					//TODO: explicitly set to system cursor for IMGUI?
 					Cursor::CursorChanged = false;
 					currentScene->EventProc(event);
@@ -225,7 +229,6 @@ int main(int argc, char** argv)
 				default:
 					break;
 				}*/
-#endif
 			}
 		}
 

@@ -46,8 +46,9 @@ void fatalError(const char* fmt, ...)
 	vfprintf(stderr, fmt, va);
 	va_end(va);
 
-	printf("fstest!\n");
-	printfile("folder/file.txt");
+	//For testing
+	//printf("fstest!\n");
+	//printfile("folder/file.txt");
 
 	//Kernel panics
 	quit();
@@ -97,8 +98,8 @@ void initControls()
 			fatalError("%s: SDL_JoystickOpen: %s", __func__, SDL_GetError());
 			printf("No joysticks connected\n");
 #endif
-		}
 	}
+}
 	//SWITCH_JoystickRumble(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)
 }
 
