@@ -56,7 +56,7 @@ ICON		:=	icon.jpg
 ARCH	:=	-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE
 
 CFLAGS	:=	`$(PREFIX)pkg-config --cflags sdl2 SDL2_mixer SDL2_image libavcodec libavfilter libavformat libavutil` -Wno-comment -Wall -O2 -ffunction-sections \
-			$(ARCH) $(DEFINES)
+			$(ARCH) $(DEFINES) -Wno-deprecated -Wno-unused-variable
 
 CFLAGS	+=	$(INCLUDE) -D__SWITCH__
 

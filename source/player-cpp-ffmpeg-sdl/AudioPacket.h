@@ -19,7 +19,10 @@ extern "C"
 
 typedef struct _AudioPacket
 {
+	//depricated on switch. long fix
+	//https://gitlab.com/OpenMW/openmw/-/issues/6088
 	AVPacketList* first, * last;
+
 	int nb_packets, size;
 	SDL_mutex* mutex;
 	SDL_cond* cond;

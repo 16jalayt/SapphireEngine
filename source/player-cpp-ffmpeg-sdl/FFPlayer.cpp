@@ -5,13 +5,18 @@
 #include <globals.h>
 #include <Engine/GUI.h>
 #include <Engine/Config.h>
+#include <loguru.hpp>
 
 //TODO: expose startPaused somewhere
 FFPlayer::FFPlayer(std::string filename, int x, int y, bool looped, bool startPaused)
 {
 	_paused = startPaused;
 	_looped = looped;
+	//TODO: bik playback on switch is blue
+	// [swscaler @ 0x162cfdd010] No accelerated colorspace conversion found from yuv420p to rgb24.
+	//LOG_F(ERROR, "Before open stream");
 	this->OpenStream(filename);
+	//LOG_F(ERROR, "Before malloc");
 	this->malloc();
 }
 

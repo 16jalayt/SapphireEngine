@@ -24,6 +24,8 @@
 std::shared_ptr<SDL_Window> Graphics::window;
 std::shared_ptr<SDL_Renderer> Graphics::renderer;
 
+//TODO: SDL assert fail when game open and turn off monitor
+
 Graphics::~Graphics()
 {
 	quit();

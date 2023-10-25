@@ -34,21 +34,25 @@ bool checkDeps(std::vector<Dependency> deps)
 		return true;
 	for (const Dependency dep : deps)
 	{
-		//if should or
-		if (dep.boolean)
+		//DT_EVENT
+		if (dep.depType == 2)
 		{
-			//TODO: figure out or. All dependencies?
-			if (flags[dep.label - 1000] || dep.condition)
-				continue;
+			//if should or
+			if (dep.boolean)
+			{
+				//TODO: figure out or. All dependencies?
+				if (flags[dep.label - 1000] || dep.condition)
+					continue;
+				else
+					return false;
+			}
 			else
-				return false;
-		}
-		else
-		{
-			if (flags[dep.label - 1000] == dep.condition)
-				continue;
-			else
-				return false;
+			{
+				if (flags[dep.label - 1000] == dep.condition)
+					continue;
+				else
+					return false;
+			}
 		}
 	}
 

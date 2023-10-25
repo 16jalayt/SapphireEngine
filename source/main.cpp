@@ -33,6 +33,7 @@
 #include "Engine/GUI.h"
 #include <Engine/Config.h>
 #include <Engine/Cursor.h>
+#include <Engine/audio.h>
 
 /*void tracetest()
 {
@@ -167,24 +168,24 @@ int main(int argc, char** argv)
 				break;
 
 				// use joystick
-/*#ifdef __SWITCH__
+#ifdef __SWITCH__
 			case SDL_JOYBUTTONDOWN:
-				switch (event.type)
+				switch (event.jbutton.button)
 				{
-				case KEY_LSTICK_UP:
-					if (wait > 0)
-						wait--;
-					break;
-				case KEY_LSTICK_DOWN:
-					if (wait < 100)
-						wait++;
-					break;
-				case KEY_PLUS:
-					if (wait > 0)
-						exit_requested = 1;
+					/*case KEY_LSTICK_UP:
+						if (wait > 0)
+							wait--;
+						break;
+					case KEY_LSTICK_DOWN:
+						if (wait < 100)
+							wait++;
+						break;*/
+				case KEY_MINUS:
+					LOG_F(ERROR, "\nShutting down engine\n");
+					exit_requested = 1;
 					break;
 				}
-#else*/
+#endif
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE)
 				{
@@ -267,7 +268,5 @@ int main(int argc, char** argv)
 		graphics->frameWait();
 	}
 
-	//Now in graphics deconstructor
-	//menuFMV->Close();
 	//quit();
 }

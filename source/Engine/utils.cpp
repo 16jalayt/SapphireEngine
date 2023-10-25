@@ -74,7 +74,7 @@ void quit()
 	romfsExit();
 	consoleExit(NULL);
 #endif
-	exit(-11);
+	exit(0);
 }
 
 int rand_range(int min, int max)
@@ -86,6 +86,7 @@ void initControls()
 {
 	// SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	SDL_JoystickEventState(SDL_ENABLE);
+	SDL_JoystickOpen(0);
 	// open CONTROLLER_PLAYER_1 and CONTROLLER_PLAYER_2
    // when railed, both joycons are mapped to joystick #0,
    // else joycons are individually mapped to joystick #0, joystick #1, ...
