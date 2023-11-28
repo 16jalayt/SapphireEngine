@@ -18,7 +18,7 @@ AnimatedSprite::AnimatedSprite(std::vector<SDL_Texture_ptr> frames, int x, int y
 
 void AnimatedSprite::Draw()
 {
-	if (currentFrameNum > _frames.size()) {
+	if (currentFrameNum >= _frames.size()) {
 		playing = false;
 	}
 

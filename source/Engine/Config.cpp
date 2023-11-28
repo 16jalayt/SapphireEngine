@@ -37,7 +37,7 @@ void Config::parse(int argc, char** argv)
 		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
 		//std::cout << apple << std::endl;
 	}
-	catch (std::ios_base::failure& e)
+	catch (std::ios_base::failure&)
 	{
 		std::cout << "The config file: " << configName << " not found. Creating..." << std::endl;
 		const toml::value data{

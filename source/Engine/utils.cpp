@@ -12,6 +12,7 @@
 #include "utils.h"
 #include <loguru.hpp>
 
+#ifdef __SWITCH__
 //to test switch romfs
 void printfile(const char* path)
 {
@@ -21,7 +22,7 @@ void printfile(const char* path)
 		char mystring[100];
 		while (fgets(mystring, sizeof(mystring), f))
 		{
-			int a = strlen(mystring);
+			size_t a = strlen(mystring);
 			if (mystring[a - 1] == '\n')
 			{
 				mystring[a - 1] = 0;
@@ -37,6 +38,7 @@ void printfile(const char* path)
 		printf("errno is %d, %s\n", errno, strerror(errno));
 	}
 }
+#endif
 
 void fatalError(const char* fmt, ...)
 {
@@ -99,8 +101,8 @@ void initControls()
 			fatalError("%s: SDL_JoystickOpen: %s", __func__, SDL_GetError());
 			printf("No joysticks connected\n");
 #endif
+		}
 	}
-}
 	//SWITCH_JoystickRumble(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)
 }
 

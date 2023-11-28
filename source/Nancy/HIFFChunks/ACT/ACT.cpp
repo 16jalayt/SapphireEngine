@@ -94,8 +94,30 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 	{
 		LOG_F(INFO, "Processing ACT chunk:%u Desc:%s at:%d", chunkType, actChunkDesc.c_str(), chunkStart);
 
-		std::string video = readString(inFile, 66);
-		skipBytes(inFile, chunkLen - 116);
+		std::string video = readString(inFile, 0x42);
+		//LOG_F(INFO, "  Video:%s", video.c_str());
+		//skipBytes(inFile, chunkLen - 116);
+
+		//unknown
+		skipBytes(inFile, 0xdf);
+		LOG_F(INFO, "  pos:%d", (int)inFile.tellg());
+		Scaled_Rect pos = Scaled_Rect{ readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
+		//second pos can be different. Unknown purpose
+		Scaled_Rect pos2 = Scaled_Rect{ readInt(inFile), readInt(inFile), readInt(inFile), readInt(inFile) };
+
+		//Unknown. Zeros?
+		skipBytes(inFile, 32);
+
+		//LOG_F(INFO, "  pos:%d", (int)inFile.tellg());
+
+		std::vector<Dependency> deps = parseDeps(inFile, chunkStart, chunkLen);
+
+		if (!checkDeps(deps))
+			break;
+
+		std::string path = Loader::getVideoPath(video);
+		Movie_ptr fmv = Movie_ptr(new Movie(path, pos.x, pos.y, false));
+		nextScene->AddMovie(fmv);
 
 		/*printf("Loading video:%s\n", video.c_str());
 		std::string path = Loader::getVideoPath(video);
@@ -110,11 +132,11 @@ bool ACT::Parse(std::ifstream& inFile, int chunkLen, int chunkStart)
 			nextScene->AddMovie(fmv);*/
 			//TODO: switch doesn't load next background after avf
 
-			LOG_F(ERROR, "Before load bik");
+			/*LOG_F(ERROR, "Before load bik");
 			std::string path2 = Loader::getVideoPath("RKCINEC");
 			Movie_ptr fmv2 = Movie_ptr(new Movie(path2, 0, 0, true));
 			LOG_F(ERROR, "Before add bik");
-			nextScene->AddMovie(fmv2);
+			nextScene->AddMovie(fmv2);*/
 		}
 		//BinkPlayback_ptr menuFMV = make_BinkPlayback_s(new BinkPlayback());
 		//menuFMV->OpenPaused(path, 0, 0, false);

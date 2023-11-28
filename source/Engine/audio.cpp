@@ -130,7 +130,8 @@ void Audio::AddSound(std::string sound, int channel, int loop, int volL, int vol
 
 					//TODO: error handle file
 					file->seek(file, 0, RW_SEEK_END);
-					unsigned long fileLen = SDL_RWtell(file);
+					//TODO: will return -1 if cannot complete
+					unsigned long fileLen = (unsigned long)SDL_RWtell(file);
 					//tmp lazy hardcode
 					file->seek(file, 0x18, RW_SEEK_SET);
 
@@ -246,7 +247,7 @@ void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int vol
 		player->Music = SDL_Mix_Music_ptr(Mix_LoadMUS(path.c_str()));
 	}
 
-	if (player->Music.get() == NULL)
+	if (player->Music.get() == NULL && !Config::debugNoSound)
 	{
 		LOG_F(ERROR, "Failed to load music: %s , %s", path.c_str(), Mix_GetError());
 	}
