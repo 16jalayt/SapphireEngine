@@ -368,7 +368,7 @@ build/
 out/
 romfs/
 ref materials/
-assets/
+SapphireEngine/
 .vscode/
 frameworks/
 x86/
