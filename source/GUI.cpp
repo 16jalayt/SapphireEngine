@@ -2,7 +2,7 @@
 #include "Engine/GUI.h"
 #include <string>
 
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
@@ -24,7 +24,7 @@ SDL_Rect GUI::canvasRect;
 GUI::GUI()
 {
 	//For now just patch out imgui from switch port
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -49,7 +49,7 @@ GUI::GUI()
 
 GUI::~GUI()
 {
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	// Cleanup IMGUI
 	ImGui_ImplSDLRenderer2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -78,7 +78,7 @@ void GUI::Draw()
 	if (canvas)
 		SDL_RenderCopy(Graphics::renderer.get(), canvas.get(), NULL, &canvasRect);
 
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	//TODO:imgui cursor position doesn't work fullscreen
 	// Start the Dear ImGui frame
 	ImGui_ImplSDLRenderer2_NewFrame();
@@ -122,7 +122,7 @@ void GUI::AddRect(GUI_Rect rect)
 	rects.push_back(rect);
 }
 
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 void GUI::drawCheatSheet()
 {
 	//TODO: key combo to toggle

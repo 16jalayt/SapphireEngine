@@ -1,12 +1,13 @@
 #define SDL_MAIN_HANDLED
 
+#include <unistd.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdarg.h>
 
 #ifdef __SWITCH__
 #include <switch.h>
-#else
+#elif !defined(__APPLE__)
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
@@ -20,7 +21,7 @@
 #include <SDL2/SDL2_rotozoom.h>
 
 //#include "vld.h"
-#include <loguru.hpp>
+#include "loguru.hpp"
 
 #include "globals.h"
 #include "Engine/utils.h"
@@ -60,6 +61,43 @@ int main(int argc, char** argv)
 
 	chdir("/switch/SapphireEngine/");
 
+#endif
+    
+#if defined(__APPLE__)
+#include <RessourcesDirectory.hpp>
+    std::string path = GetRPath();
+    printf("resdir: %s\n", path.c_str());
+    if(path.empty())
+    {
+        printf("\nUnable to get resource path\n");
+        quit();
+    }
+    chdir(path.c_str());
+    
+//    //argv = /
+//    int i;
+//        printf("argc:%d\n",argc);
+//        for(i=0;i<argc;i++)
+//        {
+//            printf("arg:%s\n",argv[i]);
+//        }
+//
+//    char* dir= (char *) malloc (50);
+//        dir = getenv("pwd");
+//        printf("Workdir: %s\n", dir);
+//        free(dir);
+//
+//        int result;
+//        result = system("pwd");
+//        printf("%d\n", result);
+//
+//    char cwd[PATH_MAX];
+//       if (getcwd(cwd, sizeof(cwd)) != NULL) {
+//           printf("Current working dir: %s\n", cwd);
+//       } else {
+//           perror("getcwd() error");
+//           return;
+//       }
 #endif
 
 	Config::parse(argc, argv);
@@ -104,7 +142,7 @@ int main(int argc, char** argv)
 	int exit_requested = 0;
 	int wait = 25;
 	SDL_Event event;
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	ImGuiIO& io = ImGui::GetIO();
 #endif
 	bool toggle = true;
@@ -147,7 +185,7 @@ int main(int argc, char** argv)
 
 		while (SDL_PollEvent(&event))
 		{
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 			// Poll and handle events (inputs, window resize, etc.)
 		// You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
 		// - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
@@ -193,13 +231,13 @@ int main(int argc, char** argv)
 					exit_requested = 1;
 					break;
 				}
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 				if (io.WantCaptureKeyboard)
 #endif
 					break;
 			case SDL_MOUSEBUTTONDOWN:
 			case SDL_FINGERDOWN:
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 				if (!io.WantCaptureMouse)
 #endif
 					//LOG_F(ERROR, "FingerDown");
@@ -208,7 +246,7 @@ int main(int argc, char** argv)
 				break;
 			case SDL_MOUSEMOTION:
 			case SDL_FINGERMOTION:
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 				if (!io.WantCaptureMouse)
 				{
 #endif
@@ -216,7 +254,7 @@ int main(int argc, char** argv)
 					//TODO: explicitly set to system cursor for IMGUI?
 					Cursor::CursorChanged = false;
 					currentScene->EventProc(event);
-#ifndef __SWITCH__
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 				}
 #endif
 				break;
