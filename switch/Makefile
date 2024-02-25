@@ -37,14 +37,15 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   of a homebrew executable (.nro). This is intended to be used for sysmodules.
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
+SOURCEDIR		:=	../source
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source source/Engine source/Nancy source/Nancy/HIFFChunks source/Nancy/HIFFChunks/ACT source/libbinkdec source/oldhertools source/player-cpp-ffmpeg-sdl source/toml11
-#source/Switch/imgui
+SOURCES		:=	$(SOURCEDIR) $(SOURCEDIR)/Engine $(SOURCEDIR)/Nancy $(SOURCEDIR)/Nancy/HIFFChunks $(SOURCEDIR)/Nancy/HIFFChunks/ACT $(SOURCEDIR)/libbinkdec $(SOURCEDIR)/oldhertools $(SOURCEDIR)/player-cpp-ffmpeg-sdl $(SOURCEDIR)/toml11 
+#$(SOURCEDIR)/Switch/imgui
 DATA		:=	data
-INCLUDES	:=	source source/Engine source/Nancy source/Nancy/HIFFChunks source/Nancy/HIFFChunks/ACT source/libbinkdec source/oldhertools source/player-cpp-ffmpeg-sdl source/toml11
-#source/Switch/imgui
-ROMFS		:=	romfs
+INCLUDES	:=	$(SOURCEDIR) $(SOURCEDIR)/Engine $(SOURCEDIR)/Nancy $(SOURCEDIR)/Nancy/HIFFChunks $(SOURCEDIR)/Nancy/HIFFChunks/ACT $(SOURCEDIR)/libbinkdec $(SOURCEDIR)/oldhertools $(SOURCEDIR)/player-cpp-ffmpeg-sdl $(SOURCEDIR)/toml11
+#$(SOURCEDIR)/Switch/imgui
+ROMFS		:=	../romfs
 
 APP_TITLE   := Sapphire Engine
 APP_AUTHOR  := 16jalayt

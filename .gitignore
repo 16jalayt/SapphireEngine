@@ -369,6 +369,8 @@ out/
 romfs/
 ref materials/
 SapphireEngine/
+.vscode/
+frameworks/
 x86/
 x64/
 obj/
