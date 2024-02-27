@@ -193,7 +193,7 @@
     <ClCompile Include="..\src\Cursor.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
     <ClCompile Include="..\src\GUI.cpp" />
-    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\SapphireApp.cpp" />
     <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\AudioCallback.cpp" />
     <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFAudio.cpp" />
     <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFPlayer.cpp" />

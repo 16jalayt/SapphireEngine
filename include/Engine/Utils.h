@@ -12,7 +12,6 @@ void fatalError(const char* fmt, ...);
 void quit();
 int rand_range(int min, int max);
 void initControls();
-void loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex);
 SDL_Rect ScaledRect_to_SDLRect(Scaled_Rect rect);
 SDL_Rect ScaleRect(SDL_Rect rect, float scale = GlobalScale);
 SDL_Rect ScaleRect(int x, int y, int w, int h, float scale = GlobalScale);

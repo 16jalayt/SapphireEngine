@@ -220,3 +220,25 @@ SDL_Texture_ptr Graphics::render_text(const char* text, TTF_Font* font, SDL_Colo
 
 	return texture;
 }*/
+
+void Graphics::loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex, string image)
+{
+	//TODO: convert to direct texture func
+	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load("data/Nintendo_Switch_Logo_resized.png"));
+	if (loading_surf)
+	{
+		loading_tex = make_SDL_Texture_s(SDL_CreateTextureFromSurface(renderer.get(), loading_surf.get()));
+		//SDL_FreeSurface(loading_surf);
+	}
+	SDL_Rect fullscreen = { 0, 0, REAL_WIDTH, REAL_HEIGHT };
+
+	//Display loading image by drawing manually
+	//Screen will not be cleared until loading done and main loop starts
+	//SDL_SetRenderDrawColor(renderer, 0, 100, 0, 0xFF);
+	//SDL_SetRenderDrawColor(renderer, 0, 100, 0, 0xFF);
+	SDL_RenderClear(renderer.get());
+	if (loading_tex)
+		SDL_RenderCopy(renderer.get(), loading_tex.get(), NULL, &fullscreen);
+
+	SDL_RenderPresent(renderer.get());
+}

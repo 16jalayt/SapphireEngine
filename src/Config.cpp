@@ -22,6 +22,7 @@ bool Config::lograw;
 
 //TODO:add option for startup scene
 //TODO: add some sort of check if missing assets, exit
+//TODO: move to user to customize
 
 void Config::parse(int argc, char** argv)
 {
@@ -64,13 +65,13 @@ void Config::parse(int argc, char** argv)
 
 	//Command line parameters
 
+	//TODO: text
 	//displayed in help screen
 	cxxopts::Options options("Sapphire Engine", "A game engine currently implementing Nancy Drew 7");
 	options.add_options()
 		("h,help", "Print help")
 		("f,fullscreen", "Fullscreen", cxxopts::value<bool>(Config::fullscreen))
-		("v,verbosity", "Change console logging level: INFO, WARNING, ERROR")
-		;
+		("v,verbosity", "Change console logging level: INFO, WARNING, ERROR");
 
 	try
 	{

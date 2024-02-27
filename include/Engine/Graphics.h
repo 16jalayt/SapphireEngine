@@ -16,6 +16,7 @@ public:
 
 	std::shared_ptr<SDL_Window> getWindow() const;
 	//std::shared_ptr<TTF_Font> getFont() const;
+	void loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex);
 
 	//SDL_Texture_ptr render_text(const char* text, TTF_Font* font, SDL_Color color, SDL_Rect* rect);
 

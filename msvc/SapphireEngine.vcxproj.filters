@@ -70,7 +70,7 @@
     <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFAudio.cpp">
       <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
+    <ClCompile Include="..\src\SapphireApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
