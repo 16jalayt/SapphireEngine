@@ -10,7 +10,7 @@
 #include "globals.h"
 #include "graphics.h"
 #include "utils.h"
-#include <loguru.hpp>
+#include "loguru/loguru.hpp"
 
 #ifdef __SWITCH__
 //to test switch romfs

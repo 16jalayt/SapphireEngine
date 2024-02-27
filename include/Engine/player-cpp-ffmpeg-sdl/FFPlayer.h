@@ -20,7 +20,7 @@ extern "C"
 #include <SDL2/SDL.h>
 #include "AudioPacket.h"
 #include "FFAudio.h"
-#include "Engine/SDL_ptr.h"
+#include "../SDL_ptr.h"
 #include <chrono>
 
 class FFPlayer

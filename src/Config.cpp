@@ -3,13 +3,15 @@
 //Made changes to loguru.cpp. loguru is also in VCPKG
 #define LOGURU_WITH_STREAMS 1
 #define TOML11_COLORIZE_ERROR_MESSAGE 1
-#include <loguru.hpp>
+#include <loguru/loguru.hpp>
+//bad practice but vcpkg doesn't compile, so linker fails
+#include <loguru/loguru.cpp>
 #include <iostream>
 
 //cmd parse
-#include "cxxopts.hpp"
+#include <cxxopts.hpp>
 //config file
-#include <toml11/toml.hpp>
+#include <toml.hpp>
 
 bool Config::fullscreen;
 bool Config::logfile;
@@ -19,6 +21,7 @@ bool Config::debugNoSound;
 bool Config::lograw;
 
 //TODO:add option for startup scene
+//TODO: add some sort of check if missing assets, exit
 
 void Config::parse(int argc, char** argv)
 {
@@ -26,7 +29,6 @@ void Config::parse(int argc, char** argv)
 	//Parse the config file first so command line arguments can overwrite
 	try
 	{
-		//TODO: Create config file if not exist
 		auto data = toml::parse(configName);
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
 		Config::logfile = toml::find_or<bool>(data, "logfile", false);
@@ -47,6 +49,7 @@ void Config::parse(int argc, char** argv)
 		std::ofstream out(configName);
 		out << data;
 		out.close();
+		//TODO: continue if succesful
 		exit(-2);
 	}
 	catch (toml::syntax_error& e)
@@ -104,7 +107,7 @@ void Config::initLog(int argc, char** argv)
 	//field length modified at loguru.hpp line 131
 	if (Config::lograw)
 	{
-		loguru::g_preamble_header = false;
+		//loguru::g_preamble_header = false;
 		loguru::g_preamble = false;
 	}
 	else

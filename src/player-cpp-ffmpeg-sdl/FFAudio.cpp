@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "defs.h"
 #include "AudioCallback.h"
-#include <Engine/audio.h>
+#include "../audio.h"
 
 FFAudio::FFAudio(AVCodecContext* pCodecAudioCtx)
 {

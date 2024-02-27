@@ -1,4 +1,4 @@
-#include "graphics.h"
+#include "Graphics.h"
 
 #ifdef __SWITCH__
 #include <switch.h>
@@ -7,6 +7,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 
+//TODO: remove
 #ifndef __SWITCH__
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>

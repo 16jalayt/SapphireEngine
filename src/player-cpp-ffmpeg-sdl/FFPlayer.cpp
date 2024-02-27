@@ -1,11 +1,11 @@
 #include "FFPlayer.h"
-#include <Engine/graphics.h>
+#include "../graphics.h"
 #include "defs.h"
-#include <Engine/audio.h>
-#include <globals.h>
-#include <Engine/GUI.h>
-#include <Engine/Config.h>
-#include <loguru.hpp>
+#include "../audio.h"
+#include "../globals.h"
+#include "../GUI.h"
+#include "../Config.h"
+#include <loguru/loguru.hpp>
 
 //TODO: expose startPaused somewhere
 FFPlayer::FFPlayer(std::string filename, int x, int y, bool looped, bool startPaused)

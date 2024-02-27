@@ -1,8 +1,11 @@
 #pragma once
 #include <fstream>
 
-#include "Engine/Scene.h"
-#include "Engine/SDL_ptr.h"
+#include "SDL_ptr.h"
+#include "Button.h"
+#include "graphics.h"
+#include "sprite.h"
+#include <vector>
 
 typedef struct GUI_Rect
 {
@@ -30,7 +33,6 @@ public:
 	void AddButton(Button_ptr button);
 	void AddRect(GUI_Rect rect);
 private:
-	void drawCheatSheet();
 	void ToggleButton(const char* str_id, bool* v);
 	void ToggleButtonV2(const char* str_id, bool* v);
 	void ShowHelpMarker(const char* desc);

@@ -9,308 +9,16 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{efb684c4-fa14-444a-8699-6994f70ac1b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine">
-      <UniqueIdentifier>{44ec94ec-ce97-48c9-a5bd-8dbc16e61dca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Nancy">
-      <UniqueIdentifier>{71307ac9-f43b-4962-93e5-a16a186a95ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Nancy">
-      <UniqueIdentifier>{b408e32b-d38f-4834-8a23-c6f530c59460}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Nancy\HIFF Chunks">
-      <UniqueIdentifier>{15487682-b8e1-49a5-8fee-cb9033f8cceb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Nancy\HIFF Chunks\ACT">
-      <UniqueIdentifier>{0691e0b3-8758-4d70-a335-1d9d1a208dd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\hertools">
-      <UniqueIdentifier>{7382427e-a867-451a-9a2a-09a21f6322b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\player-cpp-ffmpeg-sdl">
-      <UniqueIdentifier>{ba75b591-c0c8-4354-8076-f12ff4fad989}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\toml11">
-      <UniqueIdentifier>{eb2f44a7-b9c4-4cbc-b0a6-b6c9eba57208}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Nancy\HIFFChunks">
-      <UniqueIdentifier>{10d3c1d6-3b6d-4b63-af4c-772af5eb4c51}</UniqueIdentifier>
+    <Filter Include="Header Files\player-cpp-ffmpeg-sdl">
+      <UniqueIdentifier>{482d8d83-7c4a-4396-a6bc-5fc6076c084e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Nancy\HIFFChunks\ACT">
-      <UniqueIdentifier>{264ca047-1085-49ec-b732-c20452f7064e}</UniqueIdentifier>
+    <Filter Include="Source Files\player-cpp-ffmpeg-sdl">
+      <UniqueIdentifier>{a094d4d3-c34c-4e77-ac83-10eaf1b46622}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\source\Engine\audio.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\Button.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\graphics.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\sprite.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\utils.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\CIFF.cpp">
-      <Filter>Source Files\Nancy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\Loader.cpp">
-      <Filter>Source Files\Nancy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\HIFF.cpp">
-      <Filter>Source Files\Nancy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\Scene.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\AVF.cpp">
-      <Filter>Source Files\Nancy</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\oldhertools\lzss.cpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\oldhertools\colorspace.cpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\oldhertools\crypt_misc.cpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\AnimatedSprite.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\Movie.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\oldhertools\fileidx.cpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\GUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\loguru.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\AudioClip.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Engine\Cursor.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\HIFFChunks\SUM.cpp">
-      <Filter>Source Files\Nancy\HIFFChunks</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Nancy\HIFFChunks\ACT\ACT.cpp">
-      <Filter>Source Files\Nancy\HIFFChunks\ACT</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\source\globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\audio.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\Button.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\graphics.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\utils.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\SDL_ptr.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\SDL_TTF_ptr.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\sprite.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\CIFF.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\Loader.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\HIFF.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\Scene.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\ACT\ACT.h">
-      <Filter>Header Files\Nancy\HIFF Chunks\ACT</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\HIFF Chunks\SUM.h">
-      <Filter>Header Files\Nancy\HIFF Chunks</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\AVF.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\oldhertools\crypt_misc.hpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\oldhertools\lzss.hpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\oldhertools\colorspace.hpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Nancy\Dependency.h">
-      <Filter>Header Files\Nancy</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\Movie.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\AnimatedSprite.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\oldhertools\avf.hpp">
-      <Filter>Source Files\hertools</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFPlayer.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\stdafx.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\FFAudio.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioCallback.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\AudioPacket.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\player-cpp-ffmpeg-sdl\defs.h">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\cxxopts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\loguru.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\parser.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\region.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\result.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\serializer.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\source_location.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\storage.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\string.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\toml.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\traits.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\types.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\utility.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\value.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\version.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\color.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\combinator.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\comments.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\datetime.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\exception.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\from.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\get.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\into.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\lexer.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\literal.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\toml11\macros.hpp">
-      <Filter>Header Files\toml11</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\AudioClip.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\Engine\Cursor.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\GuiStyles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SapphireEngine.rc">
@@ -321,5 +29,105 @@
     <Image Include="icon.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AnimatedSprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\AudioClip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Cursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFPlayer.cpp">
+      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\AudioCallback.cpp">
+      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFAudio.cpp">
+      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Engine\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\AnimatedSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\AudioClip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\Cursor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\SDL_ptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\SDL_TTF_ptr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFPlayer.h">
+      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\AudioCallback.h">
+      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\AudioPacket.h">
+      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\defs.h">
+      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFAudio.h">
+      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

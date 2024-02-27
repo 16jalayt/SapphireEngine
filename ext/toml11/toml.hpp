@@ -29,10 +29,10 @@
 #define TOML11_VERSION_MINOR 7
 #define TOML11_VERSION_PATCH 1
 
-#include "toml11/parser.hpp"
-#include "toml11/literal.hpp"
-#include "toml11/serializer.hpp"
-#include "toml11/get.hpp"
-#include "toml11/macros.hpp"
+#include "ext/toml11/parser.hpp"
+#include "ext/toml11/literal.hpp"
+#include "ext/toml11/serializer.hpp"
+#include "ext/toml11/get.hpp"
+#include "ext/toml11/macros.hpp"
 
 #endif// TOML_FOR_MODERN_CPP
