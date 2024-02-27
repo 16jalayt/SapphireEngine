@@ -31,13 +31,13 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\utils.cpp">
+    <ClCompile Include="..\src\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\audio.cpp">
+    <ClCompile Include="..\src\Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AudioClip.cpp">
@@ -52,13 +52,13 @@
     <ClCompile Include="..\src\Cursor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\graphics.cpp">
+    <ClCompile Include="..\src\Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\sprite.cpp">
+    <ClCompile Include="..\src\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFPlayer.cpp">
@@ -75,13 +75,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Engine\utils.h">
+    <ClInclude Include="..\include\Engine\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\audio.h">
+    <ClInclude Include="..\include\Engine\Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\AudioClip.h">
@@ -96,7 +96,7 @@
     <ClInclude Include="..\include\Engine\Cursor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\graphics.h">
+    <ClInclude Include="..\include\Engine\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\GUI.h">
@@ -108,7 +108,7 @@
     <ClInclude Include="..\include\Engine\SDL_TTF_ptr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\sprite.h">
+    <ClInclude Include="..\include\Engine\Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFPlayer.h">
@@ -126,7 +126,7 @@
     <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFAudio.h">
       <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\globals.h">
+    <ClInclude Include="..\include\Engine\Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

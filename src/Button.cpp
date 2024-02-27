@@ -1,8 +1,8 @@
 #include "Engine/Button.h"
-#include "Engine/utils.h"
-#include "graphics.h"
+#include "Engine/Utils.h"
+#include "Engine/Graphics.h"
 #include "Engine/GUI.h"
-#include "Config.h"
+#include "Engine/Config.h"
 
 Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
 {

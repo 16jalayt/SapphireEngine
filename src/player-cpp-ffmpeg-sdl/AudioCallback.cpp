@@ -1,5 +1,5 @@
-#include "AudioCallback.h"
-#include "FFPlayer.h"
+#include "Engine/player-cpp-ffmpeg-sdl/AudioCallback.h"
+#include "Engine/player-cpp-ffmpeg-sdl/FFPlayer.h"
 
 extern "C"
 {

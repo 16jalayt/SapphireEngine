@@ -1,7 +1,7 @@
-#include "Cursor.h"
+#include "Engine/Cursor.h"
 #include "loguru/loguru.hpp"
 #include <SDL2/SDL_image.h>
-#include "utils.h"
+#include "Engine/Utils.h"
 
 SDL_Cursor_ptr Cursor::cursors[30];
 int Cursor::currentCursor = 0;

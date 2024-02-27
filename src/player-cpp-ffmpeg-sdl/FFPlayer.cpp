@@ -1,10 +1,10 @@
-#include "FFPlayer.h"
-#include "../graphics.h"
-#include "defs.h"
-#include "../audio.h"
-#include "../globals.h"
-#include "../GUI.h"
-#include "../Config.h"
+#include "Engine/player-cpp-ffmpeg-sdl/FFPlayer.h"
+#include "Engine/Graphics.h"
+#include "Engine/player-cpp-ffmpeg-sdl/defs.h"
+#include "Engine/Audio.h"
+#include "Engine/Globals.h"
+#include "Engine/GUI.h"
+#include "Engine/Config.h"
 #include <loguru/loguru.hpp>
 
 //TODO: expose startPaused somewhere

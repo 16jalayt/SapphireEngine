@@ -1,5 +1,5 @@
 //TODO: update convention for engine includes
-#include "GUI.h"
+#include "Engine/GUI.h"
 #include <string>
 
 #if !defined(__SWITCH__) && !defined(__APPLE__)
@@ -9,11 +9,11 @@
 #include <imgui_stdlib.h>
 #include <imgui_internal.h>
 
-#include "GuiStyles.h"
+#include "Engine/GuiStyles.h"
 #endif
 
-#include "utils.h"
-#include "Config.h"
+#include "Engine/Utils.h"
+#include "Engine/Config.h"
 
 std::shared_ptr<SDL_Texture> GUI::canvas;
 SDL_Rect GUI::canvasRect;

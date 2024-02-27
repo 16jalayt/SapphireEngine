@@ -1,4 +1,4 @@
-#include "Graphics.h"
+#include "Engine/Graphics.h"
 
 #ifdef __SWITCH__
 #include <switch.h>
@@ -14,11 +14,11 @@
 #include <imgui_impl_sdlrenderer2.h>
 #endif
 
-#include "audio.h"
-#include "globals.h"
-#include "utils.h"
-#include "Config.h"
-#include "Cursor.h"
+#include "Engine/Audio.h"
+#include "Engine/Globals.h"
+#include "Engine/Utils.h"
+#include "Engine/Config.h"
+#include "Engine/Cursor.h"
 
 //Graphics class
 //Holds all information dealing with graphics for the game

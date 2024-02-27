@@ -1,9 +1,9 @@
-#include "Audio.h"
+#include "Engine/Audio.h"
 #include <SDL2/SDL_mixer.h>
 #include <iostream>
 
-#include "utils.h"
-#include "Config.h"
+#include "Engine/Utils.h"
+#include "Engine/Config.h"
 //#include <Loader.h>
 #include <loguru/loguru.hpp>
 

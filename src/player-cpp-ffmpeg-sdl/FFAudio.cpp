@@ -1,8 +1,8 @@
-#include "FFAudio.h"
+#include "Engine/player-cpp-ffmpeg-sdl/FFAudio.h"
 #include <assert.h>
-#include "defs.h"
-#include "AudioCallback.h"
-#include "../audio.h"
+#include "Engine/player-cpp-ffmpeg-sdl/defs.h"
+#include "Engine/player-cpp-ffmpeg-sdl/AudioCallback.h"
+#include "Engine/Audio.h"
 
 FFAudio::FFAudio(AVCodecContext* pCodecAudioCtx)
 {

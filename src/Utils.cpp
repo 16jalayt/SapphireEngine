@@ -1,3 +1,5 @@
+#include "Engine/Utils.h"
+
 #ifdef __SWITCH__
 #include <switch.h>
 #endif
@@ -6,10 +8,9 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "audio.h"
-#include "globals.h"
-#include "graphics.h"
-#include "utils.h"
+#include "Engine/Audio.h"
+#include "Engine/Globals.h"
+#include "Engine/Graphics.h"
 #include "loguru/loguru.hpp"
 
 #ifdef __SWITCH__

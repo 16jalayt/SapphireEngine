@@ -1,13 +1,13 @@
-#include "Sprite.h"
+#include "Engine/Sprite.h"
 
 #include <SDL2/SDL_image.h>
 
-#include "graphics.h"
-#include "globals.h"
-#include "utils.h"
-#include "GUI.h"
+#include "Engine/Graphics.h"
+#include "Engine/Globals.h"
+#include "Engine/Utils.h"
+#include "Engine/GUI.h"
 #include <loguru/loguru.hpp>
-#include "Cursor.h"
+#include "Engine/Cursor.h"
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
