@@ -3,8 +3,9 @@
 
 #include <SDL2/SDL_mixer.h>
 #include "AudioClip.h"
+#include "Globals.h"
 
-class Audio
+class SE_API Audio
 {
 public:
 	static int Init();

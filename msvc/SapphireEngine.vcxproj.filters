@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\player-cpp-ffmpeg-sdl">
-      <UniqueIdentifier>{482d8d83-7c4a-4396-a6bc-5fc6076c084e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\player-cpp-ffmpeg-sdl">
-      <UniqueIdentifier>{a094d4d3-c34c-4e77-ac83-10eaf1b46622}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SapphireEngine.rc">
@@ -61,15 +55,6 @@
     <ClCompile Include="..\src\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFPlayer.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\AudioCallback.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\player-cpp-ffmpeg-sdl\FFAudio.cpp">
-      <Filter>Source Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\SapphireApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,22 +96,10 @@
     <ClInclude Include="..\include\Engine\Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFPlayer.h">
-      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\AudioCallback.h">
-      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\AudioPacket.h">
-      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\defs.h">
-      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Engine\player-cpp-ffmpeg-sdl\FFAudio.h">
-      <Filter>Header Files\player-cpp-ffmpeg-sdl</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Engine\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Engine\SapphireApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

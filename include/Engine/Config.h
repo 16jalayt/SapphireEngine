@@ -1,6 +1,7 @@
 #pragma once
+#include "Globals.h"
 
-class Config
+class SE_API Config
 {
 public:
 	static void parse(int argc, char** argv);

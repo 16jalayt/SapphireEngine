@@ -263,8 +263,3 @@ void Sprite::isMask(bool mask)
 {
 	_isMask = mask;
 }
-
-Sprite::~Sprite()
-{
-	destroy();
-}

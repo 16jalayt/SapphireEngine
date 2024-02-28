@@ -1,8 +1,9 @@
 #include <SDL2/SDL_mouse.h>
 #include "SDL_ptr.h"
 #include <string>
+#include "Globals.h"
 
-class Cursor
+class SE_API Cursor
 {
 public:
 	static int Init();

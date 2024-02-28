@@ -4,8 +4,9 @@
 #include <SDL2/SDL_mixer.h>
 #include <string>
 #include <vector>
+#include "Globals.h"
 
-class AudioClip
+class SE_API AudioClip
 {
 public:
 	std::string ClipName = "";

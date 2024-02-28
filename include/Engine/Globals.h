@@ -1,4 +1,9 @@
 #pragma once
+#include <string>
+
+//TODO: make func to set. Use in SapphireApp switch folder
+static std::string GAMENAME = "Sapphire Engine";
+static std::string GAMEDESC = "A game engine";
 
 //NOTE: brakes FFPlayer
 const int globalframerate = 30;
@@ -79,3 +84,14 @@ typedef Scaled_Rect UnScaled_Rect;
 const float GlobalScale = 1.25;//1.25 for newer nd
 //const int UpperUIOffset = 0;//0 for newer nd
 //const int LowerUIOffset = 320;//536 for newer nd
+#ifndef SE_API
+
+#if defined(_WIN32)
+#define SE_API __declspec(dllexport)
+#pragma warning(disable : 4251)
+
+#else
+#define SE_API __attribute__((__visibility__("default")))
+#endif
+
+#endif

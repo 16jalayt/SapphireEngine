@@ -85,28 +85,6 @@ int rand_range(int min, int max)
 	return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
 
-void initControls()
-{
-	// SDL_InitSubSystem(SDL_INIT_JOYSTICK);
-	SDL_JoystickEventState(SDL_ENABLE);
-	SDL_JoystickOpen(0);
-	// open CONTROLLER_PLAYER_1 and CONTROLLER_PLAYER_2
-   // when railed, both joycons are mapped to joystick #0,
-   // else joycons are individually mapped to joystick #0, joystick #1, ...
-   // https://github.com/devkitPro/SDL/blob/switch-sdl2/src/joystick/switch/SDL_sysjoystick.c#L45
-	for (int i = 0; i < 2; i++)
-	{
-		if (SDL_JoystickOpen(i) == NULL)
-		{
-#ifdef __SWITCH__
-			fatalError("%s: SDL_JoystickOpen: %s", __func__, SDL_GetError());
-			printf("No joysticks connected\n");
-#endif
-		}
-	}
-	//SWITCH_JoystickRumble(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)
-}
-
 SDL_Rect ScaledRect_to_SDLRect(Scaled_Rect rect)
 {
 	//return { (int)(rect.x * 1.25) + BackgroundOffsetX, (int)(rect.y * 1.25) + BackgroundOffsetY, (int)((rect.x2 - rect.x) * 1.25), (int)((rect.y2 - rect.y) * 1.25) };

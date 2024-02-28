@@ -12,6 +12,7 @@
 #include <cxxopts.hpp>
 //config file
 #include <toml.hpp>
+#include <Engine/Globals.h>
 
 bool Config::fullscreen;
 bool Config::logfile;
@@ -67,7 +68,7 @@ void Config::parse(int argc, char** argv)
 
 	//TODO: text
 	//displayed in help screen
-	cxxopts::Options options("Sapphire Engine", "A game engine currently implementing Nancy Drew 7");
+	cxxopts::Options options(GAMENAME, GAMEDESC);
 	options.add_options()
 		("h,help", "Print help")
 		("f,fullscreen", "Fullscreen", cxxopts::value<bool>(Config::fullscreen))

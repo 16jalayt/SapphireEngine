@@ -32,7 +32,7 @@ Graphics::~Graphics()
 	quit();
 }
 
-int Graphics::init(SDL_Texture_sptr loading_tex)
+int Graphics::init(std::string loadingScreen)
 {
 	//Only init video to display load screen faster.
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -131,7 +131,7 @@ int Graphics::init(SDL_Texture_sptr loading_tex)
 	SDL_GetCurrentDisplayMode(0, &current);
 	printf("Display #%d: current display mode is %dx%dpx @ %dhz.\n", 0, current.w, current.h, current.refresh_rate);*/
 
-	loadingscreen(renderer, loading_tex);
+	loadingscreen(loadingScreen);
 
 	// 800x600 render and 1080 target gets 1.8 for scale
 		//SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -221,13 +221,15 @@ SDL_Texture_ptr Graphics::render_text(const char* text, TTF_Font* font, SDL_Colo
 	return texture;
 }*/
 
-void Graphics::loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex, string image)
+//optional. Writes to screen buffer and will be overwritten on first render loop
+void Graphics::loadingscreen(std::string imagePath)
 {
+	//TODO null checks as screen is optional
 	//TODO: convert to direct texture func
-	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load("data/Nintendo_Switch_Logo_resized.png"));
+	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load(imagePath.c_str()));
 	if (loading_surf)
 	{
-		loading_tex = make_SDL_Texture_s(SDL_CreateTextureFromSurface(renderer.get(), loading_surf.get()));
+		loadingTex = make_SDL_Texture_s(SDL_CreateTextureFromSurface(renderer.get(), loading_surf.get()));
 		//SDL_FreeSurface(loading_surf);
 	}
 	SDL_Rect fullscreen = { 0, 0, REAL_WIDTH, REAL_HEIGHT };
@@ -237,8 +239,8 @@ void Graphics::loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loadin
 	//SDL_SetRenderDrawColor(renderer, 0, 100, 0, 0xFF);
 	//SDL_SetRenderDrawColor(renderer, 0, 100, 0, 0xFF);
 	SDL_RenderClear(renderer.get());
-	if (loading_tex)
-		SDL_RenderCopy(renderer.get(), loading_tex.get(), NULL, &fullscreen);
+	if (loadingTex)
+		SDL_RenderCopy(renderer.get(), loadingTex.get(), NULL, &fullscreen);
 
 	SDL_RenderPresent(renderer.get());
 }

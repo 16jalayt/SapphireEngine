@@ -7,16 +7,17 @@
 
 #include "SDL_ptr.h"
 #include "SDL_TTF_ptr.h"
+#include "Globals.h"
 
-class Graphics
+class SE_API Graphics
 {
 public:
-	~Graphics();
-	int init(SDL_Texture_sptr loading_tex);
+	virtual ~Graphics();
+	int init(std::string loadingScreen = NULL);
 
 	std::shared_ptr<SDL_Window> getWindow() const;
 	//std::shared_ptr<TTF_Font> getFont() const;
-	void loadingscreen(SDL_Renderer_sptr renderer, SDL_Texture_sptr loading_tex);
+	void loadingscreen(std::string loadingScreen);
 
 	//SDL_Texture_ptr render_text(const char* text, TTF_Font* font, SDL_Color color, SDL_Rect* rect);
 
@@ -25,6 +26,7 @@ public:
 	//TODO: use extern and out of class
 	static std::shared_ptr<SDL_Window> window;
 	static std::shared_ptr<SDL_Renderer> renderer;
+	SDL_Texture_sptr loadingTex;
 	static void Quit();
 
 private:

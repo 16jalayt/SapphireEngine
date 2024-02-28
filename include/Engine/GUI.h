@@ -6,6 +6,8 @@
 #include "graphics.h"
 #include "sprite.h"
 #include <vector>
+#include "Globals.h"
+#include "Utils.h"
 
 typedef struct GUI_Rect
 {
@@ -15,11 +17,11 @@ typedef struct GUI_Rect
 
 //using GUI_Rect_ptr = std::shared_ptr<GUI_Rect>;
 
-class GUI
+class SE_API GUI
 {
 public:
 	GUI();
-	~GUI();
+	virtual ~GUI();
 	std::vector<Sprite_ptr> statics;
 	std::vector<Button_ptr> buttons;
 	std::vector<GUI_Rect> rects;
