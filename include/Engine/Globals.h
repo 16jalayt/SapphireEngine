@@ -86,8 +86,13 @@ const float GlobalScale = 1.25;//1.25 for newer nd
 //const int LowerUIOffset = 320;//536 for newer nd
 #ifndef SE_API
 
+//COMPILING_DLL must be defined in preprocessor
 #if defined(_WIN32)
+#if COMPILING_DLL
 #define SE_API __declspec(dllexport)
+#else
+#define SE_API __declspec(dllimport)
+#endif
 #pragma warning(disable : 4251)
 
 #else
