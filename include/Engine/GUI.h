@@ -15,7 +15,9 @@ typedef struct GUI_Rect
 	int r, g, b;
 } GUI_Rect;
 
-//using GUI_Rect_ptr = std::shared_ptr<GUI_Rect>;
+#if !SDL_VERSION_ATLEAST(2,0,17)
+#error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
+#endif
 
 class SE_API GUI
 {

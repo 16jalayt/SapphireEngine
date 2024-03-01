@@ -119,6 +119,11 @@ void SapphireApp::processEvents()
 {
 }
 
+//Audio_ptr SapphireApp::getAudio()
+//{
+	//return _audio;
+//}
+
 void SapphireApp::startFrame()
 {
 	SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);

@@ -1,9 +1,12 @@
+#pragma once
+
 #include <string>
 #include <vector>
 
 #include <SDL2/SDL_mixer.h>
 #include "AudioClip.h"
 #include "Globals.h"
+#include <memory>
 
 class SE_API Audio
 {
@@ -22,9 +25,9 @@ public:
 	static void PauseSound();
 	static void RemoveAllSounds();
 	static void AddTransition(std::string scene);
-	static void CheckTransitions();
-	static std::vector<AudioClip_ptr> getSounds();
+	//static std::vector<AudioClip_ptr> getSounds();
 
 private:
-	static bool CheckIfOgg(SDL_RWops* file);
 };
+
+using Audio_ptr = std::unique_ptr<Audio>;

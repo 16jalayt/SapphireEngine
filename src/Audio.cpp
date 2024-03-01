@@ -6,14 +6,12 @@
 #include "Engine/Config.h"
 #include <loguru/loguru.hpp>
 
-AudioClip_ptr Audio::currentMusic;
-//AudioClip_ptr soundChannels[8];
-std::vector<AudioClip_ptr> Audio::sounds;
-
-std::vector<AudioClip_ptr> Audio::getSounds()
+/*std::vector<AudioClip_ptr> Audio::getSounds()
 {
 	return sounds;
-}
+}*/
+AudioClip_ptr Audio::currentMusic;
+std::vector<AudioClip_ptr> Audio::sounds;
 
 int Audio::Init()
 {
@@ -83,7 +81,7 @@ void Audio::PauseSound()
 
 void Audio::RemoveAllSounds()
 {
-	sounds.clear();
+	//sounds.clear();
 }
 
 void Audio::AddTransition(std::string scene)

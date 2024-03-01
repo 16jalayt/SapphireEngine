@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "Globals.h"
+#include <memory>
 
 class SE_API AudioClip
 {
