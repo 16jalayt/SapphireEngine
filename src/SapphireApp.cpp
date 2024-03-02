@@ -95,7 +95,7 @@ SapphireApp::SapphireApp(std::string gameName, std::string gameDesc)
 
 void SapphireApp::initControls()
 {
-	// SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+	/*// SDL_InitSubSystem(SDL_INIT_JOYSTICK);
 	SDL_JoystickEventState(SDL_ENABLE);
 	SDL_JoystickOpen(0);
 	// open CONTROLLER_PLAYER_1 and CONTROLLER_PLAYER_2
@@ -111,7 +111,7 @@ void SapphireApp::initControls()
 			printf("No joysticks connected\n");
 #endif
 		}
-	}
+	}*/
 	//SWITCH_JoystickRumble(SDL_Joystick * joystick, Uint16 low_frequency_rumble, Uint16 high_frequency_rumble)
 }
 

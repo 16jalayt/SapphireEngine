@@ -142,6 +142,7 @@ int Graphics::init(std::string loadingScreen)
 	//TODO: Check other hints like vsync
 	// linear interpolates so bad for pixel work
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	SDL_SetHint(SDL_HINT_JOYSTICK_THREAD, "1");
 	SDL_RenderSetLogicalSize(renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
 	//SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
