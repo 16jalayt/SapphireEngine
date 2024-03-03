@@ -46,10 +46,6 @@ SapphireApp::SapphireApp(std::string gameName, std::string gameDesc)
 
 #if defined(__APPLE__)
 #include <RessourcesDirectory.hpp>
-#include <Engine/Config.h>
-#include <Engine/Graphics.h>
-#include <Engine/Utils.h>
-#include <Engine/Cursor.h>
 	std::string path = GetRPath();
 	printf("resdir: %s\n", path.c_str());
 	if (path.empty())

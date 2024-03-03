@@ -1,4 +1,6 @@
 #pragma once
+//disable for insecure c functions and a warning about cxx17 standard
+#pragma warning( disable : 4996 4038)
 #include <string>
 
 //TODO: make func to set. Use in SapphireApp switch folder
@@ -98,5 +100,6 @@ const float GlobalScale = 1.25;//1.25 for newer nd
 #else
 #define SE_API __attribute__((__visibility__("default")))
 #endif
+//#define LOGURU_EXPORT SE_API;
 
 #endif

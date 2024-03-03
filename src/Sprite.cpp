@@ -6,7 +6,7 @@
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
 #include "Engine/GUI.h"
-#include <loguru/loguru.hpp>
+#include <loguru.hpp>
 #include "Engine/Cursor.h"
 
 Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)

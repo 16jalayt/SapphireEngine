@@ -1,18 +1,18 @@
 #include "Engine/Config.h"
 
-//Made changes to loguru.cpp. loguru is also in VCPKG
-#define LOGURU_WITH_STREAMS 1
 #define TOML11_COLORIZE_ERROR_MESSAGE 1
-#include <loguru/loguru.hpp>
-//bad practice but vcpkg doesn't compile, so linker fails
-#include <loguru/loguru.cpp>
+#define LOGURU_IMPLEMENTATION 1
+#define LOGURU_WITH_STREAMS 1
+#define LOGURU_FILENAME_WIDTH 15
+#define LOGURU_THREADNAME_WIDTH 13
+#include <loguru.hpp>
 #include <iostream>
 
 //cmd parse
 #include <cxxopts.hpp>
 //config file
 #include <toml.hpp>
-#include <Engine/Globals.h>
+//#include <Engine/Globals.h>
 
 bool Config::fullscreen;
 bool Config::logfile;
@@ -88,8 +88,6 @@ void Config::parse(int argc, char** argv)
 		printf("Invalid argument");
 		exit(-5);
 	}
-
-	initLog(argc, argv);
 }
 
 void Config::initLog(int argc, char** argv)
@@ -106,29 +104,32 @@ void Config::initLog(int argc, char** argv)
 	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
 #endif
 
-	//field length modified at loguru.hpp line 131
 	if (Config::lograw)
 	{
-		//loguru::g_preamble_header = false;
 		loguru::g_preamble = false;
 	}
 	else
 	{
 		loguru::g_preamble_uptime = false;
 		loguru::g_preamble_date = false;
+		loguru::g_preamble_thread = true;
+		loguru::g_preamble_verbose = false;
 	}
 
 	//init important for crash logging
 	loguru::init(argc, argv);
 	//Init sets to main thread by default
-	//loguru::set_thread_name("Main Thread");
+	loguru::set_thread_name("Engine Thread");
+
 	if (Config::logfile)
 		loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_INFO);
-	/*LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
+
+	//Logging tests/examples
+	//LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);
 	//LOG_S(INFO) << "Some float: " << 3.14;
-	LOG_S(ERROR) << "My vec3: " << 3.14;
+	//LOG_S(ERROR) << "My vec3: " << 3.14;
 	//LOG_S(ERROR) << loguru::stacktrace(1).c_str();
-	//tracetest();*/
+	//tracetest();
 
 	//LOG_SCOPE_FUNCTION(INFO);
 	//VLOG_SCOPE_F(1, "Iteration %d", 5);

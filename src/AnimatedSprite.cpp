@@ -1,5 +1,5 @@
 #include "Engine/AnimatedSprite.h"
-#include <loguru/loguru.hpp>
+#include <loguru.hpp>
 
 AnimatedSprite::AnimatedSprite(std::vector<SDL_Texture_ptr> frames, int x, int y, RenderParent parent, Scaled_Rect partial) :Sprite(SDL_Texture_ptr(frames[0].get()), x, y, parent)
 {

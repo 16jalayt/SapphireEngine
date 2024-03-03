@@ -4,7 +4,7 @@
 
 #include "Engine/Utils.h"
 #include "Engine/Config.h"
-#include <loguru/loguru.hpp>
+#include <loguru.hpp>
 
 /*std::vector<AudioClip_ptr> Audio::getSounds()
 {

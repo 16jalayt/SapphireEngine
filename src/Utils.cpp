@@ -11,7 +11,7 @@
 #include "Engine/Audio.h"
 #include "Engine/Globals.h"
 #include "Engine/Graphics.h"
-#include "loguru/loguru.hpp"
+#include <loguru.hpp>
 
 #ifdef __SWITCH__
 //to test switch romfs
@@ -72,6 +72,7 @@ void quit()
 {
 	Graphics::Quit();
 	Audio::Quit();
+	loguru::shutdown();
 
 #ifdef __SWITCH__
 	romfsExit();

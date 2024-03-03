@@ -1,5 +1,5 @@
 #include "Engine/Cursor.h"
-#include "loguru/loguru.hpp"
+#include <loguru.hpp>
 #include <SDL2/SDL_image.h>
 #include "Engine/Utils.h"
 

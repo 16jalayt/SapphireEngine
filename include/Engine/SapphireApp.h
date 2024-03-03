@@ -1,3 +1,4 @@
+//#define LOGURU_EXPORT SE_API;
 #include <string>
 #include <Engine/Graphics.h>
 #include "Globals.h"
