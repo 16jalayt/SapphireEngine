@@ -186,27 +186,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\AnimatedSprite.cpp" />
-    <ClCompile Include="..\src\Audio.cpp" />
+    <ClCompile Include="..\src\AudioEngine.cpp" />
     <ClCompile Include="..\src\AudioClip.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
     <ClCompile Include="..\src\Config.cpp" />
     <ClCompile Include="..\src\Cursor.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
-    <ClCompile Include="..\src\GUI.cpp" />
+    <ClCompile Include="..\src\GUIEngine.cpp" />
     <ClCompile Include="..\src\SapphireApp.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Engine\AnimatedSprite.h" />
-    <ClInclude Include="..\include\Engine\Audio.h" />
+    <ClInclude Include="..\include\Engine\AudioEngine.h" />
     <ClInclude Include="..\include\Engine\AudioClip.h" />
     <ClInclude Include="..\include\Engine\Button.h" />
     <ClInclude Include="..\include\Engine\Config.h" />
     <ClInclude Include="..\include\Engine\Cursor.h" />
     <ClInclude Include="..\include\Engine\Globals.h" />
     <ClInclude Include="..\include\Engine\Graphics.h" />
-    <ClInclude Include="..\include\Engine\GUI.h" />
+    <ClInclude Include="..\include\Engine\GUIEngine.h" />
     <ClInclude Include="..\include\Engine\SapphireApp.h" />
     <ClInclude Include="..\include\Engine\SDL_ptr.h" />
     <ClInclude Include="..\include\Engine\SDL_TTF_ptr.h" />

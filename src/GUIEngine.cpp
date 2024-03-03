@@ -1,5 +1,5 @@
 //TODO: update convention for engine includes
-#include "Engine/GUI.h"
+#include "Engine/GUIEngine.h"
 #include <string>
 
 #if !defined(__SWITCH__) && !defined(__APPLE__)
@@ -15,10 +15,10 @@
 #include "Engine/Utils.h"
 #include "Engine/Config.h"
 
-std::shared_ptr<SDL_Texture> GUI::canvas;
-SDL_Rect GUI::canvasRect;
+std::shared_ptr<SDL_Texture> GUIEngine::canvas;
+SDL_Rect GUIEngine::canvasRect;
 
-GUI::GUI()
+GUIEngine::GUIEngine()
 {
 	//For now just patch out imgui from switch port
 #if !defined(__SWITCH__) && !defined(__APPLE__)
@@ -43,7 +43,7 @@ GUI::GUI()
 #endif
 }
 
-GUI::~GUI()
+GUIEngine::~GUIEngine()
 {
 #if !defined(__SWITCH__) && !defined(__APPLE__)
 	// Cleanup IMGUI
@@ -53,7 +53,7 @@ GUI::~GUI()
 #endif
 }
 
-void GUI::Draw()
+void GUIEngine::Draw()
 {
 	if (this != NULL)
 	{
@@ -75,7 +75,7 @@ void GUI::Draw()
 		SDL_RenderCopy(Graphics::renderer.get(), canvas.get(), NULL, &canvasRect);
 }
 
-void GUI::EventProc(SDL_Event event)
+void GUIEngine::EventProc(SDL_Event event)
 {
 #if !defined(__SWITCH__) && !defined(__APPLE__)
 	ImGui_ImplSDL2_ProcessEvent(&event);
@@ -89,17 +89,17 @@ void GUI::EventProc(SDL_Event event)
 	}
 }
 
-void GUI::AddSprite(Sprite_ptr sprite)
+void GUIEngine::AddSprite(Sprite_ptr sprite)
 {
 	statics.push_back(sprite);
 }
 
-void GUI::AddButton(Button_ptr button)
+void GUIEngine::AddButton(Button_ptr button)
 {
 	buttons.push_back(button);
 }
 
-void GUI::AddRect(GUI_Rect rect)
+void GUIEngine::AddRect(GUI_Rect rect)
 {
 	rects.push_back(rect);
 }
@@ -108,7 +108,7 @@ void GUI::AddRect(GUI_Rect rect)
 
 //https://github.com/ocornut/imgui/issues/1537#issuecomment-355569554
 //Animates and green
-void GUI::ToggleButton(const char* str_id, bool* v)
+void GUIEngine::ToggleButton(const char* str_id, bool* v)
 {
 	ImVec2 p = ImGui::GetCursorScreenPos();
 	ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -142,7 +142,7 @@ void GUI::ToggleButton(const char* str_id, bool* v)
 }
 
 //Does not animate and blue
-void GUI::ToggleButtonV2(const char* str_id, bool* v)
+void GUIEngine::ToggleButtonV2(const char* str_id, bool* v)
 {
 	ImVec4* colors = ImGui::GetStyle().Colors;
 	ImVec2 p = ImGui::GetCursorScreenPos();
@@ -166,7 +166,7 @@ void GUI::ToggleButtonV2(const char* str_id, bool* v)
 }
 
 //From imgui_demo.cpp
-void GUI::ShowHelpMarker(const char* desc) {
+void GUIEngine::ShowHelpMarker(const char* desc) {
 	ImGui::TextDisabled("(?)");
 	if (ImGui::IsItemHovered()) {
 		ImGui::BeginTooltip();

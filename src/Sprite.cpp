@@ -5,7 +5,7 @@
 #include "Engine/Graphics.h"
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
-#include "Engine/GUI.h"
+#include "Engine/GUIEngine.h"
 #include <loguru.hpp>
 #include "Engine/Cursor.h"
 
@@ -118,7 +118,7 @@ void Sprite::Draw()
 		else//RenderParent::canvas
 		{
 			//SDL_Rect test = ScaleRect(44, 394, 300, 155);
-			SDL_SetRenderTarget(Graphics::renderer.get(), GUI::canvas.get());
+			SDL_SetRenderTarget(Graphics::renderer.get(), GUIEngine::canvas.get());
 			//SDL_RenderClear(Graphics::renderer.get());
 
 			if (_isMask)
@@ -182,8 +182,8 @@ bool Sprite::MouseCollision(SDL_Event event)
 	//subtract off the gui offset
 	if (_parent == canvas)
 	{
-		x = x - GUI::canvasRect.x;
-		y = y - GUI::canvasRect.y;
+		x = x - GUIEngine::canvasRect.x;
+		y = y - GUIEngine::canvasRect.y;
 	}
 
 	//LOG_F(ERROR, "Touch at: %d,%d\n", x, y);

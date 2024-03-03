@@ -8,7 +8,7 @@
 #include "Globals.h"
 #include <memory>
 
-class SE_API Audio
+class SE_API AudioEngine
 {
 public:
 	static int Init();
@@ -30,4 +30,4 @@ public:
 private:
 };
 
-using Audio_ptr = std::unique_ptr<Audio>;
+using AudioEngine_ptr = std::unique_ptr<AudioEngine>;

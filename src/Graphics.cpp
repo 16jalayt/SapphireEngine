@@ -14,7 +14,7 @@
 #include <imgui_impl_sdlrenderer2.h>
 #endif
 
-#include "Engine/Audio.h"
+#include "Engine/AudioEngine.h"
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
 #include "Engine/Config.h"
@@ -180,7 +180,7 @@ int Graphics::init(std::string loadingScreen)
 
 	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
-	Audio::Init();
+	AudioEngine::Init();
 	Cursor::Init();
 
 	return 0;

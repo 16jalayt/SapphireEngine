@@ -8,7 +8,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "Engine/Audio.h"
+#include "Engine/AudioEngine.h"
 #include "Engine/Globals.h"
 #include "Engine/Graphics.h"
 #include <loguru.hpp>
@@ -71,7 +71,7 @@ void fatalError(const char* fmt, ...)
 void quit()
 {
 	Graphics::Quit();
-	Audio::Quit();
+	AudioEngine::Quit();
 	loguru::shutdown();
 
 #ifdef __SWITCH__

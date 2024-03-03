@@ -21,11 +21,11 @@ typedef struct GUI_Rect
 #error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
 #endif
 
-class SE_API GUI
+class SE_API GUIEngine
 {
 public:
-	GUI();
-	virtual ~GUI();
+	GUIEngine();
+	virtual ~GUIEngine();
 	std::vector<Sprite_ptr> statics;
 	std::vector<Button_ptr> buttons;
 	std::vector<GUI_Rect> rects;
@@ -39,7 +39,7 @@ public:
 	void AddButton(Button_ptr button);
 	void AddRect(GUI_Rect rect);
 	ImGuiContext* imCtx;
-private:
+protected:
 	void ToggleButton(const char* str_id, bool* v);
 	void ToggleButtonV2(const char* str_id, bool* v);
 	void ShowHelpMarker(const char* desc);
@@ -47,4 +47,4 @@ private:
 	bool cheatSheetOpen = true;
 };
 
-using GUI_ptr = std::shared_ptr<GUI>;
+using GUIEngine_ptr = std::shared_ptr<GUIEngine>;

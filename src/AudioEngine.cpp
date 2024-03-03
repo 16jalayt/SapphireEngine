@@ -1,4 +1,4 @@
-#include "Engine/Audio.h"
+#include "Engine/AudioEngine.h"
 #include <SDL2/SDL_mixer.h>
 #include <iostream>
 
@@ -6,14 +6,14 @@
 #include "Engine/Config.h"
 #include <loguru.hpp>
 
-/*std::vector<AudioClip_ptr> Audio::getSounds()
+/*std::vector<AudioClip_ptr> AudioEngine::getSounds()
 {
 	return sounds;
 }*/
-AudioClip_ptr Audio::currentMusic;
-std::vector<AudioClip_ptr> Audio::sounds;
+AudioClip_ptr AudioEngine::currentMusic;
+std::vector<AudioClip_ptr> AudioEngine::sounds;
 
-int Audio::Init()
+int AudioEngine::Init()
 {
 	//TODO:remove or disable error handling
 	if (Config::debugNoSound) {
@@ -32,7 +32,7 @@ int Audio::Init()
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
 #endif
 	{
-		fatalError("%s: Failed to load Audio: %s", __func__, Mix_GetError());
+		fatalError("%s: Failed to load AudioEngine: %s", __func__, Mix_GetError());
 		return -1;
 	}
 
@@ -47,7 +47,7 @@ int Audio::Init()
 	return 0;
 }
 
-void Audio::Quit()
+void AudioEngine::Quit()
 {
 	if (Config::debugNoSound) {
 		return;
@@ -58,33 +58,33 @@ void Audio::Quit()
 	Mix_CloseAudio();
 }
 
-void Audio::AddSound(std::string sound, int channel, int loop, int volL, int volR)
+void AudioEngine::AddSound(std::string sound, int channel, int loop, int volL, int volR)
 {
 	//TODO: generic implementation
-	LOG_F(WARNING, "Audio::AddSound Stub");
+	LOG_F(WARNING, "AudioEngine::AddSound Stub");
 }
 
-void Audio::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
+void AudioEngine::AddMusic(std::string sound, int channel, int loop, int volL, int volR)
 {
-	LOG_F(WARNING, "Audio::AddMusic Stub");
+	LOG_F(WARNING, "AudioEngine::AddMusic Stub");
 }
 
-void Audio::PlaySound()
+void AudioEngine::PlaySound()
 {
-	LOG_F(WARNING, "Audio::PlaySound Stub");
+	LOG_F(WARNING, "AudioEngine::PlaySound Stub");
 }
 
-void Audio::PauseSound()
+void AudioEngine::PauseSound()
 {
-	LOG_F(WARNING, "Audio::PauseSound Stub");
+	LOG_F(WARNING, "AudioEngine::PauseSound Stub");
 }
 
-void Audio::RemoveAllSounds()
+void AudioEngine::RemoveAllSounds()
 {
 	//sounds.clear();
 }
 
-void Audio::AddTransition(std::string scene)
+void AudioEngine::AddTransition(std::string scene)
 {
-	LOG_F(WARNING, "Audio::AddTransition Stub");
+	LOG_F(WARNING, "AudioEngine::AddTransition Stub");
 }
