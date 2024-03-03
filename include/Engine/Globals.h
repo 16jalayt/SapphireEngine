@@ -3,7 +3,7 @@
 #pragma warning( disable : 4996 4038)
 #include <string>
 
-//TODO: make func to set. Use in SapphireApp switch folder
+//TODO: make func to set. Use in SapphireApp switch folder and in config
 static std::string GAMENAME = "Sapphire Engine";
 static std::string GAMEDESC = "A game engine";
 
