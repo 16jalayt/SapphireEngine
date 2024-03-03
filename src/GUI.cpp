@@ -2,7 +2,7 @@
 #include "Engine/GUI.h"
 #include <string>
 
-#if !defined(__SWITCH__) && !defined(__APPLE__) && !defined(_WIN32)
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
@@ -21,10 +21,10 @@ SDL_Rect GUI::canvasRect;
 GUI::GUI()
 {
 	//For now just patch out imgui from switch port
-#if !defined(__SWITCH__) && !defined(__APPLE__) && !defined(_WIN32)
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
+	imCtx = ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -45,7 +45,7 @@ GUI::GUI()
 
 GUI::~GUI()
 {
-#if !defined(__SWITCH__) && !defined(__APPLE__) && !defined(_WIN32)
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 	// Cleanup IMGUI
 	ImGui_ImplSDLRenderer2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -73,28 +73,14 @@ void GUI::Draw()
 
 	if (canvas)
 		SDL_RenderCopy(Graphics::renderer.get(), canvas.get(), NULL, &canvasRect);
-
-#if !defined(__SWITCH__) && !defined(__APPLE__) && !defined(_WIN32)
-	//TODO:imgui cursor position doesn't work fullscreen
-	// Start the Dear ImGui frame
-	ImGui_ImplSDLRenderer2_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
-
-	bool show_demo_window = false;
-	if (show_demo_window)
-		ImGui::ShowDemoWindow(&show_demo_window);
-
-	//drawCheatSheet();
-
-	// Rendering
-	ImGui::Render();
-	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
-#endif
 }
 
 void GUI::EventProc(SDL_Event event)
 {
+#if !defined(__SWITCH__) && !defined(__APPLE__)
+	ImGui_ImplSDL2_ProcessEvent(&event);
+#endif
+
 	if (this != NULL)
 	{
 		for (auto& button : buttons) {
@@ -118,7 +104,7 @@ void GUI::AddRect(GUI_Rect rect)
 	rects.push_back(rect);
 }
 
-#if !defined(__SWITCH__) && !defined(__APPLE__) && !defined(_WIN32)
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 
 //https://github.com/ocornut/imgui/issues/1537#issuecomment-355569554
 //Animates and green

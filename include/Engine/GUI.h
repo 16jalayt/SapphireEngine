@@ -9,6 +9,8 @@
 #include "Globals.h"
 #include "Utils.h"
 
+#include <imgui_internal.h>
+
 typedef struct GUI_Rect
 {
 	SDL_Rect rect;
@@ -36,6 +38,7 @@ public:
 	void AddSprite(Sprite_ptr sprite);
 	void AddButton(Button_ptr button);
 	void AddRect(GUI_Rect rect);
+	ImGuiContext* imCtx;
 private:
 	void ToggleButton(const char* str_id, bool* v);
 	void ToggleButtonV2(const char* str_id, bool* v);

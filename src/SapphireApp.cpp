@@ -125,16 +125,28 @@ void SapphireApp::startFrame()
 	SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
 
 	SDL_RenderClear(Graphics::renderer.get());
+
+#if !defined(__SWITCH__) && !defined(__APPLE__)
+	//TODO:imgui cursor position doesn't work fullscreen
+	// Start the Dear ImGui frame
+	ImGui_ImplSDLRenderer2_NewFrame();
+	ImGui_ImplSDL2_NewFrame();
+	ImGui::NewFrame();
+
+	//bool show_demo_window = true;
+	//if (show_demo_window)
+		//ImGui::ShowDemoWindow(&show_demo_window);
+#endif
 }
 
 void SapphireApp::endFrame()
 {
+#if !defined(__SWITCH__) && !defined(__APPLE__)
+	ImGui::Render();
+	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+#endif
+
 	Cursor::DrawCursor();
-	/*if (Cursor::CursorChanged)
-		{
-			Cursor::DrawCursor();
-			Cursor::CursorChanged = false;
-		}*/
 
 	SDL_RenderPresent(Graphics::renderer.get());
 
