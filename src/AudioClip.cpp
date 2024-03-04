@@ -1,5 +1,7 @@
 #include "Engine/AudioClip.h"
 
+using namespace Engine;
+
 void AudioClip::Play()
 {
 	if (Music && !Mix_PlayingMusic())

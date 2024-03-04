@@ -14,6 +14,8 @@
 #include <toml.hpp>
 //#include <Engine/Globals.h>
 
+using namespace Engine;
+
 bool Config::fullscreen;
 bool Config::logfile;
 

@@ -1,8 +1,8 @@
 //#define LOGURU_EXPORT SE_API;
 #include <string>
 #include "Engine/Graphics.h"
-#include "Globals.h"
-#include "AudioEngine.h"
+#include "Engine/Globals.h"
+#include "Engine/Audio.h"
 #include <memory>
 
 class SE_API SapphireApp

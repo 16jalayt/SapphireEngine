@@ -31,7 +31,7 @@
     <ClCompile Include="..\src\AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\AudioEngine.cpp">
+    <ClCompile Include="..\src\Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\AudioClip.cpp">
@@ -49,7 +49,7 @@
     <ClCompile Include="..\src\Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\GUIEngine.cpp">
+    <ClCompile Include="..\src\GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Sprite.cpp">
@@ -66,7 +66,7 @@
     <ClInclude Include="..\include\Engine\AnimatedSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\AudioEngine.h">
+    <ClInclude Include="..\include\Engine\Audio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\AudioClip.h">
@@ -84,7 +84,7 @@
     <ClInclude Include="..\include\Engine\Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Engine\GUIEngine.h">
+    <ClInclude Include="..\include\Engine\GUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Engine\SDL_ptr.h">

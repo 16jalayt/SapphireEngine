@@ -19,6 +19,8 @@
 #include <imgui_impl_sdlrenderer2.h>
 #endif
 
+using namespace Engine;
+
 SapphireApp::SapphireApp(std::string gameName, std::string gameDesc)
 {
 	GAMENAME = gameName;
@@ -81,7 +83,7 @@ SapphireApp::SapphireApp(std::string gameName, std::string gameDesc)
 	//       }
 #endif
 
-	_graphics = std::make_unique<Graphics>();
+	_graphics = std::make_unique<Engine::Graphics>();
 	// initial subsystem. If error, just exit. Error already printed.
 	if (_graphics->init("data/Nintendo_Switch_Logo_resized.png") < 0)
 		quit();

@@ -8,10 +8,12 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "Engine/AudioEngine.h"
+#include "Engine/Audio.h"
 #include "Engine/Globals.h"
 #include "Engine/Graphics.h"
 #include <loguru.hpp>
+
+using namespace Engine;
 
 #ifdef __SWITCH__
 //to test switch romfs
@@ -71,7 +73,7 @@ void fatalError(const char* fmt, ...)
 void quit()
 {
 	Graphics::Quit();
-	AudioEngine::Quit();
+	Audio::Quit();
 	loguru::shutdown();
 
 #ifdef __SWITCH__
