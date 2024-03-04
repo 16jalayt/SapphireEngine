@@ -26,7 +26,6 @@ namespace Engine
 		bool isVisible();
 		void Event(SDL_Event event);
 		bool MouseCollision(SDL_Event event);
-		void HoverCheck(SDL_Event event);
 		SDL_Rect getPos();
 		void visible(bool visible);
 		void setScale(float scale);

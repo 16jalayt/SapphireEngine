@@ -2,7 +2,6 @@
 #include "Engine/Graphics.h"
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
-#include "Engine/Cursor.h"
 
 #ifdef __APPLE__
 #include <unistd.h>
@@ -147,8 +146,6 @@ void SapphireApp::endFrame()
 	ImGui::Render();
 	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
 #endif
-
-	Cursor::DrawCursor();
 
 	SDL_RenderPresent(Graphics::renderer.get());
 

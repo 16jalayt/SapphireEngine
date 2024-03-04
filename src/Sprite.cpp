@@ -7,7 +7,7 @@
 #include "Engine/Utils.h"
 #include "Engine/GUI.h"
 #include <loguru.hpp>
-#include "Engine/Cursor.h"
+//#include "Cursor.h"
 
 using namespace Engine;
 
@@ -212,14 +212,6 @@ bool Sprite::MouseCollision(SDL_Event event)
 	}
 
 	return true;
-}
-
-void Sprite::HoverCheck(SDL_Event event)
-{
-	if (MouseCollision(event))
-		Cursor::setCursor(hoverCursor);
-	//else
-		//Cursor::resetCursor();
 }
 
 SDL_Rect Sprite::getPos()

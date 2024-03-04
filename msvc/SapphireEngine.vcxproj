@@ -190,7 +190,6 @@
     <ClCompile Include="..\src\AudioClip.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
     <ClCompile Include="..\src\Config.cpp" />
-    <ClCompile Include="..\src\Cursor.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
     <ClCompile Include="..\src\GUI.cpp" />
     <ClCompile Include="..\src\SapphireApp.cpp" />
@@ -203,7 +202,6 @@
     <ClInclude Include="..\include\Engine\AudioClip.h" />
     <ClInclude Include="..\include\Engine\Button.h" />
     <ClInclude Include="..\include\Engine\Config.h" />
-    <ClInclude Include="..\include\Engine\Cursor.h" />
     <ClInclude Include="..\include\Engine\Globals.h" />
     <ClInclude Include="..\include\Engine\Graphics.h" />
     <ClInclude Include="..\include\Engine\GUI.h" />

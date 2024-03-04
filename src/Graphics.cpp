@@ -18,7 +18,6 @@
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
 #include "Engine/Config.h"
-#include "Engine/Cursor.h"
 
 using namespace Engine;
 
@@ -183,7 +182,6 @@ int Graphics::init(std::string loadingScreen)
 	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
 	Audio::Init();
-	Cursor::Init();
 
 	return 0;
 }
