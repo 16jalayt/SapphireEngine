@@ -26,6 +26,7 @@ namespace Engine
 		bool isVisible();
 		void Event(SDL_Event event);
 		bool MouseCollision(SDL_Event event);
+		void HoverCheck(SDL_Event event);
 		SDL_Rect getPos();
 		void visible(bool visible);
 		void setScale(float scale);
@@ -35,8 +36,8 @@ namespace Engine
 		void setPos(SDL_Rect pos);
 		void isMask(bool mask);
 
-		int hoverCursor = 0;
 		std::function<void()> callback;
+		std::function<void()> hover_event;
 
 	protected:
 		bool _loaded = false;

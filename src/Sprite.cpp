@@ -157,8 +157,6 @@ void Sprite::destroy()
 
 void Sprite::Event(SDL_Event event)
 {
-	//HoverCheck(event);
-
 	switch (event.type)
 	{
 	case SDL_MOUSEBUTTONDOWN:
@@ -170,7 +168,10 @@ void Sprite::Event(SDL_Event event)
 		}
 		break;
 	case SDL_MOUSEMOTION:
-		HoverCheck(event);
+		if (MouseCollision(event) && hover_event)
+		{
+			hover_event();
+		}
 		break;
 	}
 }
