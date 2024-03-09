@@ -5,6 +5,8 @@
 #define LOGURU_WITH_STREAMS 1
 #define LOGURU_FILENAME_WIDTH 15
 #define LOGURU_THREADNAME_WIDTH 13
+//disable for insecure c functions and a warning about cxx17 standard
+#pragma warning( disable : 4996 )
 #include <loguru.hpp>
 #include <iostream>
 
