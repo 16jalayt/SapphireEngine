@@ -8,7 +8,7 @@
 class SE_API SapphireApp
 {
 public:
-	SapphireApp(std::string gameName = "Sapphire Engine", std::string gameDesc = "A game engine");
+	SapphireApp();
 	virtual ~SapphireApp() {};
 	void initControls();
 	void startFrame();

@@ -1,30 +1,13 @@
 #pragma once
 //disable for insecure c functions and a warning about cxx17 standard
 #pragma warning( disable : 4996 4038)
-#include <string>
-
-//TODO: make func to set. Use in SapphireApp switch folder and in config
-static std::string GAMENAME = "Sapphire Engine";
-static std::string GAMEDESC = "A game engine";
 
 //NOTE: brakes FFPlayer
 const int globalframerate = 30;
 const float frameTime = 1000 / globalframerate;
-
-//logical canvas resolution
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
-const int ANIMATION_RATE = 15;
+static int ANIMATION_RATE = 15;
 
 //const float frameTime = 1000 / ANIMATION_RATE;
-
-#ifdef __SWITCH__
-const int REAL_WIDTH = 1280;
-const int REAL_HEIGHT = 720;
-#else
-const int REAL_WIDTH = 800;
-const int REAL_HEIGHT = 600;
-#endif
 
 //working directory: $(SolutionDir)$(PlatformShortName)\$(Configuration)\
 
@@ -81,11 +64,6 @@ inline bool operator!=(const Scaled_Rect& a, const Scaled_Rect& b)
 
 typedef Scaled_Rect UnScaled_Rect;
 
-//const int BackgroundOffsetX = 52;//0 for newer nd
-//const int BackgroundOffsetY = 18;//55 for newer nd
-const float GlobalScale = 1.25;//1.25 for newer nd
-//const int UpperUIOffset = 0;//0 for newer nd
-//const int LowerUIOffset = 320;//536 for newer nd
 #ifndef SE_API
 
 //COMPILING_DLL must be defined in preprocessor

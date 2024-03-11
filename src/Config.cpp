@@ -6,7 +6,7 @@
 #define LOGURU_FILENAME_WIDTH 15
 #define LOGURU_THREADNAME_WIDTH 13
 //disable for insecure c functions and a warning about cxx17 standard
-#pragma warning( disable : 4996 )
+#pragma warning( disable : 4996 4038 )
 #include <loguru.hpp>
 #include <iostream>
 
@@ -24,6 +24,13 @@ bool Config::logfile;
 bool Config::debugHot;
 bool Config::debugNoSound;
 bool Config::lograw;
+int Config::referenceWidth;
+int Config::referenceHeight;
+int Config::windowWidth;
+int Config::windowHeight;
+float Config::globalScale;
+std::string Config::gameName;
+std::string Config::gameDesc;
 
 //TODO:add option for startup scene
 //TODO: add some sort of check if missing assets, exit
@@ -39,11 +46,18 @@ void Config::parse(int argc, char** argv)
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
 		Config::logfile = toml::find_or<bool>(data, "logfile", false);
 
+		Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
+		Config::gameDesc = toml::find_or<std::string>(data, "gameDesc", "A game engine");
+
 		const auto& debug = toml::find(data, "debug");
 		Config::debugHot = toml::find_or<bool>(debug, "debugHot", false);
 		Config::debugNoSound = toml::find_or<bool>(debug, "debugNoSound", false);
 		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
-		//std::cout << apple << std::endl;
+		Config::windowWidth = toml::find_or<int>(data, "windowWidth", 1920);
+		Config::windowHeight = toml::find_or<int>(data, "windowHeight", 1080);
+		Config::referenceWidth = toml::find_or<int>(data, "referenceWidth", 800);
+		Config::referenceHeight = toml::find_or<int>(data, "referenceHeight", 600);
+		Config::globalScale = toml::find_or<float>(data, "globalScale", 1.00);
 	}
 	catch (std::ios_base::failure&)
 	{
@@ -72,7 +86,7 @@ void Config::parse(int argc, char** argv)
 
 	//TODO: text
 	//displayed in help screen
-	cxxopts::Options options(GAMENAME, GAMEDESC);
+	cxxopts::Options options(gameName, gameDesc);
 	options.add_options()
 		("h,help", "Print help")
 		("f,fullscreen", "Fullscreen", cxxopts::value<bool>(Config::fullscreen))

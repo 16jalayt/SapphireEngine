@@ -1,5 +1,6 @@
 #pragma once
 #include "Globals.h"
+#include <string>
 
 namespace Engine
 {
@@ -15,5 +16,12 @@ namespace Engine
 		static bool debugHot;
 		static bool debugNoSound;
 		static bool lograw;
+		static int windowWidth;
+		static int windowHeight;
+		static int referenceWidth;
+		static int referenceHeight;
+		static float globalScale;
+		static std::string gameName;
+		static std::string gameDesc;
 	};
 }

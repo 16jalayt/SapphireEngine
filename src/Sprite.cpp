@@ -6,6 +6,7 @@
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
 #include "Engine/GUI.h"
+#include "Engine/Config.h"
 #include <loguru.hpp>
 
 using namespace Engine;
@@ -51,7 +52,7 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 			}
 
 			_pos = ScaleRect(x, y, _width, _height);
-			_scale = GlobalScale;
+			_scale = Config::globalScale;
 
 			_tex = SDL_Texture_ptr(SDL_CreateTextureFromSurface(Graphics::renderer.get(), tmpsurf));
 			SDL_FreeSurface(tmpsurf);
@@ -62,7 +63,6 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 			LOG_F(ERROR, "Unable to open sprite: %s , %s\n", file, IMG_GetError());
 		}
 	}
-	//}
 }
 
 Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scaled_Rect partial)
@@ -97,9 +97,52 @@ Sprite::Sprite(SDL_Texture_ptr texture, int x, int y, RenderParent parent, Scale
 		}
 
 		_pos = ScaleRect(x, y, _width, _height);
-		_scale = GlobalScale;
+		_scale = Config::globalScale;
 
 		_tex = std::move(texture);
+		_loaded = true;
+	}
+	else
+	{
+		LOG_F(ERROR, "Unable to open sprite with texture.\n");
+	}
+}
+
+Sprite::Sprite(SDL_Texture* texture, int x, int y, RenderParent parent, Scaled_Rect partial)
+{
+	_loaded = false;
+	_width = 0;
+	_height = 0;
+	_visible = true;
+	_scale = 1;
+	_parent = parent;
+
+	if (texture)
+	{
+		if (partial != Scaled_Rect())
+		{
+			_srcSpecified = true;
+			_src = ScaledRect_to_SDLRect(partial);
+
+			//Need to tweak for some reason
+			//to remove green border
+			_src.x = _src.x + 1;
+			_src.y = _src.y + 1;
+			_src.w = _src.w - 1;
+			_src.h = _src.h - 1;
+
+			_width = _src.w;
+			_height = _src.h;
+		}
+		else
+		{
+			SDL_QueryTexture(texture, NULL, NULL, &_width, &_height);
+		}
+
+		_pos = ScaleRect(x, y, _width, _height);
+		_scale = Config::globalScale;
+
+		_tex = SDL_Texture_ptr(texture);
 		_loaded = true;
 	}
 	else
@@ -178,8 +221,8 @@ void Sprite::Event(SDL_Event event)
 bool Sprite::MouseCollision(SDL_Event event)
 {
 	//Select finger or mouse and test range
-	int x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * SCREEN_WIDTH) : event.motion.x;
-	int y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * SCREEN_HEIGHT) : event.motion.y;
+	int x = event.type == SDL_FINGERDOWN ? int(event.tfinger.x * Config::referenceWidth) : event.motion.x;
+	int y = event.type == SDL_FINGERDOWN ? int(event.tfinger.y * Config::referenceHeight) : event.motion.y;
 
 	//subtract off the gui offset
 	if (_parent == canvas)

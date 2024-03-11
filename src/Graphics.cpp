@@ -69,12 +69,15 @@ int Graphics::init(std::string loadingScreen)
 	//seems to be fine
 	//Not sure what fullscreen flag would do on switch
 	//flags = SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN_DESKTOP;
+	//TODO: select dock or handheld. 720 is handheld
+	Config::windowWidth = 1280;
+	Config::windowHeight = 720;
 #else
 
 	//For IMGUI
 	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 #endif
-	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, REAL_WIDTH, REAL_HEIGHT, flags));
+	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Config::windowWidth, Config::windowHeight, flags));
 	if (!window)
 	{
 		fatalError("%s: SDL could not create window! SDL Error: %s", __func__, SDL_GetError());
@@ -144,7 +147,7 @@ int Graphics::init(std::string loadingScreen)
 	// linear interpolates so bad for pixel work
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 	SDL_SetHint(SDL_HINT_JOYSTICK_THREAD, "1");
-	SDL_RenderSetLogicalSize(renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
+	SDL_RenderSetLogicalSize(renderer.get(), Config::referenceWidth, Config::referenceHeight);
 	//SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
 	//Init everything else.
@@ -233,7 +236,8 @@ void Graphics::loadingscreen(std::string imagePath)
 		loadingTex = make_SDL_Texture_s(SDL_CreateTextureFromSurface(renderer.get(), loading_surf.get()));
 		//SDL_FreeSurface(loading_surf);
 	}
-	SDL_Rect fullscreen = { 0, 0, REAL_WIDTH, REAL_HEIGHT };
+	//TODO: move global?
+	SDL_Rect fullscreen = { 0, 0, Config::windowWidth, Config::windowHeight };
 
 	//Display loading image by drawing manually
 	//Screen will not be cleared until loading done and main loop starts

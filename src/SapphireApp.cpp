@@ -20,11 +20,8 @@
 
 using namespace Engine;
 
-SapphireApp::SapphireApp(std::string gameName, std::string gameDesc)
+SapphireApp::SapphireApp()
 {
-	GAMENAME = gameName;
-	GAMEDESC = gameDesc;
-
 #ifdef __SWITCH__
 
 	//Log to Ryujinx
