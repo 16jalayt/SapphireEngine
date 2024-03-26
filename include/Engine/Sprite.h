@@ -35,9 +35,12 @@ namespace Engine
 		int getHeight();
 		void setPos(SDL_Rect pos);
 		void isMask(bool mask);
+		void setColorMod(RGB modVal);
+		void setColorMod(int r, int g, int b);
 
 		std::function<void()> callback;
 		std::function<void()> hover_event;
+		std::string name;
 
 	protected:
 		bool _loaded = false;

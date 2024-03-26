@@ -120,7 +120,7 @@ void SapphireApp::processEvents()
 
 void SapphireApp::startFrame()
 {
-	SDL_SetRenderDrawColor(Graphics::renderer.get(), 255, 0, 0, 0xFF);
+	SDL_SetRenderDrawColor(Graphics::renderer.get(), 0, 0, 0, 0xFF);
 
 	SDL_RenderClear(Graphics::renderer.get());
 

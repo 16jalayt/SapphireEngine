@@ -300,3 +300,13 @@ void Sprite::isMask(bool mask)
 {
 	_isMask = mask;
 }
+
+void Engine::Sprite::setColorMod(RGB modVal)
+{
+	setColorMod(modVal.r, modVal.g, modVal.b);
+}
+
+void Engine::Sprite::setColorMod(int r, int g, int b)
+{
+	SDL_SetTextureColorMod(_tex.get(), r, g, b);
+}

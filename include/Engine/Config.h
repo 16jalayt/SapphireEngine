@@ -15,6 +15,7 @@ namespace Engine
 
 		static bool debugHot;
 		static bool debugNoSound;
+		static bool debugMenuOpen;
 		static bool lograw;
 		static int windowWidth;
 		static int windowHeight;

@@ -64,6 +64,11 @@ inline bool operator!=(const Scaled_Rect& a, const Scaled_Rect& b)
 
 typedef Scaled_Rect UnScaled_Rect;
 
+struct RGB
+{
+	int r, g, b;
+};
+
 #ifndef SE_API
 
 //COMPILING_DLL must be defined in preprocessor
