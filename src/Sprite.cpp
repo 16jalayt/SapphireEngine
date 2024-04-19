@@ -141,6 +141,7 @@ Sprite::Sprite(SDL_Texture* texture, int x, int y, RenderParent parent, Scaled_R
 
 		_pos = ScaleRect(x, y, _width, _height);
 		_scale = Config::globalScale;
+		_center = { _width / 2, _height / 2 };
 
 		_tex = SDL_Texture_ptr(texture);
 		_loaded = true;
@@ -157,7 +158,7 @@ void Sprite::Draw()
 	{
 		if (_parent == RenderParent::window)
 		{
-			SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), NULL, &_pos);
+			SDL_RenderCopyEx(Graphics::renderer.get(), _tex.get(), NULL, &_pos, rotation, &_center, flipped);
 		}
 		else//RenderParent::canvas
 		{
@@ -173,10 +174,9 @@ void Sprite::Draw()
 			}
 
 			if (_srcSpecified)
-				//SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), &test, &_pos);
-				SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), &_src, &_pos);
+				SDL_RenderCopyEx(Graphics::renderer.get(), _tex.get(), &_src, &_pos, rotation, &_center, flipped);
 			else
-				SDL_RenderCopy(Graphics::renderer.get(), _tex.get(), NULL, &_pos);
+				SDL_RenderCopyEx(Graphics::renderer.get(), _tex.get(), NULL, &_pos, rotation, &_center, flipped);
 			//Detach the texture
 			SDL_SetRenderTarget(Graphics::renderer.get(), NULL);
 		}

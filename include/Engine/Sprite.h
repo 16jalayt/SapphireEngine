@@ -41,6 +41,8 @@ namespace Engine
 		std::function<void()> callback;
 		std::function<void()> hover_event;
 		std::string name;
+		double rotation = 0;
+		SDL_RendererFlip flipped = SDL_FLIP_NONE;
 
 	protected:
 		bool _loaded = false;
@@ -55,6 +57,7 @@ namespace Engine
 		float _scale = 1;
 		RenderParent _parent = canvas;
 		bool _isMask = false;
+		SDL_Point _center = { 0, 0 };
 	};
 }
 

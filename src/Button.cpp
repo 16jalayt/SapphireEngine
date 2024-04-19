@@ -3,35 +3,48 @@
 #include "Engine/Graphics.h"
 #include "Engine/GUI.h"
 #include "Engine/Config.h"
+#include <cstring>
 
 using namespace Engine;
 
-Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled) :Sprite(file, x, y, parent)
+Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, x, y, parent, partial)
 {
 	_enabled = enabled;
 
-	_pos = ScaleRect(x, y, w, h);
-	_width = w;
-	_height = h;
+	//If file name is empty. Must be hot spot
+	if (strcmp(file, "") == 0)
+	{
+		_pos = ScaleRect(x, y, w, h);
+		_width = w;
+		_height = h;
+	}
 }
 
-Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enabled) :Sprite(file, rect.x, rect.y, parent)
+Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
 	_enabled = enabled;
 
-	_pos = ScaleRect(rect);
-	_width = _pos.w;
-	_height = _pos.h;
+	//If file name is empty. Must be hot spot
+	if (strcmp(file, "") == 0)
+	{
+		_pos = ScaleRect(rect);
+		_width = _pos.w;
+		_height = _pos.h;
+	}
 }
 
-Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool enabled) :Sprite(file, rect.x, rect.y, parent)
+Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
 	_enabled = enabled;
 
-	//convert rect type and scale
-	_pos = ScaleRect(ScaledRect_to_SDLRect(rect));
-	_width = _pos.w;
-	_height = _pos.h;
+	//If file name is empty. Must be hot spot
+	if (strcmp(file, "") == 0)
+	{
+		//convert rect type and scale
+		_pos = ScaleRect(ScaledRect_to_SDLRect(rect));
+		_width = _pos.w;
+		_height = _pos.h;
+	}
 }
 
 void Button::Draw()

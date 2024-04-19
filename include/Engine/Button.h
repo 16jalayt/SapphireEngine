@@ -11,9 +11,9 @@ namespace Engine
 	class SE_API Button : public Sprite
 	{
 	public:
-		Button(int x, int y, int w, int h, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
-		Button(SDL_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
-		Button(Scaled_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true);
+		Button(int x, int y, int w, int h, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true, Scaled_Rect partial = Scaled_Rect());
+		Button(SDL_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true, Scaled_Rect partial = Scaled_Rect());
+		Button(Scaled_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true, Scaled_Rect partial = Scaled_Rect());
 		virtual ~Button() {};
 		void Draw();
 
