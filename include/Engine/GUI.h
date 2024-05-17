@@ -9,7 +9,9 @@
 #include "Globals.h"
 #include "Utils.h"
 
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 #include <imgui_internal.h>
+#endif
 
 typedef struct GUI_Rect
 {
@@ -40,7 +42,11 @@ namespace Engine
 		void AddSprite(Sprite_ptr sprite);
 		void AddButton(Button_ptr button);
 		void AddRect(GUI_Rect rect);
+
+#if !defined(__SWITCH__) && !defined(__APPLE__)
 		ImGuiContext* imCtx;
+#endif
+
 	protected:
 		void ToggleButton(const char* str_id, bool* v);
 		void ToggleButtonV2(const char* str_id, bool* v);

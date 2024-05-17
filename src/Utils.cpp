@@ -2,6 +2,7 @@
 
 #ifdef __SWITCH__
 #include <switch.h>
+#include <algorithm>
 #endif
 
 #include <SDL2/SDL_mixer.h>

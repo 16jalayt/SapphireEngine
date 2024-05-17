@@ -3042,6 +3042,8 @@ namespace loguru
 
 	void install_signal_handlers()
 	{
+		//16jalayt - Not available on switch
+		#if !defined(__SWITCH__)
 		struct sigaction sig_action;
 		memset(&sig_action, 0, sizeof(sig_action));
 		sigemptyset(&sig_action.sa_mask);
@@ -3051,6 +3053,7 @@ namespace loguru
 			CHECK_F(sigaction(s.number, &sig_action, NULL) != -1,
 				"Failed to install handler for %s", s.name);
 		}
+		#endif
 	}
 } // namespace loguru
 
