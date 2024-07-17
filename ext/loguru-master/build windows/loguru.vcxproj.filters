@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\16jal\source\repos\PhantomDogs\SapphireEngine\ext\loguru-master\loguru.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\16jal\source\repos\PhantomDogs\SapphireEngine\ext\loguru-master\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{1E26169D-3C73-3F9F-96C4-9ECD37BD93A8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

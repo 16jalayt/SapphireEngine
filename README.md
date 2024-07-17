@@ -3,4 +3,4 @@ A game engine built on sdl2 and c++ 14. Designed to be game agnostic, but curren
 
 The project is far from playable!
 
-Loguru is included because edits were made
+Loguru is included because edits were made to switch version

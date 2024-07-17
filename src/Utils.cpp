@@ -46,6 +46,7 @@ void printfile(const char* path)
 
 void fatalError(const char* fmt, ...)
 {
+	LOG_F(ERROR, "Fatal Error: %s\n", fmt);
 #ifdef __SWITCH__
 	va_list va;
 	va_start(va, fmt);

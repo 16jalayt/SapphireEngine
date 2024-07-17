@@ -22,26 +22,6 @@ using namespace Engine;
 
 SapphireApp::SapphireApp()
 {
-#ifdef __SWITCH__
-
-	//Log to Ryujinx
-	consoleDebugInit(debugDevice_SVC);
-
-	//Log to nxlink on actual hardware
-	socketInitializeDefault();
-	nxlinkStdio();
-	//use cerr for both to work
-
-	//Running off sd card now so no romfs
-	/*Result rc = romfsInit();
-	if (R_FAILED(rc))
-		printf("romfsInit: %08X\n", rc);
-	chdir("romfs:/");*/
-
-	chdir("/switch/SapphireEngine/");
-
-#endif
-
 #if defined(__APPLE__)
 #include <RessourcesDirectory.hpp>
 	std::string path = GetRPath();

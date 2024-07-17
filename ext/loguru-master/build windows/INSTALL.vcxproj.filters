@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\16jal\source\repos\PhantomDogs\SapphireEngine\ext\loguru-master\build windows\CMakeFiles\803f578182bc7e169d2e1492be61840e\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0A4F3E8F-AC41-3CC5-847E-703C0D4A9C60}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
