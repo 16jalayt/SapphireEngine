@@ -48,10 +48,12 @@ void Config::parse(int argc, char** argv)
 		Config::debugNoSound = toml::find_or<bool>(debug, "debugNoSound", false);
 		Config::debugMenuOpen = toml::find_or<int>(data, "debugMenuOpen", 0);
 		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
+		//TODO: runtime resize
 		Config::windowWidth = toml::find_or<int>(data, "windowWidth", 1920);
 		Config::windowHeight = toml::find_or<int>(data, "windowHeight", 1080);
 		Config::referenceWidth = toml::find_or<int>(data, "referenceWidth", 800);
 		Config::referenceHeight = toml::find_or<int>(data, "referenceHeight", 600);
+		//TODO: calculate?
 		Config::globalScale = toml::find_or<float>(data, "globalScale", 1.00);
 	}
 	catch (std::ios_base::failure&)
