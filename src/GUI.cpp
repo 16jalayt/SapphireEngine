@@ -57,20 +57,17 @@ GUI::~GUI()
 
 void GUI::Draw()
 {
-	if (this != NULL)
-	{
-		for (auto& rect : rects) {
-			SDL_SetRenderDrawColor(Graphics::renderer.get(), rect.r, rect.g, rect.b, 0xFF);
-			SDL_RenderFillRect(Graphics::renderer.get(), &rect.rect);
-		}
+	for (auto& rect : rects) {
+		SDL_SetRenderDrawColor(Graphics::renderer.get(), rect.r, rect.g, rect.b, 0xFF);
+		SDL_RenderFillRect(Graphics::renderer.get(), &rect.rect);
+	}
 
-		for (auto& sprite : statics) {
-			sprite->Draw();
-		}
+	for (auto& sprite : statics) {
+		sprite->Draw();
+	}
 
-		for (auto& button : buttons) {
-			button->Draw();
-		}
+	for (auto& button : buttons) {
+		button->Draw();
 	}
 
 	if (canvas)
@@ -83,11 +80,8 @@ void GUI::EventProc(SDL_Event event)
 	ImGui_ImplSDL2_ProcessEvent(&event);
 #endif
 
-	if (this != NULL)
-	{
-		for (auto& button : buttons) {
-			button->Event(event);
-		}
+	for (auto& button : buttons) {
+		button->Event(event);
 	}
 }
 

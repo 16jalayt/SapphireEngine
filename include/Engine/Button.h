@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "sprite.h"
+#include "Sprite.h"
 #include "SDL_ptr.h"
 #include "Globals.h"
 

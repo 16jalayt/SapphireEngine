@@ -3,8 +3,8 @@
 
 #include "SDL_ptr.h"
 #include "Button.h"
-#include "graphics.h"
-#include "sprite.h"
+#include "Graphics.h"
+#include "Sprite.h"
 #include <vector>
 #include "Globals.h"
 #include "Utils.h"
