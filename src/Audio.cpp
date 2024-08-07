@@ -21,7 +21,7 @@ int Audio::Init()
 	if (Config::debugNoSound) {
 		return 0;
 	}
-	//SDL_InitSubSystem(SDL_INIT_AUDIO);
+	SDL_InitSubSystem(SDL_INIT_AUDIO);
 
 	//Buffer size partially fixes stuttering
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
@@ -44,7 +44,6 @@ int Audio::Init()
 		return -1;
 	}
 
-	//TODO:correct number
 	Mix_AllocateChannels(20);
 	return 0;
 }
@@ -59,7 +58,7 @@ void Audio::Quit()
 	Mix_Quit();
 	Mix_CloseAudio();
 }
-
+/*
 void Audio::AddSound(std::string sound, int channel, int loop, int volL, int volR)
 {
 	//TODO: generic implementation
@@ -89,4 +88,4 @@ void Audio::RemoveAllSounds()
 void Audio::AddTransition(std::string scene)
 {
 	LOG_F(WARNING, "Audio::AddTransition Stub");
-}
+}*/

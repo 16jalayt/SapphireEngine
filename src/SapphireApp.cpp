@@ -18,6 +18,7 @@
 #include <imgui_impl_sdlrenderer2.h>
 #endif
 
+//TODO: define IMGUI_DISABLE to disable?
 using namespace Engine;
 
 SapphireApp::SapphireApp()
@@ -121,7 +122,11 @@ void SapphireApp::endFrame()
 {
 #if !defined(__SWITCH__) && !defined(__APPLE__)
 	ImGui::Render();
+#if IMGUI_VERSION_NUM >= 19070
+	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), Graphics::renderer.get());
+#else
 	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
+#endif
 #endif
 
 	SDL_RenderPresent(Graphics::renderer.get());

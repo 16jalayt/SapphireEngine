@@ -58,6 +58,8 @@ void Config::parse(int argc, char** argv)
 	}
 	catch (std::ios_base::failure&)
 	{
+		//TODO: figure out new syntax for v4
+#if TOML11_VERSION_MAJOR == 3
 		std::cout << "The config file: " << configName << " not found. Creating..." << std::endl;
 		const toml::value data{
 			{"fullscreen", Config::fullscreen},
@@ -67,7 +69,8 @@ void Config::parse(int argc, char** argv)
 		out << data;
 		out.close();
 		//TODO: continue if succesful
-		exit(-2);
+		//exit(-2);
+#endif // TOML11_VERSION_MAJOR 3
 	}
 	catch (toml::syntax_error& e)
 	{
