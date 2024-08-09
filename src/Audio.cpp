@@ -58,6 +58,12 @@ void Audio::Quit()
 	Mix_Quit();
 	Mix_CloseAudio();
 }
+
+void Audio::RemoveAllSounds()
+{
+	sounds.clear();
+}
+
 /*
 void Audio::AddSound(std::string sound, int channel, int loop, int volL, int volR)
 {
@@ -78,11 +84,6 @@ void Audio::PlaySound()
 void Audio::PauseSound()
 {
 	LOG_F(WARNING, "Audio::PauseSound Stub");
-}
-
-void Audio::RemoveAllSounds()
-{
-	//sounds.clear();
 }
 
 void Audio::AddTransition(std::string scene)

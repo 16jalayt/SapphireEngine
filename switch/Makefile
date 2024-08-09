@@ -60,10 +60,10 @@ CXXFLAGS	:= $(CFLAGS) -fno-rtti -std=gnu++14
 #no longer c++ compiant replace with -std=c++14 https://stackoverflow.com/questions/40766055/error-strdup-was-not-declared-in-this-scope
 
 ASFLAGS	:=	-g $(ARCH)
-LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map) --disable-shared --enable-static -L../ext/loguru-master/build_switch/lib 
+LDFLAGS	=	-specs=$(DEVKITPRO)/libnx/switch.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map) --disable-shared --enable-static
 
 LIBS	:=	`$(PREFIX)pkg-config --libs sdl2 SDL2_mixer SDL2_image SDL2_ttf SDL2_gfx openal libavcodec libavfilter libavformat libavutil` \
-			-lnx -pthread -lm -lz -lloguru
+			-lnx -pthread -lm -lz
 			#-lnx -pthread -lavformat -lavcodec -lswresample -lswscale -lavutil -lbz2 -lass -lvorbis -logg -lm -lz -lopus -lpng -lbz2 -lfribidi
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing

@@ -1,6 +1,6 @@
 #include "Engine/Config.h"
 
-#include <loguru.hpp>
+#include <loguru.cpp>
 #include <iostream>
 
 //cmd parse
@@ -46,7 +46,7 @@ void Config::parse(int argc, char** argv)
 		const auto& debug = toml::find(data, "debug");
 		Config::debugHot = toml::find_or<bool>(debug, "debugHot", false);
 		Config::debugNoSound = toml::find_or<bool>(debug, "debugNoSound", false);
-		Config::debugMenuOpen = toml::find_or<int>(data, "debugMenuOpen", 0);
+		Config::debugMenuOpen = toml::find_or<bool>(debug, "debugMenuOpen", false);
 		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
 		//TODO: runtime resize
 		Config::windowWidth = toml::find_or<int>(data, "windowWidth", 1920);

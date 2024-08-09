@@ -19,13 +19,13 @@ namespace Engine
 		static AudioClip_ptr currentMusic;
 		//static AudioClip_ptr soundChannels[8];
 		static std::vector<AudioClip_ptr> sounds;
+		static void RemoveAllSounds();
 
 		/*static void AddSound(std::string sound, int channel, int loop, int chan1, int chan2);
 		//TODO: add persist bool
 		static void AddMusic(std::string sound, int channel, int loop, int chan1, int chan2);
 		static void PlaySound();
 		static void PauseSound();
-		static void RemoveAllSounds();
 		static void AddTransition(std::string scene);
 		//static std::vector<AudioClip_ptr> getSounds();*/
 
