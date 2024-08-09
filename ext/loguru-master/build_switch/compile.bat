@@ -1,1 +1,0 @@
-F:\\sdk\\devkitPro\\msys2\\msys2_shell.bat -where %~dp0
