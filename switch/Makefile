@@ -43,7 +43,7 @@ TARGET		:=	sapphire
 BUILD		:=	build
 SOURCES		:=	$(SOURCEDIR) $(SOURCEDIR)/../switch/ext/imgui
 #DATA		:=	data
-INCLUDES	:=	$(SOURCEDIR) $(SOURCEDIR)/../switch/ext/imgui $(SOURCEDIR)/../switch/ext $(SOURCEDIR)/../include $(SOURCEDIR)/../include/Engine $(SOURCEDIR)/../switch/ext/toml11 $(SOURCEDIR)/../switch/ext/toml11/toml $(SOURCEDIR)/../ext/loguru-master/build_switch
+INCLUDES	:=	$(SOURCEDIR) $(SOURCEDIR)/../switch/ext/imgui $(SOURCEDIR)/../switch/ext $(SOURCEDIR)/../include $(SOURCEDIR)/../include/Engine $(SOURCEDIR)/../switch/ext/toml11 $(SOURCEDIR)/../switch/ext/toml11/toml $(SOURCEDIR)/../switch/ext/loguru_switch
 #ROMFS		:=	../romfs
 
 #---------------------------------------------------------------------------------
