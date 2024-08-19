@@ -25,10 +25,9 @@ namespace Engine
 		void destroy();
 		bool isloaded();
 		bool isVisible();
-		void Event(SDL_Event event);
 		bool MouseCollision(SDL_Event event);
 		SDL_Rect getPos();
-		void visible(bool visible);
+		void setVisible(bool visible);
 		void setScale(float scale);
 		float getScale();
 		int getWidth();
@@ -38,9 +37,6 @@ namespace Engine
 		void setColorMod(RGB modVal);
 		void setColorMod(int r, int g, int b);
 
-		//TODO: move to button?
-		std::function<void()> callback;
-		std::function<void()> hover_event;
 		std::string name;
 		double rotation = 0;
 		SDL_RendererFlip flipped = SDL_FLIP_NONE;

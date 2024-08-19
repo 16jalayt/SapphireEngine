@@ -197,27 +197,7 @@ void Sprite::destroy()
 	_loaded = false;
 }
 
-void Sprite::Event(SDL_Event event)
-{
-	switch (event.type)
-	{
-	case SDL_MOUSEBUTTONDOWN:
-	case SDL_FINGERDOWN:
-		if (MouseCollision(event) && callback)
-		{
-			//TODO: skeliton key crashes with empty callback
-			callback();
-		}
-		break;
-	case SDL_MOUSEMOTION:
-		if (MouseCollision(event) && hover_event)
-		{
-			hover_event();
-		}
-		break;
-	}
-}
-
+//TODO: move to util?
 bool Sprite::MouseCollision(SDL_Event event)
 {
 	//Select finger or mouse and test range
@@ -262,7 +242,7 @@ SDL_Rect Sprite::getPos()
 	return _pos;
 }
 
-void Sprite::visible(bool visible)
+void Sprite::setVisible(bool visible)
 {
 	_visible = visible;
 }

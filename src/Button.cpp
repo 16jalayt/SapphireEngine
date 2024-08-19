@@ -7,10 +7,8 @@
 
 using namespace Engine;
 
-Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, x, y, parent, partial)
+Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, x, y, parent, partial)
 {
-	_enabled = enabled;
-
 	//If file name is empty. Must be hot spot
 	if (strcmp(file, "") == 0)
 	{
@@ -20,10 +18,8 @@ Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent
 	}
 }
 
-Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
+Button::Button(SDL_Rect rect, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
-	_enabled = enabled;
-
 	//If file name is empty. Must be hot spot
 	if (strcmp(file, "") == 0)
 	{
@@ -33,10 +29,8 @@ Button::Button(SDL_Rect rect, const char* file, RenderParent parent, bool enable
 	}
 }
 
-Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool enabled, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
+Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
-	_enabled = enabled;
-
 	//If file name is empty. Must be hot spot
 	if (strcmp(file, "") == 0)
 	{
@@ -47,10 +41,38 @@ Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool ena
 	}
 }
 
+void Button::setEnabled(bool enabled)
+{
+	_enabled = _enabled;
+}
+
+bool Button::isEnabled()
+{
+	return _enabled;
+}
+
 void Button::Event(SDL_Event event)
 {
 	if (_visible && _enabled)
-		Sprite::Event(event);
+	{
+		switch (event.type)
+		{
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_FINGERDOWN:
+			if (MouseCollision(event) && callback)
+			{
+				//TODO: skeliton key crashes with empty callback
+				callback();
+			}
+			break;
+		case SDL_MOUSEMOTION:
+			if (MouseCollision(event) && hover_event)
+			{
+				hover_event();
+			}
+			break;
+		}
+	}
 }
 
 void Button::Draw()
