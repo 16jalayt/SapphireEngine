@@ -16,12 +16,11 @@ namespace Engine
 		Button(Scaled_Rect rect, const char* file = NULL, RenderParent parent = RenderParent::canvas, bool enabled = true, Scaled_Rect partial = Scaled_Rect());
 		virtual ~Button() {};
 		void Draw();
+		void Event(SDL_Event event);
 
 	private:
-		//TODO: make enabled in click handler
 		bool _enabled;
 	};
 }
 
-//TODO: need deleter?
 using Button_ptr = std::shared_ptr<Engine::Button>;

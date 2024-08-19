@@ -47,11 +47,18 @@ Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, bool ena
 	}
 }
 
+void Button::Event(SDL_Event event)
+{
+	if (_visible && _enabled)
+		Sprite::Event(event);
+}
+
 void Button::Draw()
 {
 	Sprite::Draw();
 
-	if (_visible && Config::debugHot)
+	//TODO: make proporty to not have hotzone
+	if (_visible && Config::debugHot && _enabled)
 	{
 		if (_parent == RenderParent::window)
 		{

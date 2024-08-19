@@ -38,6 +38,7 @@ namespace Engine
 		void setColorMod(RGB modVal);
 		void setColorMod(int r, int g, int b);
 
+		//TODO: move to button?
 		std::function<void()> callback;
 		std::function<void()> hover_event;
 		std::string name;
