@@ -74,28 +74,28 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>../ext/loguru-master/build windows/Debug;$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>../ext/loguru-master/build windows/Release;$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>../ext/loguru-master/build windows/Debug;$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <LibraryPath>../ext/loguru-master/build windows/Release;$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -109,7 +109,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;logurud.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -131,7 +131,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;loguru.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -149,7 +149,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;logurud.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -171,7 +171,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Winmm.lib;loguru.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>

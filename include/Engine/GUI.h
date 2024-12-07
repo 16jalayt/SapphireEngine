@@ -9,7 +9,8 @@
 #include "Globals.h"
 #include "Utils.h"
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
+#include <imgui.h>
 #include <imgui_internal.h>
 #endif
 
@@ -43,7 +44,7 @@ namespace Engine
 		void AddButton(Button_ptr button);
 		void AddRect(GUI_Rect rect);
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 		ImGuiContext* imCtx;
 #endif
 
@@ -51,8 +52,6 @@ namespace Engine
 		void ToggleButton(const char* str_id, bool* v);
 		void ToggleButtonV2(const char* str_id, bool* v);
 		void ShowHelpMarker(const char* desc);
-
-		bool cheatSheetOpen = true;
 	};
 }
 

@@ -2,7 +2,7 @@
 #include "Engine/GUI.h"
 #include <string>
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
@@ -23,7 +23,7 @@ SDL_Rect GUI::canvasRect;
 GUI::GUI()
 {
 	//For now just patch out imgui from switch port
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	imCtx = ImGui::CreateContext();
@@ -47,7 +47,7 @@ GUI::GUI()
 
 GUI::~GUI()
 {
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 	// Cleanup IMGUI
 	ImGui_ImplSDLRenderer2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
@@ -76,7 +76,7 @@ void GUI::Draw()
 
 void GUI::EventProc(SDL_Event event)
 {
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 	ImGui_ImplSDL2_ProcessEvent(&event);
 #endif
 
@@ -100,7 +100,7 @@ void GUI::AddRect(GUI_Rect rect)
 	rects.push_back(rect);
 }
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)
+#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
 
 //https://github.com/ocornut/imgui/issues/1537#issuecomment-355569554
 //Animates and green

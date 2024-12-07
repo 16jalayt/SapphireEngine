@@ -9,13 +9,6 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
-//TODO: remove
-#ifndef __SWITCH__
-#include <imgui.h>
-#include <imgui_impl_sdl2.h>
-#include <imgui_impl_sdlrenderer2.h>
-#endif
-
 #include "Engine/Audio.h"
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"

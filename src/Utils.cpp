@@ -2,9 +2,12 @@
 
 #ifdef __SWITCH__
 #include <switch.h>
-#include <algorithm>
+#endif
+#ifdef __VITA__
+#include <psp2/kernel/processmgr.h>
 #endif
 
+#include <algorithm>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
@@ -81,6 +84,10 @@ void quit()
 #ifdef __SWITCH__
 	romfsExit();
 	consoleExit(NULL);
+#endif
+#ifdef __VITA__
+	//Example just used sdl_quit
+	sceKernelExitProcess(0);
 #endif
 	exit(0);
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui.h"
 
+#ifndef __VITA__
 void StyleSteam()
 {
 	// Classic Steam style by metasprite from ImThemes
@@ -177,6 +178,7 @@ void StyleClean()
 		}
 	}*/
 }
+#endif
 
 // From https://github.com/procedural/gpulib/blob/master/gpulib_imgui.h
 struct ImVec3 { float x, y, z; ImVec3(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) { x = _x; y = _y; z = _z; } };
