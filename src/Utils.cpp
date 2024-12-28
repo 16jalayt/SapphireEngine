@@ -16,6 +16,9 @@
 #include "Engine/Globals.h"
 #include "Engine/Graphics.h"
 #include <loguru.hpp>
+#include <sys/stat.h>
+#include <vector>
+#include <sys/stat.h>
 
 using namespace Engine;
 
@@ -225,4 +228,44 @@ bool AssertInt(std::ifstream& inFile, int val, bool bigEndian)
 		return false;
 	}
 	return true;
+}
+
+//Hack to get vita paths correct. Can be used for other platforms too
+std::string PathFixer(std::string path)
+{
+#ifdef __VITA__
+	return "ux0:/data/" + Config::gameName + "/" + path;
+#endif
+#ifndef __VITA__
+	return path;
+#endif
+}
+
+//https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exists-using-standard-c-c11-14-17-c
+bool FileExists(std::string path)
+{
+	/*std::string pathTest = PathFixer(path);
+	std::ifstream inFile = std::ifstream(pathTest, std::ios::in | std::ios::binary | std::ios::ate);
+	if (inFile.good()) {
+		inFile.close();
+		return true;
+	}
+	return false;*/
+	struct stat buffer;
+	return (stat(path.c_str(), &buffer) == 0);
+}
+
+std::string FindFilePath(std::string fileName, const std::vector<std::string>& paths, const std::vector<std::string>& extensions)
+{
+	for (std::string path : paths)
+	{
+		for (std::string ext : extensions)
+		{
+			if (FileExists(PathFixer(path + fileName + ext)))
+				return PathFixer(path + fileName + ext);
+		}
+	}
+
+	LOG_F(ERROR, "Cannot find file: %s", fileName.c_str());
+	return std::string();
 }

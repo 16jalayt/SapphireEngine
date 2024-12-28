@@ -7,6 +7,7 @@
 #include "SDL_ptr.h"
 #include "Globals.h"
 #include "Config.h"
+#include <vector>
 
 SE_API void fatalError(const char* fmt, ...);
 SE_API void quit();
@@ -21,3 +22,6 @@ SE_API bool AssertInt(std::ifstream& inFile, int val, bool bigEndian = false);
 SE_API char readByte(std::ifstream& inFile);
 SE_API std::string readString(std::ifstream& inFile, int length);
 SE_API void skipBytes(std::ifstream& inFile, int skip);
+SE_API std::string PathFixer(std::string path);
+SE_API bool FileExists(std::string path);
+SE_API std::string FindFilePath(std::string fileName, const std::vector<std::string>& paths, const std::vector<std::string>& extensions);
