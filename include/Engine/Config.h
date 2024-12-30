@@ -22,6 +22,7 @@ namespace Engine
 	{
 	public:
 		static void parse(int argc, char** argv);
+		static void loadStub();
 		static void initLog(int argc, char** argv);
 
 		static bool fullscreen;

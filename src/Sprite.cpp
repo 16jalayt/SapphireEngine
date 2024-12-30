@@ -8,10 +8,11 @@
 #include "Engine/GUI.h"
 #include "Engine/Config.h"
 #include <loguru.hpp>
+#include <string>
 
 using namespace Engine;
 
-Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect partial)
+Sprite::Sprite(std::string file, int x, int y, RenderParent parent, Scaled_Rect partial)
 {
 	//TODO: upgrade to string?
 	_loaded = false;
@@ -22,12 +23,12 @@ Sprite::Sprite(const char* file, int x, int y, RenderParent parent, Scaled_Rect 
 	_parent = parent;
 
 	//If file name not null or empty
-	if (file && strcmp(file, "") != 0)
+	if (file != "")
 	{
 		//TODO: move to Loader
 		//TODO: upgrade to smart pointer
 		//TODO: change all texture loading to IMG_LoadTexture to skip tmpsurf
-		SDL_Surface* tmpsurf = IMG_Load(file);
+		SDL_Surface* tmpsurf = IMG_Load(PathFixer(file).c_str());
 		if (tmpsurf)
 		{
 			if (partial != Scaled_Rect())

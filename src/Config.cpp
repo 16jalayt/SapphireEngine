@@ -7,6 +7,7 @@
 #include <cxxopts.hpp>
 //config file
 #include <toml.hpp>
+#include <Engine/Utils.h>
 //#include <Engine/Globals.h>
 
 using namespace Engine;
@@ -23,7 +24,7 @@ int Config::referenceHeight;
 int Config::windowWidth;
 int Config::windowHeight;
 float Config::globalScale;
-std::string Config::gameName;
+std::string Config::gameName = "Sapphire Engine";
 std::string Config::gameDesc;
 
 //TODO:add option for startup scene
@@ -36,7 +37,7 @@ void Config::parse(int argc, char** argv)
 	//Parse the config file first so command line arguments can overwrite
 	try
 	{
-		auto data = toml::parse(configName);
+		auto data = toml::parse(PathFixer(configName));
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
 		Config::logfile = toml::find_or<bool>(data, "logfile", false);
 
@@ -108,6 +109,13 @@ void Config::parse(int argc, char** argv)
 	}
 }
 
+void Config::loadStub()
+{
+	auto data = toml::parse("stub.toml");
+
+	Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
+}
+
 void Config::initLog(int argc, char** argv)
 {
 	//TODO: add to config
@@ -140,7 +148,7 @@ void Config::initLog(int argc, char** argv)
 	loguru::set_thread_name("Engine Thread");
 
 	if (Config::logfile)
-		loguru::add_file("game.log", loguru::Truncate, loguru::Verbosity_INFO);
+		loguru::add_file(PathFixer("game.log").c_str(), loguru::Truncate, loguru::Verbosity_INFO);
 
 	//Logging tests/examples
 	//LOG_F(INFO, "I'm hungry for some %.3f!", 3.14159);

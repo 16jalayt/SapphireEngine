@@ -1,5 +1,9 @@
 #include "Engine/AnimatedSprite.h"
 #include <loguru.hpp>
+#include <vector>
+#include <Engine/SDL_ptr.h>
+#include <Engine/Sprite.h>
+#include <Engine/Globals.h>
 
 using namespace Engine;
 

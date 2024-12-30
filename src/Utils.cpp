@@ -233,10 +233,13 @@ bool AssertInt(std::ifstream& inFile, int val, bool bigEndian)
 //Hack to get vita paths correct. Can be used for other platforms too
 std::string PathFixer(std::string path)
 {
-#ifdef __VITA__
+#if defined (__VITA__)
+	//hack for startup with no config file
+	if (Config::gameName == "Sapphire Engine")
+		Config::loadStub();
+
 	return "ux0:/data/" + Config::gameName + "/" + path;
-#endif
-#ifndef __VITA__
+#else
 	return path;
 #endif
 }
