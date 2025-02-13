@@ -39,7 +39,7 @@ void Config::parse(int argc, char** argv)
 	{
 		auto data = toml::parse(PathFixer(configName));
 		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
-		Config::logfile = toml::find_or<bool>(data, "logfile", false);
+		Config::logfile = toml::find_or<bool>(data, "logfile", true);
 
 		Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
 		Config::gameDesc = toml::find_or<std::string>(data, "gameDesc", "A game engine");
