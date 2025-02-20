@@ -146,6 +146,7 @@ SDL_Rect ScaleRect(int x, int y, int w, int h, float scale)
 }
 
 //TODO: add message
+//4 byte 32 bits
 int readInt(std::ifstream& inFile, bool bigEndian)
 {
 	int result = -1;
@@ -162,6 +163,7 @@ int readInt(std::ifstream& inFile, bool bigEndian)
 	return result;
 }
 
+//2 byte 16 bits
 short readShort(std::ifstream& inFile, bool bigEndian)
 {
 	short result = -1;
@@ -178,6 +180,7 @@ short readShort(std::ifstream& inFile, bool bigEndian)
 	return result;
 }
 
+//1 byte 8 bits
 char readByte(std::ifstream& inFile)
 {
 	char result = -1;
@@ -228,6 +231,15 @@ bool AssertInt(std::ifstream& inFile, int val, bool bigEndian)
 		return false;
 	}
 	return true;
+}
+
+int getLength(std::ifstream& inFile)
+{
+	long begin = inFile.tellg();
+	inFile.seekg(0, std::ios::end);
+	long end = inFile.tellg();
+	inFile.seekg(begin, std::ios::beg);
+	return end;
 }
 
 //Hack to get vita paths correct. Can be used for other platforms too

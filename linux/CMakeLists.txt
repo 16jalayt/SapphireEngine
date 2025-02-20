@@ -3,22 +3,36 @@ SET(CMAKE_INSTALL_PREFIX ./lib)
 
 project(SapphireEngine)
 
+set(IMGUI_SUPPORTED TRUE)
+
 find_package(SDL2 REQUIRED)
+message(STATUS "SDL2 Version ${SDL2_VERSION}")
+if (${SDL2_VERSION} VERSION_LESS "2.0.17")
+  message(WARNING "SDL2 Version ${SDL2_VERSION} is less than 2.0.17. Disabling IMGUI support.")
+  add_compile_definitions(IMGUI_SUPPORTED)
+  set(IMGUI_SUPPORTED FALSE)
+endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/include/SDL2/ -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 #might allow to remove additions from loguru *_additions
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++14")
 
+if (IMGUI_SUPPORTED)
 set(IMGUI_DIR ../ext/mac/imgui)
+
+include_directories(
+  ${IMGUI_DIR}
+  ${IMGUI_DIR}/backends
+  ${IMGUI_DIR}/misc/cpp/
+  /usr/include/SDL2/
+)
+endif()
 
 include_directories(
   "ext/"
   "ext/loguru"
   "ext/toml11"
-  ${IMGUI_DIR}
-  ${IMGUI_DIR}/backends
-  ${IMGUI_DIR}/misc/cpp/
   "../include"
 )
 
@@ -40,7 +54,7 @@ set(IMGUI_SRC
 add_library(${PROJECT_NAME} STATIC
   ${engine_SRC}
   ${engine_EXT}
-  ${IMGUI_SRC}
+  $<$<BOOL:${IMGUI_SUPPORTED}>:${IMGUI_SRC}>
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -49,20 +63,12 @@ target_link_libraries(${PROJECT_NAME}
   SDL2_ttf 
   SDL2_gfx 
   SDL2 
-  avformat
-  avfilter
-  swscale 
-  avcodec
-  webpdemux
-  webp
   opusfile
   vorbisfile
   vorbis
   ogg
   opus
-  swresample 
   mp3lame
-  avutil 
   freetype 
   mpdec 
   xmp

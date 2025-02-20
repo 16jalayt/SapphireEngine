@@ -12,7 +12,9 @@
 
 #ifdef __SWITCH__
 #include <switch.h>
-#elif !defined(__APPLE__) && !defined(__VITA__)
+#endif
+
+#if !defined(NO_IMGUI)
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
@@ -105,7 +107,7 @@ void SapphireApp::startFrame()
 
 	SDL_RenderClear(Graphics::renderer.get());
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
+#if !defined(NO_IMGUI)
 	//TODO:imgui cursor position doesn't work fullscreen
 	// Start the Dear ImGui frame
 	ImGui_ImplSDLRenderer2_NewFrame();
@@ -120,7 +122,7 @@ void SapphireApp::startFrame()
 
 void SapphireApp::endFrame()
 {
-#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
+#if !defined(NO_IMGUI)
 	ImGui::Render();
 #if IMGUI_VERSION_NUM >= 19070 || defined(__VITA__)
 	ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), Graphics::renderer.get());

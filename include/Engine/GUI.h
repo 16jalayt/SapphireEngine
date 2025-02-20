@@ -9,7 +9,20 @@
 #include "Globals.h"
 #include "Utils.h"
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
+#if !SDL_VERSION_ATLEAST(2,0,17)
+#warning This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function. Disabling debug UI.
+  #if !defined(NO_IMGUI)
+    #define NO_IMGUI
+  #endif
+#endif
+
+#if defined(__SWITCH__)  || defined(__APPLE__)|| defined(__VITA__)
+  #if !defined(NO_IMGUI)
+    #define NO_IMGUI
+  #endif
+#endif
+
+#if !defined(NO_IMGUI)
 #include <imgui.h>
 #include <imgui_internal.h>
 #endif
@@ -20,9 +33,7 @@ typedef struct GUI_Rect
 	int r, g, b;
 } GUI_Rect;
 
-#if !SDL_VERSION_ATLEAST(2,0,17)
-#error This backend requires SDL 2.0.17+ because of SDL_RenderGeometry() function
-#endif
+
 
 namespace Engine
 {
@@ -44,7 +55,7 @@ namespace Engine
 		void AddButton(Button_ptr button);
 		void AddRect(GUI_Rect rect);
 
-#if !defined(__SWITCH__) && !defined(__APPLE__)&& !defined(__VITA__)
+#if !defined(NO_IMGUI)
 		ImGuiContext* imCtx;
 #endif
 

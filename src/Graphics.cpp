@@ -69,14 +69,11 @@ int Graphics::init(std::string loadingScreen)
 	Config::windowHeight = 720;
 #endif
 
-#ifdef __VITA__
-	Config::windowWidth = 960;
-	Config::windowHeight = 544;
-	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "opengles2");
+#if !defined(NO_IMGUI)
+		//For IMGUI
+	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");	
 #endif
 
-	//For IMGUI
-	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Config::windowWidth, Config::windowHeight, flags));
 	if (!window)
 	{
@@ -207,8 +204,6 @@ void Graphics::frameWait()
 }
 void Graphics::Quit()
 {
-	//SDL_PauseAudio(true);
-	SDL_CloseAudio();
 	IMG_Quit();
 	TTF_Quit();
 	SDL_Quit();
@@ -232,7 +227,7 @@ void Graphics::loadingscreen(std::string imagePath)
 {
 	//TODO null checks as screen is optional
 	//TODO: convert to direct texture func
-	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load(PathFixer(imagePath).c_str()));
+	SDL_Surface_ptr loading_surf = SDL_Surface_ptr(IMG_Load(imagePath.c_str()));
 	if (loading_surf)
 	{
 		loadingTex = make_SDL_Texture_s(SDL_CreateTextureFromSurface(renderer.get(), loading_surf.get()));
