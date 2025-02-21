@@ -1,7 +1,7 @@
 #pragma once
-#include "imgui.h"
+#include "Engine/IMGUIInclude.h"
 
-#ifndef __VITA__
+#if !defined(NO_IMGUI)
 void StyleSteam()
 {
 	// Classic Steam style by metasprite from ImThemes
@@ -178,7 +178,6 @@ void StyleClean()
 		}
 	}*/
 }
-#endif
 
 // From https://github.com/procedural/gpulib/blob/master/gpulib_imgui.h
 struct ImVec3 { float x, y, z; ImVec3(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) { x = _x; y = _y; z = _z; } };
@@ -241,3 +240,4 @@ void StyleCleanBlue()
 	static ImVec3 color_for_pops = ImVec3(33.f / 255.f, 46.f / 255.f, 60.f / 255.f);
 	imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops);
 }
+#endif

@@ -2,6 +2,7 @@
 #include "Engine/Graphics.h"
 #include "Engine/Globals.h"
 #include "Engine/Utils.h"
+#include "Engine/IMGUIInclude.h"
 
 #ifdef __APPLE__
 #include <unistd.h>
@@ -14,16 +15,10 @@
 #include <switch.h>
 #endif
 
-#if !defined(NO_IMGUI)
-#include <imgui.h>
-#include <imgui_impl_sdl2.h>
-#include <imgui_impl_sdlrenderer2.h>
-#endif
-
 //TODO: define IMGUI_DISABLE to disable?
 using namespace Engine;
 
-SapphireApp::SapphireApp()
+SapphireApp::SapphireApp(int argc, char** argv)
 {
 #if defined(__APPLE__)
 #include <RessourcesDirectory.hpp>
@@ -61,6 +56,8 @@ SapphireApp::SapphireApp()
 	//           return;
 	//       }
 #endif
+
+	Engine::Config::parse(argc, argv);
 
 	_graphics = std::make_unique<Engine::Graphics>();
 	// initial subsystem. If error, just exit. Error already printed.

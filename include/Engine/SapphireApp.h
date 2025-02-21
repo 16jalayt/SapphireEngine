@@ -8,7 +8,7 @@
 class SE_API SapphireApp
 {
 public:
-	SapphireApp();
+	SapphireApp(int argc, char** argv);
 	virtual ~SapphireApp() {};
 	void initControls();
 	void startFrame();

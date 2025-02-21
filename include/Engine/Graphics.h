@@ -9,13 +9,6 @@
 #include "SDL_TTF_ptr.h"
 #include "Globals.h"
 
-#if !SDL_VERSION_ATLEAST(2,0,17)
-#warning This backend requires SDL 2.0.17+ because of SDL_HINT_IME_SHOW_UI. Disabling debug UI.
-  #if !defined(NO_IMGUI)
-    #define NO_IMGUI
-  #endif
-#endif
-
 namespace Engine
 {
 	class SE_API Graphics

@@ -43,7 +43,7 @@ Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, Scaled_R
 
 void Button::setEnabled(bool enabled)
 {
-	_enabled = _enabled;
+	_enabled = enabled;
 }
 
 bool Button::isEnabled()

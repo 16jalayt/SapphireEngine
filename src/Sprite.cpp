@@ -61,7 +61,7 @@ Sprite::Sprite(std::string file, int x, int y, RenderParent parent, Scaled_Rect 
 		}
 		else
 		{
-			LOG_F(ERROR, "Unable to open sprite: %s , %s\n", file, IMG_GetError());
+			LOG_F(ERROR, "Unable to open sprite: %s , %s\n", file.c_str(), IMG_GetError());
 		}
 	}
 }
