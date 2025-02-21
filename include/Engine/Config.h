@@ -1,5 +1,5 @@
 #pragma once
-#include "Globals.h"
+#include "Engine/Globals.h"
 #include <string>
 
 #define TOML11_COLORIZE_ERROR_MESSAGE 1
@@ -15,6 +15,8 @@
 #pragma warning( disable : 4996 4038 )
 
 #include <loguru.hpp>
+//config file
+#include <toml.hpp>
 
 namespace Engine
 {
@@ -22,16 +24,19 @@ namespace Engine
 	{
 	public:
 		static void parse(int argc, char** argv);
-		static void loadStub();
+		//static void loadStub();
 		static void initLog(int argc, char** argv);
+		static loguru::Verbosity GetVerbosity();
 
+		static toml::value config;
 		static bool fullscreen;
 		static bool logfile;
 
 		static bool debugHot;
 		static bool debugNoSound;
 		static bool debugMenuEnabled;
-		static bool lograw;
+		static std::string logLevel;
+		static bool logRaw;
 		static int windowWidth;
 		static int windowHeight;
 		static int referenceWidth;

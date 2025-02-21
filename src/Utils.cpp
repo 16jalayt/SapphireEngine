@@ -22,6 +22,28 @@
 
 using namespace Engine;
 
+//TODO: move file to static class?
+void switchInit()
+{
+#ifdef __SWITCH__
+	//Log to Ryujinx
+	consoleDebugInit(debugDevice_SVC);
+
+	//Log to nxlink on actual hardware
+	socketInitializeDefault();
+	nxlinkStdio();
+	//use cerr for both to work
+
+	//Running off sd card now so no romfs
+	/*Result rc = romfsInit();
+	if (R_FAILED(rc))
+		printf("romfsInit: %08X\n", rc);
+	chdir("romfs:/");*/
+
+	chdir("/switch/PhantomDogs/");
+#endif
+}
+
 #ifdef __SWITCH__
 //to test switch romfs
 void printfile(const char* path)

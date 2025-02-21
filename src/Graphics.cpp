@@ -22,6 +22,7 @@ std::shared_ptr<SDL_Window> Graphics::window;
 std::shared_ptr<SDL_Renderer> Graphics::renderer;
 
 //TODO: SDL assert fail when game open and turn off monitor
+//TODO: runtime resize
 
 Graphics::~Graphics()
 {
@@ -70,8 +71,8 @@ int Graphics::init(std::string loadingScreen)
 #endif
 
 #if !defined(NO_IMGUI)
-		//For IMGUI
-	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");	
+	//For IMGUI
+	SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1");
 #endif
 
 	window = make_SDL_Window_s(SDL_CreateWindow("Sapphire Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Config::windowWidth, Config::windowHeight, flags));

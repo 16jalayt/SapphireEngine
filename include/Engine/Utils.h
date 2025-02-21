@@ -9,6 +9,7 @@
 #include "Config.h"
 #include <vector>
 
+SE_API void switchInit();
 SE_API void fatalError(const char* fmt, ...);
 SE_API void quit();
 SE_API int rand_range(int min, int max);

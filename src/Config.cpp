@@ -1,24 +1,21 @@
 #include "Engine/Config.h"
 
-#include <loguru.hpp>
 #include <iostream>
-
 //cmd parse
 #include <cxxopts.hpp>
-//config file
-#include <toml.hpp>
 #include <Engine/Utils.h>
-//#include <Engine/Globals.h>
 
 using namespace Engine;
 
+toml::value Config::config;
 bool Config::fullscreen;
 bool Config::logfile;
 
 bool Config::debugHot;
 bool Config::debugNoSound;
 bool Config::debugMenuEnabled;
-bool Config::lograw;
+std::string Config::logLevel;
+bool Config::logRaw;
 int Config::referenceWidth;
 int Config::referenceHeight;
 int Config::windowWidth;
@@ -37,25 +34,28 @@ void Config::parse(int argc, char** argv)
 	//Parse the config file first so command line arguments can overwrite
 	try
 	{
-		auto data = toml::parse(PathFixer(configName));
-		Config::fullscreen = toml::find_or<bool>(data, "fullscreen", true);
-		Config::logfile = toml::find_or<bool>(data, "logfile", true);
+		Config::config = toml::parse(PathFixer(configName));
+		Config::fullscreen = toml::find_or<bool>(config, "fullscreen", true);
+		Config::logfile = toml::find_or<bool>(config, "logfile", true);
 
-		Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
-		Config::gameDesc = toml::find_or<std::string>(data, "gameDesc", "A game engine");
+		Config::gameName = toml::find_or<std::string>(config, "gameName", "Sapphire Engine");
+		Config::gameDesc = toml::find_or<std::string>(config, "gameDesc", "A game engine");
 
-		const auto& debug = toml::find(data, "debug");
+		Config::windowWidth = toml::find_or<int>(config, "windowWidth", 1920);
+		Config::windowHeight = toml::find_or<int>(config, "windowHeight", 1080);
+		Config::referenceWidth = toml::find_or<int>(config, "referenceWidth", 800);
+		Config::referenceHeight = toml::find_or<int>(config, "referenceHeight", 600);
+		//TODO: calculate?
+		Config::globalScale = toml::find_or<float>(config, "globalScale", 1.00);
+
+		//Debug section should be last in case error?
+		const auto& debug = toml::find(config, "debug");
 		Config::debugHot = toml::find_or<bool>(debug, "debugHot", false);
 		Config::debugNoSound = toml::find_or<bool>(debug, "debugNoSound", false);
 		Config::debugMenuEnabled = toml::find_or<bool>(debug, "debugMenuEnabled", false);
-		Config::lograw = toml::find_or<bool>(debug, "lograw", false);
-		//TODO: runtime resize
-		Config::windowWidth = toml::find_or<int>(data, "windowWidth", 1920);
-		Config::windowHeight = toml::find_or<int>(data, "windowHeight", 1080);
-		Config::referenceWidth = toml::find_or<int>(data, "referenceWidth", 800);
-		Config::referenceHeight = toml::find_or<int>(data, "referenceHeight", 600);
-		//TODO: calculate?
-		Config::globalScale = toml::find_or<float>(data, "globalScale", 1.00);
+		Config::logLevel = toml::find_or<std::string>(config, "logLevel", "Error");
+		//move from debug?
+		Config::logRaw = toml::find_or<bool>(debug, "logRaw", false);
 	}
 	catch (std::ios_base::failure&)
 	{
@@ -109,20 +109,30 @@ void Config::parse(int argc, char** argv)
 	}
 }
 
-void Config::loadStub()
+//Not used
+/*void Config::loadStub()
 {
 	auto data = toml::parse("stub.toml");
 
 	Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
-}
+}*/
 
 void Config::initLog(int argc, char** argv)
 {
-	//TODO: add to config
+	//Why c++, does string not have basic members
+	std::transform(Config::logLevel.begin(), Config::logLevel.end(), Config::logLevel.begin(), ::toupper);
+	if (Config::logLevel == "MAX")
+		loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
+	else if (Config::logLevel == "ERROR")
+		loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
+	else if (Config::logLevel == "WARNING")
+		loguru::g_stderr_verbosity = loguru::Verbosity_WARNING;
+	else if (Config::logLevel == "INFO")
+		loguru::g_stderr_verbosity = loguru::Verbosity_INFO;
+
+	//If debug build, force to max
 #ifdef _DEBUG
 	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
-#else
-	loguru::g_stderr_verbosity = loguru::Verbosity_ERROR;
 #endif
 
 	//Force to max because switch is hard to debug
@@ -130,7 +140,7 @@ void Config::initLog(int argc, char** argv)
 	loguru::g_stderr_verbosity = loguru::Verbosity_MAX;
 #endif
 
-	if (Config::lograw)
+	if (Config::logRaw)
 	{
 		loguru::g_preamble = false;
 	}
@@ -159,4 +169,9 @@ void Config::initLog(int argc, char** argv)
 
 	//LOG_SCOPE_FUNCTION(INFO);
 	//VLOG_SCOPE_F(1, "Iteration %d", 5);
+}
+
+loguru::Verbosity Config::GetVerbosity()
+{
+	return loguru::g_stderr_verbosity;
 }

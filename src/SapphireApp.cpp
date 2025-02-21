@@ -56,12 +56,15 @@ SapphireApp::SapphireApp(int argc, char** argv)
 	//           return;
 	//       }
 #endif
-
+#ifdef __SWITCH__
+	Utils::switchInit();
+#endif
 	Engine::Config::parse(argc, argv);
+	Engine::Config::initLog(argc, argv);
 
 	_graphics = std::make_unique<Engine::Graphics>();
 	// initial subsystem. If error, just exit. Error already printed.
-	if (_graphics->init("data/Nintendo_Switch_Logo_resized.png") < 0)
+	if (_graphics->init("assets/LOGO.png") < 0)
 		quit();
 
 	initControls();
