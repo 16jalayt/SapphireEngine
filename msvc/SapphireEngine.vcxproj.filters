@@ -96,5 +96,8 @@
     <ClInclude Include="..\include\Engine\SapphireApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Engine\IMGUIInclude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

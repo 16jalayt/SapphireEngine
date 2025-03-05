@@ -205,6 +205,7 @@
     <ClInclude Include="..\include\Engine\Globals.h" />
     <ClInclude Include="..\include\Engine\Graphics.h" />
     <ClInclude Include="..\include\Engine\GUI.h" />
+    <ClInclude Include="..\include\Engine\IMGUIInclude.h" />
     <ClInclude Include="..\include\Engine\SapphireApp.h" />
     <ClInclude Include="..\include\Engine\SDL_ptr.h" />
     <ClInclude Include="..\include\Engine\SDL_TTF_ptr.h" />
