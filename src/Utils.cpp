@@ -22,10 +22,10 @@
 
 using namespace Engine;
 
+#ifdef __SWITCH__
 //TODO: move file to static class?
 void switchInit()
 {
-#ifdef __SWITCH__
 	//Log to Ryujinx
 	consoleDebugInit(debugDevice_SVC);
 
@@ -41,10 +41,8 @@ void switchInit()
 	chdir("romfs:/");*/
 
 	chdir("/switch/PhantomDogs/");
-#endif
 }
 
-#ifdef __SWITCH__
 //to test switch romfs
 void printfile(const char* path)
 {

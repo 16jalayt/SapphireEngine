@@ -57,7 +57,7 @@ SapphireApp::SapphireApp(int argc, char** argv)
 	//       }
 #endif
 #ifdef __SWITCH__
-	Utils::switchInit();
+	switchInit();
 #endif
 	Engine::Config::parse(argc, argv);
 	Engine::Config::initLog(argc, argv);
