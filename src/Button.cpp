@@ -7,10 +7,10 @@
 
 using namespace Engine;
 
-Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, x, y, parent, partial)
+Button::Button(int x, int y, int w, int h, std::string  file, RenderParent parent, Scaled_Rect partial) :Sprite(file, x, y, parent, partial)
 {
 	//If file name is empty. Must be hot spot
-	if (strcmp(file, "") == 0)
+	if (file.empty())
 	{
 		_pos = ScaleRect(x, y, w, h);
 		_width = w;
@@ -18,10 +18,10 @@ Button::Button(int x, int y, int w, int h, const char* file, RenderParent parent
 	}
 }
 
-Button::Button(SDL_Rect rect, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
+Button::Button(SDL_Rect rect, std::string  file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
 	//If file name is empty. Must be hot spot
-	if (strcmp(file, "") == 0)
+	if (file.empty())
 	{
 		_pos = ScaleRect(rect);
 		_width = _pos.w;
@@ -29,10 +29,10 @@ Button::Button(SDL_Rect rect, const char* file, RenderParent parent, Scaled_Rect
 	}
 }
 
-Button::Button(Scaled_Rect rect, const char* file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
+Button::Button(Scaled_Rect rect, std::string file, RenderParent parent, Scaled_Rect partial) :Sprite(file, rect.x, rect.y, parent, partial)
 {
 	//If file name is empty. Must be hot spot
-	if (strcmp(file, "") == 0)
+	if (file.empty())
 	{
 		//convert rect type and scale
 		_pos = ScaleRect(ScaledRect_to_SDLRect(rect));
