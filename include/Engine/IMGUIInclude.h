@@ -7,7 +7,7 @@
   #endif
 #endif
 
-#if defined(__SWITCH__)  || defined(__APPLE__)|| defined(__VITA__)
+#if defined(__SWITCH__)  || defined(__APPLE__)|| defined(__VITA__)|| defined(__WIIU__)
   #if !defined(NO_IMGUI)
     #define NO_IMGUI
   #endif

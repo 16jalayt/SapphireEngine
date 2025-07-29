@@ -109,13 +109,13 @@ void Config::parse(int argc, char** argv)
 	}
 }
 
-//Not used
-/*void Config::loadStub()
+//Used by pathfixer to get path to config file on startup
+void Config::loadStub()
 {
 	auto data = toml::parse("stub.toml");
 
 	Config::gameName = toml::find_or<std::string>(data, "gameName", "Sapphire Engine");
-}*/
+}
 
 void Config::initLog(int argc, char** argv)
 {

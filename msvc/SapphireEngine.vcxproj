@@ -86,7 +86,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
+    <IncludePath>../ext/imgui/backends/;../ext/loguru-master/;../include;$(IncludePath)</IncludePath>
     <SourcePath>$(SourcePath)</SourcePath>
     <LibraryPath>../ext/loguru-master/build windows/Debug;$(LibraryPath)</LibraryPath>
     <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
@@ -185,6 +185,8 @@
     <Image Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\ext\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="..\ext\imgui\backends\imgui_impl_sdlrenderer2.cpp" />
     <ClCompile Include="..\src\AnimatedSprite.cpp" />
     <ClCompile Include="..\src\Audio.cpp" />
     <ClCompile Include="..\src\AudioClip.cpp" />
@@ -197,6 +199,8 @@
     <ClCompile Include="..\src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\ext\imgui\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="..\ext\imgui\backends\imgui_impl_sdlrenderer2.h" />
     <ClInclude Include="..\include\Engine\AnimatedSprite.h" />
     <ClInclude Include="..\include\Engine\Audio.h" />
     <ClInclude Include="..\include\Engine\AudioClip.h" />

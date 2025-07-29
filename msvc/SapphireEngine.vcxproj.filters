@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{e1914d5b-d9bc-4257-baa7-738d72d25add}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\backends">
+      <UniqueIdentifier>{13f7efe0-f971-4552-b840-2fc3c3684b0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SapphireEngine.rc">
@@ -54,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="..\src\SapphireApp.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\imgui\backends\imgui_impl_sdlrenderer2.cpp">
+      <Filter>imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\imgui\backends\imgui_impl_sdl2.cpp">
+      <Filter>imgui\backends</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +110,12 @@
     </ClInclude>
     <ClInclude Include="..\include\Engine\IMGUIInclude.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\imgui\backends\imgui_impl_sdl2.h">
+      <Filter>imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\imgui\backends\imgui_impl_sdlrenderer2.h">
+      <Filter>imgui\backends</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,7 +24,7 @@ namespace Engine
 	{
 	public:
 		static void parse(int argc, char** argv);
-		//static void loadStub();
+		static void loadStub();
 		static void initLog(int argc, char** argv);
 		static loguru::Verbosity GetVerbosity();
 
