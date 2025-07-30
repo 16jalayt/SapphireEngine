@@ -270,7 +270,10 @@ std::string PathFixer(std::string path)
 	if (Config::gameName == "Sapphire Engine")
 		Config::loadStub();
 
-	return "ux0:/data/" + Config::gameName + "/" + path;
+	if (path.find("ux0") == std::string::npos)
+		return "ux0:/data/" + Config::gameName + "/" + path;
+	else
+		return path;
 #else
 	return path;
 #endif
@@ -296,8 +299,9 @@ std::string FindFilePath(std::string fileName, const std::vector<std::string>& p
 	{
 		for (std::string ext : extensions)
 		{
+			//FileExists should be applied at the load site
 			if (FileExists(PathFixer(path + fileName + ext)))
-				return PathFixer(path + fileName + ext);
+				return path + fileName + ext;
 		}
 	}
 

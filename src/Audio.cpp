@@ -24,6 +24,9 @@ int Audio::Init()
 	//Should be initialized by graphics on startup with everything call
 	//SDL_InitSubSystem(SDL_INIT_AUDIO);
 
+	//SDL_AudioInit("winmm");
+	//SDL_AudioInit("directsound");
+
 	//Buffer size partially fixes stuttering
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	//if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 16384) == -1)
