@@ -3,10 +3,8 @@
 #ifdef __SWITCH__
 #include <switch.h>
 #endif
-#include <iostream>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_framerate.h>
-#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "Engine/Audio.h"
